@@ -40,17 +40,15 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--mon
   background:#131820;border:1px solid var(--bright);color:var(--text);
   font-family:var(--mono);font-size:12px;letter-spacing:1px;
   padding:6px 32px 6px 12px;appearance:none;cursor:pointer;outline:none;
-  min-width:210px;transition:border-color .2s,box-shadow .2s;
+  min-width:220px;transition:border-color .2s,box-shadow .2s;
 }
-#dateSelect:hover,#dateSelect:focus{border-color:var(--orange);box-shadow:0 0 0 1px rgba(255,107,0,.25);}
-.sel-arrow{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--orange);pointer-events:none;font-size:10px;}
-#loadBtn{
-  background:transparent;border:1px solid var(--orange);color:var(--orange);
-  font-family:var(--mono);font-size:11px;letter-spacing:2px;padding:6px 20px;
-  cursor:pointer;white-space:nowrap;flex-shrink:0;transition:background .2s,box-shadow .2s;
+#dateSelect:hover,#dateSelect:focus{
+  border-color:var(--orange);box-shadow:0 0 0 1px rgba(255,107,0,.25);
 }
-#loadBtn:hover{background:rgba(255,107,0,.12);box-shadow:0 0 16px rgba(255,107,0,.25);}
-#loadBtn:active{transform:scale(.97);}
+.sel-arrow{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  color:var(--orange);pointer-events:none;font-size:10px;
+}
 #clock{color:var(--dim);font-size:11px;letter-spacing:1px;white-space:nowrap;flex-shrink:0;}
 .status-dot{
   width:8px;height:8px;border-radius:50%;background:var(--green);
@@ -60,7 +58,8 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--mon
 
 #reportFrame{
   position:fixed;top:52px;left:0;right:0;bottom:0;
-  width:100%;height:calc(100vh - 52px);border:none;background:var(--bg);transition:opacity .25s;
+  width:100%;height:calc(100vh - 52px);border:none;background:var(--bg);
+  transition:opacity .2s;
 }
 #overlay{
   position:fixed;top:52px;left:0;right:0;bottom:0;background:var(--bg);
@@ -87,7 +86,6 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--mon
     <select id="dateSelect" onchange="onSelChange()"><option>載入中...</option></select>
     <span class="sel-arrow">▾</span>
   </div>
-  <button id="loadBtn" onclick="loadReport()">▶ OPEN REPORT</button>
   <div class="bar-div"></div>
   <div id="clock">--:--:--</div>
 </div>
@@ -106,7 +104,7 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--mon
   const p=n=>String(n).padStart(2,'0');
   const el=document.getElementById('clock');
   function u(){const n=new Date();el.textContent=`${p(n.getHours())}:${p(n.getMinutes())}:${p(n.getSeconds())}`;}
-  u(); setInterval(u,1000);
+  u();setInterval(u,1000);
 })();
 
 function applyRegime(regime){
@@ -137,20 +135,21 @@ async function init(){
     if(latest) applyRegime(latest.regime);
     loadReport();
   }catch(e){
-    console.error(e);
     document.getElementById('overlay').innerHTML=`
-      <div style="color:var(--red);font-size:12px;letter-spacing:2px;text-align:center;line-height:2.2;">
+      <div style="color:var(--red);font-size:12px;letter-spacing:2px;text-align:center;line-height:2.5;">
         ✕ 無法載入 manifest.json<br>
         <span style="color:var(--dim);font-size:10px;">請確認 docs/manifest.json 存在且格式正確</span>
       </div>`;
   }
 }
 
+// 選日期直接換頁，不需要按按鈕
 function onSelChange(){
   if(!manifest) return;
   const date=document.getElementById('dateSelect').value;
   const entry=manifest.dates.find(d=>d.date===date);
   if(entry) applyRegime(entry.regime);
+  loadReport(); // 直接載入
 }
 
 function loadReport(){
