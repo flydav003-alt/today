@@ -1,0 +1,8 @@
+{
+  "latest": "20260513",
+  "dates": [
+    {"date": "20260513", "display": "2026/05/13", "regime": "Risk-On"},
+    {"date": "20260512", "display": "2026/05/12", "regime": "中性"},
+    {"date": "20260511", "display": "2026/05/11", "regime": "Risk-Off"}
+  ]
+}
