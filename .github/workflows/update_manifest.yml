@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'docs/[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]_claude.html'
+      - 'docs/[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]_*_claude.html'
 
 jobs:
   update-manifest:
