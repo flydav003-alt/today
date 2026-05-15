@@ -6,9 +6,10 @@
 <title>AI Market Intelligence Terminal</title>
 <style>
 :root {
-  --bg:#0a0c0f; --bar:#0f1318; --border:#1e2d40; --bright:#2a3f58;
+  --bg:#0a0c0f; --bar:#0d1117; --border:#1e2d40; --bright:#2a3f58;
   --orange:#ff6b00; --blue:#00a8ff; --green:#00e676; --yellow:#ffd600; --red:#ff3d3d;
-  --text:#e8f0f8; --dim:#7a9ab8; --mono:'Courier New','Lucida Console',monospace;
+  --text:#e8f0f8; --dim:#7a9ab8; --faint:#3d5a78;
+  --mono:'Courier New','Lucida Console',monospace;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--mono);}
@@ -16,11 +17,21 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--mon
 #topbar{
   position:fixed;top:0;left:0;right:0;height:52px;
   background:var(--bar);border-bottom:2px solid var(--orange);
-  box-shadow:0 2px 24px rgba(255,107,0,.18);
-  display:flex;align-items:center;gap:14px;padding:0 20px;z-index:1000;
+  box-shadow:0 2px 24px rgba(255,107,0,.2);
+  display:flex;align-items:center;gap:12px;padding:0 20px;z-index:1000;
 }
-.logo{color:var(--orange);font-size:12px;font-weight:bold;letter-spacing:3px;white-space:nowrap;}
+.logo{
+  color:var(--orange);font-size:11px;font-weight:bold;letter-spacing:3px;
+  white-space:nowrap;display:flex;align-items:center;gap:8px;
+}
+.logo-pulse{
+  width:7px;height:7px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 8px var(--green);animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
+
 .bar-div{width:1px;height:24px;background:var(--bright);flex-shrink:0;}
+
 .nav-btn{
   background:transparent;border:1px solid transparent;color:var(--dim);
   font-family:var(--mono);font-size:10px;letter-spacing:2px;padding:5px 14px;
@@ -28,62 +39,101 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--mon
   transition:all .2s;white-space:nowrap;
 }
 .nav-btn:hover{border-color:var(--bright);color:var(--text);}
-.nav-btn.active{color:var(--orange);border-color:rgba(255,107,0,.4);}
+.nav-btn.active{color:var(--orange);border-color:rgba(255,107,0,.4);background:rgba(255,107,0,.05);}
+
 #regimeBadge{
-  font-size:10px;font-weight:bold;letter-spacing:2px;padding:3px 12px;
+  font-size:9px;font-weight:bold;letter-spacing:3px;padding:4px 14px;
   border:1px solid currentColor;white-space:nowrap;flex-shrink:0;
-  transition:color .3s;color:var(--dim);
+  transition:color .4s;color:var(--dim);
 }
 .sp{flex:1;}
+
+/* version tabs */
+#versionTabs{display:flex;border:1px solid var(--bright);overflow:hidden;flex-shrink:0;}
+.vtab{
+  background:transparent;border:none;border-right:1px solid var(--bright);
+  color:var(--faint);font-family:var(--mono);font-size:9px;letter-spacing:2px;
+  padding:7px 18px;cursor:pointer;transition:all .2s;white-space:nowrap;
+  display:flex;align-items:center;gap:7px;
+}
+.vtab:last-child{border-right:none;}
+.vtab:hover:not(.vd){color:var(--dim);background:rgba(255,255,255,.03);}
+.vtab.va{color:var(--orange);background:rgba(255,107,0,.08);}
+.vtab.vd{opacity:.32;cursor:not-allowed;}
+.vdot{width:5px;height:5px;border-radius:50%;background:var(--faint);flex-shrink:0;transition:background .2s;}
+.vtab.vh .vdot{background:var(--green);}
+.vtab.va .vdot{background:var(--orange);}
+
+/* date select */
 .select-wrap{position:relative;flex-shrink:0;}
 #dateSelect{
-  background:#131820;border:1px solid var(--bright);color:var(--text);
-  font-family:var(--mono);font-size:12px;letter-spacing:1px;
+  background:#0d1117;border:1px solid var(--bright);color:var(--text);
+  font-family:var(--mono);font-size:11px;letter-spacing:1px;
   padding:6px 32px 6px 12px;appearance:none;cursor:pointer;outline:none;
-  min-width:220px;transition:border-color .2s,box-shadow .2s;
+  min-width:215px;transition:border-color .2s;
 }
-#dateSelect:hover,#dateSelect:focus{
-  border-color:var(--orange);box-shadow:0 0 0 1px rgba(255,107,0,.25);
-}
-.sel-arrow{
-  position:absolute;right:10px;top:50%;transform:translateY(-50%);
-  color:var(--orange);pointer-events:none;font-size:10px;
-}
+#dateSelect:hover,#dateSelect:focus{border-color:var(--orange);}
+.sel-arrow{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--orange);pointer-events:none;font-size:10px;}
+
 #clock{color:var(--dim);font-size:11px;letter-spacing:1px;white-space:nowrap;flex-shrink:0;}
-.status-dot{
-  width:8px;height:8px;border-radius:50%;background:var(--green);
-  box-shadow:0 0 8px var(--green);animation:pulse 2s ease-in-out infinite;flex-shrink:0;
-}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
 
 #reportFrame{
-  position:fixed;top:52px;left:0;right:0;bottom:0;
-  width:100%;height:calc(100vh - 52px);border:none;background:var(--bg);
-  transition:opacity .2s;
+  position:fixed;top:52px;left:0;right:0;bottom:24px;
+  width:100%;height:calc(100vh - 76px);border:none;background:var(--bg);
+  opacity:0;transition:opacity .25s;
 }
+#reportFrame.loaded{opacity:1;}
+
 #overlay{
-  position:fixed;top:52px;left:0;right:0;bottom:0;background:var(--bg);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:20px;z-index:500;
+  position:fixed;top:52px;left:0;right:0;bottom:24px;
+  background:var(--bg);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:20px;z-index:500;
+  transition:opacity .3s;
 }
-.ov-ascii{color:var(--orange);font-size:11px;opacity:.45;letter-spacing:2px;white-space:pre;line-height:1.5;}
-.ov-msg{color:var(--dim);font-size:12px;letter-spacing:2px;}
+#overlay.oh{opacity:0;pointer-events:none;}
+.ov-ascii{color:var(--orange);font-size:10px;letter-spacing:2px;white-space:pre;line-height:1.6;opacity:.4;}
+.ov-msg{color:var(--dim);font-size:11px;letter-spacing:2px;text-align:center;line-height:2.2;}
+.ob{animation:blink .8s step-end infinite;color:var(--orange);}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
-.blink{animation:blink 1s step-end infinite;}
+
+#statusbar{
+  position:fixed;bottom:0;left:0;right:0;height:24px;
+  background:var(--bar);border-top:1px solid var(--border);
+  display:flex;align-items:center;z-index:1000;overflow:hidden;
+}
+.sb{
+  font-size:9px;letter-spacing:1px;color:var(--faint);white-space:nowrap;
+  padding:0 14px;border-right:1px solid var(--border);height:100%;
+  display:flex;align-items:center;gap:5px;
+}
+.sb .sv{color:var(--dim);}
+.sb.ok .sv{color:var(--green);}
+.sb.warn .sv{color:var(--yellow);}
+.sb-sp{flex:1;}
 </style>
 </head>
 <body>
 
 <div id="topbar">
-  <div class="logo">▸ AI INTEL</div>
+  <div class="logo"><div class="logo-pulse"></div>▸ AI INTEL</div>
   <div class="bar-div"></div>
-  <div class="status-dot"></div>
   <a class="nav-btn active" href="index.html">◈ REPORTS</a>
   <a class="nav-btn" href="journal.html">◈ JOURNAL</a>
   <div id="regimeBadge">---</div>
   <div class="sp"></div>
+
+  <div id="versionTabs">
+    <button class="vtab vd" id="tab-1" onclick="switchVer('1')">
+      <span class="vdot"></span>版本一
+    </button>
+    <button class="vtab vd" id="tab-2" onclick="switchVer('2')">
+      <span class="vdot"></span>版本二
+    </button>
+  </div>
+
+  <div class="bar-div"></div>
   <div class="select-wrap">
-    <select id="dateSelect" onchange="onSelChange()"><option>載入中...</option></select>
+    <select id="dateSelect" onchange="onDateChange()"><option>載入中...</option></select>
     <span class="sel-arrow">▾</span>
   </div>
   <div class="bar-div"></div>
@@ -91,81 +141,142 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--mon
 </div>
 
 <div id="overlay">
-  <pre class="ov-ascii">╔══════════════════════════════════╗
-║  AI MARKET INTELLIGENCE SYSTEM  ║
-╚══════════════════════════════════╝</pre>
-  <div class="ov-msg"><span class="blink">■</span> &nbsp;LOADING LATEST REPORT...</div>
+  <pre class="ov-ascii">╔══════════════════════════════════════╗
+║   AI MARKET INTELLIGENCE TERMINAL   ║
+╚══════════════════════════════════════╝</pre>
+  <div id="overlayMsg" class="ov-msg"><span class="ob">■</span> LOADING...</div>
 </div>
 
 <iframe id="reportFrame" src="about:blank"></iframe>
 
+<div id="statusbar">
+  <div class="sb"><span>DATE</span><span class="sv" id="sv-date">—</span></div>
+  <div class="sb"><span>VER</span><span class="sv" id="sv-ver">—</span></div>
+  <div class="sb"><span>FILE</span><span class="sv" id="sv-file">—</span></div>
+  <div class="sb ok" id="sb-st"><span>STATUS</span><span class="sv" id="sv-st">READY</span></div>
+  <div class="sb-sp"></div>
+  <div class="sb"><span>TOTAL</span><span class="sv" id="sv-total">—</span></div>
+</div>
+
 <script>
+// clock
 (function(){
-  const p=n=>String(n).padStart(2,'0');
-  const el=document.getElementById('clock');
+  const p=n=>String(n).padStart(2,'0'),el=document.getElementById('clock');
   function u(){const n=new Date();el.textContent=`${p(n.getHours())}:${p(n.getMinutes())}:${p(n.getSeconds())}`;}
   u();setInterval(u,1000);
 })();
 
-function applyRegime(regime){
+let manifest=null,currentDate=null,currentVer='1';
+
+function fd(d){return`${d.slice(0,4)}/${d.slice(4,6)}/${d.slice(6,8)}`;}
+
+function applyRegime(r){
   const el=document.getElementById('regimeBadge');
-  el.textContent=regime||'---';
-  const r=(regime||'').toLowerCase();
-  el.style.color=r.includes('risk-on')?'var(--green)':r.includes('risk-off')?'var(--red)':'var(--yellow)';
+  el.textContent=r||'---';
+  const rl=(r||'').toLowerCase();
+  el.style.color=rl.includes('risk-on')?'var(--green)':rl.includes('risk-off')?'var(--red)':'var(--yellow)';
 }
 
-let manifest=null;
+function showLoading(msg){
+  document.getElementById('overlay').className='';
+  document.getElementById('overlayMsg').innerHTML=`<span class="ob">■</span> ${msg}`;
+  document.getElementById('reportFrame').classList.remove('loaded');
+}
+function hideOverlay(){
+  document.getElementById('overlay').classList.add('oh');
+  document.getElementById('reportFrame').classList.add('loaded');
+}
+function showNoFile(date,ver){
+  document.getElementById('overlay').className='';
+  const fn=`${date}_${ver}_claude.html`;
+  document.getElementById('overlayMsg').innerHTML=
+    `版本二尚未上傳<br>
+     <span style="color:var(--yellow);font-size:10px;">${fn}</span><br>
+     <span style="color:var(--faint);font-size:9px;">上傳報告後執行 update_manifest.py</span>`;
+  document.getElementById('reportFrame').classList.remove('loaded');
+}
 
-async function init(){
-  try{
-    const res=await fetch('manifest.json?t='+Date.now());
-    if(!res.ok) throw new Error('HTTP '+res.status);
-    manifest=await res.json();
-    const dates=manifest.dates||[];
-    const sel=document.getElementById('dateSelect');
-    sel.innerHTML='';
-    dates.forEach(entry=>{
-      const opt=document.createElement('option');
-      opt.value=entry.date;
-      opt.textContent=`${entry.display}  [${entry.regime}]`;
-      sel.appendChild(opt);
-    });
-    if(manifest.latest) sel.value=manifest.latest;
-    const latest=dates.find(d=>d.date===manifest.latest)||dates[0];
-    if(latest) applyRegime(latest.regime);
-    loadReport();
-  }catch(e){
-    document.getElementById('overlay').innerHTML=`
-      <div style="color:var(--red);font-size:12px;letter-spacing:2px;text-align:center;line-height:2.5;">
-        ✕ 無法載入 manifest.json<br>
-        <span style="color:var(--dim);font-size:10px;">請確認 docs/manifest.json 存在且格式正確</span>
-      </div>`;
+function updateTabs(){
+  if(!manifest||!currentDate)return;
+  const entry=manifest.dates.find(d=>d.date===currentDate);
+  const vers=new Set((entry&&entry.versions)||[]);
+  ['1','2'].forEach(v=>{
+    const t=document.getElementById(`tab-${v}`);
+    const has=vers.has(v),active=currentVer===v;
+    t.className='vtab'+(has?' vh':'')+(active?' va':'')+(has?'':' vd');
+  });
+}
+
+function switchVer(v){currentVer=v;updateTabs();loadReport();}
+
+function setStatus(date,ver,hasFile){
+  document.getElementById('sv-date').textContent=date?fd(date):'—';
+  document.getElementById('sv-ver').textContent=ver==='1'?'版本一':'版本二';
+  document.getElementById('sv-file').textContent=`${date}_${ver}_claude.html`;
+  const sb=document.getElementById('sb-st'),sv=document.getElementById('sv-st');
+  if(hasFile){sb.className='sb ok';sv.textContent='LOADED';}
+  else{sb.className='sb warn';sv.textContent='NO FILE';}
+}
+
+function onDateChange(){
+  if(!manifest)return;
+  currentDate=document.getElementById('dateSelect').value;
+  const entry=manifest.dates.find(d=>d.date===currentDate);
+  if(entry){
+    applyRegime(entry.regime);
+    currentVer=(entry.versions||[]).includes('2')?'2':'1';
   }
-}
-
-// 選日期直接換頁，不需要按按鈕
-function onSelChange(){
-  if(!manifest) return;
-  const date=document.getElementById('dateSelect').value;
-  const entry=manifest.dates.find(d=>d.date===date);
-  if(entry) applyRegime(entry.regime);
-  loadReport(); // 直接載入
+  updateTabs();
+  loadReport();
 }
 
 function loadReport(){
-  const date=document.getElementById('dateSelect').value;
-  if(!date||date==='載入中...') return;
+  if(!currentDate)return;
+  const entry=manifest&&manifest.dates.find(d=>d.date===currentDate);
+  const hasFile=(entry&&(entry.versions||[]).includes(currentVer))||false;
+  setStatus(currentDate,currentVer,hasFile);
+  updateTabs();
+  if(!hasFile){showNoFile(currentDate,currentVer);return;}
+  const fn=`${currentDate}_${currentVer}_claude.html`;
+  showLoading(`LOADING ${fn}`);
   const frame=document.getElementById('reportFrame');
-  const overlay=document.getElementById('overlay');
-  overlay.style.display='flex';
-  frame.style.opacity='0';
-  frame.onload=()=>{
-    if(frame.src&&frame.src!=='about:blank'){
-      overlay.style.display='none';
-      frame.style.opacity='1';
+  frame.onload=()=>{if(frame.src&&!frame.src.endsWith('blank'))hideOverlay();};
+  frame.src=fn;
+}
+
+async function init(){
+  showLoading('LOADING MANIFEST...');
+  try{
+    const res=await fetch('manifest.json?t='+Date.now());
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    manifest=await res.json();
+    const dates=manifest.dates||[];
+
+    const sel=document.getElementById('dateSelect');
+    sel.innerHTML='';
+    dates.forEach(e=>{
+      const opt=document.createElement('option');
+      opt.value=e.date;
+      const tag=(e.versions||[]).map(v=>`v${v}`).join('+');
+      opt.textContent=`${e.display}  [${e.regime}]${tag?' ('+tag+')':''}`;
+      sel.appendChild(opt);
+    });
+
+    currentDate=manifest.latest||(dates[0]&&dates[0].date)||null;
+    if(currentDate)sel.value=currentDate;
+    const latest=dates.find(d=>d.date===currentDate)||dates[0];
+    if(latest){
+      applyRegime(latest.regime);
+      currentVer=(latest.versions||[]).includes('2')?'2':'1';
     }
-  };
-  frame.src=date+'_claude.html';
+    document.getElementById('sv-total').textContent=dates.length+' 份';
+    updateTabs();
+    loadReport();
+  }catch(e){
+    document.getElementById('overlay').className='';
+    document.getElementById('overlayMsg').innerHTML=`<span style="color:var(--red)">✕ 無法載入 manifest.json</span>`;
+    console.error(e);
+  }
 }
 
 init();
