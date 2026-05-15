@@ -7,22 +7,31 @@
 <style>
 :root {
   --bg:#0a0c0f; --bar:#0d1117; --border:#1e2d40; --bright:#2a3f58;
-  --orange:#ff6b00; --blue:#00a8ff; --green:#00e676; --yellow:#ffd600; --red:#ff3d3d;
+  --orange:#ff6b00; --green:#00e676; --yellow:#ffd600; --red:#ff3d3d;
   --text:#e8f0f8; --dim:#7a9ab8; --faint:#3d5a78;
   --mono:'Courier New','Lucida Console',monospace;
+  --topH:52px; /* desktop: single row */
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--mono);}
 
+/* ═══════════════════════════════════════
+   TOPBAR  — desktop: 1 row / mobile: 2 rows
+   ═══════════════════════════════════════ */
 #topbar{
-  position:fixed;top:0;left:0;right:0;height:52px;
+  position:fixed;top:0;left:0;right:0;
   background:var(--bar);border-bottom:2px solid var(--orange);
-  box-shadow:0 2px 24px rgba(255,107,0,.2);
-  display:flex;align-items:center;gap:12px;padding:0 20px;z-index:1000;
+  box-shadow:0 2px 20px rgba(255,107,0,.18);
+  z-index:1000;
+}
+
+/* Row 1 */
+.tb-row1{
+  height:52px;display:flex;align-items:center;gap:10px;padding:0 16px;
 }
 .logo{
   color:var(--orange);font-size:11px;font-weight:bold;letter-spacing:3px;
-  white-space:nowrap;display:flex;align-items:center;gap:8px;
+  white-space:nowrap;display:flex;align-items:center;gap:7px;flex-shrink:0;
 }
 .logo-pulse{
   width:7px;height:7px;border-radius:50%;background:var(--green);
@@ -30,31 +39,42 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--mon
 }
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
 
-.bar-div{width:1px;height:24px;background:var(--bright);flex-shrink:0;}
+.bar-div{width:1px;height:22px;background:var(--bright);flex-shrink:0;}
 
 .nav-btn{
   background:transparent;border:1px solid transparent;color:var(--dim);
-  font-family:var(--mono);font-size:10px;letter-spacing:2px;padding:5px 14px;
+  font-family:var(--mono);font-size:10px;letter-spacing:2px;padding:5px 12px;
   cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;
-  transition:all .2s;white-space:nowrap;
+  transition:all .2s;white-space:nowrap;flex-shrink:0;
 }
 .nav-btn:hover{border-color:var(--bright);color:var(--text);}
 .nav-btn.active{color:var(--orange);border-color:rgba(255,107,0,.4);background:rgba(255,107,0,.05);}
 
 #regimeBadge{
-  font-size:9px;font-weight:bold;letter-spacing:3px;padding:4px 14px;
+  font-size:9px;font-weight:bold;letter-spacing:3px;padding:3px 10px;
   border:1px solid currentColor;white-space:nowrap;flex-shrink:0;
   transition:color .4s;color:var(--dim);
 }
-.sp{flex:1;}
+.tb-sp{flex:1;}
+
+/* clock — hide on mobile */
+#clock{color:var(--dim);font-size:11px;letter-spacing:1px;white-space:nowrap;flex-shrink:0;}
+
+/* Row 2 — desktop: hidden, fused into row1 via flex
+           mobile: visible second row */
+.tb-row2{
+  display:none; /* hidden on desktop */
+  height:44px;align-items:center;gap:8px;padding:0 12px;
+  border-top:1px solid var(--border);
+}
 
 /* version tabs */
 #versionTabs{display:flex;border:1px solid var(--bright);overflow:hidden;flex-shrink:0;}
 .vtab{
   background:transparent;border:none;border-right:1px solid var(--bright);
   color:var(--faint);font-family:var(--mono);font-size:9px;letter-spacing:2px;
-  padding:7px 18px;cursor:pointer;transition:all .2s;white-space:nowrap;
-  display:flex;align-items:center;gap:7px;
+  padding:6px 14px;cursor:pointer;transition:all .2s;white-space:nowrap;
+  display:flex;align-items:center;gap:6px;
 }
 .vtab:last-child{border-right:none;}
 .vtab:hover:not(.vd){color:var(--dim);background:rgba(255,255,255,.03);}
@@ -65,34 +85,59 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--mon
 .vtab.va .vdot{background:var(--orange);}
 
 /* date select */
-.select-wrap{position:relative;flex-shrink:0;}
+.select-wrap{position:relative;flex:1;min-width:0;}
 #dateSelect{
+  width:100%;
   background:#0d1117;border:1px solid var(--bright);color:var(--text);
   font-family:var(--mono);font-size:11px;letter-spacing:1px;
-  padding:6px 32px 6px 12px;appearance:none;cursor:pointer;outline:none;
-  min-width:215px;transition:border-color .2s;
+  padding:6px 28px 6px 10px;appearance:none;cursor:pointer;outline:none;
+  transition:border-color .2s;
 }
 #dateSelect:hover,#dateSelect:focus{border-color:var(--orange);}
-.sel-arrow{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--orange);pointer-events:none;font-size:10px;}
+.sel-arrow{position:absolute;right:9px;top:50%;transform:translateY(-50%);color:var(--orange);pointer-events:none;font-size:10px;}
 
-#clock{color:var(--dim);font-size:11px;letter-spacing:1px;white-space:nowrap;flex-shrink:0;}
+/* ── DESKTOP: everything in one row ── */
+@media (min-width:700px){
+  :root{--topH:52px;}
+  .tb-row2{display:none !important;}
+  /* inject row2 items into row1 via a desktop-only flex row */
+  #topbar{display:flex;flex-direction:column;}
+  .tb-row1{flex:1;}
+  /* desktop: show versionTabs + select inside row1 */
+  .desktop-controls{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .select-wrap{flex:none;min-width:0;}
+  #dateSelect{min-width:200px;width:auto;}
+}
 
+/* ── MOBILE: two rows ── */
+@media (max-width:699px){
+  :root{--topH:96px;}
+  .tb-row2{display:flex;}
+  .desktop-controls{display:none !important;}
+  #clock{display:none;}
+  .bar-div.hide-m{display:none;}
+}
+
+/* ═══════════════════════════════════════
+   FRAME / OVERLAY / STATUSBAR
+   ═══════════════════════════════════════ */
 #reportFrame{
-  position:fixed;top:52px;left:0;right:0;bottom:24px;
-  width:100%;height:calc(100vh - 76px);border:none;background:var(--bg);
-  opacity:0;transition:opacity .25s;
+  position:fixed;top:var(--topH);left:0;right:0;bottom:24px;
+  width:100%;height:calc(100vh - var(--topH) - 24px);
+  border:none;background:var(--bg);opacity:0;transition:opacity .25s;
 }
 #reportFrame.loaded{opacity:1;}
 
 #overlay{
-  position:fixed;top:52px;left:0;right:0;bottom:24px;
+  position:fixed;top:var(--topH);left:0;right:0;bottom:24px;
   background:var(--bg);display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:20px;z-index:500;
   transition:opacity .3s;
 }
 #overlay.oh{opacity:0;pointer-events:none;}
 .ov-ascii{color:var(--orange);font-size:10px;letter-spacing:2px;white-space:pre;line-height:1.6;opacity:.4;}
-.ov-msg{color:var(--dim);font-size:11px;letter-spacing:2px;text-align:center;line-height:2.2;}
+@media(max-width:699px){.ov-ascii{display:none;}}
+.ov-msg{color:var(--dim);font-size:11px;letter-spacing:2px;text-align:center;line-height:2.4;}
 .ob{animation:blink .8s step-end infinite;color:var(--orange);}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
 
@@ -103,42 +148,69 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--mon
 }
 .sb{
   font-size:9px;letter-spacing:1px;color:var(--faint);white-space:nowrap;
-  padding:0 14px;border-right:1px solid var(--border);height:100%;
+  padding:0 12px;border-right:1px solid var(--border);height:100%;
   display:flex;align-items:center;gap:5px;
 }
 .sb .sv{color:var(--dim);}
 .sb.ok .sv{color:var(--green);}
 .sb.warn .sv{color:var(--yellow);}
 .sb-sp{flex:1;}
+/* hide verbose status items on narrow screens */
+@media(max-width:499px){
+  .sb-hide{display:none;}
+}
 </style>
 </head>
 <body>
 
 <div id="topbar">
-  <div class="logo"><div class="logo-pulse"></div>▸ AI INTEL</div>
-  <div class="bar-div"></div>
-  <a class="nav-btn active" href="index.html">◈ REPORTS</a>
-  <a class="nav-btn" href="journal.html">◈ JOURNAL</a>
-  <div id="regimeBadge">---</div>
-  <div class="sp"></div>
 
-  <div id="versionTabs">
-    <button class="vtab vd" id="tab-1" onclick="switchVer('1')">
-      <span class="vdot"></span>版本一
-    </button>
-    <button class="vtab vd" id="tab-2" onclick="switchVer('2')">
-      <span class="vdot"></span>版本二
-    </button>
+  <!-- ── ROW 1: logo / nav / regime / [desktop: tabs+select+clock] ── -->
+  <div class="tb-row1">
+    <div class="logo"><div class="logo-pulse"></div>▸ AI INTEL</div>
+    <div class="bar-div"></div>
+    <a class="nav-btn active" href="index.html">◈ REPORTS</a>
+    <a class="nav-btn" href="journal.html">◈ JOURNAL</a>
+    <div id="regimeBadge">---</div>
+    <div class="tb-sp"></div>
+
+    <!-- desktop only: version tabs + select + clock in row 1 -->
+    <div class="desktop-controls">
+      <div id="versionTabs-d" style="display:flex;border:1px solid var(--bright);overflow:hidden;">
+        <button class="vtab vd" id="dtab-1" onclick="switchVer('1')">
+          <span class="vdot"></span>版本一
+        </button>
+        <button class="vtab vd" id="dtab-2" onclick="switchVer('2')">
+          <span class="vdot"></span>版本二
+        </button>
+      </div>
+      <div class="bar-div"></div>
+      <div class="select-wrap">
+        <select id="dateSelect-d" onchange="onDateChange('d')"><option>載入中...</option></select>
+        <span class="sel-arrow">▾</span>
+      </div>
+      <div class="bar-div"></div>
+      <div id="clock">--:--:--</div>
+    </div>
   </div>
 
-  <div class="bar-div"></div>
-  <div class="select-wrap">
-    <select id="dateSelect" onchange="onDateChange()"><option>載入中...</option></select>
-    <span class="sel-arrow">▾</span>
+  <!-- ── ROW 2: mobile only — version tabs + date select ── -->
+  <div class="tb-row2">
+    <div id="versionTabs-m" style="display:flex;border:1px solid var(--bright);overflow:hidden;flex-shrink:0;">
+      <button class="vtab vd" id="mtab-1" onclick="switchVer('1')">
+        <span class="vdot"></span>版本一
+      </button>
+      <button class="vtab vd" id="mtab-2" onclick="switchVer('2')">
+        <span class="vdot"></span>版本二
+      </button>
+    </div>
+    <div class="select-wrap">
+      <select id="dateSelect-m" onchange="onDateChange('m')"><option>載入中...</option></select>
+      <span class="sel-arrow">▾</span>
+    </div>
   </div>
-  <div class="bar-div"></div>
-  <div id="clock">--:--:--</div>
-</div>
+
+</div><!-- /topbar -->
 
 <div id="overlay">
   <pre class="ov-ascii">╔══════════════════════════════════════╗
@@ -150,26 +222,28 @@ html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--mon
 <iframe id="reportFrame" src="about:blank"></iframe>
 
 <div id="statusbar">
-  <div class="sb"><span>DATE</span><span class="sv" id="sv-date">—</span></div>
+  <div class="sb sb-hide"><span>DATE</span><span class="sv" id="sv-date">—</span></div>
   <div class="sb"><span>VER</span><span class="sv" id="sv-ver">—</span></div>
-  <div class="sb"><span>FILE</span><span class="sv" id="sv-file">—</span></div>
+  <div class="sb sb-hide"><span>FILE</span><span class="sv" id="sv-file">—</span></div>
   <div class="sb ok" id="sb-st"><span>STATUS</span><span class="sv" id="sv-st">READY</span></div>
   <div class="sb-sp"></div>
-  <div class="sb"><span>TOTAL</span><span class="sv" id="sv-total">—</span></div>
+  <div class="sb sb-hide"><span>TOTAL</span><span class="sv" id="sv-total">—</span></div>
 </div>
 
 <script>
-// clock
+// ── Clock ──────────────────────────────────────────
 (function(){
   const p=n=>String(n).padStart(2,'0'),el=document.getElementById('clock');
   function u(){const n=new Date();el.textContent=`${p(n.getHours())}:${p(n.getMinutes())}:${p(n.getSeconds())}`;}
   u();setInterval(u,1000);
 })();
 
-let manifest=null,currentDate=null,currentVer='1';
+// ── State ──────────────────────────────────────────
+let manifest=null, currentDate=null, currentVer='1';
 
 function fd(d){return`${d.slice(0,4)}/${d.slice(4,6)}/${d.slice(6,8)}`;}
 
+// ── Regime badge ──────────────────────────────────
 function applyRegime(r){
   const el=document.getElementById('regimeBadge');
   el.textContent=r||'---';
@@ -177,6 +251,7 @@ function applyRegime(r){
   el.style.color=rl.includes('risk-on')?'var(--green)':rl.includes('risk-off')?'var(--red)':'var(--yellow)';
 }
 
+// ── Overlay ───────────────────────────────────────
 function showLoading(msg){
   document.getElementById('overlay').className='';
   document.getElementById('overlayMsg').innerHTML=`<span class="ob">■</span> ${msg}`;
@@ -190,37 +265,74 @@ function showNoFile(date,ver){
   document.getElementById('overlay').className='';
   const fn=`${date}_${ver}_claude.html`;
   document.getElementById('overlayMsg').innerHTML=
-    `版本二尚未上傳<br>
+    `版本${ver==='2'?'二':'一'}尚未上傳<br>
      <span style="color:var(--yellow);font-size:10px;">${fn}</span><br>
      <span style="color:var(--faint);font-size:9px;">上傳報告後執行 update_manifest.py</span>`;
   document.getElementById('reportFrame').classList.remove('loaded');
 }
 
+// ── Version tabs (sync both desktop+mobile sets) ──
 function updateTabs(){
   if(!manifest||!currentDate)return;
   const entry=manifest.dates.find(d=>d.date===currentDate);
   const vers=new Set((entry&&entry.versions)||[]);
   ['1','2'].forEach(v=>{
-    const t=document.getElementById(`tab-${v}`);
-    const has=vers.has(v),active=currentVer===v;
-    t.className='vtab'+(has?' vh':'')+(active?' va':'')+(has?'':' vd');
+    const has=vers.has(v), active=currentVer===v;
+    const cls='vtab'+(has?' vh':'')+(active?' va':'')+(has?'':' vd');
+    const dt=document.getElementById(`dtab-${v}`);
+    const mt=document.getElementById(`mtab-${v}`);
+    if(dt)dt.className=cls;
+    if(mt)mt.className=cls;
   });
 }
 
 function switchVer(v){currentVer=v;updateTabs();loadReport();}
 
+// ── Status bar ────────────────────────────────────
 function setStatus(date,ver,hasFile){
   document.getElementById('sv-date').textContent=date?fd(date):'—';
   document.getElementById('sv-ver').textContent=ver==='1'?'版本一':'版本二';
-  document.getElementById('sv-file').textContent=`${date}_${ver}_claude.html`;
+  document.getElementById('sv-file').textContent=date?`${date}_${ver}_claude.html`:'—';
   const sb=document.getElementById('sb-st'),sv=document.getElementById('sv-st');
   if(hasFile){sb.className='sb ok';sv.textContent='LOADED';}
   else{sb.className='sb warn';sv.textContent='NO FILE';}
 }
 
-function onDateChange(){
+// ── Sync both selects ─────────────────────────────
+function syncSelects(date){
+  ['d','m'].forEach(id=>{
+    const sel=document.getElementById(`dateSelect-${id}`);
+    if(sel&&sel.value!==date)sel.value=date;
+  });
+}
+
+function buildOptions(dates){
+  return dates.map(e=>{
+    const tag=(e.versions||[]).map(v=>`v${v}`).join('+');
+    return {value:e.date, text:`${e.display}  [${e.regime}]${tag?' ('+tag+')':''}`};
+  });
+}
+
+function populateSelects(dates){
+  const opts=buildOptions(dates);
+  ['d','m'].forEach(id=>{
+    const sel=document.getElementById(`dateSelect-${id}`);
+    if(!sel)return;
+    sel.innerHTML='';
+    opts.forEach(o=>{
+      const opt=document.createElement('option');
+      opt.value=o.value;opt.textContent=o.text;
+      sel.appendChild(opt);
+    });
+  });
+}
+
+// ── Date change (called from either select) ───────
+function onDateChange(src){
   if(!manifest)return;
-  currentDate=document.getElementById('dateSelect').value;
+  const sel=document.getElementById(`dateSelect-${src}`);
+  currentDate=sel.value;
+  syncSelects(currentDate);
   const entry=manifest.dates.find(d=>d.date===currentDate);
   if(entry){
     applyRegime(entry.regime);
@@ -230,6 +342,7 @@ function onDateChange(){
   loadReport();
 }
 
+// ── Load iframe ───────────────────────────────────
 function loadReport(){
   if(!currentDate)return;
   const entry=manifest&&manifest.dates.find(d=>d.date===currentDate);
@@ -244,6 +357,7 @@ function loadReport(){
   frame.src=fn;
 }
 
+// ── Init ──────────────────────────────────────────
 async function init(){
   showLoading('LOADING MANIFEST...');
   try{
@@ -252,18 +366,11 @@ async function init(){
     manifest=await res.json();
     const dates=manifest.dates||[];
 
-    const sel=document.getElementById('dateSelect');
-    sel.innerHTML='';
-    dates.forEach(e=>{
-      const opt=document.createElement('option');
-      opt.value=e.date;
-      const tag=(e.versions||[]).map(v=>`v${v}`).join('+');
-      opt.textContent=`${e.display}  [${e.regime}]${tag?' ('+tag+')':''}`;
-      sel.appendChild(opt);
-    });
+    populateSelects(dates);
 
     currentDate=manifest.latest||(dates[0]&&dates[0].date)||null;
-    if(currentDate)sel.value=currentDate;
+    if(currentDate)syncSelects(currentDate);
+
     const latest=dates.find(d=>d.date===currentDate)||dates[0];
     if(latest){
       applyRegime(latest.regime);
@@ -278,6 +385,20 @@ async function init(){
     console.error(e);
   }
 }
+
+// ── Recalc frame height on resize (handles mobile browser chrome) ──
+function recalcHeight(){
+  const topH=document.getElementById('topbar').offsetHeight;
+  const sbH=24;
+  const frame=document.getElementById('reportFrame');
+  const overlay=document.getElementById('overlay');
+  const h=`calc(100vh - ${topH}px - ${sbH}px)`;
+  frame.style.top=topH+'px';frame.style.height=h;
+  overlay.style.top=topH+'px';overlay.style.height=h;
+}
+window.addEventListener('resize',recalcHeight);
+// Run after DOM + fonts settle
+setTimeout(recalcHeight,50);
 
 init();
 </script>
