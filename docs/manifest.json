@@ -1,23 +1,39 @@
 {
-  "latest": "20260514",
+  "latest": "20260515",
   "dates": [
+    {
+      "date": "20260515",
+      "display": "2026/05/15",
+      "regime": "中性",
+      "versions": [
+        "1"
+      ]
+    },
     {
       "date": "20260514",
       "display": "2026/05/14",
       "regime": "中性",
-      "versions": ["1", "2"]
+      "versions": [
+        "1",
+        "2"
+      ]
     },
     {
       "date": "20260513",
       "display": "2026/05/13",
       "regime": "Risk-On",
-      "versions": ["1", "2"]
+      "versions": [
+        "1",
+        "2"
+      ]
     },
     {
       "date": "20260512",
       "display": "2026/05/12",
       "regime": "中性",
-      "versions": ["1"]
+      "versions": [
+        "2"
+      ]
     }
   ]
 }
