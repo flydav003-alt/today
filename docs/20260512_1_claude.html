@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI台股短線機會雷達 · 2026/05/11</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --surface: #111318;
+    --surface2: #181c24;
+    --border: #252a35;
+    --accent-gold: #f5c842;
+    --accent-red: #ff4d5a;
+    --accent-green: #2ecc8a;
+    --accent-blue: #4a9eff;
+    --accent-orange: #ff8c42;
+    --accent-purple: #9b6dff;
+    --text: #e8eaf0;
+    --text-muted: #7a8099;
+    --text-dim: #4a5068;
+    --glow-gold: rgba(245,200,66,0.15);
+    --glow-red: rgba(255,77,90,0.12);
+    --glow-green: rgba(46,204,138,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Serif TC', serif;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    background: linear-gradient(135deg, #0d1117 0%, #111827 50%, #0a0f1a 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(245,200,66,0.07) 0%, transparent 60%);
+  }
+  .header-inner {
+    max-width: 1180px; margin: 0 auto; position: relative;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .logo-block { display: flex; align-items: baseline; gap: 0.8rem; }
+  .logo-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.18em; color: var(--accent-gold);
+    background: rgba(245,200,66,0.08); border: 1px solid rgba(245,200,66,0.25);
+    padding: 0.25rem 0.65rem; border-radius: 3px; text-transform: uppercase;
+  }
+  .logo-title {
+    font-size: 1.6rem; font-weight: 900; color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .logo-title span { color: var(--accent-gold); }
+  .header-meta {
+    text-align: right;
+    font-family: 'Space Mono', monospace; font-size: 0.72rem; color: var(--text-muted);
+    line-height: 1.9;
+  }
+  .regime-badge {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    padding: 0.3rem 0.8rem; border-radius: 4px;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em;
+    font-family: 'Space Mono', monospace;
+    background: rgba(46,204,138,0.12); border: 1px solid rgba(46,204,138,0.35); color: var(--accent-green);
+  }
+  .regime-badge::before { content: '●'; font-size: 0.55rem; animation: pulse 1.8s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  /* ─── LAYOUT ─── */
+  .main { max-width: 1180px; margin: 0 auto; padding: 2rem 2rem 4rem; }
+  
+  /* ─── SECTION LABEL ─── */
+  .section-label {
+    font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.22em;
+    color: var(--text-dim); text-transform: uppercase; margin-bottom: 0.8rem;
+  }
+  .section-title {
+    font-size: 1.15rem; font-weight: 700; color: var(--text);
+    margin-bottom: 1.4rem; border-left: 3px solid var(--accent-gold);
+    padding-left: 0.8rem; line-height: 1.3;
+  }
+
+  /* ─── REGIME PANEL ─── */
+  .regime-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--accent-green);
+    border-radius: 8px;
+    padding: 1.6rem 2rem;
+    margin-bottom: 2.4rem;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem;
+  }
+  .regime-item { }
+  .regime-item-label { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.14em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 0.3rem; }
+  .regime-item-val { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+  .regime-item-val.up { color: var(--accent-green); }
+  .regime-item-val.warn { color: var(--accent-orange); }
+  .regime-verdict {
+    grid-column: 1/-1;
+    background: rgba(46,204,138,0.06); border: 1px solid rgba(46,204,138,0.2);
+    border-radius: 5px; padding: 0.9rem 1.2rem;
+    font-size: 0.85rem; color: var(--text); line-height: 1.7;
+  }
+  .regime-verdict strong { color: var(--accent-green); }
+
+  /* ─── SUMMARY CARD ─── */
+  .summary-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.9rem;
+    margin-bottom: 2.6rem;
+  }
+  .summary-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 7px; padding: 1.1rem 1.3rem;
+    position: relative; overflow: hidden;
+  }
+  .summary-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  }
+  .summary-card.gold::before { background: var(--accent-gold); }
+  .summary-card.red::before { background: var(--accent-red); }
+  .summary-card.green::before { background: var(--accent-green); }
+  .summary-card.purple::before { background: var(--accent-purple); }
+  .summary-card.orange::before { background: var(--accent-orange); }
+  .summary-card.blue::before { background: var(--accent-blue); }
+  .sc-q { font-size: 0.7rem; color: var(--text-dim); margin-bottom: 0.35rem; font-family: 'Space Mono', monospace; }
+  .sc-a { font-size: 0.9rem; font-weight: 700; color: var(--text); line-height: 1.5; }
+  .sc-a .ticker { color: var(--accent-gold); }
+  .sc-a .danger { color: var(--accent-red); }
+  .sc-a .safe { color: var(--accent-green); }
+
+  /* ─── RADAR TABLE ─── */
+  .radar-table-wrap {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden; margin-bottom: 2.6rem;
+  }
+  .radar-table {
+    width: 100%; border-collapse: collapse; font-size: 0.8rem;
+  }
+  .radar-table thead tr {
+    background: var(--surface2); border-bottom: 1px solid var(--border);
+  }
+  .radar-table th {
+    padding: 0.75rem 1rem; text-align: left;
+    font-family: 'Space Mono', monospace; font-size: 0.58rem;
+    letter-spacing: 0.12em; color: var(--text-dim); text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .radar-table td { padding: 0.9rem 1rem; border-bottom: 1px solid rgba(37,42,53,0.5); vertical-align: middle; }
+  .radar-table tr:last-child td { border-bottom: none; }
+  .radar-table tr:hover td { background: rgba(255,255,255,0.015); }
+  .score-badge {
+    display: inline-block; padding: 0.2rem 0.55rem; border-radius: 3px;
+    font-family: 'Space Mono', monospace; font-size: 0.7rem; font-weight: 700;
+  }
+  .score-s { background: rgba(245,200,66,0.15); color: var(--accent-gold); border: 1px solid rgba(245,200,66,0.3); }
+  .score-a { background: rgba(46,204,138,0.12); color: var(--accent-green); border: 1px solid rgba(46,204,138,0.3); }
+  .score-b { background: rgba(74,158,255,0.12); color: var(--accent-blue); border: 1px solid rgba(74,158,255,0.3); }
+  .score-c { background: rgba(255,140,66,0.12); color: var(--accent-orange); border: 1px solid rgba(255,140,66,0.3); }
+  .score-d { background: rgba(255,77,90,0.12); color: var(--accent-red); border: 1px solid rgba(255,77,90,0.3); }
+  .kline-A { color: var(--accent-green); font-weight: 700; }
+  .kline-B { color: var(--accent-blue); }
+  .kline-C { color: var(--accent-orange); }
+  .kline-D { color: var(--accent-red); }
+  .rotation-tag {
+    display: inline-block; padding: 0.15rem 0.45rem; border-radius: 3px;
+    font-size: 0.62rem; font-family: 'Space Mono', monospace; font-weight: 700;
+  }
+  .rt-laggard { background: rgba(245,200,66,0.1); color: var(--accent-gold); }
+  .rt-emerging { background: rgba(155,109,255,0.1); color: var(--accent-purple); }
+  .rt-leader { background: rgba(46,204,138,0.1); color: var(--accent-green); }
+  .rt-sympathy { background: rgba(74,158,255,0.1); color: var(--accent-blue); }
+  .ticker-main { font-weight: 700; font-size: 0.88rem; }
+  .ticker-code { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--text-muted); }
+
+  /* ─── DEEP CARDS ─── */
+  .deep-grid { display: grid; gap: 1.6rem; margin-bottom: 2.6rem; }
+  .deep-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+  }
+  .deep-card-header {
+    padding: 1.2rem 1.6rem; display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .deep-card-header.gold { background: linear-gradient(90deg, rgba(245,200,66,0.08) 0%, transparent 100%); border-top: 2px solid var(--accent-gold); }
+  .deep-card-header.green { background: linear-gradient(90deg, rgba(46,204,138,0.07) 0%, transparent 100%); border-top: 2px solid var(--accent-green); }
+  .deep-card-header.purple { background: linear-gradient(90deg, rgba(155,109,255,0.07) 0%, transparent 100%); border-top: 2px solid var(--accent-purple); }
+  .deep-card-header.blue { background: linear-gradient(90deg, rgba(74,158,255,0.07) 0%, transparent 100%); border-top: 2px solid var(--accent-blue); }
+  .dch-left { }
+  .dch-name { font-size: 1.05rem; font-weight: 900; color: var(--text); }
+  .dch-code { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--text-muted); margin-top: 0.1rem; }
+  .dch-right { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .deep-card-body { padding: 1.4rem 1.6rem; }
+  .deep-grid-inner {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem 1.4rem;
+    margin-bottom: 1.2rem;
+  }
+  .di-item { }
+  .di-label { font-family: 'Space Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 0.25rem; }
+  .di-val { font-size: 0.82rem; color: var(--text); font-weight: 600; line-height: 1.5; }
+  .di-val.gold { color: var(--accent-gold); }
+  .di-val.green { color: var(--accent-green); }
+  .di-val.red { color: var(--accent-red); }
+  .di-val.blue { color: var(--accent-blue); }
+  .di-val.orange { color: var(--accent-orange); }
+  .catalyst-box {
+    background: rgba(245,200,66,0.05); border: 1px solid rgba(245,200,66,0.15);
+    border-radius: 5px; padding: 0.8rem 1rem; margin-bottom: 1rem;
+    font-size: 0.82rem; color: var(--text); line-height: 1.7;
+  }
+  .catalyst-box strong { color: var(--accent-gold); }
+  .exec-row {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem;
+    background: var(--surface2); border-radius: 6px; padding: 0.9rem 1rem;
+  }
+  .exec-item { }
+  .exec-label { font-size: 0.6rem; font-family: 'Space Mono', monospace; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+  .exec-val { font-size: 0.8rem; font-weight: 700; }
+  .exec-val.green { color: var(--accent-green); }
+  .exec-val.red { color: var(--accent-red); }
+  .exec-val.gold { color: var(--accent-gold); }
+  .exec-val.orange { color: var(--accent-orange); }
+
+  /* ─── DANGER ZONE ─── */
+  .danger-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2.6rem; }
+  .danger-card {
+    background: var(--surface); border: 1px solid rgba(255,77,90,0.2);
+    border-top: 2px solid var(--accent-red);
+    border-radius: 7px; padding: 1.1rem 1.3rem;
+  }
+  .danger-card-name { font-weight: 700; font-size: 0.9rem; color: var(--accent-red); margin-bottom: 0.4rem; }
+  .danger-card-why { font-size: 0.8rem; color: var(--text-muted); line-height: 1.65; }
+  .danger-card-why strong { color: var(--text); }
+
+  /* ─── PAIR TRADE ─── */
+  .pair-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.3rem 1.6rem; margin-bottom: 2.6rem;
+    display: flex; align-items: center; gap: 1.8rem; flex-wrap: wrap;
+  }
+  .pair-long, .pair-short {
+    flex: 1; min-width: 180px;
+    background: var(--surface2); border-radius: 6px; padding: 0.9rem 1.1rem;
+  }
+  .pair-long { border: 1px solid rgba(46,204,138,0.25); }
+  .pair-short { border: 1px solid rgba(255,77,90,0.25); }
+  .pair-label { font-size: 0.6rem; font-family: 'Space Mono', monospace; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .pair-long .pair-label { color: var(--accent-green); }
+  .pair-short .pair-label { color: var(--accent-red); }
+  .pair-ticker { font-weight: 700; font-size: 0.95rem; color: var(--text); }
+  .pair-reason { font-size: 0.77rem; color: var(--text-muted); margin-top: 0.25rem; }
+  .pair-arrow { font-size: 1.6rem; color: var(--text-dim); flex-shrink: 0; }
+  .pair-logic { font-size: 0.8rem; color: var(--text); line-height: 1.7; flex: 2; min-width: 220px; }
+
+  /* ─── CALENDAR ─── */
+  .calendar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-bottom: 2.6rem; }
+  .cal-item {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+    padding: 0.85rem 1rem;
+  }
+  .cal-date { font-family: 'Space Mono', monospace; font-size: 0.65rem; color: var(--accent-gold); font-weight: 700; margin-bottom: 0.3rem; }
+  .cal-event { font-size: 0.78rem; color: var(--text); line-height: 1.55; }
+  .cal-impact {
+    display: inline-block; margin-top: 0.35rem;
+    font-size: 0.58rem; font-family: 'Space Mono', monospace; letter-spacing: 0.1em;
+    padding: 0.15rem 0.4rem; border-radius: 2px;
+  }
+  .ci-high { background: rgba(255,77,90,0.12); color: var(--accent-red); border: 1px solid rgba(255,77,90,0.25); }
+  .ci-mid { background: rgba(245,200,66,0.1); color: var(--accent-gold); border: 1px solid rgba(245,200,66,0.25); }
+  .ci-low { background: rgba(74,158,255,0.1); color: var(--accent-blue); border: 1px solid rgba(74,158,255,0.25); }
+
+  /* ─── CONCLUSION ─── */
+  .conclusion-card {
+    background: linear-gradient(135deg, #111827 0%, #0f1520 100%);
+    border: 1px solid var(--border); border-top: 2px solid var(--accent-gold);
+    border-radius: 10px; padding: 2rem;
+    margin-bottom: 2rem;
+  }
+  .conclusion-title { font-size: 1rem; font-weight: 900; color: var(--accent-gold); margin-bottom: 1.2rem; letter-spacing: 0.05em; }
+  .conclusion-item { display: flex; gap: 1rem; margin-bottom: 0.9rem; align-items: flex-start; }
+  .ci-icon { font-size: 1.1rem; flex-shrink: 0; line-height: 1.5; }
+  .ci-text { font-size: 0.85rem; color: var(--text); line-height: 1.7; }
+  .ci-text strong { color: var(--accent-gold); }
+  .ci-text em { color: var(--accent-red); font-style: normal; }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    text-align: center; padding: 1.5rem; border-top: 1px solid var(--border);
+    font-family: 'Space Mono', monospace; font-size: 0.58rem; color: var(--text-dim);
+    letter-spacing: 0.08em; line-height: 2;
+  }
+
+  .divider { height: 1px; background: var(--border); margin: 2.4rem 0; }
+
+  @media (max-width: 768px) {
+    .regime-panel { grid-template-columns: 1fr 1fr; }
+    .summary-grid { grid-template-columns: 1fr; }
+    .deep-grid-inner { grid-template-columns: 1fr 1fr; }
+    .exec-row { grid-template-columns: 1fr 1fr; }
+    .danger-grid { grid-template-columns: 1fr; }
+    .calendar-grid { grid-template-columns: 1fr 1fr; }
+    .pair-card { flex-direction: column; }
+    .radar-table { font-size: 0.72rem; }
+    .radar-table th, .radar-table td { padding: 0.6rem 0.65rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo-block">
+      <span class="logo-tag">AIreport</span>
+      <h1 class="logo-title">台股<span>AI</span>短線機會雷達</h1>
+    </div>
+    <div class="header-meta">
+      <div>2026 / 05 / 11 &nbsp;·&nbsp; 盤中更新</div>
+      <div style="margin-top:0.3rem">
+        <span class="regime-badge">AI Risk-On ⚡ 中性偏多</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+
+  <!-- ═══ ZERO: MARKET REGIME ═══ -->
+  <div class="section-label">ZERO · 市場 Regime 判斷</div>
+  <div class="section-title">大盤當前狀態掃描</div>
+  <div class="regime-panel">
+    <div class="regime-item">
+      <div class="regime-item-label">加權指數 / 位階</div>
+      <div class="regime-item-val up">41,714 → 41,874 點</div>
+    </div>
+    <div class="regime-item">
+      <div class="regime-item-label">NASDAQ / SOX</div>
+      <div class="regime-item-val up">NASDAQ +1.71% · 費半 +5.51%</div>
+    </div>
+    <div class="regime-item">
+      <div class="regime-item-label">大盤技術結構</div>
+      <div class="regime-item-val up">指數守5日線 · 多頭排列</div>
+    </div>
+    <div class="regime-item">
+      <div class="regime-item-label">外資動向</div>
+      <div class="regime-item-val up">上週單日外資 +751億（史上第4大）</div>
+    </div>
+    <div class="regime-item">
+      <div class="regime-item-label">投信動向</div>
+      <div class="regime-item-val up">投信連11買超</div>
+    </div>
+    <div class="regime-item">
+      <div class="regime-item-label">擁擠度 / 警訊</div>
+      <div class="regime-item-val warn">高成交量 · 類股輪動極快 · 留意短線過熱</div>
+    </div>
+    <div class="regime-verdict">
+      <strong>Regime 判定：AI Risk-On（中性偏多，局部過熱警示）</strong><br>
+      台股指數創歷史高點 41,874，外資大回補、費半強勢大漲 5.51%，AI 供應鏈全面噴出。整體多頭架構未破，但聯發科、世芯、勤誠等已漲翻天，資金輪動速度極快。本週操作重點：<strong>避開已暴漲 FOMO 股，獵捕「尚未輪到」的 Laggard/Emerging 族群（記憶體補漲、ABF 回測、散熱次階梯）</strong>，不追短線過熱股，等待 Pullback 進場機會更佳。
+    </div>
+  </div>
+
+  <!-- ═══ ONE: SUMMARY ═══ -->
+  <div class="section-label">ONE · 交易員一頁總結</div>
+  <div class="section-title">最重要的 8 個問題</div>
+  <div class="summary-grid">
+    <div class="summary-card gold">
+      <div class="sc-q">▸ 今天/本週最值得買的標的？</div>
+      <div class="sc-a"><span class="ticker">南亞科（2408）</span> ＋ <span class="ticker">華邦電（2344）</span><br>記憶體族群位階低、財報前資金進駐，投信剛轉積極買超，5/15 財報大考前還有一波行情窗口。</div>
+    </div>
+    <div class="summary-card green">
+      <div class="sc-q">▸ 最像「剛起漲」的甜蜜點？</div>
+      <div class="sc-a"><span class="ticker">華邦電（2344）</span> — 4 月營收月增 32%、年增 182%，產能滿載至 2027，外資投信同步買超，股價尚在百元附近低位階，A 級突破機會。</div>
+    </div>
+    <div class="summary-card purple">
+      <div class="sc-q">▸ 最佳 Laggard / Emerging Rotation？</div>
+      <div class="sc-a">
+        <span class="ticker">景碩（3189）</span>：ABF 三雄中位階最低，9 天飆漲後出現回測，Q2 持續漲價。<br>
+        <span class="ticker">康舒（6282）</span>：BBU 電源新焦點，今日強勢漲停，外資剛開始注意。
+      </div>
+    </div>
+    <div class="summary-card red">
+      <div class="sc-q">▸ 最危險的 FOMO 擁擠股？</div>
+      <div class="sc-a"><span class="danger">世芯-KY（3661）、聯發科（2454）、勤誠（8210）</span> — 近期漲幅 50~100%+，高檔震盪，媒體全版面報導，典型 Sell-the-News 風險區。</div>
+    </div>
+    <div class="summary-card gold">
+      <div class="sc-q">▸ 如果今天只能重壓一檔？</div>
+      <div class="sc-a"><span class="ticker">南亞科（2408）</span><br>投信連 2 日砸 127 億建倉，打入輝達供應鏈確認，5/15 財報預期 EPS 8.41 元，基本面 + 籌碼 + 催化劑三合一。</div>
+    </div>
+    <div class="summary-card blue">
+      <div class="sc-q">▸ 如果只能做隔夜單？</div>
+      <div class="sc-a"><span class="ticker">康舒（6282）</span><br>BBU 電源新焦點今日漲停，族群尚未全面噴出，隔夜小倉位博 Gap-up 延伸，設嚴格停損。</div>
+    </div>
+    <div class="summary-card orange">
+      <div class="sc-q">▸ AI 轉弱第一個先砍誰？</div>
+      <div class="sc-a"><span class="danger">聯發科（2454）</span> — 股價月內翻倍後被列入分盤處置，高本益比，若跌破 5 日線或費半轉弱立刻砍。</div>
+    </div>
+    <div class="summary-card red">
+      <div class="sc-q">▸ 故事很好但 K 線不能碰的？</div>
+      <div class="sc-a"><span class="danger">南電（8046）</span> — 大股東申報轉讓 2.5 萬張套現 180 億，今日急殺 9%，賣壓未散，故事再好也先觀望。</div>
+    </div>
+  </div>
+
+  <!-- ═══ TWO: RADAR TABLE ═══ -->
+  <div class="section-label">TWO · AI 台股短線機會雷達表</div>
+  <div class="section-title">全標的綜合評分一覽</div>
+  <div class="radar-table-wrap">
+    <table class="radar-table">
+      <thead>
+        <tr>
+          <th>標的</th>
+          <th>總分</th>
+          <th>K線等級</th>
+          <th>輪動位置</th>
+          <th>型態</th>
+          <th>核心催化劑</th>
+          <th>建議</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="ticker-main">南亞科</div>
+            <div class="ticker-code">2408 · DRAM</div>
+          </td>
+          <td><span class="score-badge score-s">87</span></td>
+          <td><span class="kline-A">A</span></td>
+          <td><span class="rotation-tag rt-laggard">Laggard</span></td>
+          <td>記憶體補漲</td>
+          <td>5/15 Q1 財報 · 打入輝達供應鏈</td>
+          <td style="color:var(--accent-green);font-weight:700">核心重倉</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ticker-main">華邦電</div>
+            <div class="ticker-code">2344 · 利基 DRAM</div>
+          </td>
+          <td><span class="score-badge score-s">85</span></td>
+          <td><span class="kline-A">A</span></td>
+          <td><span class="rotation-tag rt-laggard">Laggard</span></td>
+          <td>記憶體補漲</td>
+          <td>4月營收年增 182% · 5/15 財報</td>
+          <td style="color:var(--accent-green);font-weight:700">核心重倉</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ticker-main">景碩</div>
+            <div class="ticker-code">3189 · ABF 載板</div>
+          </td>
+          <td><span class="score-badge score-a">78</span></td>
+          <td><span class="kline-B">B</span></td>
+          <td><span class="rotation-tag rt-sympathy">Sympathy</span></td>
+          <td>ABF 載板回測</td>
+          <td>Q2 ABF 再漲 5% · Computex 前資金輪動</td>
+          <td style="color:var(--accent-blue);font-weight:700">積極參與</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ticker-main">康舒</div>
+            <div class="ticker-code">6282 · 電源供應</div>
+          </td>
+          <td><span class="score-badge score-a">76</span></td>
+          <td><span class="kline-A">A</span></td>
+          <td><span class="rotation-tag rt-emerging">Emerging</span></td>
+          <td>BBU 電源輪動</td>
+          <td>高壓直流機房趨勢 · 今日漲停突破</td>
+          <td style="color:var(--accent-blue);font-weight:700">積極參與</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ticker-main">欣興</div>
+            <div class="ticker-code">3037 · ABF 龍頭</div>
+          </td>
+          <td><span class="score-badge score-b">71</span></td>
+          <td><span class="kline-B">B</span></td>
+          <td><span class="rotation-tag rt-leader">Leader</span></td>
+          <td>ABF 主升段</td>
+          <td>AI 載板龍頭 · Computex 題材</td>
+          <td style="color:var(--accent-orange)">小倉位觀察</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ticker-main">群聯</div>
+            <div class="ticker-code">8299 · NAND Ctrl</div>
+          </td>
+          <td><span class="score-badge score-b">72</span></td>
+          <td><span class="kline-B">B</span></td>
+          <td><span class="rotation-tag rt-leader">Leader</span></td>
+          <td>AI SSD</td>
+          <td>Q1 EPS 68.8元 · Computex 前利多釋放</td>
+          <td style="color:var(--accent-orange)">小倉位觀察</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ticker-main">聯發科</div>
+            <div class="ticker-code">2454 · ASIC/AI 核</div>
+          </td>
+          <td><span class="score-badge score-c">58</span></td>
+          <td><span class="kline-C">C</span></td>
+          <td><span class="rotation-tag rt-leader">Leader</span></td>
+          <td>ASIC 龍頭</td>
+          <td>Google TPU · ASIC 20億美元</td>
+          <td style="color:var(--accent-red)">捨棄（位階過高）</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="ticker-main">南電</div>
+            <div class="ticker-code">8046 · ABF</div>
+          </td>
+          <td><span class="score-badge score-d">42</span></td>
+          <td><span class="kline-D">D</span></td>
+          <td><span class="rotation-tag rt-leader">Leader</span></td>
+          <td>ABF 三雄</td>
+          <td>—（大股東賣壓 180 億未散）</td>
+          <td style="color:var(--accent-red)">直接放棄</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══ THREE: DEEP ANALYSIS ═══ -->
+  <div class="section-label">THREE · Top 4 深度交易機會</div>
+  <div class="section-title">完整執行規則 + 進出場條件</div>
+  <div class="deep-grid">
+
+    <!-- 南亞科 -->
+    <div class="deep-card">
+      <div class="deep-card-header gold">
+        <div class="dch-left">
+          <div class="dch-name">🥇 南亞科技（2408）</div>
+          <div class="dch-code">DRAM · 記憶體族群 Laggard Catch-up</div>
+        </div>
+        <div class="dch-right">
+          <span class="score-badge score-s">87分</span>
+          <span class="kline-A" style="font-weight:700;border:1px solid rgba(46,204,138,0.4);padding:0.2rem 0.55rem;border-radius:3px;">K線A級</span>
+          <span class="rotation-tag rt-laggard">Laggard</span>
+        </div>
+      </div>
+      <div class="deep-card-body">
+        <div class="catalyst-box">
+          <strong>⚡ 核心催化劑（時間點明確）</strong><br>
+          ① <strong>5/15 Q1 財報</strong>：EPS 預期 8.41 元，遠優市場預期，投顧目標價 365 元<br>
+          ② <strong>打入輝達供應鏈</strong>：黃仁勳「有多少產能照單全收」，AI DRAM 缺貨延續至 2028<br>
+          ③ <strong>Q2 全產品線合約價調漲</strong>：DRAM ASP 改善加速，毛利率持續擴張<br>
+          ④ <strong>投信連 2 日砸 127 億建倉</strong>（5/5~5/6）：籌碼轉強明確
+        </div>
+        <div class="deep-grid-inner">
+          <div class="di-item">
+            <div class="di-label">型態分類</div>
+            <div class="di-val gold">記憶體補漲 Laggard</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">輪動位置</div>
+            <div class="di-val gold">Laggard Catch-up（最甜蜜點）</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">資金籌碼</div>
+            <div class="di-val green">投信連買 · 外資回補 · 主力集中</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">技術結構</div>
+            <div class="di-val">突破整理區 · 月線翻揚 · MA5 > MA10</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">擁擠度</div>
+            <div class="di-val green">低（同族群最低位階之一）</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">融資狀況</div>
+            <div class="di-val">未見暴增，健康</div>
+          </div>
+        </div>
+        <div class="exec-row">
+          <div class="exec-item">
+            <div class="exec-label">最佳進場區</div>
+            <div class="exec-val green">Pullback 280~295</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">不追價區</div>
+            <div class="exec-val orange">跳空 >5% 不追</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">停損位</div>
+            <div class="exec-val red">跌破 MA5 / 270 元</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">目標 / 持有天</div>
+            <div class="exec-val gold">350+ · 5~12 天</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">RR 比</div>
+            <div class="exec-val green">1 : 3 以上</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">勝率評估</div>
+            <div class="exec-val green">高（65~75%）</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">適合隔夜？</div>
+            <div class="exec-val green">✓ 是</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">建議倉位</div>
+            <div class="exec-val gold">核心 20~30%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 華邦電 -->
+    <div class="deep-card">
+      <div class="deep-card-header green">
+        <div class="dch-left">
+          <div class="dch-name">🥈 華邦電（2344）</div>
+          <div class="dch-code">利基型 DRAM · NOR Flash · Edge AI 受惠</div>
+        </div>
+        <div class="dch-right">
+          <span class="score-badge score-s">85分</span>
+          <span class="kline-A" style="font-weight:700;border:1px solid rgba(46,204,138,0.4);padding:0.2rem 0.55rem;border-radius:3px;">K線A級</span>
+          <span class="rotation-tag rt-laggard">Laggard</span>
+        </div>
+      </div>
+      <div class="deep-card-body">
+        <div class="catalyst-box">
+          <strong>⚡ 核心催化劑（時間點明確）</strong><br>
+          ① <strong>4 月營收年增 182%、月增 32%</strong>：史上最強成長率，明確看見訂單爆發<br>
+          ② <strong>5/15 Q1 財報前</strong>：市場提前布局記憶體財報行情<br>
+          ③ <strong>產能滿載至 2027</strong>：稀缺性確立，漲價能見度高<br>
+          ④ <strong>投信 + 外資雙向買超</strong>：5/5~5/6 投信大幅建倉 1.1 萬張
+        </div>
+        <div class="deep-grid-inner">
+          <div class="di-item">
+            <div class="di-label">型態分類</div>
+            <div class="di-val green">記憶體補漲 Laggard · 第一波有效突破</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">輪動位置</div>
+            <div class="di-val green">Laggard（同族群最早未動的一檔）</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">資金籌碼</div>
+            <div class="di-val green">投信外資齊買 · 主力分點集中</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">技術結構</div>
+            <div class="di-val">突破月線 · 月線翻揚 · 量增轉強</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">擁擠度</div>
+            <div class="di-val green">低（媒體關注度不如南亞科）</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">基本面支撐</div>
+            <div class="di-val">Edge AI NOR Flash 需求強 · 利基產品</div>
+          </div>
+        </div>
+        <div class="exec-row">
+          <div class="exec-item">
+            <div class="exec-label">最佳進場區</div>
+            <div class="exec-val green">Pullback 95~105</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">不追價區</div>
+            <div class="exec-val orange">跳空 >6% 不追</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">停損位</div>
+            <div class="exec-val red">跌破 MA5 / 90 元</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">目標 / 持有天</div>
+            <div class="exec-val gold">125+ · 5~10 天</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">RR 比</div>
+            <div class="exec-val green">1 : 2.5</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">勝率評估</div>
+            <div class="exec-val green">高（60~70%）</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">適合隔夜？</div>
+            <div class="exec-val green">✓ 是</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">建議倉位</div>
+            <div class="exec-val gold">核心 15~25%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 景碩 -->
+    <div class="deep-card">
+      <div class="deep-card-header purple">
+        <div class="dch-left">
+          <div class="dch-name">🥉 景碩（3189）</div>
+          <div class="dch-code">ABF 載板 · AI GPU 第三供應商</div>
+        </div>
+        <div class="dch-right">
+          <span class="score-badge score-a">78分</span>
+          <span class="kline-B" style="font-weight:700;border:1px solid rgba(74,158,255,0.4);padding:0.2rem 0.55rem;border-radius:3px;">K線B級</span>
+          <span class="rotation-tag rt-sympathy">Sympathy</span>
+        </div>
+      </div>
+      <div class="deep-card-body">
+        <div class="catalyst-box">
+          <strong>⚡ 核心催化劑（時間點明確）</strong><br>
+          ① <strong>ABF Q2 再漲價 5%</strong>：T-glass 供應持續短缺，上游漲價確立<br>
+          ② <strong>Computex 2026 (6/1~6/5)</strong>：黃仁勳演講點名供應鏈，短線催化劑<br>
+          ③ <strong>凱基目標價 650 元</strong>（現價 486）：2027 EPS 18.04 元，本益比重估<br>
+          ④ <strong>9 天飆漲 52% 後回測</strong>：若回測不破，B 轉 A 佈局機會
+        </div>
+        <div class="deep-grid-inner">
+          <div class="di-item">
+            <div class="di-label">型態分類</div>
+            <div class="di-val purple">ABF Sympathy · 回測不破再布局</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">輪動位置</div>
+            <div class="di-val purple">Sympathy（欣興後第2波）</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">擁擠度評估</div>
+            <div class="di-val orange">9 天飆 52%，短線過熱，等回測</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">資金籌碼</div>
+            <div class="di-val">外資已調升目標價 · 私募引進策略客戶</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">失效條件</div>
+            <div class="di-val red">跌破 440 元強支撐（前整理區頂）</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">關鍵觀察</div>
+            <div class="di-val">量縮整理期間不出貨為多頭訊號</div>
+          </div>
+        </div>
+        <div class="exec-row">
+          <div class="exec-item">
+            <div class="exec-label">最佳進場區</div>
+            <div class="exec-val green">Pullback 450~470</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">不追價區</div>
+            <div class="exec-val orange">520+ 不追（前高壓力）</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">停損位</div>
+            <div class="exec-val red">440 元破則出</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">目標 / 持有天</div>
+            <div class="exec-val gold">550+ · 7~14 天</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">RR 比</div>
+            <div class="exec-val green">1 : 2</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">勝率評估</div>
+            <div class="exec-val orange">中（50~60%）</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">適合隔夜？</div>
+            <div class="exec-val orange">視回測深度決定</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">建議倉位</div>
+            <div class="exec-val">衛星 10~15%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 康舒 -->
+    <div class="deep-card">
+      <div class="deep-card-header blue">
+        <div class="dch-left">
+          <div class="dch-name">④ 康舒（6282）</div>
+          <div class="dch-code">BBU 電源供應器 · 高壓直流資料中心受惠</div>
+        </div>
+        <div class="dch-right">
+          <span class="score-badge score-a">76分</span>
+          <span class="kline-A" style="font-weight:700;border:1px solid rgba(46,204,138,0.4);padding:0.2rem 0.55rem;border-radius:3px;">K線A級</span>
+          <span class="rotation-tag rt-emerging">Emerging</span>
+        </div>
+      </div>
+      <div class="deep-card-body">
+        <div class="catalyst-box">
+          <strong>⚡ 核心催化劑（時間點明確）</strong><br>
+          ① <strong>今日漲停（5/11）</strong>：BBU 電源族群首根漲停，Emerging 輪動第一棒<br>
+          ② <strong>輝達 GPU 高功耗 → 高壓直流機房主流化</strong>：台達電、光寶科先噴，康舒跟進<br>
+          ③ <strong>Computex 2026 (6/1)</strong>：BBU/電源架構升級議題持續發酵 3 週<br>
+          ④ <strong>Emerging 位階最低</strong>：尚未被全市場發現，甜蜜點
+        </div>
+        <div class="deep-grid-inner">
+          <div class="di-item">
+            <div class="di-label">型態分類</div>
+            <div class="di-val blue">BBU Emerging Rotation 第一棒</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">輪動位置</div>
+            <div class="di-val blue">Emerging（最早期）</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">擁擠度</div>
+            <div class="di-val green">極低（剛開始被注意）</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">技術結構</div>
+            <div class="di-val">今日漲停突破整理區 · 量增顯著</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">失效條件</div>
+            <div class="di-val red">若明日開高走低 / 爆量長上影線立即退出</div>
+          </div>
+          <div class="di-item">
+            <div class="di-label">風險提示</div>
+            <div class="di-val orange">Emerging 期失敗率較高，嚴格控倉</div>
+          </div>
+        </div>
+        <div class="exec-row">
+          <div class="exec-item">
+            <div class="exec-label">最佳進場區</div>
+            <div class="exec-val green">今日收盤 / 明日回踩 52~55</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">不追價區</div>
+            <div class="exec-label" style="font-size:0.75rem;color:var(--accent-orange)">Gap >8% 不追</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">停損位</div>
+            <div class="exec-val red">跌破 50 元（今日收盤 -5%）</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">目標 / 持有天</div>
+            <div class="exec-val gold">65+ · 3~7 天</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">RR 比</div>
+            <div class="exec-val green">1 : 2.5</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">勝率評估</div>
+            <div class="exec-val orange">中等（50%）</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">適合隔夜？</div>
+            <div class="exec-val green">✓ 小倉位</div>
+          </div>
+          <div class="exec-item">
+            <div class="exec-label">建議倉位</div>
+            <div class="exec-val">試倉 5~10%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /deep-grid -->
+
+  <div class="divider"></div>
+
+  <!-- ═══ FOUR: DANGER ZONE ═══ -->
+  <div class="section-label">FOUR · 避開 / 弱勢名單</div>
+  <div class="section-title">K 線很醜或容易套人的標的</div>
+  <div class="danger-grid">
+    <div class="danger-card">
+      <div class="danger-card-name">⛔ 南電（8046）</div>
+      <div class="danger-card-why">
+        <strong>大股東申報賣股 2.5 萬張、套現 180 億</strong>，今日急殺 9%，破千金股地位。ABF 三雄中最危險。外資目標價雖高但賣壓明確，建議等賣壓消化（至少 2 週）後再評估。D 級 K 線，跑。
+      </div>
+    </div>
+    <div class="danger-card">
+      <div class="danger-card-name">⛔ 世芯-KY（3661）</div>
+      <div class="danger-card-why">
+        <strong>近期改寫掛牌新高，股價飆上千金股</strong>，漲幅已達 50%+，媒體全面追捧。3nm Q2 量產爬坡利多已反映，短線追高風險極高。故事很棒但現在不能碰，等大幅回測再說。
+      </div>
+    </div>
+    <div class="danger-card">
+      <div class="danger-card-name">⛔ 聯發科（2454）</div>
+      <div class="danger-card-why">
+        <strong>月內翻倍被列入分盤處置</strong>，高本益比 + 立委關切 + 散戶全面 FOMO。高盛喊 5,000 元目標但短線追高等於替主力抬轎。若跌破 5 日線立即成為重倉離場訊號。C 級 K 線。
+      </div>
+    </div>
+    <div class="danger-card">
+      <div class="danger-card-name">⛔ 十銓（4967）</div>
+      <div class="danger-card-why">
+        <strong>4 月營收月減 59%</strong>，族群最弱股，反向操作陷阱。其他記憶體族群噴出時，十銓可能是最後跟上甚至根本不動的那一個。完全排除在觀察名單之外。
+      </div>
+    </div>
+    <div class="danger-card">
+      <div class="danger-card-name">⛔ 勤誠（8210）</div>
+      <div class="danger-card-why">
+        <strong>今日改寫掛牌新高，股價達 1,555 元千金股</strong>，機殼題材已全市場知曉。AI 伺服器機殼漲幅驚人，短線 Sell-the-News 風險高。擁擠度評分最高，不宜追高。
+      </div>
+    </div>
+    <div class="danger-card">
+      <div class="danger-card-name">⚠️ 宜鼎（5289）</div>
+      <div class="danger-card-why">
+        <strong>今日股價 1,760 元刷新掛牌新高</strong>，6 月機器人大腦題材很好但已漲很多。分析師提醒漲多後可能被列為處置股，流動性風險上升。故事好，但不是此刻進場的時機。
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ FIVE: PAIR TRADE ═══ -->
+  <div class="section-label">FIVE · 配對交易建議</div>
+  <div class="section-title">多空對沖降低大盤波動風險</div>
+  <div class="pair-card">
+    <div class="pair-long">
+      <div class="pair-label">LONG 多方</div>
+      <div class="pair-ticker">南亞科（2408）</div>
+      <div class="pair-reason">記憶體 Laggard · 投信積極建倉 · 5/15 財報催化</div>
+    </div>
+    <div class="pair-arrow">⟷</div>
+    <div class="pair-short">
+      <div class="pair-label">SHORT / 規避 空方</div>
+      <div class="pair-ticker">十銓（4967）</div>
+      <div class="pair-reason">同族群最弱股 · 4月營收月減59% · 結構性分歧</div>
+    </div>
+    <div class="pair-logic">
+      <strong style="color:var(--accent-gold)">邏輯：記憶體族群內部強弱分化</strong><br>
+      同屬記憶體族群，南亞科打入輝達供應鏈 + 法人積極建倉，十銓則是族群中唯一 4 月營收大幅衰退的個股。買強賣弱，對沖大盤系統性風險，純押族群內部分化。若記憶體族群整體下修，南亞科抗跌、十銓跌更深，配對損失小；若族群漲，南亞科漲更多，十銓落後。
+    </div>
+  </div>
+
+  <div class="pair-card">
+    <div class="pair-long">
+      <div class="pair-label">LONG 多方</div>
+      <div class="pair-ticker">景碩（3189）</div>
+      <div class="pair-reason">ABF 三雄中位階最低 · 凱基 650 目標</div>
+    </div>
+    <div class="pair-arrow">⟷</div>
+    <div class="pair-short">
+      <div class="pair-label">HEDGE 風險對沖</div>
+      <div class="pair-ticker">南電（8046）</div>
+      <div class="pair-reason">大股東 180 億賣壓 · K線D級 · 避開</div>
+    </div>
+    <div class="pair-logic">
+      <strong style="color:var(--accent-gold)">邏輯：ABF 族群內部籌碼分化</strong><br>
+      同為 ABF 載板，景碩賣壓相對較小，大股東未申報大量賣股；南電則有明確大股東 2 階段出脫 2.5 萬張，籌碼最不健康。若持有景碩可輕倉融券南電避險。Computex 題材若帶動 ABF 族群，景碩彈幅會大於南電。
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ SIX: CATALYST CALENDAR ═══ -->
+  <div class="section-label">SIX · 未來 14 天催化劑日曆</div>
+  <div class="section-title">2026 / 05 / 11 → 05 / 24</div>
+  <div class="calendar-grid">
+    <div class="cal-item">
+      <div class="cal-date">5/11 (今日)</div>
+      <div class="cal-event">台股高檔震盪，BBU 電源族群漲停突破（康舒、順達）。記憶體輪動延續。</div>
+      <span class="cal-impact ci-high">高影響</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-date">5/12~5/13</div>
+      <div class="cal-event">美國 CPI / PPI 數據公布。若通膨降溫 → 科技股 Risk-On 延續；若超預期 → 壓縮本益比</div>
+      <span class="cal-impact ci-high">高影響</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-date">5/15</div>
+      <div class="cal-event">台股 Q1 財報截止日。南亞科、華邦電、群聯等記憶體族群財報大考，市場高度期待爆表。</div>
+      <span class="cal-impact ci-high">🔥 最重要</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-date">5/15~5/19</div>
+      <div class="cal-event">各 AI 供應鏈廠商 Q1 法說會密集登場（欣興、景碩、台積電客戶等）法說後資金換倉。</div>
+      <span class="cal-impact ci-high">高影響</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-date">5/22 (預期)</div>
+      <div class="cal-event">NVIDIA FY2026 Q1 財報。若 AI 需求指引上修 → 台灣 AI 供應鏈全面受惠；若不如預期 → 獲利了結</div>
+      <span class="cal-impact ci-high">🔥 最重要</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-date">6/1</div>
+      <div class="cal-event">NVIDIA 黃仁勳 Computex Keynote（台北流行音樂中心）。AI 供應鏈前 3 週是布局黃金期，現在正是窗口。</div>
+      <span class="cal-impact ci-high">🔥 超重要</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-date">6/2~6/5</div>
+      <div class="cal-event">Computex 2026 展覽正式開幕（南港展覽館）。鴻海劉揚偉主題演講，Physical AI 機器人熱潮</div>
+      <span class="cal-impact ci-mid">中影響</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-date">5/中旬起</div>
+      <div class="cal-event">台積電 CoWoS 擴產進度更新（預計 2026 年底達 12 萬片/月）。先進封裝族群持續受惠。</div>
+      <span class="cal-impact ci-mid">中影響</span>
+    </div>
+    <div class="cal-item">
+      <div class="cal-date">持續滾動</div>
+      <div class="cal-event">DRAM / NAND 合約價報價更新。Q2 全線漲價確立，缺貨延續至 2028。記憶體族群持續受惠。</div>
+      <span class="cal-impact ci-low">持續催化</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══ SEVEN: CONCLUSION ═══ -->
+  <div class="section-label">SEVEN · 最後交易員結論</div>
+  <div class="conclusion-card">
+    <div class="conclusion-title">⚡ 短線交易員直接結論</div>
+
+    <div class="conclusion-item">
+      <div class="ci-icon">🎯</div>
+      <div class="ci-text">
+        <strong>本週最核心操作主軸：記憶體族群 Laggard 補漲</strong><br>
+        加權指數已在 42,000 點高位，繼續追 ASIC 或機殼族群是追高行為。資金已明顯輪動至記憶體，<strong>南亞科（2408）+ 華邦電（2344）是當前最佳 Risk/Reward 組合</strong>，5/15 財報前是黃金窗口。
+      </div>
+    </div>
+
+    <div class="conclusion-item">
+      <div class="ci-icon">⏰</div>
+      <div class="ci-text">
+        <strong>催化劑時間軸非常清晰：5/15 → 5/22 → 6/1 三連發</strong><br>
+        財報季 + NVIDIA 財報 + Computex Keynote，未來 3 週是台股 AI 供應鏈最密集的催化劑窗口。現在進場記憶體與 ABF 回測，正好卡在三大催化劑的前置布局甜蜜點。
+      </div>
+    </div>
+
+    <div class="conclusion-item">
+      <div class="ci-icon">🚦</div>
+      <div class="ci-text">
+        <strong>Regime 雖是 Risk-On，但必須嚴防 Sell-the-News</strong><br>
+        聯發科、世芯、勤誠、宜鼎已是 FOMO 股，<em>千萬不追</em>。南電有明確賣壓，直接排除。景碩 9 天飆 52% 需要等回測確認不破支撐才能入場。
+      </div>
+    </div>
+
+    <div class="conclusion-item">
+      <div class="ci-icon">💼</div>
+      <div class="ci-text">
+        <strong>建議倉位配置參考</strong><br>
+        南亞科（2408）：20~30% 核心倉 &nbsp;|&nbsp; 華邦電（2344）：15~25% 核心倉 &nbsp;|&nbsp; 景碩（3189）：10~15% 衛星倉（等回測）&nbsp;|&nbsp; 康舒（6282）：5~10% 試倉 &nbsp;|&nbsp; 現金保留 25~35%
+      </div>
+    </div>
+
+    <div class="conclusion-item">
+      <div class="ci-icon">🛑</div>
+      <div class="ci-text">
+        <strong>停損紀律：指數跌破 MA10（約 40,500）→ 全面降倉至 30% 以下</strong><br>
+        若費半指數單日跌超 3% 或 NVIDIA 財報不如預期，立刻收縮倉位，不戀戰。短線交易員的核心優勢是快進快出，不是長抱等反彈。
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  AIreport · 台股AI短線機會雷達 &nbsp;·&nbsp; 2026 / 05 / 11 &nbsp;·&nbsp; 僅供研究參考，不構成任何投資建議<br>
+  本報告依賴公開資訊分析，市場存在不確定性，投資人應自行評估風險、審慎決策
+</footer>
+
+</body>
+</html>
