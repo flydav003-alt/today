@@ -1,10 +1,23 @@
 {
-  "latest": "20260512",
+  "latest": "20260514",
   "dates": [
+    {
+      "date": "20260514",
+      "display": "2026/05/14",
+      "regime": "中性",
+      "versions": ["1", "2"]
+    },
+    {
+      "date": "20260513",
+      "display": "2026/05/13",
+      "regime": "Risk-On",
+      "versions": ["1", "2"]
+    },
     {
       "date": "20260512",
       "display": "2026/05/12",
-      "regime": "中性"
+      "regime": "中性",
+      "versions": ["1"]
     }
   ]
 }
