@@ -3,17 +3,15 @@
 """
 update_manifest.py
 ==================
-自動掃描 /docs 資料夾，更新 manifest.json 的日期清單。
+自動掃描 /docs 資料夾，更新 manifest.json。
+支援雙版本：版本一（盤後）與版本二（早晨修訂）。
+
+檔案命名規則：
+  20260514_1_claude.html  ← 版本一：台股盤後（晚上 7~8 點上傳）
+  20260514_2_claude.html  ← 版本二：早晨修訂版（次日早上上傳，日期仍為分析當日）
+
 執行環境：Windows（Python 3.8+）
-
-使用方式：
-  python update_manifest.py
-
-功能：
-  - 掃描所有符合 YYYYMMDD_claude.html 格式的檔案
-  - 詢問使用者輸入當天（最新日期）的 Regime
-  - 更新 manifest.json，依日期降冪排序
-  - 輸出確認訊息
+使用方式：在 /docs 資料夾內執行  python update_manifest.py
 """
 
 import os
@@ -23,14 +21,18 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-# ── 設定 ──────────────────────────────────────────────────────────────────────
-SCRIPT_DIR = Path(__file__).parent          # 腳本所在資料夾（即 /docs）
+SCRIPT_DIR    = Path(__file__).parent
 MANIFEST_PATH = SCRIPT_DIR / "manifest.json"
-HTML_PATTERN = re.compile(r"^(\d{8})_claude\.html$", re.IGNORECASE)
 
-VALID_REGIMES = ["Risk-On", "中性", "Risk-Off"]
+# 新格式：YYYYMMDD_1_claude.html 或 YYYYMMDD_2_claude.html
+HTML_PATTERN = re.compile(r"^(\d{8})_([12])_claude\.html$", re.IGNORECASE)
+# 舊格式（向下相容）：YYYYMMDD_claude.html → 視為版本一
+HTML_PATTERN_OLD = re.compile(r"^(\d{8})_claude\.html$", re.IGNORECASE)
 
-# ── 顏色輸出（Windows CMD / PowerShell 支援 ANSI 轉義碼）────────────────────
+VALID_REGIMES  = ["Risk-On", "中性", "Risk-Off"]
+DEFAULT_REGIME = "中性"
+
+# ── 顏色輸出 ──────────────────────────────────────────────────────────────────
 def c(text, code): return f"\033[{code}m{text}\033[0m"
 GREEN  = lambda t: c(t, "92")
 YELLOW = lambda t: c(t, "93")
@@ -39,169 +41,169 @@ CYAN   = lambda t: c(t, "96")
 BOLD   = lambda t: c(t, "1")
 DIM    = lambda t: c(t, "2")
 
-def enable_ansi_windows():
-    """在 Windows 上啟用 ANSI 色彩支援"""
+def enable_ansi():
     if sys.platform == "win32":
         try:
             import ctypes
-            kernel32 = ctypes.windll.kernel32
-            kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
+            ctypes.windll.kernel32.SetConsoleMode(
+                ctypes.windll.kernel32.GetStdHandle(-11), 7)
         except Exception:
             pass
 
 def header():
     print()
-    print(CYAN("╔══════════════════════════════════════════╗"))
-    print(CYAN("║") + BOLD("   AI INTEL TERMINAL — Manifest Updater  ") + CYAN("║"))
-    print(CYAN("╚══════════════════════════════════════════╝"))
+    print(CYAN("╔══════════════════════════════════════════════════╗"))
+    print(CYAN("║") + BOLD("   AI INTEL TERMINAL — Manifest Updater          ") + CYAN("║"))
+    print(CYAN("║") + DIM("   命名規則：YYYYMMDD_1_claude.html / _2_claude   ") + CYAN("║"))
+    print(CYAN("╚══════════════════════════════════════════════════╝"))
     print()
 
-def scan_html_files(docs_dir: Path) -> list[str]:
-    """掃描資料夾，回傳所有符合格式的日期字串（降冪排序）"""
-    dates_found = []
+# ── 掃描 ──────────────────────────────────────────────────────────────────────
+def scan_files(docs_dir: Path) -> dict:
+    """回傳 {date_str: {'1', '2', ...}} 的字典"""
+    result: dict[str, set] = {}
+
     for filename in os.listdir(docs_dir):
+        # 新格式
         m = HTML_PATTERN.match(filename)
         if m:
-            date_str = m.group(1)
-            # 驗證日期格式是否合法
+            date_str, ver = m.group(1), m.group(2)
             try:
                 datetime.strptime(date_str, "%Y%m%d")
-                dates_found.append(date_str)
+                result.setdefault(date_str, set()).add(ver)
             except ValueError:
-                print(YELLOW(f"  ⚠  跳過格式不合法的日期：{filename}"))
-    # 降冪排序（最新在前）
-    dates_found.sort(reverse=True)
-    return dates_found
+                print(YELLOW(f"  ⚠  跳過日期不合法：{filename}"))
+            continue
 
-def load_existing_manifest(path: Path) -> dict:
-    """載入現有的 manifest.json，若不存在則回傳空結構"""
+        # 舊格式（相容）
+        m2 = HTML_PATTERN_OLD.match(filename)
+        if m2:
+            date_str = m2.group(1)
+            try:
+                datetime.strptime(date_str, "%Y%m%d")
+                result.setdefault(date_str, set()).add("1")
+                print(YELLOW(f"  ⚠  舊格式偵測：{filename} → 視為版本一"))
+            except ValueError:
+                print(YELLOW(f"  ⚠  跳過日期不合法：{filename}"))
+
+    return result
+
+def load_manifest(path: Path) -> dict:
     if path.exists():
         try:
             with open(path, "r", encoding="utf-8") as f:
                 return json.load(f)
-        except (json.JSONDecodeError, IOError) as e:
-            print(YELLOW(f"  ⚠  現有 manifest.json 讀取失敗（{e}），將重新建立"))
+        except Exception as e:
+            print(YELLOW(f"  ⚠  讀取失敗（{e}），將重新建立"))
     return {"latest": "", "dates": []}
 
-def format_display(date_str: str) -> str:
-    """將 20260513 → 2026/05/13"""
-    return f"{date_str[:4]}/{date_str[4:6]}/{date_str[6:8]}"
+def fd(d: str) -> str:
+    return f"{d[:4]}/{d[4:6]}/{d[6:8]}"
 
-def ask_regime(date_str: str) -> str:
-    """詢問使用者輸入最新日期的 Regime"""
-    display = format_display(date_str)
-    print(f"\n  📅 最新日期：{BOLD(display)}")
-    print(f"  請選擇 Regime：")
-    for i, r in enumerate(VALID_REGIMES, 1):
-        print(f"    {CYAN(str(i))}. {r}")
-    print()
+def ask_regime(date_str: str, current: str = "") -> str:
+    if current:
+        print(f"\n  {BOLD(fd(date_str))} 現有 Regime：{YELLOW(current)}")
+        raw = input("  直接 Enter 保留，或輸入新值（1/2/3）：").strip()
+        if not raw:
+            return current
+    else:
+        print(f"\n  {BOLD(fd(date_str))} 請選擇 Regime：")
+        raw = input("  1=Risk-On  2=中性  3=Risk-Off  > ").strip()
 
-    while True:
-        raw = input("  輸入編號或名稱（1/2/3 或 Risk-On/中性/Risk-Off）：").strip()
-        # 數字輸入
-        if raw in ("1", "2", "3"):
-            return VALID_REGIMES[int(raw) - 1]
-        # 文字輸入（不分大小寫比對）
-        for v in VALID_REGIMES:
-            if raw.lower() == v.lower() or raw == v:
-                return v
-        print(RED("  ✕ 無效輸入，請輸入 1、2、3 或對應名稱"))
+    if raw in ("1", "2", "3"):
+        return VALID_REGIMES[int(raw) - 1]
+    for v in VALID_REGIMES:
+        if raw.lower() == v.lower():
+            return v
+    if raw:
+        print(YELLOW(f"  ⚠  未辨識「{raw}」，保留：{current or DEFAULT_REGIME}"))
+    return current or DEFAULT_REGIME
 
+# ── 主程式 ────────────────────────────────────────────────────────────────────
 def main():
-    enable_ansi_windows()
+    enable_ansi()
     header()
 
     docs_dir = SCRIPT_DIR
-    print(f"  📂 掃描目錄：{DIM(str(docs_dir))}")
+    print(f"  📂 掃描：{DIM(str(docs_dir))}\n")
 
-    # 1. 掃描 HTML 檔案
-    found_dates = scan_html_files(docs_dir)
+    date_versions = scan_files(docs_dir)
 
-    if not found_dates:
-        print(RED("\n  ✕ 找不到任何符合格式的 HTML 檔案（YYYYMMDD_claude.html）"))
-        print(DIM("    請確認 /docs 資料夾內有正確命名的報告檔案"))
+    if not date_versions:
+        print(RED("  ✕ 找不到任何報告檔案"))
+        print(DIM("    請確認命名格式：YYYYMMDD_1_claude.html"))
         input("\n  按 Enter 結束...")
         return
 
-    print(f"\n  ✔ 找到 {GREEN(str(len(found_dates)))} 份報告：")
-    for d in found_dates:
-        print(f"      {DIM('•')} {format_display(d)}")
+    sorted_dates = sorted(date_versions.keys(), reverse=True)
 
-    # 2. 載入現有 manifest
-    existing = load_existing_manifest(MANIFEST_PATH)
-    existing_map = {entry["date"]: entry for entry in existing.get("dates", [])}
+    # 顯示掃描結果
+    total_files = sum(len(v) for v in date_versions.values())
+    print(f"  ✔ 找到 {GREEN(str(len(sorted_dates)))} 個交易日，共 {GREEN(str(total_files))} 份報告：\n")
+    for d in sorted_dates:
+        vers = sorted(date_versions[d])
+        tags = "  ".join(
+            (GREEN(f"版本{v}●") if v == "2" else YELLOW(f"版本{v}●"))
+            for v in vers
+        )
+        print(f"      {DIM('•')} {fd(d)}  {tags}")
 
-    # 3. 詢問最新日期的 Regime
-    latest_date = found_dates[0]
-    latest_display = format_display(latest_date)
+    # 載入現有 manifest
+    existing      = load_manifest(MANIFEST_PATH)
+    existing_map  = {e["date"]: e for e in existing.get("dates", [])}
+    latest_date   = sorted_dates[0]
 
-    existing_latest = existing_map.get(latest_date, {})
-    current_regime = existing_latest.get("regime", "")
+    print(f"\n  {'─'*46}")
+    print(f"  ★  最新日期：{BOLD(fd(latest_date))}")
+    print(f"  {'─'*46}")
 
-    if current_regime:
-        print(f"\n  📋 最新日期 {BOLD(latest_display)} 現有 Regime：{YELLOW(current_regime)}")
-        answer = input("  是否更新 Regime？（直接按 Enter 保留 / 輸入新值）：").strip()
-        if answer:
-            # 嘗試解析新輸入
-            if answer in ("1", "2", "3"):
-                regime_for_latest = VALID_REGIMES[int(answer) - 1]
-            else:
-                matched = next((v for v in VALID_REGIMES if v.lower() == answer.lower()), None)
-                if matched:
-                    regime_for_latest = matched
-                else:
-                    print(YELLOW(f"  ⚠  未能辨識「{answer}」，保留原有 Regime：{current_regime}"))
-                    regime_for_latest = current_regime
-        else:
-            regime_for_latest = current_regime
-    else:
-        regime_for_latest = ask_regime(latest_date)
-
-    # 4. 組建新的 dates 清單
     new_dates = []
-    for date_str in found_dates:
-        display = format_display(date_str)
-        if date_str == latest_date:
-            regime = regime_for_latest
-        elif date_str in existing_map:
-            regime = existing_map[date_str].get("regime", "中性")
+    for date_str in sorted_dates:
+        old_entry  = existing_map.get(date_str, {})
+        old_regime = old_entry.get("regime", "")
+        old_vers   = set(old_entry.get("versions", []))
+        new_vers   = sorted(date_versions[date_str])
+
+        # 詢問 Regime：最新日期 or 首次出現的日期
+        is_new = date_str not in existing_map
+        if date_str == latest_date or is_new:
+            regime = ask_regime(date_str, old_regime)
         else:
-            # 新發現的舊日期，設預設值
-            regime = "中性"
-            print(YELLOW(f"  ⚠  {display} 為新增項目，Regime 預設為「中性」，請手動編輯 manifest.json 修改"))
-        new_dates.append({"date": date_str, "display": display, "regime": regime})
+            regime = old_regime or DEFAULT_REGIME
 
-    # 5. 計算差異
-    old_count = len(existing.get("dates", []))
-    new_count = len(new_dates)
-    added   = new_count - old_count if new_count > old_count else 0
-    removed = old_count - new_count if old_count > new_count else 0
+        new_dates.append({
+            "date":     date_str,
+            "display":  fd(date_str),
+            "regime":   regime,
+            "versions": new_vers
+        })
 
-    # 6. 寫入 manifest.json
-    new_manifest = {
-        "latest": latest_date,
-        "dates": new_dates
-    }
+    # 寫入
     with open(MANIFEST_PATH, "w", encoding="utf-8") as f:
-        json.dump(new_manifest, f, ensure_ascii=False, indent=2)
+        json.dump({"latest": latest_date, "dates": new_dates}, f,
+                  ensure_ascii=False, indent=2)
 
-    # 7. 確認輸出
+    # 摘要
+    added   = set(sorted_dates) - set(existing_map)
+    removed = set(existing_map) - set(sorted_dates)
+
     print()
     print(GREEN("  ✔ manifest.json 更新完成！"))
     print()
-    print(f"  {'─'*40}")
-    print(f"  最新日期     ：{BOLD(latest_display)}")
-    print(f"  最新 Regime  ：{YELLOW(regime_for_latest)}")
-    print(f"  總筆數       ：{new_count} 筆")
+    print(f"  {'─'*46}")
+    print(f"  最新日期    ：{BOLD(fd(latest_date))}")
+    print(f"  最新 Regime ：{YELLOW(new_dates[0]['regime'])}")
+    print(f"  已有版本    ：{', '.join('版本'+v for v in new_dates[0]['versions'])}")
+    print(f"  交易日總數  ：{len(new_dates)} 天")
     if added:
-        print(f"  新增         ：{GREEN(f'+{added}')} 筆")
+        print(f"  新增日期    ：{GREEN(', '.join(fd(d) for d in sorted(added, reverse=True)))}")
     if removed:
-        print(f"  移除         ：{RED(f'-{removed}')} 筆")
-    print(f"  {'─'*40}")
+        print(f"  移除日期    ：{RED(', '.join(fd(d) for d in sorted(removed, reverse=True)))}")
+    print(f"  {'─'*46}")
     print()
-    print(DIM(f"  輸出路徑：{MANIFEST_PATH}"))
+    print(DIM(f"  輸出：{MANIFEST_PATH}"))
     print()
-    print("  ✅ 完成！現在可以 git add / commit / push 更新網站")
+    print("  ✅ 完成！執行 git add . → commit → push")
     print()
     input("  按 Enter 結束...")
 
