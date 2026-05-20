@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股早盤操作指令（第二輪）｜ 20260519</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Times New Roman','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px}
+h1{font-size:20px;color:#00e5ff;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:0.5px}
+h2{font-size:16px;color:#ffcc00;margin:12px 0 8px;border-left:3px solid #ffcc00;padding-left:8px}
+h3{font-size:14px;color:#aaa;margin:8px 0 5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:4px;padding:10px}
+.card.green{border-left:3px solid #ff4444}
+.card.yellow{border-left:3px solid #ffcc00}
+.card.red{border-left:3px solid #00cc66}
+.card.blue{border-left:3px solid #4488ff}
+.card.orange{border-left:3px solid #ff8800}
+.card.horse{border-left:3px solid #cc88ff;background:#1a1520}
+.card.riskoff{border:2px solid #ff4444;background:#1a0a0a}
+.card.action{border:2px solid #ffcc00;background:#1a1500}
+.card.nvda-alert{border:2px solid #ff8800;background:#1a1000}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px}
+.tag.up{background:#440000;color:#ff4444}
+.tag.hold{background:#333;color:#aaa}
+.tag.dn{background:#003300;color:#00cc66}
+.tag.cancel{background:#222;color:#555}
+.tag.wait{background:#2a2000;color:#ffcc00}
+.tag.horse{background:#2a1540;color:#cc88ff}
+.score{float:right;font-size:22px;font-weight:bold;color:#00e5ff}
+.regime{background:#1a0a0a;border:2px solid #ff4444;border-radius:4px;padding:12px;margin-bottom:12px}
+.regime.neutral{border-color:#ffcc00;background:#1a1000}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.6;font-size:15px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:15px;line-height:1.6}
+.big{font-size:22px;font-weight:bold}
+.key-price{font-size:20px;font-weight:bold;color:#ff4444}
+.key-stop{font-size:20px;font-weight:bold;color:#00cc66}
+.key-target{font-size:20px;font-weight:bold;color:#ffcc00}
+.key-rr{font-size:22px;font-weight:bold;color:#00e5ff}
+.key-pos{font-size:20px;font-weight:bold;color:#ff8800}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:3px;padding:8px;margin-top:6px}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:3px;padding:10px;margin-top:8px}
+.us-box{background:#0d0d1a;border:1px solid #4488ff;border-radius:3px;padding:8px;margin:5px 0}
+.nvda-box{background:#1a1000;border:1px solid #ff8800;border-radius:3px;padding:8px;margin:5px 0}
+.pool-tag{display:inline-block;background:#1a1a2e;color:#4488ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #4488ff}
+</style>
+</head>
+<body>
+
+<h1>⚡ 台股早盤操作指令（第二輪）｜ 20260519</h1>
+<p style="color:#555;font-size:12px;margin-bottom:12px">
+檔名：20260519_2_claude.html　｜　執行於：20260520 早盤
+｜　輸入：第一輪交接清單 20260519　｜　Claude自動搜尋美盤數據　｜　AIreport v2.2 Round2
+</p>
+
+<!-- ====== 特殊警報：NVDA財報今晚 ====== -->
+<div class="card nvda-alert" style="margin-bottom:12px;padding:12px">
+<p style="font-size:16px;font-weight:bold;color:#ff8800">🔥 今日最大變數：NVIDIA Q1 FY27 財報 ── 今晚（美東5/20盤後）公布！</p>
+<p style="color:#ccc;font-size:13px;margin-top:4px">台股5/20（今日）開盤時，NVDA財報<strong style="color:#ff8800">尚未公布</strong>。
+市場預期 EPS $1.78（+120% YoY）、Revenue $79.2B（+79.5% YoY）。
+→ 今日台股操作：需在「尚不知財報結果」下執行，建議<strong style="color:#ff4444">全面輕倉、保留觀望空間</strong>，等明日（5/21）確認財報後再加大操作。</p>
+</div>
+
+<!-- ====== 零、美盤掃描結果 ====== -->
+<h2>▌零、美盤掃描結果（5/19 美股收盤，Claude自動搜尋完成）</h2>
+<div class="grid3">
+<div class="card blue">
+<h3>🇺🇸 關鍵指數（5/19 美盤收盤）</h3>
+<p>費半 SOX：<span class="dn big">-1.97%</span>（11,079）</p>
+<p>那斯達克：<span class="dn">-1%以上</span>（連續下跌）</p>
+<p>台積電 ADR（TSM）：<span class="dn">-2.08%</span>（$395.95）</p>
+<p style="color:#555;font-size:12px">台指期夜盤：資料取得中，參考台積電ADR走弱判斷偏弱</p>
+</div>
+<div class="card">
+<h3>🔥 美股產業強弱（5/19 美盤）</h3>
+<p class="warn">強勢：無明顯產業強勢 ── 整體Risk-Off</p>
+<p class="dn">弱勢：半導體 SOX -1.97% | 科技 Nasdaq &gt;-1%</p>
+<p class="dn">弱勢：TSM ADR -2.08%（月線持續承壓）</p>
+<p class="dn">弱勢：MU(記憶體) -5.95% ── 記憶體族群重挫</p>
+</div>
+<div class="card">
+<h3>📰 隔夜重大消息（5/19）</h3>
+<p class="warn">🔴 美30年期公債殖利率飆至近20年新高 → 市場主要拖累</p>
+<p>🟡 NVDA：收$222.32（-1.33%），財報<strong>今晚</strong>盤後公布（台灣時間5/21凌晨）</p>
+<p style="color:#555">📌 ONSEMI最新Q1財報（5/4公布）：EPS $0.64 vs 預期$0.61，超預期</p>
+<p class="dn">ZIM：被Hapag-Lloyd收購（$35/股），現價$26附近</p>
+</div>
+</div>
+
+<!-- 候選標的對應美股 -->
+<h2>▌一、候選標的 × 美股對應表現</h2>
+<table>
+<tr>
+  <th>台股標的</th><th>產業</th><th>對應美股指標</th>
+  <th>美股5/19表現</th><th>相關強度</th><th>初步方向</th>
+</tr>
+<tr>
+  <td class="hl">2412 中華電</td>
+  <td>電信防禦</td>
+  <td>T / VZ（防禦高殖利率）</td>
+  <td class="dn">殖利率飆升 → 高殖利率估值壓縮</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性偏弱（利率上升不利）</td>
+</tr>
+<tr>
+  <td class="hl">2615 萬海</td>
+  <td>航運（非AI）</td>
+  <td>ZIM / MATX / DAC</td>
+  <td class="warn">ZIM $26（Hapag收購$35保護支撐）</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性（收購保護，但大環境弱）</td>
+</tr>
+<tr>
+  <td class="hl">5291 邑昇</td>
+  <td>功率半導體</td>
+  <td>ONSEMI / STM / IFX</td>
+  <td class="up">ONSEMI Q1超預期，股價在52週高附近</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑ 獨立偏正面（但整體SOX弱）</td>
+</tr>
+<tr>
+  <td class="hl">6209 今國光 ⭐</td>
+  <td>光學精密</td>
+  <td>AAPL</td>
+  <td class="dn">大盤下跌，AAPL未見特殊消息</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性偏弱</td>
+</tr>
+<tr>
+  <td class="hl">4540 全球傳動 ⭐</td>
+  <td>工具機機電</td>
+  <td>美元指數DXY</td>
+  <td class="dn">美債殖利率飆升 → 美元走強 → 台灣出口不利</td>
+  <td><span class="tag hold">弱相關</span></td>
+  <td class="dn">↓ 偏弱（美元走強不利台灣出口）</td>
+</tr>
+<tr>
+  <td class="hl">4510 高鋒 ⭐</td>
+  <td>工具機零件</td>
+  <td>XLI工業ETF / DXY</td>
+  <td class="dn">工業類股承壓，美元強</td>
+  <td><span class="tag hold">弱相關</span></td>
+  <td class="dn">↓ 偏弱</td>
+</tr>
+</table>
+
+<!-- ====== 二、Regime修正 ====== -->
+<div class="regime">
+<h2>▌二、今日台股開盤 Regime → <span class="dn big">C Risk-Off（持續）</span></h2>
+<div class="grid3">
+<div>
+<h3>與第一輪比較</h3>
+<p>第一輪判斷：C Risk-Off（系統停損已觸發）</p>
+<p>今日修正：<span class="warn">維持 → C Risk-Off</span></p>
+<p>修正原因：SOX -1.97%（接近但未達-2%），Nasdaq -1%以上，TSM ADR -2.08%，美債殖利率飆升至近20年高 → 整體Risk-Off延續</p>
+</div>
+<div>
+<h3>系統性風險檢查</h3>
+<p>費半SOX 5/19：<span class="dn">-1.97%</span>（接近系統停損線-2%，<span class="warn">警戒</span>）</p>
+<p>TSM ADR：<span class="dn">-2.08%（連2日下跌，月線承壓）</span></p>
+<p>MU記憶體：<span class="dn">-5.95%（重挫）</span></p>
+<p>NVDA：<span class="dn">-1.33%</span>（財報前緊縮）</p>
+</div>
+<div>
+<h3>今日整體操作基調</h3>
+<p><span class="dn">保守縮手，全面輕倉</span></p>
+<p><span class="warn">NVDA財報不確定性 → 今日倉位上限壓縮至5%</span></p>
+<p class="warn">最大風險：①NVDA財報超預期明日大反彈但今日錯失；②財報遜預期明日繼續殺；③美債殖利率持續飆升</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 三、逐檔評級修正總覽 ====== -->
+<h2>▌三、逐檔評級修正總覽</h2>
+<table>
+<tr>
+  <th>標的</th><th>第一輪</th><th>美盤依據</th>
+  <th>今日評級</th><th>今日倉位</th><th>開盤策略摘要</th>
+</tr>
+<tr>
+  <td class="hl">2412 中華電</td>
+  <td>爆量等確認（主力A）</td>
+  <td class="dn">美債殖利率飆升→高殖利率估值壓縮，中相關</td>
+  <td><span class="tag wait">⏳ 開盤確認</span>（倉位壓縮）</td>
+  <td class="warn">3%以內（縮減）</td>
+  <td>量縮守142才進，跳空開高&gt;3%全部不追</td>
+</tr>
+<tr>
+  <td class="hl">2615 萬海</td>
+  <td>主力候選 B</td>
+  <td class="warn">ZIM有收購保護，非AI邏輯未破，中相關</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td class="warn">3%（不加倉）</td>
+  <td>79~81回測進場，大盤若穩可小倉</td>
+</tr>
+<tr>
+  <td class="hl">5291 邑昇</td>
+  <td>主力候選 C</td>
+  <td class="up">ONSEMI Q1超預期，股價52週高附近，強相關</td>
+  <td><span class="tag up">⬆️ 小幅升評</span></td>
+  <td class="up">3~5%（小升）</td>
+  <td>74~77進場，量比需持續&gt;1.5x確認</td>
+</tr>
+<tr>
+  <td class="hl">6209 今國光 ⭐</td>
+  <td>黑馬候選</td>
+  <td class="dn">大盤弱+AAPL無特殊催化劑，中相關</td>
+  <td><span class="tag dn">⬇️ 降評</span></td>
+  <td class="dn">0~2%（極輕倉）</td>
+  <td>等回測67~70才看，今日不主動</td>
+</tr>
+<tr>
+  <td class="hl">4540 全球傳動 ⭐</td>
+  <td>黑馬候選</td>
+  <td class="dn">美元走強→台灣出口機械不利，弱相關</td>
+  <td><span class="tag cancel">❌ 取消</span></td>
+  <td class="dn">0%</td>
+  <td>美元強+大盤弱，今日不操作</td>
+</tr>
+<tr>
+  <td class="hl">4510 高鋒 ⭐</td>
+  <td>黑馬候選</td>
+  <td class="dn">工業ETF弱+美元強，弱相關</td>
+  <td><span class="tag cancel">❌ 取消</span></td>
+  <td class="dn">0%</td>
+  <td>今日不操作，等市場穩定後觀察</td>
+</tr>
+</table>
+
+<!-- ====== 四、逐檔開盤操作指令 ====== -->
+<h2>▌四、逐檔開盤操作指令（詳細）</h2>
+
+<!-- 2412 中華電：爆量情境確認 -->
+<div class="card yellow" style="margin-bottom:10px">
+<h2>⏳ 開盤確認 → 倉位壓縮　2412 中華電 <span class="score" style="color:#ffcc00">83</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>T / VZ 電信股</strong>：美30年期殖利率飆至近20年高 → 高殖利率防禦股估值受壓（中相關）</p>
+<p>⚠️ 今晚NVDA財報前，防禦資金流入可能暫時持續，但利率上升抵銷估值吸引力</p>
+</div>
+<div class="nvda-box">
+<p>🔥 <strong>NVDA財報緊張期效應</strong>：財報公布前，市場觀望情緒強烈 → 防禦型資金仍有需求，但規模縮小</p>
+<p>若昨日（5/19台股）爆量後今日量縮守穩 → 防禦邏輯成立；若大盤繼續下探 → 防禦股也難獨立</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：台積電開盤是否繼續下跌、大盤是否守4萬點、中華電量能是否縮減</p>
+<div class="sep"></div>
+<p style="color:#ffcc00;font-weight:bold">今日情境判斷（從原爆量確認調整）：</p>
+<table>
+<tr><th>情境</th><th>開盤表現</th><th>操作</th><th>進場區</th><th>倉位</th></tr>
+<tr>
+  <td class="up">✅ 情境一</td>
+  <td>量縮（&lt;2.6萬張）+ 收紅 + 守142</td>
+  <td class="buy">輕倉進場</td>
+  <td class="up"><strong>140~142.5元</strong></td>
+  <td class="up"><strong>2~3%</strong>（較第一輪縮半）</td>
+</tr>
+<tr>
+  <td class="warn">⚠️ 情境二</td>
+  <td>跳空開高 + 量延續</td>
+  <td class="warn">今日不追</td>
+  <td class="warn">跳空&gt;2%直接放棄（今日利率環境下不值得追高）</td>
+  <td class="warn"><strong>0%</strong>（今日縮手）</td>
+</tr>
+<tr>
+  <td class="dn">❌ 情境三</td>
+  <td>開高走低 or 跌破142</td>
+  <td class="stop">直接放棄</td>
+  <td>—</td>
+  <td class="dn">0%</td>
+</tr>
+</table>
+<div class="sep"></div>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">136元</span>（維持第一輪設定）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">148~149元</span>（維持，但今日以觀察為主）</p>
+<div class="rr-box">
+<p>今日 RR ≈ <span class="key-rr">2.6:1</span>　｜　今日倉位 <span class="key-pos">2~3%</span>（從5~7%降低，NVDA財報前保守）</p>
+</div>
+<p class="warn">⚠️ 利率上升警告：若美債30年期殖利率持續創新高，中華電電信防禦邏輯可能在未來2~3日減弱，需動態評估</p>
+</div>
+</div>
+
+<!-- 2615 萬海：維持 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持　2615 萬海 <span class="score">83</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>ZIM</strong>：被Hapag-Lloyd收購（$35/股），現價~$26，有16%以上套利空間支撐 → 航運股有「收購保護」（中相關）</p>
+<p>航運基本面：非AI邏輯，中美貿易關稅協議後供應鏈重配需求仍在</p>
+<p>大環境：Risk-Off持續，但非AI族群相對抗跌 → 維持第一輪判斷</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="key-price">79~81元</span>（不變）</p>
+<p class="warn">跳空 &gt;3% 不追（即&gt;82.8 不追）</p>
+<div class="sep"></div>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">76.5元</span>（月線支撐，維持）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">86元</span>（前高，維持）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.1:1</span>　｜　倉位 <span class="key-pos">3%</span>（不加倉，等市場穩定）</p>
+</div>
+<p>今日開盤策略：等開盤15分鐘，確認大盤量能走向後，於79~81回測點輕倉買入</p>
+<p class="warn">⚠️ 注意：ZIM收購情況對萬海是間接參考，需關注萬海自身量能是否延續</p>
+</div>
+</div>
+
+<!-- 5291 邑昇：升評 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 小幅升評　5291 邑昇 <span class="score">74→76</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>ONSEMI</strong>：Q1 2026財報（5/4公布）EPS $0.64 vs 預期$0.61，超預期 ✅</p>
+<p>Revenue $1.51B vs 預期$1.49B，超預期 ✅；股價已反映在52週高附近</p>
+<p>Cantor Fitzgerald調升目標至$95，Q1獲利驅動：汽車+AI數據中心（強相關）</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：大盤方向 + 邑昇昨日爆量後量能是否縮減（量縮守住才進）</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：等開盤回測確認，不追開盤跳高</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">74~77元</span>（維持第一輪區間）　<span class="warn">跳空&gt;3%（&gt;78.8）不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">71元</span>（維持，量縮收盤破此離場）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">84~86元</span>（前高法，稍微調升上限）</p>
+<div class="rr-box">
+<p>今日 RR ≈ <span class="key-rr">2.4:1</span>　｜　建議倉位 <span class="key-pos">3~5%</span>（較第一輪維持，ONSEMI超預期支撐）</p>
+</div>
+<p class="up">📈 升評依據：ONSEMI財報超預期確認功率半導體基本面正向，邑昇作為功率半導體受益股，基本面支撐升評</p>
+<p class="dn">📉 注意：整體SOX -1.97%，若今日量縮破71元直接出場，不戀棧</p>
+</div>
+</div>
+
+<!-- 6209 今國光：降評 -->
+<div class="card yellow" style="margin-bottom:10px">
+<h2>⬇️ 降評　6209 今國光 ⭐ <span class="score" style="color:#ffcc00">71→67</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>AAPL</strong>：5/19美股整體弱，AAPL無特殊正面催化劑（中相關）</p>
+<p>昨日台股今國光已漲9%（爆量），今日若繼續追高風險過高</p>
+</div>
+<div class="action-box">
+<p class="warn">降評原因：①昨日已漲9%，追高風險高；②美股整體弱，AAPL無新催化劑；③Risk-Off環境下黑馬優先放棄</p>
+<p><span class="buy">今日策略</span>：<span class="dn">不主動進場</span>，只在回測67~70元且量明顯縮減（&lt;昨日50%）才考慮2%極輕倉</p>
+<p><span class="stop">🛡️ 停損收緊至</span>：<span class="key-stop">67元</span>（比第一輪更嚴格）</p>
+<p>若跌破67元：直接觀望，不操作</p>
+<p>倉位：<span class="key-pos">0~2%</span>（極輕倉，優先放棄）</p>
+</div>
+</div>
+
+<!-- 4540/4510 取消 -->
+<div class="card red" style="margin-bottom:10px">
+<h2>❌ 取消　4540 全球傳動 ＋ 4510 高鋒</h2>
+<div class="us-box">
+<p>🇺🇸 取消原因：美30年期公債殖利率飆至近20年高 → 美元走強 → 台灣工具機/機電出口競爭力承壓</p>
+<p>工業ETF(XLI)同步弱，加上整體Risk-Off環境，黑馬低分標的優先清出</p>
+</div>
+<p class="stop">今日倉位：<span class="key-pos" style="color:#00cc66">0%</span>　｜　待美元走勢穩定 + 市場Regime轉換後再重新評估</p>
+</div>
+
+<!-- ====== 五、今日開盤優先順序 ====== -->
+<h2>▌五、今日開盤執行優先順序</h2>
+<div class="card action">
+<h3>⏰ 09:00 台股開盤前確認清單</h3>
+<p>① 台積電開盤方向（ADR昨夜-2.08%，預計偏弱開盤）</p>
+<p>② 大盤是否守住4萬點整數關卡（關鍵支撐）</p>
+<p>③ 邑昇(5291)與中華電(2412)開盤量能確認</p>
+<p>④ 美債30年期殖利率最新水位（若繼續飆升，全面縮手）</p>
+<div class="sep"></div>
+<h3>📋 今日執行順序</h3>
+<table>
+<tr><th>順序</th><th>標的</th><th>動作</th><th>觸發條件</th><th>倉位</th></tr>
+<tr>
+  <td class="up">第1優先</td>
+  <td class="hl">5291 邑昇</td>
+  <td class="buy">輕倉進場</td>
+  <td>回測74~77 + 量比&gt;1.5x確認</td>
+  <td class="up"><strong>3~5%</strong></td>
+</tr>
+<tr>
+  <td class="warn">第2優先</td>
+  <td class="hl">2615 萬海</td>
+  <td class="warn">小倉觀察</td>
+  <td>開盤15分鐘後，79~81回測確認</td>
+  <td class="warn"><strong>3%</strong></td>
+</tr>
+<tr>
+  <td>第3優先</td>
+  <td class="hl">2412 中華電</td>
+  <td>等情境一成立</td>
+  <td>量縮（&lt;2.6萬張）+ 守142 → 輕倉</td>
+  <td>2~3%</td>
+</tr>
+<tr>
+  <td>第4優先</td>
+  <td class="hl">6209 今國光</td>
+  <td>極輕倉或不動</td>
+  <td>量縮回測67~70才看，否則不動</td>
+  <td>0~2%</td>
+</tr>
+<tr>
+  <td class="dn">今日不操作</td>
+  <td>4540 全球傳動 / 4510 高鋒</td>
+  <td class="stop">跳過</td>
+  <td>美元強+大盤弱，取消</td>
+  <td class="dn">0%</td>
+</tr>
+</table>
+<div class="sep"></div>
+<h3 style="color:#ff8800">🔥 NVDA財報特別策略（今日最重要）</h3>
+<p class="warn">今日台股操作結束後（下午），等待今晚NVDA財報（美東5/20盤後，台灣5/21凌晨）</p>
+<p>財報超預期（Revenue &gt;$79.2B，EPS &gt;$1.78）→ 明日(5/21)台股AI族群大反攻，5236凌陽創新重新進入視野</p>
+<p>財報遜預期 → 繼續Risk-Off，5291邑昇停損，2615萬海成為唯一持有</p>
+</div>
+
+<!-- ====== 六、催化劑日曆更新 ====== -->
+<h2>▌六、催化劑日曆（含美盤新消息更新）</h2>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響產業/標的</th><th>較昨日變化</th><th>方向</th></tr>
+<tr>
+  <td class="warn">5/20 今晚</td>
+  <td>🔴 NVIDIA Q1 FY27 財報（美東盤後）</td>
+  <td>全AI供應鏈、IC設計、CoWoS、5236凌陽創新</td>
+  <td class="up">確認：今晚盤後公布（EPS預期$1.78，Rev $79.2B）</td>
+  <td class="warn">關鍵催化劑，超預期=大反攻，遜預期=繼續殺</td>
+</tr>
+<tr>
+  <td class="warn">5/19 美盤</td>
+  <td>🔴 美30年期公債殖利率近20年高</td>
+  <td>高殖利率股（中華電），科技估值壓縮</td>
+  <td class="dn">新增：意外的宏觀壓力因素，5/20須持續監控</td>
+  <td class="dn">利空高殖利率股，利空高估值科技</td>
+</tr>
+<tr>
+  <td class="up">6/1</td>
+  <td>🔴 黃仁勳 GTC Taipei 主題演說</td>
+  <td>AI供應鏈全族群，5236凌陽創新</td>
+  <td class="up">確認未變，若NVDA財報超預期則提前布局</td>
+  <td class="up">強正面催化劑</td>
+</tr>
+<tr>
+  <td>6/2~6/5</td>
+  <td>🔴 COMPUTEX 2026</td>
+  <td>AI族群、IC設計、網通</td>
+  <td class="up">維持，NVDA財報後台股COMPUTEX行情可能啟動</td>
+  <td class="up">利多</td>
+</tr>
+<tr>
+  <td>5/25 前後</td>
+  <td>🟡 ZIM Q1財報（預定5/25）</td>
+  <td>航運類，2615萬海參考</td>
+  <td class="up">新增：ZIM財報可能影響航運族群情緒</td>
+  <td class="warn">觀察</td>
+</tr>
+</table>
+
+<!-- ====== 七、最終結論 ====== -->
+<h2>▌七、早盤交易員最終結論</h2>
+<div class="card blue">
+<p><strong>今日Regime</strong>：<span class="dn">C Risk-Off</span>　較第一輪維持（SOX -1.97%接近但未突破-2%系統線）</p>
+<div class="sep"></div>
+<p><strong>🔥 今日最大變數</strong>：<span class="warn">NVDA財報今晚公布（台灣5/21凌晨）</span> → 今日操作全面輕倉，保留現金等待財報結果</p>
+<div class="sep"></div>
+<p><strong>第1優先</strong>：<span class="up">5291 邑昇</span>。ONSEMI Q1超預期確認功率半導體基本面正向，邑昇量比最高（3.03x）有主力支撐。進場 <span class="key-price">74~77元</span>，停損71元，目標84~86元。倉位 <span class="key-pos">3~5%</span>。</p>
+<p><strong>第2優先</strong>：<span class="up">2615 萬海</span>。非AI邏輯，ZIM收購保護提供航運股整體支撐。進場 <span class="key-price">79~81元</span>，停損76.5元。倉位 <span class="key-pos">3%</span>。</p>
+<p><strong>第3優先</strong>：<span class="warn">2412 中華電</span>。爆量後等情境一（量縮守142）才輕倉，利率上升有壓力，倉位壓縮至 <span class="key-pos">2~3%</span>。</p>
+<p><strong>降評</strong>：<span class="dn">6209 今國光</span>。昨漲9%，今日不追，等回測67~70才極輕倉觀察。</p>
+<p><strong>取消</strong>：<span class="dn">4540 全球傳動、4510 高鋒</span>。美元走強+大盤弱，黑馬低分標的清出。</p>
+<div class="sep"></div>
+<p><strong>最大風險</strong>：①NVDA財報前後市場劇烈波動；②美30年期殖利率繼續創高加劇市場拋售；③台股4萬點整數關卡若失守，加速下探38,000</p>
+<p><strong>系統停損線狀態</strong>：費半昨夜-1.97%，接近但未觸及-2%停損線，今日<span class="warn">提高警戒</span>，若當日任何時間SOX期貨繼續走弱需立即縮手。</p>
+<p><strong>產業輪動觀察</strong>：昨夜美股最強為防禦/非科技（ZIM收購股），最弱為記憶體（MU-5.95%）。台股今日關注功率半導體（邑昇）與非AI航運（萬海），AI族群等NVDA財報結果後再評估介入。</p>
+<p><strong>明日（5/21）早盤特別提醒</strong>：NVDA財報結果將重塑整體Regime，屆時需立即執行第三輪評估：超預期→AI族群反攻（5236凌陽創新優先）；遜預期→繼續縮倉。</p>
+</div>
+
+<p style="color:#555;font-size:12px;margin-top:14px;text-align:right">
+第二輪早盤版：Claude自動搜尋美盤數據，比對產業相關性，修正第一輪評級。不構成投資建議，投資有風險。
+｜ 20260519_2_claude.html　AIreport v2.2 Round2（執行於20260520早盤）
+</p>
+</body>
+</html>
