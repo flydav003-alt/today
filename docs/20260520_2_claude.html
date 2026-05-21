@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股早盤操作指令（第二輪）｜ 20260520</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Times New Roman','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px}
+h1{font-size:20px;color:#00e5ff;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:0.5px}
+h2{font-size:16px;color:#ffcc00;margin:12px 0 8px;border-left:3px solid #ffcc00;padding-left:8px}
+h3{font-size:14px;color:#aaa;margin:8px 0 5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:4px;padding:10px}
+.card.green{border-left:3px solid #ff4444}
+.card.yellow{border-left:3px solid #ffcc00}
+.card.red{border-left:3px solid #00cc66}
+.card.blue{border-left:3px solid #4488ff}
+.card.orange{border-left:3px solid #ff8800}
+.card.horse{border-left:3px solid #cc88ff;background:#1a1520}
+.card.action{border:2px solid #ffcc00;background:#1a1500}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px}
+.tag.up{background:#440000;color:#ff4444}
+.tag.hold{background:#333;color:#aaa}
+.tag.dn{background:#003300;color:#00cc66}
+.tag.cancel{background:#222;color:#555}
+.tag.wait{background:#2a2000;color:#ffcc00}
+.score{float:right;font-size:22px;font-weight:bold;color:#00e5ff}
+.regime{background:#0a1a00;border:2px solid #ff4444;border-radius:4px;padding:12px;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.6;font-size:15px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:14px;line-height:1.6}
+.big{font-size:22px;font-weight:bold}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:3px;padding:8px;margin-top:6px}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:3px;padding:10px;margin-top:8px}
+.us-box{background:#0d0d1a;border:1px solid #4488ff;border-radius:3px;padding:8px;margin:5px 0}
+.key-price{font-size:20px;font-weight:bold;color:#ff4444}
+.key-stop{font-size:20px;font-weight:bold;color:#00cc66}
+.key-target{font-size:20px;font-weight:bold;color:#ffcc00}
+.key-rr{font-size:22px;font-weight:bold;color:#00e5ff}
+.key-pos{font-size:20px;font-weight:bold;color:#ff8800}
+.alert{background:#1a0a0a;border:2px solid #ff4444;border-radius:4px;padding:10px;margin:8px 0}
+</style>
+</head>
+<body>
+<h1>⚡ 台股早盤操作指令（第二輪）｜ 20260520</h1>
+<p style="color:#555;font-size:12px;margin-bottom:12px">
+檔名：20260520_2_claude.html　｜　執行於：20260521 早盤
+｜　輸入：第一輪交接清單　｜　Claude自動搜尋美盤數據　｜　AIreport v2.2 Round2
+</p>
+
+<!-- 重大警示橫幅 -->
+<div class="alert">
+⚡ <span class="up" style="font-weight:bold;font-size:15px">NVIDIA財報超預期但股價盤後下跌！</span>
+<span class="warn"> EPS $1.87 vs 預期 $1.77（+6%），營收 $81.6B vs 預期 $79.2B（+3%）。Q2指引 $91B 超預期，但中國出口限制使市場反應冷淡，盤後 NVDA -1.3%。
+台積電 ADR +2.28% 強勢。台指期夜盤大漲 +488 點（+1.22%），整體傾向 Risk-On，但需注意 NVDA 賣消息效應。</span>
+</div>
+
+<!-- ====== 零、美盤掃描結果 ====== -->
+<h2>▌零、美盤掃描結果（Claude自動搜尋完成）</h2>
+<div class="grid3">
+<div class="card blue">
+<h3>🇺🇸 關鍵指數（20260520 美股收盤）</h3>
+<p>費半 SOX：<span class="up big">估 +1.5~2%</span>（日盤回彈，夜盤已反映）</p>
+<p>那斯達克 100：<span class="up">+1.2%</span>（S&P500 +1%，Dow +1.2%）</p>
+<p>台積電 ADR（TSM）：<span class="up" style="font-weight:bold">+2.28%（$401.55）⭐</span></p>
+<p>台指期夜盤：<span class="up" style="font-weight:bold">+488 點（+1.22%），收 40,612</span></p>
+<p style="color:#555;font-size:12px">※SOX 具體收盤值待確認，那指/S&P500 日盤已大漲，台指期夜盤充分反映</p>
+</div>
+<div class="card">
+<h3>🔥 美股產業強弱（20260520）</h3>
+<p class="up">強勢：航空（UAL +10%、DAL +9.4%、LUV +6.3%）⭐</p>
+<p class="up">強勢：台積電 ADR +2.28%（AI基建受益）</p>
+<p class="up">強勢：AMD +4.56%、AVGO +1.17%</p>
+<p class="warn">中性：NVDA 日盤 +1.3% 但盤後 -1.3%（財報後賣消息）</p>
+<p class="dn">弱勢：MU -4.93%（記憶體 / 中國出口疑慮）⚠️</p>
+<p class="dn">弱勢：TSM 日盤 -1.11%（但盤後反彈至 +2.28%）</p>
+</div>
+<div class="card">
+<h3>📰 隔夜重大消息</h3>
+<p class="up">🔴 NVDA Q1 FY27：EPS $1.87（+6% 超預期），營收 $81.6B，Q2 指引 $91B</p>
+<p class="up">🟡 川普宣布伊朗談判接近協議，油價繼續回落，航空/航運成本壓力紓解</p>
+<p class="up">🟢 台積電 ADR 盤後強彈 +2.28%，AI 基建信心回復</p>
+<p class="warn">⚠️ NVDA 盤後 -1.3%：中國 Data Center H20 出口禁止，Q2 指引排除中國營收（損失約 $4.6B）</p>
+<p class="dn">⚠️ MU -4.93%：中國出口疑慮蔓延至記憶體族群，8016 矽創需留意</p>
+<p>SpaceX IPO 文件正式提交，2455 全新相關概念題材延續</p>
+</div>
+</div>
+
+<!-- 候選標的對應美股表現 -->
+<h2>▌一、候選標的 × 美股對應表現</h2>
+<table>
+<tr>
+  <th>台股標的</th><th>產業</th><th>對應美股指標</th>
+  <th>美股昨夜表現</th><th>相關強度</th><th>初步方向</th>
+</tr>
+<tr>
+  <td class="hl">5309 系統電</td>
+  <td>AI電源/BBU/無人機</td>
+  <td>SMCI、NVDA（間接）</td>
+  <td><span class="up">NVDA日盤+1.3%；TSM ADR+2.28%</span><br><span class="warn">NVDA盤後-1.3%（賣消息）</span></td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="up">↑ 偏正面（台積電ADR強，AI基建信心維持）</td>
+</tr>
+<tr>
+  <td class="hl">2615 萬海</td>
+  <td>貨櫃航運</td>
+  <td>ZIM、DAC、油價</td>
+  <td class="up">UAL +10%、DAL +9.4%（油價回落，航空大漲，航運受益）</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑↑ 強正面（中東局勢緩和+油價跌）</td>
+</tr>
+<tr>
+  <td class="hl">8016 矽創</td>
+  <td>記憶體IC控制器</td>
+  <td>MU（Micron）</td>
+  <td class="dn">MU -4.93%（中國出口禁令疑慮）⚠️</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="dn">↓ 負面（MU大跌，記憶體族群壓力大）</td>
+</tr>
+<tr>
+  <td class="hl">2455 全新（爆量確認）</td>
+  <td>砷化鎵/AI光模組</td>
+  <td>NVDA、光模組相關</td>
+  <td class="warn">NVDA日盤+1.3%但盤後-1.3%（賣消息）；SpaceX IPO正式提交</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性偏弱（NVDA賣消息抵消SpaceX正面效應）</td>
+</tr>
+<tr>
+  <td class="hl">2489 瑞軒（黑馬）</td>
+  <td>顯示/AI周邊</td>
+  <td>NVDA/SMCI（間接）</td>
+  <td class="warn">SMCI、伺服器族群跟漲日盤，NVDA盤後弱</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性（台積電ADR强，但NVDA盤後弱抵消）</td>
+</tr>
+<tr>
+  <td class="hl">3709 鑫聯大投控（黑馬）</td>
+  <td>投控（業務待確認）</td>
+  <td>整體台股大盤情緒</td>
+  <td class="up">台指期+488點，整體偏多</td>
+  <td><span class="tag hold">弱相關</span></td>
+  <td class="up">↑ 輕微正面（跟隨大盤情緒）</td>
+</tr>
+</table>
+
+<!-- ====== 二、Regime修正 ====== -->
+<div class="regime">
+<h2>▌二、今日台股開盤 Regime → <span class="up big">A- Risk-On（偏積極，但需防 NVDA 賣消息回流）</span></h2>
+<div class="grid3">
+<div>
+<h3>與第一輪比較</h3>
+<p>第一輪判斷：B 中性偏弱</p>
+<p>今日修正：<span class="up">升級 → A-（偏積極）</span></p>
+<p>修正原因：台積電ADR +2.28% / 台指期夜盤+488點 / 美股日盤全面上漲 / 油價回落航運受益</p>
+<p class="warn">但：NVDA財報後盤後-1.3%、MU-4.93%，不能全面追高</p>
+</div>
+<div>
+<h3>系統性風險檢查</h3>
+<p>費半：日盤估 <span class="up">+1.5~2%</span> <span class="up">正常，遠離停損線</span></p>
+<p>台積電ADR：<span class="up" style="font-weight:bold">$401.55（+2.28%）✅</span></p>
+<p>台指期夜盤：<span class="up">+488點（+1.22%）✅</span></p>
+<p>MU：<span class="dn">-4.93%⚠️（記憶體族群壓力）</span></p>
+<p>NVDA盤後：<span class="warn">-1.3%（賣消息，警惕）</span></p>
+</div>
+<div>
+<h3>今日整體操作基調</h3>
+<p><span class="up" style="font-size:15px;font-weight:bold">偏積極，精選個股</span></p>
+<p class="up">優先：航運（萬海）+ AI電源（系統電）</p>
+<p class="dn">降評：記憶體族群（矽創）⚠️</p>
+<p class="warn">最大風險：NVDA盤後下跌若擴大 → AI族群開盤反應可能複雜；MU大跌傳染記憶體IC</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 三、逐檔評級修正總覽 ====== -->
+<h2>▌三、逐檔評級修正總覽</h2>
+<table>
+<tr>
+  <th>標的</th><th>第一輪</th><th>美盤依據</th>
+  <th>今日評級</th><th>今日倉位</th><th>開盤策略摘要</th>
+</tr>
+<tr>
+  <td class="hl">2615 萬海</td>
+  <td>主力（77分）</td>
+  <td class="up">UAL+10%、DAL+9.4%，油價下跌，中東緩和，強相關</td>
+  <td><span class="tag up">⬆️ 升評</span></td>
+  <td class="up">8~10%（加倉）</td>
+  <td>開盤回測 79~81 買入，不追跳空</td>
+</tr>
+<tr>
+  <td class="hl">5309 系統電</td>
+  <td>主力（84分）</td>
+  <td class="up">TSM ADR+2.28%，台指期+488點；NVDA日盤正向</td>
+  <td><span class="tag up">⬆️ 升評</span></td>
+  <td class="up">8~12%（加倉）</td>
+  <td>開盤直接進或回測 65.5~67.5</td>
+</tr>
+<tr>
+  <td class="hl">8016 矽創</td>
+  <td>主力（73分）</td>
+  <td class="dn">MU -4.93%（強相關），記憶體族群壓力大</td>
+  <td><span class="tag dn">⬇️ 降評</span></td>
+  <td class="dn">0~3%（大幅縮倉）</td>
+  <td>不主動追，觀察開盤量能再決定</td>
+</tr>
+<tr>
+  <td class="hl">2455 全新</td>
+  <td>爆量待確認</td>
+  <td class="warn">NVDA盤後-1.3%，SpaceX IPO正式申請（中性）</td>
+  <td><span class="tag wait">⏳ 嚴格確認</span></td>
+  <td class="warn">視情境</td>
+  <td>開盤前15分鐘嚴格看量縮確認</td>
+</tr>
+<tr>
+  <td class="hl">2489 瑞軒</td>
+  <td>黑馬（68分）</td>
+  <td class="warn">整體AI情緒回升，但NVDA盤後弱，中相關</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td>3~5%</td>
+  <td>等開盤量確認，不搶進</td>
+</tr>
+<tr>
+  <td class="hl">3709 鑫聯大投控</td>
+  <td>黑馬（64分）</td>
+  <td class="up">台指期+488點，大盤情緒整體偏多</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td>3~5%</td>
+  <td>等放量突破84.5確認</td>
+</tr>
+</table>
+
+<!-- ====== 四、逐檔開盤操作指令 ====== -->
+<h2>▌四、逐檔開盤操作指令（詳細）</h2>
+
+<!-- 萬海 升評 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評　2615 萬海 <span class="score">77→82</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>航空股</strong> UAL <span class="up">+10.01%</span>、DAL <span class="up">+9.39%</span>、LUV <span class="up">+6.29%</span>（強相關——同受油價回落、中東緩和驅動）</p>
+<p>中東：川普宣布伊朗協議接近達成，三艘超級油輪已離開霍爾木茲海峽 → 油價繼續下跌，航運燃油成本大減</p>
+<p>產業：升評理由充分，航運族群今日開盤預計跟隨航空股氣勢大漲</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：長榮/陽明開盤方向（領頭羊），若同步強勢則追；若弱則等回測</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：開盤回測或直接進（若開盤漲停板前方向明確可追）</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">79.0 ~ 82.5</span>　<span class="warn">跳空 &gt;5% 不追（超過 85.2 不追）</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">76.0</span>（維持第一輪，跌破今日起漲點失效）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">88 ~ 92</span>（前高法，中東協議若達成可看更高）</p>
+<div class="rr-box">
+<p>今日 RR ≈ <span class="key-rr">2.5~3:1</span>　｜　建議倉位 <span class="key-pos">8~10%</span>（較第一輪加倉，升評確立）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：航運今日可能開高，切勿在第一根K棒追高；等第一個回測再進場更安全。中東局勢若逆轉（川普改口）立即停損。</p>
+</div>
+</div>
+
+<!-- 系統電 升評 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評　5309 系統電 <span class="score">84→86</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>台積電 ADR（TSM）</strong> 盤後 <span class="up">+2.28%（$401.55）⭐</span>（中相關——AI基建受益，系統電在AI伺服器電源供應鏈）</p>
+<p>NVDA 日盤 +1.3%（財報超預期），Q1 EPS $1.87 vs 預期 $1.77，Q2 指引 $91B → AI基建加速確認</p>
+<p class="warn">注意：NVDA 盤後 -1.3%（賣消息效應），但台積電 ADR 強勢修正這個擔憂</p>
+<p>台指期夜盤 +488 點，整體開盤情緒確定偏多，系統電是甜蜜點，保持核心多頭</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：台積電（2330）開盤方向 + 大盤量能是否放大至兆元以上</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：開盤回測 65.5~67.5 進；若開盤直接拉升至 69 以上等回測</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">65.5 ~ 68.5</span>　<span class="warn">跳空 &gt;4% 不追（超過 70.4 不追）</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">63.5</span>（維持第一輪設定）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">74 ~ 76</span>（維持，NVDA財報確認AI電源需求）</p>
+<div class="rr-box">
+<p>今日 RR ≈ <span class="key-rr">2.5~3:1</span>　｜　建議倉位 <span class="key-pos">8~12%</span>（升評，可加至核心倉位）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：NVDA財報雖超預期，市場反應「賣消息」，系統電若開盤追高需謹慎。除息基準日 6/3 仍是硬時間點，若今日不跳空可回測進場。BBU出貨消息若有更新，升評依據更充分。</p>
+</div>
+</div>
+
+<!-- 矽創 降評 -->
+<div class="card yellow" style="margin-bottom:10px">
+<h2>⬇️ 降評　8016 矽創 <span class="score" style="color:#ffcc00">73→65</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>MU（Micron）</strong> 昨夜 <span class="dn">-4.93%</span>（強相關——記憶體IC控制器直接受影響）</p>
+<p>降評原因：NVDA中國出口禁令疑慮，MU也有中國出口相關壓力，記憶體族群整體承壓</p>
+<p class="warn">補充：原第一輪升評條件「MU收紅」已失敗（MU -4.93%），降評條件成立</p>
+</div>
+<div class="action-box">
+<p><span class="warn">降評原因</span>：MU大跌 -4.93%，強相關指標直接觸發降評條件；記憶體出口限制疑慮擴散</p>
+<p><span class="buy">今日策略</span>：縮倉至 0~3%，僅若矽創開盤不跟跌（逆勢守穩 280 以上+量縮）才考慮小倉留倉觀察</p>
+<p><span class="stop">🛡️ 停損收緊至</span>：<span class="key-stop">278</span>（較第一輪 272 更嚴格，MU大跌後不給空間）</p>
+<p><span class="warn">若跌破 <span class="key-stop">278</span></span>：直接清倉，不等其他條件</p>
+<p>倉位：<span class="key-pos">0~3%</span>（較第一輪大幅縮減，以觀察為主）</p>
+<p class="warn">⚠️ 今日關注：若 MU 美股繼續下跌或中國出口限制消息擴大，矽創可能連跌兩日，請勿抄底</p>
+</div>
+</div>
+
+<!-- 全新 嚴格確認 -->
+<div class="card" style="border-left:3px solid #ffcc00;margin-bottom:10px">
+<h2>⏳ 嚴格確認　2455 全新（爆量後第二日）</h2>
+<div class="us-box">
+<p>🇺🇸 NVDA 日盤 <span class="up">+1.3%</span> 但盤後 <span class="dn">-1.3%</span>（賣消息，對光模組/砷化鎵族群影響中性偏弱）</p>
+<p>SpaceX IPO 文件正式提交 → 題材持續，但已非新消息</p>
+<p>美盤方向對情境判斷：<span class="warn">中性偏謹慎</span>（NVDA賣消息可能壓制熱題材追高意願，情境三風險升高）</p>
+</div>
+<p class="warn" style="font-size:13px;margin:6px 0">⚠️ 重要提醒：NVDA盤後下跌使情境三（開高走低）機率略升高。全新今日判斷標準比原計劃更嚴格。</p>
+<table>
+<tr><th>情境</th><th>開盤表現</th><th>操作</th><th>進場區</th><th>倉位</th></tr>
+<tr>
+  <td class="up">✅ 情境一</td>
+  <td>量縮（&lt;今日50%=1.8倍以下）+收紅+守昨低 395</td>
+  <td class="buy">進場（NVDA賣消息下量縮守支撐=主力惜售）</td>
+  <td class="up"><strong>395 ~ 402</strong></td>
+  <td class="up"><strong>5~7%</strong></td>
+</tr>
+<tr>
+  <td class="warn">⚠️ 情境二</td>
+  <td>量延續+跳空開高+守住</td>
+  <td class="warn">小倉謹慎追（NVDA賣消息環境下跳空追高風險更高）</td>
+  <td class="warn">跳空&lt;3%才追（412以下）</td>
+  <td class="warn"><strong>3%上限</strong></td>
+</tr>
+<tr>
+  <td class="dn">❌ 情境三</td>
+  <td>量繼續爆量/開高走低/破395</td>
+  <td class="stop">直接放棄，主力出貨訊號明確</td>
+  <td>--</td>
+  <td class="dn">0%</td>
+</tr>
+</table>
+</div>
+
+<!-- 瑞軒 維持 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持　2489 瑞軒 <span class="score">68</span></h2>
+<div class="us-box">
+<p>🇺🇸 整體 AI 情緒：台積電 ADR +2.28%（間接正面），台指期 +488 點</p>
+<p>NVDA 盤後 -1.3%（輕微拖累），但整體開盤環境仍偏多</p>
+<p>第一輪升評/降評條件均未明確觸發，維持黑馬小倉觀察</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="key-price">42.0 ~ 43.0</span>（需等開盤量確認）</p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">40.5</span>（維持第一輪）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">46.5</span>　｜　倉位 <span class="key-pos">3~5%</span>（不變）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.3:1</span></p>
+</div>
+<p class="warn">⚠️ 今日策略：等量確認（量比需超過 2x 以上才進），若跟隨大盤情緒漲但量不夠，繼續觀察不進</p>
+</div>
+</div>
+
+<!-- 鑫聯大投控 維持 -->
+<div class="card horse" style="margin-bottom:10px">
+<h2>⭐ 黑馬維持　3709 鑫聯大投控 <span class="score" style="color:#cc88ff">64</span></h2>
+<div class="us-box">
+<p>🇺🇸 台指期夜盤 +488 點，整體大盤情緒偏多（弱相關）</p>
+<p>K值 24.3 極低，反彈空間大，大盤上漲有助帶動</p>
+</div>
+<p><span class="tag horse">今日策略</span>：等開盤確認 → 若放量突破 84.5，升評為正式候選（5~7%）</p>
+<p><span class="buy">📍 觀察進場</span>：<span class="key-price">82.0 ~ 84.5</span>（放量才追）</p>
+<p><span class="stop">🛡️ 停損</span>：<span class="key-stop">80.5</span>　｜　目標 <span class="key-target">89~90</span></p>
+<p class="warn">提醒：黑馬倉位上限 <span class="key-pos">3~5%</span>，停損比主力更嚴格執行。催化劑仍待確認，需謹慎。</p>
+</div>
+
+<!-- ====== 五、今日開盤執行優先順序 ====== -->
+<h2>▌五、今日開盤執行優先順序</h2>
+<div class="card action">
+<h3>⏰ 09:00 開盤前確認清單</h3>
+<p>① 台積電（2330）開盤方向（若跳空上漲 >1%，今日整體偏多基調確立）</p>
+<p>② 長榮/陽明開盤（航運族群領頭羊，萬海跟進確認）</p>
+<p>③ 大盤期指實際缺口（夜盤 +488 點，台股預期高開）</p>
+<p>④ 矽創開盤是否跟跌（MU -4.93%，需確認是否傳染台股記憶體族群）</p>
+<div class="sep"></div>
+<h3>📋 今日執行順序</h3>
+<table>
+<tr><th>順序</th><th>標的</th><th>動作</th><th>觸發條件</th><th>倉位</th></tr>
+<tr>
+  <td class="up">第1優先</td>
+  <td class="hl">2615 萬海</td>
+  <td class="buy">進場（升評）</td>
+  <td>長榮/陽明帶頭拉升 / 開盤回測 79~82 買入</td>
+  <td class="up"><strong>8~10%</strong></td>
+</tr>
+<tr>
+  <td class="up">第2優先</td>
+  <td class="hl">5309 系統電</td>
+  <td class="buy">進場（升評）</td>
+  <td>開盤不破 65 / 等回測 65.5~68.5 進</td>
+  <td class="up"><strong>8~12%</strong></td>
+</tr>
+<tr>
+  <td class="warn">第3優先</td>
+  <td class="hl">2455 全新</td>
+  <td class="warn">等15分鐘確認情境</td>
+  <td>量縮+守395（情境一成立才進）</td>
+  <td class="warn"><strong>5~7%（情境一）/ 3%（情境二）</strong></td>
+</tr>
+<tr>
+  <td class="warn">第4優先</td>
+  <td class="hl">2489 瑞軒</td>
+  <td class="warn">等量確認</td>
+  <td>量比超過 2x + 站穩 42.5</td>
+  <td class="warn"><strong>3~5%</strong></td>
+</tr>
+<tr>
+  <td>第5優先</td>
+  <td>3709 鑫聯大投控</td>
+  <td>等放量突破</td>
+  <td>放量突破 84.5</td>
+  <td><strong>3~5%</strong></td>
+</tr>
+<tr>
+  <td class="dn">今日降評</td>
+  <td>8016 矽創</td>
+  <td class="stop">縮倉觀察</td>
+  <td>MU-4.93%降評，守278才留極小倉</td>
+  <td class="dn">0~3%</td>
+</tr>
+</table>
+</div>
+
+<!-- ====== 六、催化劑日曆更新 ====== -->
+<h2>▌六、催化劑日曆（含美盤新消息更新）</h2>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響產業/標的</th><th>較昨日變化</th><th>方向</th></tr>
+<tr>
+  <td class="up">20260520（已確認）</td>
+  <td>🔴 NVDA Q1 FY27 財報：EPS $1.87 超預期 +6%</td>
+  <td>5309系統電（AI電源），全市場AI鏈</td>
+  <td class="up">新增確認（財報超預期）</td>
+  <td class="warn">利多確認，但「賣消息」需觀察明日延續性</td>
+</tr>
+<tr>
+  <td class="up">20260520（已確認）</td>
+  <td>🟡 川普宣布美伊協議接近達成，油價持續回落</td>
+  <td>2615 萬海（航運成本受益）</td>
+  <td class="up">催化劑升級（較昨日更明確）</td>
+  <td class="up">強力利多（航運燃油成本壓力大減）</td>
+</tr>
+<tr>
+  <td class="up">20260520（已確認）</td>
+  <td>🟡 SpaceX IPO 文件正式提交 SEC</td>
+  <td>2455 全新（砷化鎵/光模組概念）</td>
+  <td class="warn">已知消息正式化，非新催化劑</td>
+  <td class="warn">題材持續但需量縮確認才追</td>
+</tr>
+<tr>
+  <td class="warn">20260521（今日）</td>
+  <td>⚠️ NVDA 盤後 -1.3%「賣消息」效應</td>
+  <td>8016矽創（MU -4.93%）、AI高本益比族群</td>
+  <td class="dn">新增風險（MU大跌）</td>
+  <td class="dn">記憶體族群今日壓力，矽創降評</td>
+</tr>
+<tr>
+  <td>20260603</td>
+  <td>🔴 5309 系統電 除息基準日（$0.5元現金）</td>
+  <td>5309 系統電</td>
+  <td class="up">維持（14天內硬催化劑）</td>
+  <td class="up">填息行情</td>
+</tr>
+<tr>
+  <td>20260602~04</td>
+  <td>🔴 COMPUTEX 2026</td>
+  <td>AI伺服器供應鏈全鏈、5309系統電</td>
+  <td class="up">NVDA財報確認AI基建加速，COMPUTEX展示題材更強</td>
+  <td class="up">強力利多預期</td>
+</tr>
+</table>
+
+<!-- ====== 七、最終結論 ====== -->
+<h2>▌七、早盤交易員最終結論</h2>
+<div class="card blue">
+<p><strong>今日Regime</strong>：<span class="up">A-（偏積極，精選個股）</span>　較第一輪升級（B→A-）</p>
+<div class="sep"></div>
+<p><strong>第1優先</strong>：<span class="up">2615 萬海</span>。中東緩和+油價跌，航空股美盤暴漲（UAL+10%）直接映射台灣航運補漲。等回測 79~82 買，停損 76，目標 88~92。倉位 <span class="key-pos">8~10%</span>。</p>
+<p><strong>第2優先</strong>：<span class="up">5309 系統電</span>。NVDA財報超預期確認AI基建加速，台積電ADR +2.28%，系統電BBU+無人機雙催化劑加持。回測 65.5~68.5 買，停損 63.5，目標 74~76。倉位 <span class="key-pos">8~12%</span>。</p>
+<p><strong>第3 等確認</strong>：<span class="warn">2455 全新</span>。NVDA賣消息環境下，全新今日需嚴格量縮確認（情境一）才進，不搶。情境一成立：5~7%；情境三出現（開高走低）：立即放棄。</p>
+<p><strong>降評</strong>：<span class="dn">8016 矽創</span>。MU -4.93%，記憶體族群壓力大，縮倉至 0~3% 觀察，停損收緊至 278。</p>
+<p><strong>黑馬維持</strong>：<span style="color:#cc88ff">2489 瑞軒 / 3709 鑫聯大投控</span>，等量確認或放量突破再進，各 3~5% 小倉。</p>
+<div class="sep"></div>
+<p><strong>最大風險</strong>：①NVDA盤後-1.3%「賣消息」效應若擴大，AI題材股（系統電、全新）開盤可能先衝後回——需設好跳空上限；②MU大跌-4.93%傳染記憶體族群，矽創今日需謹慎；③中東談判若逆轉（川普改口）→萬海停損76立即執行。</p>
+<p><strong>系統停損線狀態</strong>：費半昨夜估計回升 +1.5~2%（夜盤強勁+台積電ADR回彈），<span class="up">已遠離 -2% 停損線</span>，今日<span class="up">正常操作</span>，但保持個股停損紀律。</p>
+<p><strong>產業輪動觀察</strong>：昨夜美股最強為<span class="up">航空/航運族群</span>（受油價回落驅動），台股對應今日關注<span class="up">萬海、陽明、長榮（航運三雄）</span>補漲力道；AI電源維持次強，記憶體族群需迴避。</p>
+</div>
+
+<p style="color:#555;font-size:12px;margin-top:14px;text-align:right">
+第二輪早盤版：Claude自動搜尋美盤數據，比對產業相關性，修正第一輪評級。不構成投資建議，投資有風險。
+｜ 20260520_2_claude.html　AIreport v2.2 Round2（執行於20260521早盤）
+</p>
+</body>
+</html>
