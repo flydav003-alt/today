@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股早盤操作指令（第二輪）｜ 20260521</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Times New Roman','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px}
+h1{font-size:20px;color:#00e5ff;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:0.5px}
+h2{font-size:16px;color:#ffcc00;margin:12px 0 8px;border-left:3px solid #ffcc00;padding-left:8px}
+h3{font-size:14px;color:#aaa;margin:8px 0 5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:4px;padding:10px}
+.card.green{border-left:3px solid #ff4444}
+.card.yellow{border-left:3px solid #ffcc00}
+.card.red{border-left:3px solid #00cc66}
+.card.blue{border-left:3px solid #4488ff}
+.card.orange{border-left:3px solid #ff8800}
+.card.horse{border-left:3px solid #cc88ff;background:#1a1520}
+.card.riskoff{border:2px solid #00cc66;background:#0a1a0a}
+.card.action{border:2px solid #ffcc00;background:#1a1500}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px}
+.tag.a{background:#440000;color:#ff4444}
+.tag.up{background:#440000;color:#ff4444}
+.tag.hold{background:#333;color:#aaa}
+.tag.dn{background:#003300;color:#00cc66}
+.tag.cancel{background:#222;color:#555}
+.tag.wait{background:#2a2000;color:#ffcc00}
+.tag.horse{background:#2a1540;color:#cc88ff}
+.score{float:right;font-size:22px;font-weight:bold;color:#00e5ff}
+.regime{background:#1a0a0a;border:2px solid #ff4444;border-radius:4px;padding:12px;margin-bottom:12px}
+.regime.neutral{border-color:#ffcc00}
+.regime.off{border-color:#00cc66;background:#0a1a0a}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.6;font-size:15px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:15px;line-height:1.6}
+.big{font-size:22px;font-weight:bold}
+.pool-tag{display:inline-block;background:#1a1a2e;color:#4488ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #4488ff}
+.horse-tag{display:inline-block;background:#2a1540;color:#cc88ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #cc88ff}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:3px;padding:8px;margin-top:6px}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:3px;padding:10px;margin-top:8px}
+.us-box{background:#0d0d1a;border:1px solid #4488ff;border-radius:3px;padding:8px;margin:5px 0}
+.key-price{font-size:20px;font-weight:bold;color:#ff4444}
+.key-stop{font-size:20px;font-weight:bold;color:#00cc66}
+.key-target{font-size:20px;font-weight:bold;color:#ffcc00}
+.key-rr{font-size:22px;font-weight:bold;color:#00e5ff}
+.key-pos{font-size:20px;font-weight:bold;color:#ff8800}
+.warn-box{background:#1a1000;border:2px solid #ff8800;border-radius:4px;padding:10px;margin-bottom:12px}
+</style>
+</head>
+<body>
+<h1>⚡ 台股早盤操作指令（第二輪）｜ 20260521</h1>
+<p style="color:#555;font-size:12px;margin-bottom:12px">
+檔名：20260521_2_claude.html　｜　執行於：20260522 早盤
+｜　輸入：第一輪交接清單（20260521）　｜　Claude自動搜尋美盤數據　｜　AIreport v2.2 Round2
+</p>
+
+<!-- ⚠️ 關鍵警示 -->
+<div class="warn-box">
+<p style="color:#ff8800;font-size:14px;font-weight:bold">⚠️ 關鍵背景提示：NVDA財報「利好出盡」現象</p>
+<p style="font-size:13px">NVIDIA於5/20盤後公布Q1財報（營收$816億、年增85%，全面超預期），但5/21股價反跌<span class="dn">-1.77%</span>收$219.51。此為典型「Buy rumor, Sell news」：財報利多已在前一日大盤漲幅中提前消化（5/20 SOX +4.49%），台股昨日（5/21）已大漲3.39%，今日（5/22）開盤需警惕高檔壓力。VIX當前17.65，油價高企（布倫特$107），長債殖利率仍偏高，需精選操作而非全面追漲。</p>
+</div>
+
+<!-- ====== 零、美盤掃描結果 ====== -->
+<h2>▌零、美盤掃描結果（5/21 美股收盤）</h2>
+<div class="grid3">
+<div class="card blue">
+<h3>🇺🇸 關鍵指數（5/21夜）</h3>
+<p>費半 SOX：<span class="dn big">約-1.5~-2%</span> <span style="color:#555;font-size:12px">（NVDA財報後半導體整體回檔）</span></p>
+<p>那斯達克：<span class="dn">-0.48%</span>（國債殖利率升、油價高）</p>
+<p>台積電 ADR：<span class="up">+2.28%</span>（收$401.62，逆勢強勢）</p>
+<p>道瓊：<span class="dn">-0.17%</span>　S&P 500：<span class="dn">-0.31%</span></p>
+<p>台指期夜盤：<span class="up">41,336點（+167點，+0.40%）</span></p>
+<p>VIX：<span class="warn">17.65（+2.12%，溫和上升）</span></p>
+</div>
+<div class="card">
+<h3>🔥 美股產業強弱（5/21夜）</h3>
+<p class="up">強勢：台積電ADR +2.28% | ANET +5.77% | CSCO持穩 | MU +3.13%</p>
+<p class="warn">中性：NVDA -1.77%（財報利好出盡，但基本面超強） | AMD -1.22%</p>
+<p class="dn">弱勢：SOX整體半導體回檔 | ONSEMI承壓（-7%前已有報導週內大跌）</p>
+<p style="color:#555;font-size:12px">健康/公用事業最強，大盤防禦色彩</p>
+</div>
+<div class="card">
+<h3>📰 隔夜重大消息</h3>
+<p class="warn">🔴 NVDA財報「利好出盡」：EPS +1.62（beat $1.52），Q2指引$91B（beat $87B），但股價收跌-1.77%</p>
+<p class="up">🟢 ANET +5.77%：AI網通需求持續強勁，Gartner Magic Quadrant Leader確認</p>
+<p class="warn">🟡 美伊談判僵局：油價維持$107/桶，長債殖利率高企，市場觀望</p>
+<p class="dn">🔴 三星罷工5/21開始：記憶體供應利好（但對網通/功率半導體中性）</p>
+<p style="color:#555;font-size:12px">整體：好消息已定價，市場轉向消化高位壓力</p>
+</div>
+</div>
+
+<!-- 候選標的對應美股表現 -->
+<h2>▌一、候選標的 × 美股對應表現</h2>
+<table>
+<tr>
+  <th>台股標的</th><th>產業</th><th>對應美股指標</th>
+  <th>美股5/21表現</th><th>相關強度</th><th>初步方向</th>
+</tr>
+<tr>
+  <td class="hl">6245 立端</td>
+  <td>上櫃網通交換器</td>
+  <td>ANET / CSCO</td>
+  <td class="up">ANET +5.77% ｜ CSCO 持穩 $113.81</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑↑ 正面強勁</td>
+</tr>
+<tr>
+  <td class="hl">2421 建準</td>
+  <td>AI散熱風扇</td>
+  <td>NVDA / SMCI</td>
+  <td class="warn">NVDA -1.77%（財報利好出盡）</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="warn">→ 中性偏謹慎</td>
+</tr>
+<tr>
+  <td class="hl">6282 康舒</td>
+  <td>AI伺服器PSU</td>
+  <td>NVDA / SMCI / DELL</td>
+  <td class="warn">NVDA -1.77% ｜ SMCI不明</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="warn">→ 中性偏謹慎</td>
+</tr>
+<tr>
+  <td class="hl">6548 長科*</td>
+  <td>上櫃IC測試/半導體</td>
+  <td>SOX整體</td>
+  <td class="dn">SOX約-1.5~-2%（半導體整體回檔）</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="dn">↓ 偏弱，需謹慎</td>
+</tr>
+<tr>
+  <td class="hl">2436 偉詮電</td>
+  <td>功率半導體</td>
+  <td>ONSEMI / TI</td>
+  <td class="dn">ONSEMI 本週已重挫，5/21繼續承壓</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="dn">↓ 偏弱</td>
+</tr>
+<tr>
+  <td class="hl">6146 耕興</td>
+  <td>IC驗證服務</td>
+  <td>AMAT（半導體服務）</td>
+  <td class="warn">AMAT中性（未見明顯動能）</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性，觀察為主</td>
+</tr>
+</table>
+
+<!-- ====== 二、Regime修正 ====== -->
+<div class="regime neutral">
+<h2>▌二、今日台股開盤 Regime → <span class="warn big">B 中性偏謹慎（高位消化）</span></h2>
+<div class="grid3">
+<div>
+<h3>與第一輪比較</h3>
+<p>第一輪判斷：A++（NVDA財報前夕強烈多頭）</p>
+<p>今日修正：<span class="warn">降級 → B 中性偏謹慎</span></p>
+<p>修正原因：NVDA財報利好出盡，SOX回檔，那指跌0.48%。台積電ADR逆勢+2.28%是亮點，台指期夜盤+167點顯示資金仍在。但大盤已漲3.39%，高位消化機率升高。</p>
+</div>
+<div>
+<h3>系統性風險檢查</h3>
+<p>費半SOX：<span class="dn">約-1.5~-2%</span> <span class="warn">⚠️ 接近警戒線（-2%停損線）</span></p>
+<p>台積電ADR：<span class="up">+2.28%</span> → 守穩，正面</p>
+<p>VIX：17.65 <span class="warn">（小幅上升，正常範圍）</span></p>
+<p>那指：<span class="dn">-0.48%</span>（輕度回檔）</p>
+<p style="color:#ff8800;font-size:12px">⚠️ SOX若確認跌破-2%，觸發全面降倉警報</p>
+</div>
+<div>
+<h3>今日整體操作基調</h3>
+<p><span class="warn">精選個股，不全面追漲</span></p>
+<p>台積電ADR強勢是定海神針，但半導體族群整體承壓</p>
+<p>ANET強勢帶動網通族群——立端是今日最亮點</p>
+<p class="warn">最大風險：NVDA財報後資金從AI主題撤出，高位震盪加劇；台股昨漲1357點後面臨獲利了結壓力</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 三、逐檔評級修正總覽 ====== -->
+<h2>▌三、逐檔評級修正總覽</h2>
+<table>
+<tr>
+  <th>標的</th><th>第一輪</th><th>美盤依據</th>
+  <th>今日評級</th><th>今日倉位</th><th>開盤策略摘要</th>
+</tr>
+<tr>
+  <td class="hl">6245 立端</td>
+  <td>主力A類（72分）</td>
+  <td class="up">ANET +5.77%，強相關</td>
+  <td><span class="tag up">⬆️ 升評</span></td>
+  <td class="up">7~10%（加倉）</td>
+  <td>網通族群最強受益，開盤回測86~89元買入</td>
+</tr>
+<tr>
+  <td class="hl">2421 建準</td>
+  <td>黑馬B類（68分）</td>
+  <td class="warn">NVDA -1.77%，財報利好出盡，強相關</td>
+  <td><span class="tag hold">➡️ 維持（小心為上）</span></td>
+  <td class="warn">3~5%（不加碼，原倉）</td>
+  <td>等開盤15分鐘確認，守152支撐才進</td>
+</tr>
+<tr>
+  <td class="hl">6282 康舒</td>
+  <td>黑馬B類（65分）</td>
+  <td class="warn">NVDA -1.77% + SMCI承壓，強相關</td>
+  <td><span class="tag dn">⬇️ 降評</span></td>
+  <td class="warn">2~3%（縮倉）</td>
+  <td>今日觀察為主，等AI伺服器族群止穩再動</td>
+</tr>
+<tr>
+  <td class="hl">6548 長科*</td>
+  <td>黑馬B類（63分）</td>
+  <td class="dn">SOX -1.5~-2%，中相關</td>
+  <td><span class="tag dn">⬇️ 降評</span></td>
+  <td class="warn">2~3%（縮倉，嚴格停損）</td>
+  <td>半導體整體承壓，今日不追，等量確認</td>
+</tr>
+<tr>
+  <td class="hl">2436 偉詮電</td>
+  <td>黑馬B類（64分）</td>
+  <td class="dn">ONSEMI本週重挫，強相關</td>
+  <td><span class="tag cancel">❌ 取消</span></td>
+  <td class="dn">0%</td>
+  <td>功率半導體美股大跌，今日不操作</td>
+</tr>
+<tr>
+  <td class="hl">6146 耕興</td>
+  <td>黑馬B類（60分）最低順位</td>
+  <td class="warn">AMAT中性，中相關</td>
+  <td><span class="tag cancel">❌ 取消</span></td>
+  <td class="dn">0%</td>
+  <td>順位最低，今日資源集中於立端</td>
+</tr>
+</table>
+
+<!-- ====== 四、逐檔開盤操作指令（核心） ====== -->
+<h2>▌四、逐檔開盤操作指令（詳細）</h2>
+
+<!-- 立端：升評 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評　6245 立端 <span class="score">74分</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>ANET（Arista Networks）</strong> 5/21夜 <span class="up">+5.77%</span>，收$148.77（強相關）</p>
+<p>🇺🇸 <strong>CSCO</strong> 5/21夜 盤中區間 $113.55~$116.92，收$113.81（穩定）</p>
+<p>產業評論：AI網通需求不退，ANET強勢確認400G交換器族群動能持續——立端是台股最直接受益標的，且尚未被媒體頭條點名，甜蜜點完整。</p>
+<p class="up" style="font-weight:bold">⭐ 今日最強催化劑：ANET +5.77% 是本輪所有候選標的對應美股中表現最佳者</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：台積電開盤方向（正面則立端跟漲機率高）+ 網通族群（智邦、中磊）是否同步走強 + 台指期是否守住41,200點</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：開盤若無跳空 → 等回測86~88元再進；若跳空<5%開高 → 等開盤5分鐘縮量確認後進</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">86~90元</span>　<span class="warn">跳空>5%（>89.4元）不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">83.5元</span>（維持第一輪設定，破此失效）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">96~100元</span>（前高法，維持第一輪）</p>
+<div class="rr-box">
+<p>進場88元 | 停損83.5（損4.5元）| 目標98元（獲10元）</p>
+<p>今日 RR ≈ <span class="key-rr">2.2:1</span>　｜　建議倉位 <span class="key-pos">7~10%</span>（第一輪5~8%，今日升評加倉）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：ANET強勢雖是正面信號，但台股昨日已大漲，今日若整體高位回檔，立端可能跟跌。若開盤15分鐘量能不足、整體市場翻空，立即降倉至5%，不強守。</p>
+<p><span class="warn">⚠️ ANET供應鏈效應</span>：ANET +5.77%的強勢來自AI網通需求，立端作為台灣在地交換器供應商，是直接受益方，今日優先順位第一。</p>
+</div>
+</div>
+
+<!-- 建準：維持 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持（謹慎）　2421 建準 <span class="score">68分</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>NVDA</strong> 5/21夜 <span class="dn">-1.77%</span>，收$219.51（財報利好出盡，強相關）</p>
+<p>📋 第一輪維持條件：NVDA/SMCI持續強→今日NVDA跌，升評條件未觸發；降評條件（費半轉弱）接近觸發。</p>
+<p>判斷：維持現狀但降低積極度。NVDA財報本質超強（Q2指引$91B+95%），只是短線市場預期太高。AI散熱中長線邏輯不變，但今日不宜追高。</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="key-price">155~160元</span>（與第一輪相同）</p>
+<p><span class="warn">跳空>3%（>157元）不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">149元</span>（維持第一輪設定）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">175~182元</span>（維持）　｜　倉位 <span class="key-pos">3~5%</span>（不加碼，原倉或更小）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.2:1</span>（不變，但今日主動性降低）</p>
+</div>
+<p style="color:#ff8800">今日策略：等開盤15分鐘，若台指期守穩+台積電開盤紅，才考慮小倉買進。若大盤走弱，本日完全觀察不動。</p>
+</div>
+</div>
+
+<!-- 康舒：降評 -->
+<div class="card yellow" style="margin-bottom:10px">
+<h2>⬇️ 降評　6282 康舒 <span class="score" style="color:#ffcc00">65分</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>NVDA/SMCI</strong> 5/21夜 NVDA <span class="dn">-1.77%</span>（AI伺服器整體需求面短線承壓，強相關）</p>
+</div>
+<div class="action-box">
+<p><span class="warn">降評原因</span>：AI伺服器PSU（電源供應）直接依賴NVDA/SMCI生態系需求，NVDA財報後股價下跌，資金短線從AI伺服器供應鏈撤出風險升高。台股昨日已大漲，康舒評分本就偏低（65分），今日不適合追高。</p>
+<p><span class="buy">今日策略</span>：縮倉至2~3%，只在明確量縮回測54元低吸；若開盤跳空>2%則完全不動。</p>
+<p><span class="stop">🛡️ 停損收緊至</span>：<span class="key-stop">51.5元</span>（比第一輪52元更嚴格）</p>
+<p><span class="warn">若跌破 <span class="key-stop">51.5元</span></span>：直接清倉，不等其他條件</p>
+<p>倉位：<span class="key-pos">2~3%</span>（較第一輪3~5%縮減）</p>
+</div>
+</div>
+
+<!-- 長科*：降評 -->
+<div class="card yellow" style="margin-bottom:10px">
+<h2>⬇️ 降評　6548 長科* <span class="score" style="color:#ffcc00">63分</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>SOX費半</strong> 5/21夜 <span class="dn">約-1.5~-2%</span>（半導體整體回檔，中相關）</p>
+</div>
+<div class="action-box">
+<p><span class="warn">降評原因</span>：SOX整體下跌，長科作為半導體IC驗證服務股受到系統性壓力。評分本就偏低（63分），今日半導體整體承壓，進場時機不佳。台股昨日已大漲，今日不宜在高位追進弱勢標的。</p>
+<p><span class="buy">今日策略</span>：縮倉至2~3%，僅在量比>1.5x且守穩51~52元才考慮小倉試水；否則完全觀察不動。</p>
+<p><span class="stop">🛡️ 停損收緊至</span>：<span class="key-stop">49元</span>（維持第一輪設定）</p>
+<p>倉位：<span class="key-pos">2~3%</span>（較第一輪縮減）</p>
+</div>
+</div>
+
+<!-- 偉詮電：取消 -->
+<div class="card red" style="margin-bottom:10px">
+<h2>❌ 取消　2436 偉詮電</h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 取消原因：ONSEMI本週累計重挫（週內曾-7%），功率半導體族群承受韓國立法課稅AI利潤討論的系統性壓力。第一輪降評條件「ONSEMI/TI持續走弱」已確實觸發。</p>
+</div>
+<p class="stop">今日倉位：<span class="key-pos" style="color:#00cc66">0%</span>　｜　等ONSEMI止穩回穩、且台股功率半導體族群重新獲得資金關注後再評估</p>
+</div>
+
+<!-- 耕興：取消 -->
+<div class="card red" style="margin-bottom:10px">
+<h2>❌ 取消　6146 耕興</h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 取消原因：原本就是最低順位黑馬（60分）。今日資源集中於立端（升評），在Regime降至B（中性）的情況下，低評分標的不應占用倉位。AMAT對應美股無明顯催化劑。</p>
+</div>
+<p class="stop">今日倉位：<span class="key-pos" style="color:#00cc66">0%</span>　｜　今日完全略過，後續若選股池有新動能再觀察</p>
+</div>
+
+<!-- ====== 五、今日開盤操作優先順序 ====== -->
+<h2>▌五、今日開盤執行優先順序</h2>
+<div class="card action">
+<h3>⏰ 09:00 開盤前確認清單</h3>
+<p>① 台積電（2330）開盤方向 → TSM ADR +2.28%，預期台積電今日開盤強勢，這是今日整體多頭基調的壓艙石</p>
+<p>② 網通族群（智邦、立端、中磊）是否同步走強 → ANET +5.77%應帶動整個族群</p>
+<p>③ 台指期實際開盤缺口 vs 夜盤41,336點預估 → 若正常開高<1%，屬於健康缺口</p>
+<p>④ 費半期貨最新狀態 → 若轉正回穩，建準可追加；若繼續弱，維持今日保守策略</p>
+<div class="sep"></div>
+<h3>📋 今日執行順序</h3>
+<table>
+<tr><th>順序</th><th>標的</th><th>動作</th><th>觸發條件</th><th>倉位</th></tr>
+<tr>
+  <td class="up">第1優先</td>
+  <td class="hl">6245 立端</td>
+  <td class="buy">進場/加倉</td>
+  <td>開盤回測86~89元，網通族群量能放大確認</td>
+  <td class="up"><strong>7~10%</strong></td>
+</tr>
+<tr>
+  <td class="warn">第2優先</td>
+  <td class="hl">2421 建準</td>
+  <td class="warn">小倉觀察</td>
+  <td>台積電開盤強勢+大盤守穩+建準守152不破</td>
+  <td class="warn"><strong>3~5%</strong></td>
+</tr>
+<tr>
+  <td>第3優先</td>
+  <td>6282 康舒</td>
+  <td>量縮才低吸</td>
+  <td>明確量縮回測54元才考慮，跳空>2%完全不動</td>
+  <td><strong>2~3%</strong></td>
+</tr>
+<tr>
+  <td>第4優先</td>
+  <td>6548 長科*</td>
+  <td>量確認才試水</td>
+  <td>量比>1.5x且守52元，否則觀察</td>
+  <td><strong>2~3%</strong></td>
+</tr>
+<tr>
+  <td class="dn">今日不操作</td>
+  <td>2436 偉詮電</td>
+  <td class="stop">跳過</td>
+  <td>ONSEMI重挫，功率半導體族群失去動能</td>
+  <td class="dn">0%</td>
+</tr>
+<tr>
+  <td class="dn">今日不操作</td>
+  <td>6146 耕興</td>
+  <td class="stop">跳過</td>
+  <td>最低順位，Regime降至B不適合低分標的</td>
+  <td class="dn">0%</td>
+</tr>
+</table>
+<div class="sep"></div>
+<h3>💡 倉位管理提醒</h3>
+<p>今日建議總倉位上限：<span class="key-pos">14~20%</span>（Regime B，精選操作）</p>
+<p>立端為核心倉位，其餘為小倉觀察。台股昨日已大漲，今日以「守住獲利」為優先，不盲目追高。</p>
+</div>
+
+<!-- ====== 六、催化劑日曆更新 ====== -->
+<h2>▌六、催化劑日曆（含美盤新消息更新）</h2>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響產業/標的</th><th>較昨日變化</th><th>方向</th></tr>
+<tr>
+  <td class="warn">5/21~6/7</td>
+  <td>🔴 三星工人大罷工（4.8萬人）</td>
+  <td>記憶體整體（MU +3.13%已反應）</td>
+  <td class="up">新增確認（罷工正式開始）</td>
+  <td class="up">利多記憶體供應商，對網通/功率半導體中性</td>
+</tr>
+<tr>
+  <td class="up">5/20（已公布）</td>
+  <td>🔴 NVDA Q1財報超預期（營收$81.6B+85%，Q2指引$91B）</td>
+  <td>AI整體概念股</td>
+  <td class="warn">利多已定價，股價-1.77%（利好出盡）</td>
+  <td class="warn">中長線正面，短線承壓</td>
+</tr>
+<tr>
+  <td class="warn">持續</td>
+  <td>🟡 COMPUTEX 2026 進行中</td>
+  <td>AI伺服器/網通族群</td>
+  <td class="up">持續加持（無新消息但背景正面）</td>
+  <td class="up">利多 → 尤其利端立端（ANET生態系）</td>
+</tr>
+<tr>
+  <td class="warn">持續</td>
+  <td>🟡 美伊油價僵局（布倫特$107）</td>
+  <td>通膨預期、長債殖利率</td>
+  <td class="dn">持續不利高估值科技股</td>
+  <td class="dn">壓制大盤，但對台股影響間接</td>
+</tr>
+<tr>
+  <td class="warn">7/16</td>
+  <td>台積電Q2財報法說會</td>
+  <td>台積電/AI整體</td>
+  <td class="warn">TSM ADR +2.28%顯示市場對台積電仍有信心</td>
+  <td class="up">中長線利多，短線觀察</td>
+</tr>
+</table>
+
+<!-- ====== 七、最終結論 ====== -->
+<h2>▌七、早盤交易員最終結論</h2>
+<div class="card blue">
+<p><strong>今日Regime</strong>：<span class="warn">B 中性偏謹慎（高位消化）</span>　較第一輪從A++降級</p>
+<p style="font-size:12px;color:#555">降級原因：NVDA財報利好出盡，SOX回檔約-1.5~-2%，那指-0.48%。但台積電ADR+2.28%逆勢強，台指期夜盤+167點，顯示資金仍在，不是全面撤退，而是精選個股的環境。</p>
+<div class="sep"></div>
+<p><strong>🥇 第1優先</strong>：<span class="up">6245 立端</span>。ANET +5.77%是本輪最強美股催化劑，網通族群今日最受益。進場 <span class="key-price">86~89元</span>，停損 <span class="key-stop">83.5元</span>，目標 <span class="key-target">96~100元</span>，倉位 <span class="key-pos">7~10%</span>。跳空>5%不追。</p>
+<p><strong>🥈 第2優先（謹慎）</strong>：<span class="up">2421 建準</span>。AI散熱中長線邏輯不變，但NVDA財報後短線承壓。等開盤15分鐘確認守152元，台積電開紅才進。倉位 <span class="key-pos">3~5%</span>。</p>
+<p><strong>⬇️ 降評</strong>：<span class="warn">6282 康舒、6548 長科*</span>。縮倉至2~3%，量縮才低吸，不追高。</p>
+<p><strong>❌ 取消</strong>：<span class="dn">2436 偉詮電、6146 耕興</span>。功率半導體美股重挫，耕興順位最低，今日資源集中於立端。</p>
+<div class="sep"></div>
+<p><strong>⚠️ 最大風險</strong>：台股昨日大漲3.39%（加權指數41,377點），今日高位震盪概率高。若開盤跳高後迅速回落、成交量萎縮，則全面縮手，不強守任何倉位。</p>
+<p><strong>🛡️ 系統停損線狀態</strong>：SOX昨夜約-1.5~-2%，接近系統停損線（-2%）但尚未觸發。若今日開盤後費半期貨繼續走弱且確認跌破-2%，則全部標的降倉50%，切換Risk-Off模式。</p>
+<p><strong>🔥 產業輪動觀察</strong>：昨夜美股最強為網通（ANET+5.77%）、記憶體（MU+3.13%）、台積電ADR（+2.28%）。台股今日優先關注網通族群（立端、智邦），以及台積電帶頭的AI供應鏈股（可留意廣達、緯穎等是否跟漲）。</p>
+</div>
+
+<p style="color:#555;font-size:12px;margin-top:14px;text-align:right">
+第二輪早盤版：Claude自動搜尋美盤數據，比對產業相關性，修正第一輪評級。不構成投資建議，投資有風險。
+｜ 20260521_2_claude.html　AIreport v2.2 Round2（執行於20260522早盤）
+</p>
+</body>
+</html>
