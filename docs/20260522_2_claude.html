@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股早盤操作指令（第二輪）｜ 20260522</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Times New Roman','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px}
+h1{font-size:20px;color:#00e5ff;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:0.5px}
+h2{font-size:16px;color:#ffcc00;margin:12px 0 8px;border-left:3px solid #ffcc00;padding-left:8px}
+h3{font-size:14px;color:#aaa;margin:8px 0 5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:4px;padding:10px}
+.card.green{border-left:3px solid #ff4444}
+.card.yellow{border-left:3px solid #ffcc00}
+.card.red{border-left:3px solid #00cc66}
+.card.blue{border-left:3px solid #4488ff}
+.card.orange{border-left:3px solid #ff8800}
+.card.horse{border-left:3px solid #cc88ff;background:#1a1520}
+.card.riskoff{border:2px solid #00cc66;background:#0a1a0a}
+.card.action{border:2px solid #ffcc00;background:#1a1500}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px}
+.tag.up{background:#440000;color:#ff4444}
+.tag.hold{background:#333;color:#aaa}
+.tag.dn{background:#003300;color:#00cc66}
+.tag.cancel{background:#222;color:#555}
+.tag.wait{background:#2a2000;color:#ffcc00}
+.tag.horse{background:#2a1540;color:#cc88ff}
+.score{float:right;font-size:22px;font-weight:bold;color:#00e5ff}
+.regime{background:#1a0a0a;border:2px solid #ff4444;border-radius:4px;padding:12px;margin-bottom:12px}
+.regime.neutral{border-color:#ffcc00;background:#1a1500}
+.regime.off{border-color:#00cc66;background:#0a1a0a}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.6;font-size:15px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:15px;line-height:1.6}
+.big{font-size:22px;font-weight:bold}
+.pool-tag{display:inline-block;background:#1a1a2e;color:#4488ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #4488ff}
+.horse-tag{display:inline-block;background:#2a1540;color:#cc88ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #cc88ff}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:3px;padding:8px;margin-top:6px}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:3px;padding:10px;margin-top:8px}
+.us-box{background:#0d0d1a;border:1px solid #4488ff;border-radius:3px;padding:8px;margin:5px 0}
+.key-price{font-size:20px;font-weight:bold;color:#ff4444}
+.key-stop{font-size:20px;font-weight:bold;color:#00cc66}
+.key-target{font-size:20px;font-weight:bold;color:#ffcc00}
+.key-rr{font-size:22px;font-weight:bold;color:#00e5ff}
+.key-pos{font-size:20px;font-weight:bold;color:#ff8800}
+.nvda-warn{background:#1a0800;border:1px solid #ff8800;border-radius:3px;padding:6px 10px;margin:6px 0;font-size:13px}
+</style>
+</head>
+<body>
+<h1>⚡ 台股週一開盤操作指令（第二輪）｜ 20260522</h1>
+<p style="color:#555;font-size:12px;margin-bottom:12px">
+檔名：20260522_2_claude.html　｜　執行於：20260523 早盤（週六確認）
+｜　輸入：第一輪交接清單　｜　Claude自動搜尋美盤數據　｜　AIreport v2.2 Round2
+</p>
+<p style="color:#ff8800;font-size:13px;margin-bottom:12px;padding:8px;border:1px solid #ff8800;border-radius:4px;background:#1a1200">
+⚠️ <strong>時間提醒</strong>：台股5/22（五）收盤在先，美股5/22（五）盤後收盤。本報告操作目標為台股<strong>5/26（一）開盤</strong>。週末無新催化劑，COMPUTEX 6/2倒數10天。
+</p>
+
+<!-- ====== 零、美盤掃描結果 ====== -->
+<h2>▌零、美盤掃描結果（Claude自動搜尋 ｜ 美東時間5/22收盤）</h2>
+<div class="grid3">
+<div class="card blue">
+<h3>🇺🇸 關鍵指數（5/22收盤）</h3>
+<p>費半 SOXX ETF：<span class="up big">+1.72%</span>（$533→新高）</p>
+<p>SOX Philadelphia：<span class="up">估+1.5~2%</span>（盤中飆至$539.64新高）</p>
+<p>那斯達克 NASDAQ：<span class="up">估+0.8~1.5%</span>（AMD/QCOM拉升）</p>
+<p>台積電 TSM ADR：<span class="dn">-0.65%</span>（$404.52）</p>
+<p style="margin-top:6px">台指期夜盤：<span class="up">+283點（+0.67%）</span>收42,738（01:01更新）</p>
+</div>
+<div class="card">
+<h3>🔥 美股產業強弱（5/22 Friday）</h3>
+<p class="up" style="font-weight:bold">🚀 爆強：QCOM +11.6% ｜ CRDO +12.94%</p>
+<p class="up">強勢：ANET +5.77% ｜ AMD +3.99%</p>
+<p class="up">次強：ARM +2.78% ｜ MRVL +2.96% ｜ INTC +1.13%</p>
+<p class="warn">中性：AVGO -0.10%（近乎持平）</p>
+<p class="dn">弱勢：NVDA -1.90% ｜ TSM -0.65% ｜ MU -1.46%</p>
+</div>
+<div class="card">
+<h3>📰 隔夜重大消息</h3>
+<p class="up">✅ <strong>NVIDIA Q1 FY27財報</strong>：EPS $1.87（+140% YoY）超預期$1.78；營收$81.6B超預期$78.9B；毛利率75%；Q2指引$91B</p>
+<p class="dn">⚠️ <strong>NVDA「賣事實」</strong>：財報強勁但股價-1.90%——供應鏈約束 + 中國數據中心業務收入=0的前瞻指引令市場失望</p>
+<p class="up">✅ SOXX創盤中新高$539.64（全年漲幅超65%）</p>
+<p class="warn">⚠️ 美伊和談：群益分析師指出「和談有希望」，油價若回落有利AI股</p>
+<p class="warn">⚠️ 10年期美債殖利率4.6%，$100油價雙重壓力仍在</p>
+</div>
+</div>
+
+<div class="nvda-warn">
+🔑 <span class="warn"><strong>NVDA財報解讀</strong></span>：NVIDIA Q1 FY2027大幅超預期，但「賣事實」(sell-the-news)效應導致股價下跌。關鍵負面信號：<strong>中國市場數據中心業務預期為零</strong>（出口管制影響）；供應鏈約束限制出貨。台股NVDA連動族群（CoWoS、ABF、AI散熱）需謹慎評估是否有「賣事實」輪轉效應。
+</div>
+
+<!-- 候選標的對應美股表現 -->
+<h2>▌一、候選標的 × 美股對應表現（5/22夜）</h2>
+<table>
+<tr>
+  <th>台股標的</th><th>產業</th><th>對應美股指標</th>
+  <th>美股5/22表現</th><th>相關強度</th><th>初步方向</th>
+</tr>
+<tr>
+  <td class="hl">3037 欣興</td>
+  <td>ABF載板/PCB</td>
+  <td>TSM ADR / NVDA / TTM</td>
+  <td class="dn">TSM -0.65% ｜ NVDA -1.90%</td>
+  <td><span class="tag hold">強相關</span></td>
+  <td class="warn">→ 中性偏弱（NVDA賣事實壓制）</td>
+</tr>
+<tr>
+  <td class="hl">2421 建準</td>
+  <td>AI散熱風扇</td>
+  <td>NVDA / SMCI / HPE</td>
+  <td class="dn">NVDA -1.90%（降評條件觸發）</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="dn">↓ 負面（降評條件成立）</td>
+</tr>
+<tr>
+  <td class="hl">2377 微星</td>
+  <td>AI PC/電競主機板</td>
+  <td>NVDA / AMD</td>
+  <td class="warn">NVDA -1.90% ｜ AMD +3.99%（混合）</td>
+  <td><span class="tag hold">中強相關</span></td>
+  <td class="warn">→ 中性（AMD正面抵消NVDA）</td>
+</tr>
+<tr>
+  <td class="hl">4510 高鋒</td>
+  <td>工具機/機器人</td>
+  <td>那斯達克大盤方向</td>
+  <td class="up">NASDAQ 估+0.8~1.5%</td>
+  <td><span class="tag cancel">弱相關</span></td>
+  <td class="warn">→ 中性（主看台股自身）</td>
+</tr>
+<tr>
+  <td class="hl">6245 立端</td>
+  <td>工業電腦/網通</td>
+  <td>ANET / CSCO</td>
+  <td class="up"><strong>ANET +5.77%</strong>（升評條件觸發！）</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑↑ 強烈正面（升評）</td>
+</tr>
+<tr>
+  <td class="hl">3152 璟德 ⭐黑馬</td>
+  <td>CoWoS/NVDA供應鏈</td>
+  <td>NVDA / 台積電ADR</td>
+  <td class="dn">NVDA -1.90%（降評條件觸發）</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="dn">↓ 負面（今日暫緩進場）</td>
+</tr>
+<tr>
+  <td class="hl">3706 神達 ⭐黑馬</td>
+  <td>AI伺服器</td>
+  <td>NVDA / SMCI</td>
+  <td class="dn">NVDA -1.90% ｜ SMCI預估偏弱</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="dn">↓ 負面（今日暫緩進場）</td>
+</tr>
+</table>
+
+<!-- ====== 二、Regime修正 ====== -->
+<div class="regime neutral">
+<h2>▌二、今日台股開盤 Regime → <span class="warn big">B 中性偏A（精選個股）</span></h2>
+<div class="grid3">
+<div>
+<h3>與第一輪比較</h3>
+<p>第一輪判斷：<span class="up">A Risk-On</span></p>
+<p>今日修正：<span class="warn">略降 → B中性偏A</span></p>
+<p>修正原因：SOXX創新高維持正面；但NVDA -1.90%「賣事實」拖累NVDA連動族群；TSM ADR -0.65% 也略弱。整體半導體ETF仍創歷史新高，但個股分化明顯。</p>
+</div>
+<div>
+<h3>系統性風險檢查</h3>
+<p>費半SOXX：<span class="up">+1.72% ✅ 正常偏強</span></p>
+<p>TSM ADR：<span class="dn">-0.65% ⚠️ 輕微偏弱</span></p>
+<p>VIX：<span class="warn">17.81（+2.12%）⚠️ 注意</span></p>
+<p>10Y美債：<span class="warn">4.6%（略高，持續關注）</span></p>
+<p>台指期夜盤：<span class="up">+283點（+0.67%）✅ 正面</span></p>
+</div>
+<div>
+<h3>今日整體操作基調</h3>
+<p><span class="warn"><strong>精選個股，不全面追高</strong></span></p>
+<p style="margin-top:6px" class="up">✅ 重點做：立端（ANET加持）</p>
+<p class="dn">❌ 謹慎：建準、璟德、神達（NVDA賣事實）</p>
+<p class="warn">⚠️ 等確認：欣興（ABF景氣仍強，但NVDA短期壓制）</p>
+<p style="margin-top:6px" class="warn">最大風險：NVDA「賣事實」效應擴散至AI供應鏈；台股上週五大漲899點後週一存在獲利了結壓力；COMPUTEX前需確認是否「買預期賣事實」已提前反映</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 三、逐檔評級修正總覽 ====== -->
+<h2>▌三、逐檔評級修正總覽</h2>
+<table>
+<tr>
+  <th>標的</th><th>第一輪評級</th><th>美盤依據</th>
+  <th>今日評級</th><th>今日建議倉位</th><th>開盤策略摘要</th>
+</tr>
+<tr>
+  <td class="hl">6245 立端</td>
+  <td>主力候選（72分）</td>
+  <td class="up">ANET +5.77%，強相關；升評條件觸發</td>
+  <td><span class="tag up">⬆️ 升評</span></td>
+  <td class="up">5~8%（升至較積極）</td>
+  <td>開盤等15分鐘確認方向，量縮守84元進場</td>
+</tr>
+<tr>
+  <td class="hl">2377 微星</td>
+  <td>主力候選（81分）</td>
+  <td class="warn">NVDA -1.9% ｜ AMD +3.99%（混合）</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td>4~6%（不追高，等回測）</td>
+  <td>等回測119~122元，跳空>3%不追</td>
+</tr>
+<tr>
+  <td class="hl">4510 高鋒</td>
+  <td>主力候選（74分）</td>
+  <td class="warn">弱相關，大盤略正面</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td>3~5%（維持低配）</td>
+  <td>等回測47.5~49元，量能確認再進</td>
+</tr>
+<tr>
+  <td class="hl">3037 欣興</td>
+  <td>主力候選（81分）</td>
+  <td class="dn">TSM ADR -0.65% ｜ NVDA -1.90%</td>
+  <td><span class="tag dn">⬇️ 降評</span></td>
+  <td class="dn">5~8%（從8~12%縮倉）</td>
+  <td>降評觀察，等開盤量縮守940元再進，不追高</td>
+</tr>
+<tr>
+  <td class="hl">2421 建準</td>
+  <td>主力+爆量確認</td>
+  <td class="dn">NVDA -1.90%（降評條件直接觸發）</td>
+  <td><span class="tag dn">⬇️ 降評</span></td>
+  <td class="dn">3~5%（從6~10%縮倉）</td>
+  <td>降評！NVDA直接觸發降評條件；等量縮守156再評估</td>
+</tr>
+<tr>
+  <td class="hl">3152 璟德 ⭐</td>
+  <td>黑馬候選（66分）</td>
+  <td class="dn">NVDA -1.90%（降評條件觸發）</td>
+  <td><span class="tag cancel">❌ 暫緩</span></td>
+  <td class="dn">0%（本週暫緩）</td>
+  <td>NVDA賣事實效應未除前，CoWoS黑馬不啟動</td>
+</tr>
+<tr>
+  <td class="hl">3706 神達 ⭐</td>
+  <td>黑馬候選（62分）</td>
+  <td class="dn">NVDA -1.90%（降評條件觸發）</td>
+  <td><span class="tag cancel">❌ 暫緩</span></td>
+  <td class="dn">0%（本週暫緩）</td>
+  <td>AI伺服器黑馬等NVDA止跌後重新評估</td>
+</tr>
+</table>
+
+<!-- ====== 四、逐檔開盤操作指令（核心） ====== -->
+<h2>▌四、逐檔開盤操作指令（詳細）</h2>
+
+<!-- 立端 - 升評 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評　6245 立端　工業電腦/網通邊緣AI <span class="score">75分（升評後）</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>ANET（Arista Networks）</strong> 5/22收盤 <span class="up">+5.77%（$152.38）</span>（強相關）</p>
+<p>🇺🇸 <strong>CRDO（Credo Technology）</strong> +12.94%　｜　<strong>MRVL</strong> +2.96%</p>
+<p>網通族群昨夜美股整體 <span class="up"><strong>大幅強勢</strong></span>，立端升評條件「ANET收紅」強力觸發</p>
+<p>📌 加分背景：ANET雖5/5財報後下跌，昨夜已大幅修復（+5.77%），顯示資金重新流入網通設備族群</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：觀察台積電ADR方向確認大盤基調、立端自身開盤量能（是否跳空且守穩）</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：等開盤15分鐘確認量縮守84元後進場；若跳空直接爆量>3%暫緩</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">84~87元</span>　<span class="warn">跳空>3%（>90.6元）不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">81元</span>（維持第一輪設定）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">97元</span>（升評後小幅上調，前高區域）</p>
+<div class="rr-box">
+<p>升評後 RR ≈ <span class="key-rr">2.7:1</span>（進場85.5 | 停損81 | 目標97）　｜　建議倉位 <span class="key-pos">5~8%</span>（較第一輪加倉）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：台股上週五大漲899點後可能有短期獲利了結；立端RSI/K值偏高，若開盤大幅跳空>3%寧可等回落</p>
+<p><span class="up">💡 今日優先順序：第1優先</span>（ANET強升提供最清晰外部催化劑）</p>
+</div>
+</div>
+
+<!-- 微星 - 維持 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持　2377 微星　AI PC/電競 <span class="score">81分</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>NVDA</strong> 5/22 <span class="dn">-1.90%（$215.33）</span>　｜　<span class="up"><strong>AMD +3.99%（$467.51）</strong></span></p>
+<p>混合信號：微星主要做NVDA顯卡及AMD主機板電競產品，正負抵消</p>
+<p>升評條件（「NVDA收紅 / 回測120~122守穩」）：NVDA未收紅，升評條件未達；降評條件（「費半跌>-1.5%」）：費半+1.72%，降評未觸發</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="key-price">119~122元</span>（等回測再進，不追高）</p>
+<p><span class="warn">跳空>3%（>127.7元）不追</span></p>
+<div class="sep"></div>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">115元</span>（維持第一輪設定）</p>
+<div class="rr-box">
+<p><span class="buy">🎯 目標</span>：<span class="key-target">135~138元</span>（前高法）　RR ≈ <span class="key-rr">3.2:1</span>　｜　倉位 <span class="key-pos">4~6%</span>（不變）</p>
+</div>
+<p>策略：台股若開盤走高，微星可能跳空。<strong>不追高，等回測119~122元再進，優先確認AMD持續拉升</strong></p>
+<p><span class="up">💡 今日優先順序：第3優先</span>（等回測機會，不主動追）</p>
+</div>
+</div>
+
+<!-- 高鋒 - 維持 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持　4510 高鋒　工具機/機器人 <span class="score">74分</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 NASDAQ 大盤方向（弱相關）：<span class="up">估+0.8~1.5%（AMD/QCOM帶動）</span></p>
+<p>高鋒主要看台股自身籌碼與機器人題材，美股相關性弱</p>
+<p>升降評條件均未特殊觸發</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="key-price">47.5~49.0元</span>（等回測，不追）</p>
+<p><span class="warn">跳空>4%不追（上櫃流動性差）</span></p>
+<div class="sep"></div>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">45.5元</span>（維持）</p>
+<div class="rr-box">
+<p><span class="buy">🎯 目標</span>：<span class="key-target">54~55元</span>（前高）　RR ≈ <span class="key-rr">2.4:1</span>　｜　倉位 <span class="key-pos">3~5%</span>（低配）</p>
+</div>
+<p>策略：量比1.11x偏弱，需等開盤量能放大（量比≥1.5x）才考慮進場。COMPUTEX 6/2前機器人題材仍有支撐</p>
+<p><span class="warn">💡 今日優先順序：第4優先</span>（機器人題材次要，等量確認）</p>
+</div>
+</div>
+
+<!-- 欣興 - 降評 -->
+<div class="card yellow" style="margin-bottom:10px">
+<h2>⬇️ 降評　3037 欣興　ABF載板/PCB <span class="score" style="color:#ffcc00">78分（降評後）</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>TSM ADR</strong> 5/22 <span class="dn">-0.65%（$404.52）</span>（ABF景氣指標）</p>
+<p>🇺🇸 <strong>NVDA</strong> 5/22 <span class="dn">-1.90%</span>（ABF終端需求指標）</p>
+<p>兩大指標同步偏弱；降評原因非基本面惡化，而是「NVDA賣事實」短期壓制情緒</p>
+</div>
+<div class="action-box">
+<p><span class="warn">⬇️ 降評原因</span>：TSM ADR -0.65% + NVDA -1.90%，短期NVDA賣事實效應可能影響ABF族群情緒；台股5/22已大漲，欣興可能面臨獲利了結</p>
+<p><span class="buy">今日策略</span>：縮倉至5~8%，<strong>不追高，等開盤確認走勢後才進</strong></p>
+<p><span class="buy">📍 進場條件</span>：開盤後若量縮（&lt;昨日50%）且守940元 → 才考慮進場 940~960元</p>
+<p><span class="stop">🛡️ 停損收緊至</span>：<span class="key-stop">920元</span>（較第一輪910元略收緊）</p>
+<p><span class="warn">若開盤跳空超過3%（&gt;999元）</span>：直接等回落，不追</p>
+<p>倉位：<span class="key-pos">5~8%</span>（較第一輪8~12%縮減）</p>
+<p style="margin-top:6px;color:#4488ff;font-size:13px">💡 ABF長期基本面仍強（COMPUTEX 6/2），但本週NVDA財報後短期情緒需觀察；若NVDA止跌回穩，欣興可於下週重回升評</p>
+<p><span class="warn">💡 今日優先順序：第2優先</span>（等確認後進，不主動追）</p>
+</div>
+</div>
+
+<!-- 建準 - 降評 -->
+<div class="card yellow" style="margin-bottom:10px">
+<h2>⬇️ 降評　2421 建準　AI散熱風扇（含爆量確認） <span class="score" style="color:#ffcc00">74分（降評後）</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>NVDA</strong> 5/22 <span class="dn"><strong>-1.90%（$215.33）</strong></span>（強相關，<span class="dn">降評條件直接觸發</span>）</p>
+<p>建準升評條件：「NVDA ADR漲&gt;+2%」→ 未觸發；降評條件：「NVDA ADR下跌」→ 已觸發（-1.90%）</p>
+</div>
+<div class="action-box">
+<p><span class="warn">⬇️ 降評原因</span>：NVDA -1.90%直接觸發降評條件。建準作為NVDA伺服器散熱供應商，NVDA「賣事實」效應短期直接影響</p>
+<p><span class="buy">今日策略</span>：縮倉至3~5%，<strong>今日以觀察為主</strong></p>
+<p><span class="buy">📍 原爆量情境判斷更新</span>（結合美盤降評）：</p>
+<ul>
+  <li class="dn"><strong>情境一機率降低</strong>（量縮收紅）：若成立仍可小倉進場，進場區152~155元（縮小範圍），倉位僅3%</li>
+  <li class="warn"><strong>情境二取消</strong>（量延續跳空追）：NVDA弱勢下不追爆量</li>
+  <li class="dn"><strong>情境三警戒提高</strong>（開高走低）：直接放棄，後續觀察NVDA是否止跌</li>
+</ul>
+<p><span class="stop">🛡️ 停損收緊至</span>：<span class="key-stop">149元</span>（較第一輪146元更嚴格）</p>
+<p>倉位：<span class="key-pos">3~5%</span>（從6~10%大幅縮減）</p>
+<p style="margin-top:6px;color:#4488ff;font-size:13px">💡 若NVDA下週止跌（或SMCI同步回穩），建準可考慮升回；COMPUTEX 6/2前GTC Taipei消息仍是正面催化劑</p>
+</div>
+
+<!-- 情境表（爆量確認更新） -->
+<h3 style="margin-top:10px;color:#ffcc00">🔄 爆量情境更新（降評後修正）</h3>
+<table>
+<tr><th>情境</th><th>開盤表現</th><th>美盤後修正操作</th><th>進場區</th><th>倉位</th></tr>
+<tr>
+  <td class="warn">✅ 情境一（機率降低）</td>
+  <td>量縮&lt;50%+守156元收紅</td>
+  <td class="warn">小倉試進</td>
+  <td class="warn"><strong>152~155元</strong></td>
+  <td class="warn"><strong>3%</strong></td>
+</tr>
+<tr>
+  <td class="dn">❌ 情境二（取消）</td>
+  <td>量延續+跳空+守住</td>
+  <td class="stop">NVDA弱勢下不追</td>
+  <td>——</td>
+  <td class="dn">0%</td>
+</tr>
+<tr>
+  <td class="dn">❌ 情境三</td>
+  <td>爆量長上影/開高走低</td>
+  <td class="stop">直接放棄</td>
+  <td>——</td>
+  <td class="dn">0%</td>
+</tr>
+</table>
+</div>
+
+<!-- 璟德 黑馬 - 暫緩 -->
+<div class="card horse" style="margin-bottom:10px">
+<h2>❌ 暫緩　3152 璟德　⭐黑馬 CoWoS概念 <span class="score" style="color:#cc88ff">66分</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>NVDA</strong> 5/22 <span class="dn">-1.90%（降評條件：跌&gt;-1% = 已觸發）</span></p>
+<p>璟德的核心驅動力是CoWoS封裝需求（台積電供應NVDA），NVDA財報後「賣事實」直接命中</p>
+</div>
+<p style="margin-top:6px"><span class="tag horse">今日策略</span>：<span class="dn"><strong>暫緩進場，不操作</strong></span></p>
+<p class="warn">⚠️ 重新啟動條件：NVDA連續2日收紅且SOXX維持在$530以上 → 下週重新評估升回黑馬候選</p>
+<p style="color:#555;margin-top:6px">今日倉位 0%　｜　停損位維持170元（待啟動後執行）</p>
+</div>
+
+<!-- 神達 黑馬 - 暫緩 -->
+<div class="card horse" style="margin-bottom:10px">
+<h2>❌ 暫緩　3706 神達　⭐黑馬 AI伺服器 <span class="score" style="color:#cc88ff">62分</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>NVDA</strong> 5/22 <span class="dn">-1.90%</span>　｜　SMCI 預估偏弱（NVDA供應鏈）</p>
+<p>降評條件：「大盤轉弱 / 跌破82元」→ 美盤NVDA確認弱，評級暫緩</p>
+</div>
+<p style="margin-top:6px"><span class="tag horse">今日策略</span>：<span class="dn"><strong>暫緩進場，不操作</strong></span></p>
+<p class="warn">⚠️ 重新啟動條件：NVDA止跌反彈 + GTC Taipei/COMPUTEX有神達相關報導 → 下週重新評估</p>
+<p style="color:#555;margin-top:6px">今日倉位 0%　｜　觀察進場區84~86元（等未來確認）</p>
+</div>
+
+<!-- ====== 五、今日開盤執行優先順序 ====== -->
+<h2>▌五、今日開盤執行優先順序（5/26週一）</h2>
+<div class="card action">
+<h3>⏰ 09:00 開盤前確認清單（5/26週一必做）</h3>
+<p>① <strong>NVDA After-Hours</strong>：確認週末有無NVDA相關進一步消息（補漲or持續下跌）</p>
+<p>② <strong>TSM ADR最終週五收盤</strong>：確認$404.52是否為最終價位</p>
+<p>③ <strong>台積電開盤方向</strong>：決定今日整體基調</p>
+<p>④ <strong>台指期開盤缺口</strong>：夜盤預估42,738 vs 實際開盤，觀察缺口方向</p>
+<div class="sep"></div>
+<h3>📋 今日執行順序</h3>
+<table>
+<tr><th>順序</th><th>標的</th><th>動作</th><th>觸發條件</th><th>倉位</th></tr>
+<tr>
+  <td class="up">第1優先</td>
+  <td class="hl">6245 立端</td>
+  <td class="buy">升評進場</td>
+  <td>開盤15分鐘確認量縮守84元 / ANET昨夜+5.77%支撐</td>
+  <td class="up"><strong>5~8%</strong></td>
+</tr>
+<tr>
+  <td class="warn">第2優先</td>
+  <td class="hl">3037 欣興</td>
+  <td class="warn">降評縮倉觀察</td>
+  <td>量縮守940元才進；跳空>3%不追</td>
+  <td class="warn"><strong>5~8%</strong>（縮倉）</td>
+</tr>
+<tr>
+  <td>第3優先</td>
+  <td class="hl">2377 微星</td>
+  <td>等回測</td>
+  <td>回測119~122元量縮守穩後進</td>
+  <td><strong>4~6%</strong></td>
+</tr>
+<tr>
+  <td style="color:#888">第4優先</td>
+  <td>4510 高鋒</td>
+  <td class="warn">量能確認</td>
+  <td>量比升至1.5x以上才考慮，回測47.5~49元</td>
+  <td><strong>3~5%</strong></td>
+</tr>
+<tr>
+  <td class="warn">爆量觀察</td>
+  <td class="hl">2421 建準</td>
+  <td class="warn">降評縮倉，情境一才小進</td>
+  <td>量縮守156元且情境一成立 → 最多3%</td>
+  <td class="warn"><strong>3%（最多）</strong></td>
+</tr>
+<tr>
+  <td class="dn">今日不操作</td>
+  <td>3152 璟德 ⭐</td>
+  <td class="stop">暫緩</td>
+  <td>NVDA賣事實未解除</td>
+  <td class="dn">0%</td>
+</tr>
+<tr>
+  <td class="dn">今日不操作</td>
+  <td>3706 神達 ⭐</td>
+  <td class="stop">暫緩</td>
+  <td>NVDA/SMCI雙弱</td>
+  <td class="dn">0%</td>
+</tr>
+</table>
+</div>
+
+<!-- ====== 六、催化劑日曆更新 ====== -->
+<h2>▌六、催化劑日曆（含美盤新消息更新）</h2>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響標的</th><th>美盤後變化</th><th>方向</th></tr>
+<tr>
+  <td class="up">5/22 已發</td>
+  <td>🔴 NVIDIA Q1 FY27財報（已發布）</td>
+  <td>建準、璟德、神達</td>
+  <td class="dn">Beat但「賣事實」；NVDA -1.90%</td>
+  <td class="dn">短期負面（情緒）｜中長期利多（AI需求強）</td>
+</tr>
+<tr>
+  <td class="warn">6/1</td>
+  <td>🔥 GTC Taipei 黃仁勳主題演講</td>
+  <td>建準、欣興、璟德</td>
+  <td class="up">不變，仍是重要催化劑</td>
+  <td class="up">利多（COMPUTEX前預熱）</td>
+</tr>
+<tr>
+  <td class="warn">6/2</td>
+  <td>🔥 COMPUTEX 2026 開幕</td>
+  <td>欣興、建準、立端、高鋒</td>
+  <td class="up">倒數10天，不變</td>
+  <td class="up">最大催化劑</td>
+</tr>
+<tr>
+  <td class="up">持續</td>
+  <td>🔔 ANET 網通族群資金回流</td>
+  <td>6245 立端</td>
+  <td class="up">新增！ANET昨夜+5.77% / CRDO +12.94%確認資金回流</td>
+  <td class="up">利多（升評依據）</td>
+</tr>
+<tr>
+  <td>6/4</td>
+  <td>📊 Broadcom（AVGO）Q2財報</td>
+  <td>欣興、AI供應鏈</td>
+  <td class="warn">維持關注</td>
+  <td class="warn">若AVGO Beat → ABF族群升評</td>
+</tr>
+<tr>
+  <td>6/5</td>
+  <td>⚠️ COMPUTEX結束「賣事實」風險</td>
+  <td>全部</td>
+  <td class="warn">NVDA財報「賣事實」教訓 → 需提前注意COMPUTEX後效應</td>
+  <td class="dn">警示（6/5後注意輪轉）</td>
+</tr>
+</table>
+
+<!-- ====== 七、最終結論 ====== -->
+<h2>▌七、早盤交易員最終結論（5/26週一）</h2>
+<div class="card blue">
+<p><strong>今日Regime</strong>：<span class="warn">B中性偏A（精選個股）</span>　較第一輪A Risk-On略降</p>
+<div class="sep"></div>
+<p><strong>🥇 第1優先</strong>：<span class="up">6245 立端</span>。ANET昨夜+5.77%直接觸發升評條件，網通族群美盤全面強勢（CRDO +12.94%），是今日最清晰的外部信號。進場 <span class="key-price">84~87元</span>，倉位 <span class="key-pos">5~8%</span>。</p>
+<p><strong>🥈 第2優先（謹慎）</strong>：<span class="up">3037 欣興</span>。降評但基本面仍強，ABF長期需求沒有改變。等量縮守940元才進，縮倉5~8%操作。</p>
+<p><strong>⏳ 爆量確認</strong>：<span class="warn">2421 建準</span> 降評，NVDA -1.90%觸發。情境一成立（量縮守156元）才進，最多3%倉位；情境三直接放棄。</p>
+<p><strong>等回測</strong>：<span class="warn">2377 微星</span> 維持，等回測119~122元。<span class="warn">4510 高鋒</span> 維持低配，等量能確認。</p>
+<p><strong>❌ 暫緩</strong>：<span class="dn">3152 璟德、3706 神達</span>。NVDA「賣事實」效應下CoWoS/AI伺服器黑馬暫緩，等NVDA止跌確認。</p>
+<div class="sep"></div>
+<p><strong>最大風險</strong>：台股上週五大漲899點後週一可能有獲利了結；NVDA「賣事實」效應可能蔓延至AI供應鏈族群；油價$100+與美債殖利率4.6%是持續的宏觀壓力</p>
+<p><strong>最大機會</strong>：ANET網通族群昨夜大漲，COMPUTEX 6/2前網通邊緣AI主題（立端）是今日最佳甜蜜點；台指期夜盤+283點（+0.67%）顯示週一開盤情緒偏正面</p>
+<p><strong>系統停損線狀態</strong>：費半SOXX昨夜+1.72%（新高），距停損線（-2%）甚遠，今日正常操作。但VIX 17.81略升，保持警覺。</p>
+<p><strong>NVDA財報後觀察</strong>：NVDA強勁財報但股價跌，市場在等待「何時止跌反彈」。若本週NVDA守住$210支撐，下週CoWoS/散熱族群可望恢復。</p>
+<p><strong>產業輪動觀察</strong>：昨夜美股最強為網通/邊緣AI（ANET/CRDO）、非AI半導體（QCOM +11.6%）。台股對應族群：網通邊緣AI（立端）今日重點關注。</p>
+</div>
+
+<p style="color:#555;font-size:12px;margin-top:14px;text-align:right">
+第二輪早盤版：Claude自動搜尋美盤數據，比對產業相關性，修正第一輪評級。不構成投資建議，投資有風險。
+｜ 20260522_2_claude.html　AIreport v2.2 Round2（執行於20260523早盤）
+</p>
+</body>
+</html>
