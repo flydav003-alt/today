@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股收盤後分析（第一輪）｜ 20260527</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px;max-width:1200px;margin:0 auto}
+h1{font-size:20px;color:#00e5ff;border-bottom:2px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:1px}
+h2{font-size:15px;color:#ffcc00;margin:12px 0 8px;border-left:4px solid #ffcc00;padding-left:8px;letter-spacing:0.5px}
+h3{font-size:14px;color:#bbb;margin:8px 0 5px}
+.section-title{font-size:16px;color:#ffcc00;margin:16px 0 8px;border-left:4px solid #ffcc00;padding-left:8px;font-weight:bold}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:10px}
+.card.green{border-left:4px solid #ff4444}
+.card.yellow{border-left:4px solid #ffcc00}
+.card.red{border-left:4px solid #00cc66}
+.card.blue{border-left:4px solid #4488ff}
+.card.orange{border-left:4px solid #ff8800}
+.card.horse{border-left:4px solid #cc88ff;background:#1a1520}
+.card.handoff{border:2px solid #00e5ff;background:#0a1520;margin-top:16px}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:11px;padding:2px 6px;border-radius:3px;margin:1px}
+.tag.a{background:#440000;color:#ff4444}
+.tag.b{background:#444400;color:#ffcc00}
+.tag.c{background:#003300;color:#00cc66}
+.tag.horse{background:#2a1540;color:#cc88ff}
+.score{float:right;font-size:20px;font-weight:bold;color:#00e5ff}
+.regime{background:#1a0a0a;border:2px solid #ff4444;border-radius:6px;padding:12px;margin-bottom:12px}
+.regime.warn{border-color:#ff8800;background:#1a0f00}
+.regime.off{border-color:#00cc66;background:#0a1a0a}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold;font-size:14px}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.7;font-size:14px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:14px;line-height:1.6}
+.big{font-size:20px;color:#00e5ff;font-weight:bold}
+.pool-tag{display:inline-block;background:#1a1a2e;color:#4488ff;font-size:11px;padding:2px 6px;border-radius:3px;margin:1px;border:1px solid #4488ff}
+.horse-tag{display:inline-block;background:#2a1540;color:#cc88ff;font-size:11px;padding:2px 6px;border-radius:3px;margin:1px;border:1px solid #cc88ff}
+.wait-tag{display:inline-block;background:#2a2000;color:#ffcc00;font-size:11px;padding:2px 6px;border-radius:3px;border:1px solid #ffcc00}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:4px;padding:8px;margin-top:6px}
+.up-cond{color:#ff4444;font-size:13px;margin:3px 0;line-height:1.6}
+.dn-cond{color:#00cc66;font-size:13px;margin:3px 0;line-height:1.6}
+pre{background:#111;border:1px solid #2a4a2a;padding:12px;border-radius:4px;font-size:12px;color:#ccc;white-space:pre-wrap;margin:8px 0;line-height:1.8;font-family:'Courier New',monospace}
+.warn-banner{background:#2a1500;border:2px solid #ff8800;border-radius:6px;padding:10px;margin-bottom:12px;text-align:center;font-size:14px}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:4px;padding:10px;margin-top:8px}
+.stock-card{margin-bottom:10px}
+.collapsible-header{background:#1a1a1a;border:1px solid #444;border-radius:6px;padding:10px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;user-select:none}
+.collapsible-header:hover{background:#222;border-color:#555}
+.collapsible-header .ch-title{color:#aaa;font-size:14px}
+.collapsible-header .ch-arrow{color:#555;font-size:16px;transition:transform 0.2s}
+.collapsible-header.open .ch-arrow{transform:rotate(180deg)}
+.collapsible-content{display:none;margin-bottom:10px}
+.collapsible-content.open{display:block}
+</style>
+</head>
+<body>
+
+<h1>🎯 台股收盤後分析報告（第一輪）｜ 20260527</h1>
+<p style="color:#555;font-size:12px;margin-bottom:8px">
+檔名：20260527_1_claude.html　｜　輸入：系統截圖　｜　AIreport v2.3 Round1
+</p>
+
+<!-- ====== 一、市場 Regime 判斷 ====== -->
+<div class="section-title">▌一、市場 Regime 判斷</div>
+<div class="regime">
+<h2 style="border:none;padding:0;margin-bottom:10px">今日判斷 → <span class="up" style="font-size:18px;font-weight:bold">A — AI Risk-On 🔥 強烈做多模式</span></h2>
+<div class="grid3">
+<div>
+  <h3>大盤現況</h3>
+  <p>加權指數：<span class="hl">44,256.8 點（+1.68%）</span></p>
+  <p>今日再創歷史新高｜成交量 <span class="up">1兆5,568億</span>（近期最大量）</p>
+  <p>連2日大漲 +2,247點｜MA5、MA10 均強勢向上</p>
+  <p class="warn">明日風險預估：大漲後跳空高開機率中等，注意首盤15分鐘承接量能</p>
+</div>
+<div>
+  <h3>美股 / 費半（前一個交易日）</h3>
+  <p>費半 SOX：本周累計 <span class="up">+4.54%</span>（5月高達+22.21%）</p>
+  <p>那斯達克：同步走強</p>
+  <p>台積電ADR：同步正向</p>
+  <p><span class="warn">系統停損線</span>：費半跌&gt;2% → 全面降倉50%</p>
+</div>
+<div>
+  <h3>法人整體方向</h3>
+  <p>三大法人今日合計 <span class="up">買超307.63億</span></p>
+  <p>外資：<span class="up">買超</span>（南亞4.57萬張居前段）</p>
+  <p>投信：同步偏多，買超主要集中成長股</p>
+  <p>自營商：配合做多</p>
+  <p style="color:#ffcc00;font-size:12px">⚡ COMPUTEX 2026（6/2~6/5）倒數6天，黃仁勳已抵台暖場，資金狂潮不斷</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 二、交易員一頁總結 ====== -->
+<div class="section-title">▌二、交易員一頁總結</div>
+<div class="grid2">
+  <div class="card blue"><h3>📌 明日最值得佈局</h3><p><span class="up" style="font-size:15px;font-weight:bold">1303 南亞</span>｜外資今日大買4.57萬張，PCB電子材料＋AI伺服器受惠概念，連兩日法人同步買超，擁擠度中等，漲勢仍在初段</p></div>
+  <div class="card green"><h3>🍯 最像「剛起漲」甜蜜點</h3><p><span class="up" style="font-size:15px;font-weight:bold">1503 士電</span>｜電力設備/輸配電落後補漲型，量比2.84x爆量但屬起漲初段，COMPUTEX AI用電需求催化劑尚未被大幅炒作</p></div>
+  <div class="card yellow"><h3>🔄 最佳 Laggard / Emerging</h3><p><span class="up" style="font-size:15px;font-weight:bold">6005 群益證</span>｜台股成交量爆升至1.5兆，證券股受惠台股行情高度正相關，量比1.69x穩健，RSI 76.9尚未超買至85</p></div>
+  <div class="card orange"><h3>🔥 如果明日只能重壓一檔</h3><p class="big">1303 南亞</p><p>外資今日買超量創近期大量、PCB材料AI受惠明確、技術面量縮整理後今日再度放量攻高，產業催化劑COMPUTEX尚有5天，估值偏低，RR佳</p></div>
+</div>
+<div class="grid2">
+  <div class="card orange"><h3>🌙 如果只能做隔夜單</h3><p class="big">6005 群益證</p><p>台股量能不退則隔夜風險低，證券股與指數強相關，停損明確（32元），適合短線隔夜</p></div>
+  <div class="card red"><h3>⚡ AI轉弱第一個先砍誰</h3><p><span class="dn" style="font-size:15px;font-weight:bold">3711 日月光</span>｜K值76.8偏高、RSI 65.5偏熱，封裝概念已漲一大段（472→642），量比1.09x資金未加速，AI轉弱第一個止損</p></div>
+</div>
+<div class="card horse" style="margin-bottom:12px">
+  <h3>⭐ 黑馬候選（低分但有潛力）</h3>
+  <p><span style="color:#cc88ff;font-size:14px;font-weight:bold">3293 鈺象</span>：評分64但量比2.07x爆量、上櫃股、COMPUTEX網通題材、RSI 56.8健康區間，符合3項黑馬條件</p>
+  <p><span style="color:#cc88ff;font-size:14px;font-weight:bold">3689 湧德</span>：評分62，量比2.18x，RSI 57.4健康，上櫃股，功率元件補漲題材</p>
+</div>
+
+<!-- ====== 三、AI台股短線機會雷達表 ====== -->
+<div class="section-title">▌三、AI台股短線機會雷達表</div>
+<table>
+<tr>
+  <th>股票</th><th>來源</th><th>K線等級</th><th>今日K線對明日含義</th><th>輪動位置</th>
+  <th>產業催化劑</th><th>時間點</th><th>擁擠度</th><th>評分</th><th>建議</th>
+</tr>
+<tr>
+  <td class="hl">1303 南亞</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td><span class="tag a">A級</span></td>
+  <td class="up">外資大買4.57萬張，今日放量強勢，明日進場邏輯強</td>
+  <td class="up">Laggard Catch-up</td>
+  <td>AI伺服器PCB材料、高階CCL</td><td class="warn">COMPUTEX 6/2</td>
+  <td class="warn">中</td><td class="up" style="font-weight:bold">66</td>
+  <td class="buy">核心佈局</td>
+</tr>
+<tr>
+  <td class="hl">6005 群益證</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td><span class="tag b">B級</span></td>
+  <td class="up">台股放量1.5兆，量比1.69x溫和，明日若指數續強則優先受惠</td>
+  <td class="up">Emerging Rotation</td>
+  <td>台股量能爆增直接受惠</td><td class="warn">每日即時</td>
+  <td class="dn">低</td><td class="up" style="font-weight:bold">74</td>
+  <td class="buy">積極參與</td>
+</tr>
+<tr>
+  <td class="hl">1503 士電</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td><span class="tag a">A級</span></td>
+  <td class="up">量比2.84x大量突破，起漲初段，今日K線進場邏輯強</td>
+  <td class="up">Laggard Catch-up</td>
+  <td>AI用電/輸配電基礎建設</td><td class="warn">COMPUTEX 6/2~持續</td>
+  <td class="warn">中</td><td class="warn" style="font-weight:bold">70</td>
+  <td class="buy">積極參與</td>
+</tr>
+<tr>
+  <td class="hl">6548 長科*</td>
+  <td><span class="pool-tag">上櫃</span></td>
+  <td><span class="tag a">A級</span></td>
+  <td class="up">量比2.07x放量，功率半導體起漲，明日進場邏輯偏強</td>
+  <td class="up">Emerging Rotation</td>
+  <td>AI外溢效應、英飛凌下半年缺貨</td><td class="warn">2026 Q2~Q3</td>
+  <td class="dn">低</td><td class="up" style="font-weight:bold">75</td>
+  <td class="buy">核心佈局</td>
+</tr>
+<tr>
+  <td class="hl">3293 鈺象 <span class="horse-tag">⭐黑馬</span></td>
+  <td><span class="pool-tag">上櫃</span></td>
+  <td><span class="tag b">B級</span></td>
+  <td class="warn">量比2.07x、RSI 56.8健康，中性偏多</td>
+  <td class="warn">Sympathy Play</td>
+  <td>網通/工業乙太網路</td><td>COMPUTEX 6/2</td>
+  <td class="dn">低</td><td class="warn">64</td>
+  <td class="warn">小倉觀察</td>
+</tr>
+<tr>
+  <td class="hl">3689 湧德 <span class="horse-tag">⭐黑馬</span></td>
+  <td><span class="pool-tag">上櫃</span></td>
+  <td><span class="tag b">B級</span></td>
+  <td class="warn">量比2.18x，RSI 57.4健康，K值72.8尚未超買</td>
+  <td class="warn">Sympathy Play</td>
+  <td>功率元件、AI外溢</td><td>待確認</td>
+  <td class="dn">低</td><td class="warn">62</td>
+  <td class="warn">小倉觀察</td>
+</tr>
+</table>
+
+<!-- ====== 四、深度交易機會 ====== -->
+<div class="section-title">▌四、深度交易機會（全部通過初篩標的）</div>
+
+<!-- #1 長科* -->
+<div class="card green stock-card">
+<h2>🥇 6548 長科* — Emerging Rotation｜功率半導體首發轉強 <span class="score">75</span></h2>
+<div style="clear:both"></div>
+<div class="grid2">
+<div>
+  <p><span class="tag a">K線：A級</span> 今日量比2.07x放量強攻，48.5→61.1大漲幅度</p>
+  <p><span class="tag">今日K線意義</span> <span class="up">進場邏輯強——功率半導體板塊首波量增轉強，非爆量出貨</span></p>
+  <p><span class="tag">來源</span> <span class="pool-tag">上櫃強勢股</span></p>
+  <p><span class="tag">型態</span> Emerging Rotation（英飛凌下半年缺貨，台廠補位）</p>
+  <p><span class="tag">輪動位置</span> 功率半導體板塊剛啟動，龍頭強茂已漲，長科尚未被全面點名</p>
+  <p><span class="tag">產業催化劑</span></p>
+  <ul>
+    <li>英飛凌下半年傳缺貨，台功率半導體廠大啖AI外溢效應</li>
+    <li>COMPUTEX 2026（6/2~6/5）AI伺服器用電量攀升帶動功率元件需求</li>
+    <li>Q2 EPS 0.51元，Q2營收季增挑戰雙位數（已公告）</li>
+  </ul>
+  <p><span class="tag">媒體曝光</span> <span class="dn">低</span>｜截至今日未見Yahoo/鉅亨頭條，甜蜜點完整</p>
+  <p><span class="tag">籌碼</span> 今日大量突破，外資本月曾列入買超名單 | 融資需持續觀察勿暴增</p>
+  <p><span class="tag">系統訊號</span> RSI 70.9 | K值 78.5 | 量比 2.07x | 系統評分 75</p>
+</div>
+<div>
+  <div class="action-box">
+    <p><span class="buy">📍 最佳進場區</span>：<span class="up" style="font-size:16px;font-weight:bold">59.0 ~ 62.0</span></p>
+    <p><span class="warn">跳空 &gt;4% 不追（高開超過63.7不追）</span></p>
+    <div class="sep"></div>
+    <p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">56.0</span>（跌破此位視為假突破失效）</p>
+    <p><span class="warn">失效條件</span>：收盤破56元或爆量長上影線開高走低</p>
+    <div class="sep"></div>
+    <div class="rr-box">
+      <p><span class="buy">🎯 目標價</span>：①前高阻力法 → <span class="up" style="font-weight:bold">68~72元</span>（近60日前高區間）</p>
+      <p>進場60.5 | 停損56（損4.5）| 目標70（獲9.5）</p>
+      <p><span class="up" style="font-size:15px;font-weight:bold">RR ≈ 2.1:1</span></p>
+    </div>
+    <p><span class="tag">持有天數</span>：5~10天　<span class="tag">隔夜</span>：✅</p>
+    <p><span class="tag">建議倉位</span>：<span class="up" style="font-size:15px;font-weight:bold">5~8%</span></p>
+  </div>
+  <div class="sep"></div>
+  <p class="up-cond">📈 明日升評條件：費半漲>1% / ONSEMI收紅 / 台股量能維持1兆以上</p>
+  <p class="dn-cond">📉 明日降評條件：費半跌>1% / ONSEMI走弱 / 台積電ADR大跌</p>
+  <p style="color:#4488ff;font-size:12px">🔗 對應美股指標：ONSEMI、英飛凌(IFX)、WOLFSPEED</p>
+</div>
+</div>
+</div>
+
+<!-- #2 群益證 -->
+<div class="card blue stock-card">
+<h2>🥈 6005 群益證 — Emerging Rotation｜台股量能爆升直接受惠 <span class="score">74</span></h2>
+<div style="clear:both"></div>
+<div class="grid2">
+<div>
+  <p><span class="tag b">K線：B級</span> 今日量比1.69x穩健放量，30.6→35.0強勢</p>
+  <p><span class="tag">今日K線意義</span> <span class="up">台股1.5兆成交量創近期大量，量能延續則群益直接受惠</span></p>
+  <p><span class="tag">來源</span> <span class="pool-tag">上市強勢股</span></p>
+  <p><span class="tag">型態</span> Emerging Rotation（台股量能行情直接受惠者）</p>
+  <p><span class="tag">輪動位置</span> 指數連創新高，券商股屬最直接受益族群</p>
+  <p><span class="tag">產業催化劑</span> 台股成交量站上1.5兆、COMPUTEX行情持續，日均量維持高檔則券商EPS大幅成長</p>
+  <p><span class="tag">媒體曝光</span> <span class="warn">中</span>｜5/4曾出現外資名單，非頭條但有券商族群輪動報導</p>
+  <p><span class="tag">籌碼</span> 今日外資列入買超前段｜外資持股比率穩定｜融資狀況需觀察</p>
+  <p><span class="tag">系統訊號</span> RSI 76.9 | K值 80.0 | 量比 1.69x | 系統評分 74</p>
+</div>
+<div>
+  <div class="action-box">
+    <p><span class="buy">📍 進場區</span>：<span class="up" style="font-size:16px;font-weight:bold">34.0 ~ 36.0</span></p>
+    <p><span class="warn">跳空 &gt;3% 不追（高開超過36.0不追）</span></p>
+    <div class="sep"></div>
+    <p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">32.0</span>（台股量能萎縮或指數轉弱則同步出場）</p>
+    <div class="rr-box">
+      <p><span class="buy">🎯 目標</span>：①前高阻力法 → <span class="up" style="font-weight:bold">38.5~40.0</span></p>
+      <p>進場35 | 停損32（損3）| 目標39（獲4）</p>
+      <p><span class="up" style="font-size:15px;font-weight:bold">RR ≈ 2.0:1（K值80偏高，目標保守）</span></p>
+    </div>
+    <p><span class="tag">建議倉位</span>：<span class="warn" style="font-size:15px;font-weight:bold">5~8%</span></p>
+    <p><span class="tag">持有天數</span>：3~7天　<span class="tag">隔夜</span>：✅（低風險，與指數同步）</p>
+  </div>
+  <div class="sep"></div>
+  <p class="up-cond">📈 明日升評：台股成交量維持>1兆3千億 / 大盤再創新高</p>
+  <p class="dn-cond">📉 明日降評：台股量能大幅萎縮至8000億以下 / 費半跌>1.5%</p>
+  <p style="color:#4488ff;font-size:12px">🔗 對應美股指標：市場整體情緒（台指期夜盤）</p>
+</div>
+</div>
+</div>
+
+<!-- #3 南亞 -->
+<div class="card blue stock-card">
+<h2>🥉 1303 南亞 — Laggard Catch-up｜外資今日大買電子材料AI受惠 <span class="score">66</span></h2>
+<div style="clear:both"></div>
+<div class="grid2">
+<div>
+  <p><span class="tag a">K線：A級</span> 今日量比1.63x放量，81.7→95.5強攻漲幅逾15%</p>
+  <p><span class="tag">今日K線意義</span> <span class="up">外資4.57萬張大買居買超第6名，AI電子材料受惠題材啟動</span></p>
+  <p><span class="tag">來源</span> <span class="pool-tag">上市強勢股</span></p>
+  <p><span class="tag">型態</span> Laggard Catch-up（AI供應鏈中落後族群—電子材料）</p>
+  <p><span class="tag">輪動位置</span> PCB材料、高階CCL尚在第二梯隊，欣興/南電已漲，南亞為落後補漲</p>
+  <p><span class="tag">產業催化劑</span></p>
+  <ul>
+    <li>與日東紡策略合作，強化特殊玻纖布及高階CCL產品競爭力</li>
+    <li>AI伺服器需求擴張，電子材料業務前景轉樂觀</li>
+    <li>投信曾連兩日大幅買超（本月紀錄）</li>
+  </ul>
+  <p><span class="tag">媒體曝光</span> <span class="warn">中</span>｜有CMoney即時新聞，但非ETtoday頭條</p>
+  <p><span class="tag">籌碼</span> 外資今日買超4.57萬張（前6大）| 投信本月數度買超</p>
+  <p><span class="tag">系統訊號</span> RSI 62.8 | K值 68.2 | 量比 1.63x | 系統評分 66</p>
+</div>
+<div>
+  <div class="action-box">
+    <p><span class="buy">📍 最佳進場區</span>：<span class="up" style="font-size:16px;font-weight:bold">93.0 ~ 97.0</span></p>
+    <p><span class="warn">跳空 &gt;4% 不追（高開超過99.3不追）</span></p>
+    <div class="sep"></div>
+    <p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">88.0</span>（今日量大，跌破即視為外資主力出場）</p>
+    <p><span class="warn">失效條件</span>：收盤跌破88元或外資由買轉賣</p>
+    <div class="sep"></div>
+    <div class="rr-box">
+      <p><span class="buy">🎯 目標價</span>：③均線目標法 → <span class="up" style="font-weight:bold">105~110元</span>（前高阻力區）</p>
+      <p>進場95 | 停損88（損7）| 目標107（獲12）</p>
+      <p><span class="up" style="font-size:15px;font-weight:bold">RR ≈ 1.7:1（評分偏低，倉位控制）</span></p>
+    </div>
+    <p><span class="tag">持有天數</span>：5~10天　<span class="tag">隔夜</span>：⚠️（注意今日漲幅已大）</p>
+    <p><span class="tag">建議倉位</span>：<span class="warn" style="font-size:15px;font-weight:bold">4~6%</span></p>
+  </div>
+  <div class="sep"></div>
+  <p class="up-cond">📈 明日升評條件：外資連續2日買超 / PCB族群續強 / 費半收紅</p>
+  <p class="dn-cond">📉 明日降評條件：外資轉賣 / 塑化族群整體走弱</p>
+  <p style="color:#4488ff;font-size:12px">🔗 對應美股指標：TTM Technologies、AMAT（PCB材料）</p>
+</div>
+</div>
+</div>
+
+<!-- #4 士電 -->
+<div class="card blue stock-card">
+<h2>4️⃣ 1503 士電 — Laggard Catch-up｜電力設備落後補漲甜蜜點 <span class="score">70</span></h2>
+<div style="clear:both"></div>
+<div class="grid2">
+<div>
+  <p><span class="tag a">K線：A級（量增轉強）</span> 量比2.84x大量突破，183.5→221漲幅達20%</p>
+  <p><span class="tag">今日K線意義</span> <span class="up">輸配電族群今日大量啟動，明日進場邏輯強但需注意今日漲幅已大，等回測較佳</span></p>
+  <p><span class="tag">來源</span> <span class="pool-tag">上市強勢股</span></p>
+  <p><span class="tag">型態</span> Laggard Catch-up（電力設備族群，前年漲過，去年整理，今年再啟動）</p>
+  <p><span class="tag">輪動位置</span> 華城已大漲，士電/中興電為第二梯隊，今日啟動</p>
+  <p><span class="tag">產業催化劑</span></p>
+  <ul>
+    <li>COMPUTEX前夕分析師點名：電力電機為AI資料中心基礎建設受惠股</li>
+    <li>AI伺服器用電需求急增，華城/士電輸配電概念</li>
+    <li>AI資料中心建設長期需求催化</li>
+  </ul>
+  <p><span class="tag">媒體曝光</span> <span class="warn">中</span>｜分析師在COMPUTEX報告中點名，但個股頭條曝光尚低</p>
+  <p><span class="tag">籌碼</span> 今日量比2.84x屬啟動訊號，需觀察後續法人連續買超</p>
+  <p><span class="tag">系統訊號</span> RSI 68.7 | K值 70.8 | 量比 2.84x | 系統評分 70</p>
+</div>
+<div>
+  <div class="action-box">
+    <p><span class="buy">📍 最佳進場區</span>：<span class="up" style="font-size:16px;font-weight:bold">215 ~ 225</span>（等回測較佳，今日漲幅已大）</p>
+    <p><span class="warn">跳空 &gt;3% 不追（跳空高開超過227不追）</span></p>
+    <div class="sep"></div>
+    <p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">208</span>（今日啟動低點守住為關鍵）</p>
+    <p><span class="warn">失效條件</span>：收盤跌破208元或量能大幅萎縮至昨日以下</p>
+    <div class="sep"></div>
+    <div class="rr-box">
+      <p><span class="buy">🎯 目標價</span>：②技術量測法 → <span class="up" style="font-weight:bold">245~260元</span>（啟動幅度推算）</p>
+      <p>進場220 | 停損208（損12）| 目標252（獲32）</p>
+      <p><span class="up" style="font-size:15px;font-weight:bold">RR ≈ 2.7:1</span></p>
+    </div>
+    <p><span class="tag">持有天數</span>：7~14天　<span class="tag">隔夜</span>：⚠️（今日漲幅大，等回測確認）</p>
+    <p><span class="tag">建議倉位</span>：<span class="warn" style="font-size:15px;font-weight:bold">4~6%</span></p>
+  </div>
+  <div class="sep"></div>
+  <p class="up-cond">📈 明日升評條件：量縮守208收紅（A級甜蜜點）/ COMPUTEX持續利多</p>
+  <p class="dn-cond">📉 明日降評條件：爆量長上影開高走低（出貨訊號）/ 費半跌>1.5%</p>
+  <p style="color:#4488ff;font-size:12px">🔗 對應美股指標：AI資料中心整體（NVDA、AVGO）</p>
+</div>
+</div>
+</div>
+
+<!-- #5 日月光 -->
+<div class="card yellow stock-card">
+<h2>5️⃣ 3711 日月光投控 — Sympathy Play｜先進封裝龍頭，已大漲但COMPUTEX前仍有動能 <span class="score">72</span></h2>
+<div style="clear:both"></div>
+<div class="grid2">
+<div>
+  <p><span class="tag b">K線：B級</span> 今日量比1.09x量能偏低，472→642延續</p>
+  <p><span class="tag">今日K線意義</span> <span class="warn">量能未加速擴大，屬主升段中慣性上漲，不追高，等回測</span></p>
+  <p><span class="tag">來源</span> <span class="pool-tag">ETF買進訊號</span></p>
+  <p><span class="tag">型態</span> Sympathy Play（AI先進封裝龍頭已漲一大段）</p>
+  <p><span class="tag">產業催化劑</span> 攜手楠電352億元打造先進封裝新據點、Q2法說會期待、COMPUTEX期間輝達持續加碼台廠</p>
+  <p><span class="tag">媒體曝光</span> <span class="up">高（-5分警示）</span>｜鉅亨/中時財經連續出現，COMPUTEX前高曝光</p>
+  <p><span class="tag">籌碼</span> 外資歷史上連10買、今日量比偏低1.09x，主力未加速 | K值78.5偏高</p>
+  <p><span class="tag">系統訊號</span> RSI 65.5 | K值 76.8 | 量比 1.09x | 系統評分 72（媒體扣5分→實質67）</p>
+</div>
+<div>
+  <div class="action-box">
+    <p><span class="buy">📍 進場區</span>：<span class="up" style="font-size:16px;font-weight:bold">625 ~ 640</span>（只在回測買，不追高）</p>
+    <p><span class="warn">跳空 &gt;2% 不追</span></p>
+    <div class="sep"></div>
+    <p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">610</span>（跌破MA5即出場）</p>
+    <div class="rr-box">
+      <p><span class="buy">🎯 目標</span>：前高估算 → <span class="up" style="font-weight:bold">680~700</span></p>
+      <p>進場632 | 停損610（損22）| 目標690（獲58）</p>
+      <p><span class="up" style="font-size:15px;font-weight:bold">RR ≈ 2.6:1</span></p>
+    </div>
+    <p><span class="tag">建議倉位</span>：<span class="warn" style="font-size:15px;font-weight:bold">3~5%</span>（媒體曝光高，降低倉位）</p>
+    <p><span class="tag">持有天數</span>：3~7天　<span class="tag">隔夜</span>：⚠️</p>
+  </div>
+  <div class="sep"></div>
+  <p class="up-cond">📈 明日升評：輝達COMPUTEX釋出台廠利多具體訂單 / 台積電ADR走強</p>
+  <p class="dn-cond">📉 明日降評：費半跌>1% / 量能繼續萎縮</p>
+  <p style="color:#4488ff;font-size:12px">🔗 對應美股指標：NVDA、AVGO（先進封裝）</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 五、黑馬候選區 ====== -->
+<div class="section-title">▌五、⭐ 黑馬候選區（低分但有潛力，3~5% 小倉）</div>
+
+<div class="card horse stock-card">
+<h2>⭐ 3293 鈺象 — 網通/工業乙太網路 <span class="score" style="color:#cc88ff">64</span></h2>
+<div style="clear:both"></div>
+<p style="color:#cc88ff;font-size:13px">系統評分64偏低，但技術/量能出現異常訊號｜COMPUTEX前夕網通題材補漲候選</p>
+<div class="grid2">
+<div>
+  <p><span class="tag horse">升級原因</span> 量比≥1.8x（✅2.07x）、RSI在45~65（✅56.8）、上櫃股（✅）→ 符合3項黑馬條件</p>
+  <p><span class="tag">K線</span> B級　<span class="tag">量比</span> 2.07x</p>
+  <p><span class="tag">輪動</span> 網通族群COMPUTEX前夕補漲，智邦/中磊已漲，鈺象為同族群落後</p>
+  <p><span class="tag">潛在催化劑</span> COMPUTEX 6/2~6/5 400G網通、工業乙太網路</p>
+  <p class="up-cond">📈 明日升評條件：ANET/CSCO收紅 / 網通族群板塊帶量突破</p>
+  <p class="dn-cond">📉 明日降評條件：費半跌>1% / 量能萎縮</p>
+  <p style="color:#4488ff;font-size:12px">🔗 對應美股指標：ANET、CSCO</p>
+</div>
+<div>
+  <div class="action-box">
+    <p><span class="buy">📍 觀察進場</span>：<span class="up" style="font-size:15px;font-weight:bold">745 ~ 770</span>（需等確認訊號）</p>
+    <p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">716</span></p>
+    <div class="rr-box">
+      <p><span class="buy">🎯 目標</span>：停損幅度×2~2.5 → <span class="up" style="font-weight:bold">800~820</span></p>
+      <p><span class="up">RR ≈ 2.0:1</span></p>
+    </div>
+    <p><span class="tag horse">倉位</span>：3~5%（黑馬小倉）</p>
+    <p><span class="warn">⚠️ 風險</span>：評分偏低，嚴格停損，不適合隔夜重倉</p>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="card horse stock-card">
+<h2>⭐ 3689 湧德 — 功率元件/電源管理 <span class="score" style="color:#cc88ff">62</span></h2>
+<div style="clear:both"></div>
+<p style="color:#cc88ff;font-size:13px">系統評分62，量比2.18x、RSI57.4健康，功率元件板塊受惠AI用電補漲</p>
+<div class="grid2">
+<div>
+  <p><span class="tag horse">升級原因</span> 量比≥1.8x（✅2.18x）、RSI在45~65（✅57.4）、上櫃股（✅）→ 符合3項黑馬條件</p>
+  <p><span class="tag">K線</span> B級　<span class="tag">量比</span> 2.18x</p>
+  <p><span class="tag">輪動</span> 功率元件同族群強茂已漲，湧德落後補漲</p>
+  <p><span class="tag">潛在催化劑</span> AI伺服器電源管理需求、48V電源架構趨勢</p>
+  <p class="up-cond">📈 明日升評條件：ONSEMI收紅 / 功率元件族群持續帶量</p>
+  <p class="dn-cond">📉 明日降評條件：ONSEMI走弱 / 量縮翻黑</p>
+  <p style="color:#4488ff;font-size:12px">🔗 對應美股指標：ONSEMI、STMicro</p>
+</div>
+<div>
+  <div class="action-box">
+    <p><span class="buy">📍 觀察進場</span>：<span class="up" style="font-size:15px;font-weight:bold">128 ~ 133</span>（需等隔日確認）</p>
+    <p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">123</span></p>
+    <div class="rr-box">
+      <p><span class="buy">🎯 目標</span>：停損幅度×2.5 → <span class="up" style="font-weight:bold">143~148</span></p>
+      <p><span class="up">RR ≈ 2.3:1</span></p>
+    </div>
+    <p><span class="tag horse">倉位</span>：3~5%（黑馬小倉）</p>
+    <p><span class="warn">⚠️ 風險</span>：評分偏低，嚴格停損</p>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ====== 六、未來14天催化劑日曆 ====== -->
+<div class="section-title">▌六、未來14天催化劑日曆</div>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響產業 / 標的</th><th>方向</th></tr>
+<tr>
+  <td class="warn">2026/05/28</td>
+  <td>🟡 輝達黃仁勳北士科員工大會（T17/T18）</td>
+  <td>日月光（3711）、台積電、整體AI供應鏈</td>
+  <td class="up">利多觀察</td>
+</tr>
+<tr>
+  <td class="warn">2026/05/29</td>
+  <td>🔴 台股加權報酬指數突破10萬點效應持續</td>
+  <td>全市場，群益證（6005）特別受惠</td>
+  <td class="up">利多</td>
+</tr>
+<tr>
+  <td class="warn">2026/06/02</td>
+  <td>🔴 COMPUTEX 2026 正式開幕（6/2~6/5）</td>
+  <td>長科（6548）、日月光（3711）、鈺象（3293）、士電（1503）</td>
+  <td class="up">強利多</td>
+</tr>
+<tr>
+  <td class="warn">2026/06/02~05</td>
+  <td>🔴 黃仁勳COMPUTEX演講 / NVIDIA新品發表</td>
+  <td>AI供應鏈全線，重點：先進封裝、功率半導體、網通</td>
+  <td class="up">強利多</td>
+</tr>
+<tr>
+  <td class="warn">2026/06/05</td>
+  <td>🟡 美國就業報告（Non-Farm Payroll）</td>
+  <td>全市場，注意美元走向</td>
+  <td class="warn">觀察（可能影響費半）</td>
+</tr>
+<tr>
+  <td class="warn">2026/06/10</td>
+  <td>🟡 聯準會 FOMC 利率決策</td>
+  <td>全市場系統性風險</td>
+  <td class="warn">觀察（降息預期下行）</td>
+</tr>
+</table>
+
+<!-- ====== 七、交易員最終結論 ====== -->
+<div class="section-title">▌七、交易員最終結論</div>
+<div class="card blue" style="margin-bottom:16px">
+<p><strong style="font-size:15px">Regime</strong>：<span class="up" style="font-size:15px">A — AI Risk-On｜COMPUTEX倒數6天，黃仁勳抵台，市場資金狂潮不退，台股創歷史新高1.5兆大量</span></p>
+<div class="sep"></div>
+<p><strong>🥇 最甜蜜點</strong>：<span class="up" style="font-size:15px;font-weight:bold">6548 長科*</span>。功率半導體板塊啟動，英飛凌缺貨台廠補位，系統評分最高75，媒體曝光低，擁擠度低。進場區59~62，停損56，目標70，RR 2.1:1。倉位5~8%。</p>
+<p><strong>🥈 次甜蜜點</strong>：<span class="up" style="font-size:15px;font-weight:bold">6005 群益證</span>。台股量能爆升最直接受益者，評分74，適合隔夜持有。進場34~36，停損32，目標39，倉位5~8%。</p>
+<p><strong>🥉 補充佈局</strong>：<span class="up" style="font-size:15px;font-weight:bold">1503 士電</span>。電力設備落後補漲，COMPUTEX AI用電題材催化，等明日回測215~220再進，倉位4~6%。</p>
+<p><strong>⭐ 黑馬觀察</strong>：<span style="color:#cc88ff;font-size:14px;font-weight:bold">3293 鈺象、3689 湧德</span>。網通/功率元件補漲候選，評分偏低需等確認。各倉位3~5%。</p>
+<div class="sep"></div>
+<p><strong>⚠️ 系統性停損</strong>：費半跌&gt;2%立即降倉50%，不等個股失效條件。</p>
+<p><strong>🚨 最大風險</strong>：台股連續暴漲後，COMPUTEX實際展出內容若不如預期（Buy the rumor, sell the news），6/2開幕當日可能反轉，必須提前設定6/1收盤前減倉計劃。</p>
+<p><strong>❌ FOMO避開</strong>：<span class="dn">2303 聯電</span>｜K值91.1嚴重超買，技術面直接排除｜<span class="dn">3037 欣興</span>｜量比0.88x未達1.0x排除</p>
+<p><strong>⏳ 爆量等確認</strong>：1503 士電今日量比2.84x屬大量啟動，明日需觀察是否量縮收紅確認A級甜蜜點。</p>
+<p><strong>選股池品質</strong>：上市5支/上櫃5支/ETF訊號5支，共15支解析；上市偏多，整體擁擠度中低，黑馬2支，主力候選5支，品質良好</p>
+</div>
+
+<!-- ====== 八、等早盤版確認區 ====== -->
+<div class="section-title">▌八、⏳ 等早盤版確認區（今日爆量股）</div>
+<div class="card yellow stock-card">
+<h3 style="font-size:15px">1503 士電 — 今日量比2.84x大量啟動，需隔日確認</h3>
+<p style="color:#ff8800;font-size:13px;margin-bottom:6px">今日從183.5→221元大漲約20%，量比達2.84x屬電力設備板塊今日最大量。明日開盤前15分鐘需觀察以下情境。</p>
+<p style="color:#4488ff;font-size:12px;margin-bottom:6px">🔗 對應美股指標：NVDA、AVGO（AI資料中心整體需求）（早盤版將自動搜尋）</p>
+<table>
+<tr><th>情境</th><th>開盤表現</th><th>操作</th><th>進場區</th></tr>
+<tr>
+  <td class="up" style="font-weight:bold">✅ 情境一（最佳）</td>
+  <td>量縮（&lt;今日50%）+ 守住210以上 + 收紅</td>
+  <td class="buy">早盤版升評A級 → 積極進場</td>
+  <td class="up">215~222</td>
+</tr>
+<tr>
+  <td class="warn" style="font-weight:bold">✅ 情境二</td>
+  <td>量延續 + 跳空開高 + 守住不大幅回測</td>
+  <td class="warn">小倉追（跳空限&lt;3%）</td>
+  <td class="warn">依跳空位置，上限227</td>
+</tr>
+<tr>
+  <td class="dn" style="font-weight:bold">❌ 情境三</td>
+  <td>爆量長上影 / 開高走低跌破210</td>
+  <td class="stop">直接放棄，確認出貨</td>
+  <td class="dn">—</td>
+</tr>
+</table>
+</div>
+
+<!-- ====== 九、摺疊區：截圖解析 + 初篩 ====== -->
+<div style="margin-bottom:4px">
+<div class="collapsible-header" id="hdr-parse" onclick="toggleCollapse('parse')">
+<span class="ch-title">📋 截圖解析 &amp; 選股池初篩結果（點擊展開）</span>
+<span class="ch-arrow" id="arrow-parse">▼</span>
+</div>
+<div class="collapsible-content" id="col-parse">
+
+<div class="card blue" style="margin-bottom:10px">
+<h2>▌截圖解析（全部辨識標的）</h2>
+<p style="color:#555;font-size:12px">* 號 = 歷史股票分割標記，不影響分析　｜　本截圖無「強烈偏多」訊號（全為「偏多觀察」）→ 評分不加3</p>
+<table>
+<tr>
+  <th>代號</th><th>名稱</th><th>來源</th><th>系統評分</th><th>強烈偏多+3</th><th>調整後評分</th>
+  <th>現價</th><th>RSI</th><th>K值</th><th>量比</th><th>訊號</th>
+</tr>
+<tr><td class="hl">3711</td><td>日月光投控</td><td><span class="pool-tag">ETF</span></td><td>72</td><td class="warn">—</td><td class="up">72</td><td>642</td><td>65.5</td><td>76.8</td><td>1.09x</td><td>偏多觀察</td></tr>
+<tr><td class="hl">2454</td><td>聯發科</td><td><span class="pool-tag">ETF</span></td><td>70</td><td class="warn">—</td><td>70</td><td>4640</td><td>70.7</td><td>82.4</td><td>1.51x</td><td>偏多觀察</td></tr>
+<tr><td class="hl">2303</td><td>聯電</td><td><span class="pool-tag">ETF</span></td><td>70</td><td class="warn">—</td><td class="warn">70</td><td>143.5</td><td>78.1</td><td>91.1</td><td>1.04x</td><td>偏多觀察</td></tr>
+<tr><td class="hl">6488</td><td>環球晶</td><td><span class="pool-tag">ETF</span></td><td>69</td><td class="warn">—</td><td>69</td><td>930</td><td>61.3</td><td>77.0</td><td>2.31x</td><td>偏多觀察</td></tr>
+<tr><td class="hl">3037</td><td>欣興</td><td><span class="pool-tag">ETF</span></td><td>69</td><td class="warn">—</td><td>69</td><td>1080</td><td>68.3</td><td>84.1</td><td>0.88x</td><td>偏多觀察</td></tr>
+<tr><td class="hl">6548</td><td>長科*</td><td><span class="pool-tag">上櫃</span></td><td>75</td><td class="warn">—</td><td class="up">75</td><td>61.1</td><td>70.9</td><td>78.5</td><td>2.07x</td><td>偏多觀察</td></tr>
+<tr><td class="hl">5274</td><td>信驊</td><td><span class="pool-tag">上櫃</span></td><td>66</td><td class="warn">—</td><td>66</td><td>18230</td><td>62.2</td><td>69.4</td><td>1.17x</td><td>偏多觀察</td></tr>
+<tr><td class="hl">3293</td><td>鈺象</td><td><span class="pool-tag">上櫃</span></td><td>64</td><td class="warn">—</td><td>64</td><td>756</td><td>56.8</td><td>68.5</td><td>2.07x</td><td>偏多觀察</td></tr>
+<tr><td class="hl">3689</td><td>湧德</td><td><span class="pool-tag">上櫃</span></td><td>62</td><td class="warn">—</td><td>62</td><td>130.5</td><td>57.4</td><td>72.8</td><td>2.18x</td><td>偏多觀察</td></tr>
+<tr><td class="hl">8088</td><td>品安</td><td><span class="pool-tag">上櫃</span></td><td>53</td><td class="warn">—</td><td>53</td><td>61.0</td><td>63.5</td><td>65.7</td><td>1.71x</td><td>中性觀望</td></tr>
+<tr><td class="hl">6005</td><td>群益證</td><td><span class="pool-tag">上市</span></td><td>74</td><td class="warn">—</td><td class="up">74</td><td>35.0</td><td>76.9</td><td>80.0</td><td>1.69x</td><td>偏多觀察</td></tr>
+<tr><td class="hl">1503</td><td>士電</td><td><span class="pool-tag">上市</span></td><td>70</td><td class="warn">—</td><td>70</td><td>221</td><td>68.7</td><td>70.8</td><td>2.84x</td><td>偏多觀察</td></tr>
+<tr><td class="hl">1303</td><td>南亞</td><td><span class="pool-tag">上市</span></td><td>66</td><td class="warn">—</td><td>66</td><td>95.5</td><td>62.8</td><td>68.2</td><td>1.63x</td><td>偏多觀察</td></tr>
+<tr><td class="hl">8070</td><td>長華*</td><td><span class="pool-tag">上市</span></td><td>55</td><td class="warn">—</td><td>55</td><td>50.3</td><td>65.5</td><td>69.1</td><td>1.82x</td><td>中性觀望</td></tr>
+<tr><td class="hl">8131</td><td>福懋科</td><td><span class="pool-tag">上市</span></td><td>53</td><td class="warn">—</td><td>53</td><td>68.9</td><td>58.3</td><td>63.6</td><td>2.31x</td><td>中性觀望</td></tr>
+</table>
+</div>
+
+<div>
+<h2>▌選股池初篩結果</h2>
+<table>
+<tr>
+  <th>代號(名稱)</th><th>來源</th><th>調整後評分</th><th>RSI</th><th>K值</th><th>量比</th>
+  <th>今日K線</th><th>初篩結果</th><th>理由</th>
+</tr>
+<tr>
+  <td class="hl">6548(長科*)</td><td><span class="pool-tag">上櫃</span></td>
+  <td class="up" style="font-weight:bold">75</td><td>70.9</td><td>78.5</td><td class="up">2.07x</td>
+  <td class="up">量增轉強</td><td class="buy">✅ 主力候選</td><td>評分75≥72，量比良好，RSI未超買</td>
+</tr>
+<tr>
+  <td class="hl">6005(群益證)</td><td><span class="pool-tag">上市</span></td>
+  <td class="up" style="font-weight:bold">74</td><td>76.9</td><td>80.0</td><td class="up">1.69x</td>
+  <td class="up">穩健放量</td><td class="buy">✅ 主力候選</td><td>評分74≥72，台股量能最直接受惠</td>
+</tr>
+<tr>
+  <td class="hl">3711(日月光)</td><td><span class="pool-tag">ETF</span></td>
+  <td class="up" style="font-weight:bold">72</td><td>65.5</td><td>76.8</td><td class="warn">1.09x</td>
+  <td class="warn">量能偏低</td><td class="buy">✅ 主力候選（降優先）</td><td>評分72剛好通過，量比偏低，媒體曝光高</td>
+</tr>
+<tr>
+  <td class="hl">1503(士電)</td><td><span class="pool-tag">上市</span></td>
+  <td class="warn">70</td><td>68.7</td><td>70.8</td><td class="up">2.84x</td>
+  <td class="up">今日大量啟動</td><td class="warn">⏳ 等早盤確認</td><td>評分70在黑馬區但量比2.84x極大量，今日漲幅大，需明日確認情境</td>
+</tr>
+<tr>
+  <td class="hl">2454(聯發科)</td><td><span class="pool-tag">ETF</span></td>
+  <td>70</td><td>70.7</td><td>82.4</td><td>1.51x</td>
+  <td class="warn">K值82.4偏高</td><td class="stop">❌ 排除</td><td class="warn">K值82.4偏高，RSI70.7，追價風險高，且媒體曝光極高（漲停頭條）</td>
+</tr>
+<tr>
+  <td class="hl">2303(聯電)</td><td><span class="pool-tag">ETF</span></td>
+  <td>70</td><td>78.1</td><td class="warn">91.1</td><td>1.04x</td>
+  <td>—</td><td class="stop">❌ 排除</td><td class="warn">K值91.1嚴重超買（>90直接排除）</td>
+</tr>
+<tr>
+  <td class="hl">1303(南亞)</td><td><span class="pool-tag">上市</span></td>
+  <td>66</td><td>62.8</td><td>68.2</td><td class="up">1.63x</td>
+  <td class="up">外資大買放量</td><td><span class="horse-tag">⭐ 升格主力候選</span></td><td>評分66但外資今日買超4.57萬張，催化劑強，升格討論</td>
+</tr>
+<tr>
+  <td class="hl">5274(信驊)</td><td><span class="pool-tag">上櫃</span></td>
+  <td>66</td><td>62.2</td><td>69.4</td><td>1.17x</td>
+  <td>平盤量</td><td class="stop">❌ 排除</td><td class="warn">評分66、量比1.17x偏低，無明確催化劑，進入低分區但不符黑馬條件</td>
+</tr>
+<tr>
+  <td class="hl">3293(鈺象)</td><td><span class="pool-tag">上櫃</span></td>
+  <td class="warn">64</td><td>56.8</td><td>68.5</td><td class="up">2.07x</td>
+  <td>放量</td><td><span class="horse-tag">⭐ 黑馬候選</span></td><td>符合3項黑馬條件（量比2.07x、RSI56.8、上櫃）</td>
+</tr>
+<tr>
+  <td class="hl">3689(湧德)</td><td><span class="pool-tag">上櫃</span></td>
+  <td class="warn">62</td><td>57.4</td><td>72.8</td><td class="up">2.18x</td>
+  <td>放量</td><td><span class="horse-tag">⭐ 黑馬候選</span></td><td>符合3項黑馬條件（量比2.18x、RSI57.4、上櫃）</td>
+</tr>
+<tr>
+  <td class="hl">6488(環球晶)</td><td><span class="pool-tag">ETF</span></td>
+  <td>69</td><td>61.3</td><td>77.0</td><td class="up">2.31x</td>
+  <td>量增</td><td class="stop">❌ 排除</td><td class="warn">評分69低於72，黑馬條件不足（ETF非上櫃，RSI61未在45~65區間內且缺少明確個股催化劑）</td>
+</tr>
+<tr>
+  <td class="hl">3037(欣興)</td><td><span class="pool-tag">ETF</span></td>
+  <td>69</td><td>68.3</td><td>84.1</td><td class="dn">0.88x</td>
+  <td>量縮</td><td class="stop">❌ 排除</td><td class="warn">量比0.88x&lt;1.0x，資金未流入，直接排除</td>
+</tr>
+<tr>
+  <td>8070(長華*)</td><td><span class="pool-tag">上市</span></td>
+  <td>55</td><td>65.5</td><td>69.1</td><td>1.82x</td>
+  <td>—</td><td class="stop">❌ 排除</td><td class="warn">評分55&lt;60，中性觀望訊號，直接排除</td>
+</tr>
+<tr>
+  <td>8088(品安)</td><td><span class="pool-tag">上櫃</span></td>
+  <td>53</td><td>63.5</td><td>65.7</td><td>1.71x</td>
+  <td>—</td><td class="stop">❌ 排除</td><td class="warn">評分53&lt;60，中性觀望訊號，直接排除</td>
+</tr>
+<tr>
+  <td>8131(福懋科)</td><td><span class="pool-tag">上市</span></td>
+  <td>53</td><td>58.3</td><td>63.6</td><td>2.31x</td>
+  <td>—</td><td class="stop">❌ 排除</td><td class="warn">評分53&lt;60，中性觀望訊號，直接排除</td>
+</tr>
+</table>
+</div>
+
+</div>
+</div>
+
+<!-- ====== 十、早盤交接清單 ====== -->
+<div class="card handoff">
+<h2>▌📋 早盤交接清單（複製此區塊貼入第二輪早盤版 Prompt）</h2>
+<p style="color:#00e5ff;font-size:13px;margin-bottom:10px">
+⚡ 將以下文字區塊完整複製，貼入「20260527_2_claude」第二輪Prompt。<br>
+Claude會自動搜尋美盤數據，自動比對產業相關性，不需手動輸入任何數字。
+</p>
+<pre>
+=== 第一輪交接清單 ｜ 20260527 收盤後版 ===
+（第二輪早盤版請讀取此日期，輸出檔名為 20260527_2_claude.html）
+
+【今日Regime】
+台股Regime：A（AI Risk-On）
+加權指數：44,256.8點（+1.68%）歷史新高
+外資：買超（今日南亞4.57萬張居前，力積電7.4萬張最大）
+投信：同步偏多買超
+重大背景：COMPUTEX 2026（6/2~6/5）倒數6天，黃仁勳明日北士科員工大會，今日台股1.5兆近期最大成交量，加權報酬指數首破10萬點
+
+【A. 主力候選（明日優先佈局）】
+────────────────────────────────
+6548 長科* | 調整評分75 | 現價61.1
+進場區：59~62 | 跳空>4%不追（上限63.7）
+停損：56.0（失效條件：收盤破56或爆量長上影）
+目標：70元（①前高阻力法）| RR 2.1:1 | 建議倉位5~8%
+K線等級：A | 輪動：Emerging Rotation | 擁擠度：低
+產業：功率半導體
+產業催化劑：英飛凌下半年傳缺貨、AI外溢效應 | 硬時間點：COMPUTEX 6/2~6/5
+籌碼：今日量比2.07x大量放量，外資關注中
+📈 升評條件：費半漲>1% / ONSEMI收紅 / 台股量能維持1兆以上
+📉 降評條件：費半跌>1% / ONSEMI走弱 / 台積電ADR大跌
+🔗 對應美股指標：ONSEMI、IFX（英飛凌）
+────────────────────────────────
+6005 群益證 | 調整評分74 | 現價35.0
+進場區：34~36 | 跳空>3%不追（上限36.0）
+停損：32.0（失效條件：台股量能大幅萎縮）
+目標：39元（①前高阻力法）| RR 2.0:1 | 建議倉位5~8%
+K線等級：B | 輪動：Emerging Rotation | 擁擠度：低
+產業：證券/金融
+產業催化劑：台股量能1.5兆近期最大量，COMPUTEX行情持續 | 硬時間點：每日
+籌碼：外資今日有買超，量比1.69x穩健
+📈 升評條件：台股成交量維持>1兆3千億 / 大盤再創新高
+📉 降評條件：台股量能大幅萎縮<8000億 / 費半跌>1.5%
+🔗 對應美股指標：台指期夜盤（情緒指標）
+────────────────────────────────
+3711 日月光投控 | 調整評分72 | 現價642
+進場區：625~640（只在回測買，不追高）| 跳空>2%不追
+停損：610（失效條件：跌破MA5）
+目標：680~700元（①前高） | RR 2.6:1 | 建議倉位3~5%（媒體曝光高降倉）
+K線等級：B | 輪動：Sympathy Play（龍頭已漲段）| 擁擠度：高
+產業：先進封裝/半導體
+產業催化劑：COMPUTEX輝達持續加碼台廠、楠電352億先進封裝 | 硬時間點：6/2~6/5
+籌碼：外資歷史連買，今日量比1.09x偏低
+📈 升評條件：輝達COMPUTEX釋出台廠具體訂單 / 台積電ADR走強
+📉 降評條件：費半跌>1% / 量能繼續萎縮
+🔗 對應美股指標：NVDA、AVGO
+────────────────────────────────
+1303 南亞 | 調整評分66 | 現價95.5（外資大買升格）
+進場區：93~97 | 跳空>4%不追（上限99.3）
+停損：88.0（失效條件：外資轉賣或收盤破88）
+目標：105~110元（③均線/前高目標）| RR 1.7:1 | 建議倉位4~6%
+K線等級：A | 輪動：Laggard Catch-up（PCB電子材料）| 擁擠度：中
+產業：電子材料/PCB/塑化
+產業催化劑：與日東紡合作高階CCL、AI伺服器需求 | 硬時間點：COMPUTEX 6/2
+籌碼：外資今日買超4.57萬張（買超排名第6）
+📈 升評條件：外資連續2日買超 / PCB族群續強
+📉 降評條件：外資轉賣 / 塑化族群走弱
+🔗 對應美股指標：TTM Technologies（PCB）
+────────────────────────────────
+
+【B. 黑馬候選（小倉位觀察，3~5%）】
+────────────────────────────────
+3293 鈺象 | 調整評分64 | 現價756
+黑馬原因：量比2.07x（✅）、RSI56.8（✅）、上櫃股（✅）→符合3項
+觀察進場：745~770 | 停損：716 | 目標：800~820 | RR 2.0:1
+📈 升評條件：ANET/CSCO收紅 / 網通族群帶量突破
+📉 降評條件：費半跌>1% / 量縮翻黑
+🔗 對應美股指標：ANET、CSCO
+────────────────────────────────
+3689 湧德 | 調整評分62 | 現價130.5
+黑馬原因：量比2.18x（✅）、RSI57.4（✅）、上櫃股（✅）→符合3項
+觀察進場：128~133 | 停損：123 | 目標：143~148 | RR 2.3:1
+📈 升評條件：ONSEMI收紅 / 功率元件族群持續帶量
+📉 降評條件：ONSEMI走弱 / 量縮翻黑
+🔗 對應美股指標：ONSEMI、STMicro
+────────────────────────────────
+
+【C. 爆量等確認（早盤版判斷情境）】
+────────────────────────────────
+1503 士電 | 今日量比2.84x大量啟動 | 現價221
+情境一（量縮+守210+收紅）→ A級進場，進場區215~222
+情境二（量延續+跳空守住）→ 小倉追，上限跳空3%（上限約227）
+情境三（爆量長上影/開高走低跌破210）→ 直接放棄
+🔗 對應美股指標：NVDA、AVGO（AI資料中心整體）
+────────────────────────────────
+
+【D. 今日排除，明日不看】
+2303 聯電 | 原因：K值91.1嚴重超買（>90直接排除）
+2454 聯發科 | 原因：K值82.4偏高＋媒體曝光極高（漲停頭條）
+3037 欣興 | 原因：量比0.88x&lt;1.0x資金未流入
+5274 信驊 | 原因：評分66量比1.17x偏低無明確催化劑
+6488 環球晶 | 原因：評分69不達主力標準，黑馬條件不足
+8070 長華* | 原因：評分55&lt;60中性觀望訊號
+8088 品安 | 原因：評分53&lt;60
+8131 福懋科 | 原因：評分53&lt;60
+
+【系統性停損線】
+費半單日 &lt; -2% → 全部降倉50%，直接切Risk-Off
+台積電ADR跌破主要均線 → 重新評估所有持倉
+COMPUTEX 6/1收盤前建議主動減倉30~50%（展前高點警戒）
+</pre>
+</div>
+
+<p style="color:#555;font-size:11px;margin-top:14px;text-align:right">
+本報告標的來自使用者系統截圖，Claude負責截圖解析、深度過濾與執行分析。不構成投資建議，投資有風險，請自行判斷並設置停損。
+｜ 20260527_1_claude.html　AIreport v2.3 Round1
+</p>
+
+<script>
+function toggleCollapse(id) {
+  var content = document.getElementById('col-' + id);
+  var header = document.getElementById('hdr-' + id);
+  var arrow = document.getElementById('arrow-' + id);
+  if (content.classList.contains('open')) {
+    content.classList.remove('open');
+    header.classList.remove('open');
+    arrow.textContent = '▼';
+  } else {
+    content.classList.add('open');
+    header.classList.add('open');
+    arrow.textContent = '▲';
+  }
+}
+</script>
+</body>
+</html>
