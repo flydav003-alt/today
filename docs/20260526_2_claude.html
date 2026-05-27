@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股早盤操作指令（第二輪）｜ 20260526</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Times New Roman','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px}
+h1{font-size:20px;color:#00e5ff;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:0.5px}
+h2{font-size:16px;color:#ffcc00;margin:12px 0 8px;border-left:3px solid #ffcc00;padding-left:8px}
+h3{font-size:14px;color:#aaa;margin:8px 0 5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:4px;padding:10px}
+.card.green{border-left:3px solid #ff4444}
+.card.yellow{border-left:3px solid #ffcc00}
+.card.red{border-left:3px solid #00cc66}
+.card.blue{border-left:3px solid #4488ff}
+.card.orange{border-left:3px solid #ff8800}
+.card.horse{border-left:3px solid #cc88ff;background:#1a1520}
+.card.riskoff{border:2px solid #00cc66;background:#0a1a0a}
+.card.action{border:2px solid #ffcc00;background:#1a1500}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px}
+.tag.up{background:#440000;color:#ff4444}
+.tag.hold{background:#333;color:#aaa}
+.tag.dn{background:#003300;color:#00cc66}
+.tag.cancel{background:#222;color:#555}
+.tag.wait{background:#2a2000;color:#ffcc00}
+.tag.horse{background:#2a1540;color:#cc88ff}
+.score{float:right;font-size:22px;font-weight:bold;color:#00e5ff}
+.regime{background:#1a0a0a;border:2px solid #ff4444;border-radius:4px;padding:12px;margin-bottom:12px}
+.regime.neutral{border-color:#ffcc00}
+.regime.off{border-color:#00cc66;background:#0a1a0a}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.6;font-size:15px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:15px;line-height:1.6}
+.big{font-size:22px;font-weight:bold}
+.pool-tag{display:inline-block;background:#1a1a2e;color:#4488ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #4488ff}
+.horse-tag{display:inline-block;background:#2a1540;color:#cc88ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #cc88ff}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:3px;padding:8px;margin-top:6px}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:3px;padding:10px;margin-top:8px}
+.us-box{background:#0d0d1a;border:1px solid #4488ff;border-radius:3px;padding:8px;margin:5px 0}
+.key-price{font-size:20px;font-weight:bold;color:#ff4444}
+.key-stop{font-size:20px;font-weight:bold;color:#00cc66}
+.key-target{font-size:20px;font-weight:bold;color:#ffcc00}
+.key-rr{font-size:22px;font-weight:bold;color:#00e5ff}
+.key-pos{font-size:20px;font-weight:bold;color:#ff8800}
+.mu-banner{background:#0a1f0a;border:2px solid #ff4444;border-radius:4px;padding:10px;margin-bottom:12px;text-align:center}
+</style>
+</head>
+<body>
+<h1>⚡ 台股早盤操作指令（第二輪）｜ 20260526</h1>
+<p style="color:#555;font-size:12px;margin-bottom:12px">
+檔名：20260526_2_claude.html　｜　執行於：20260527 早盤
+｜　輸入：第一輪交接清單　｜　Claude自動搜尋美盤數據　｜　AIreport v2.2 Round2
+</p>
+
+<!-- MU重磅利多橫幅 -->
+<div class="mu-banner">
+🚀 <span class="up" style="font-size:16px;font-weight:bold">【重磅利多】美光(MU) 5/26單日暴漲 +19.29%，突破$1兆市值！</span><br>
+<span style="color:#ccc;font-size:13px">UBS將目標價從$535三倍調升至$1,625，稱MU為「AI原生基礎設施巨頭」，HBM/DDR5長期協議鎖定60~70%伺服器用量</span><br>
+<span class="up" style="font-weight:bold">→ 直接正面衝擊：力積電(6770)、漢科(3402)、京元電子(2449)、相關記憶體封測族群</span>
+</div>
+
+<!-- ====== 零、美盤掃描結果 ====== -->
+<h2>▌零、美盤掃描結果（Claude自動搜尋完成 — 5/26/2026美股收盤）</h2>
+<div class="grid3">
+<div class="card blue">
+<h3>🇺🇸 關鍵指數（5/26美股）</h3>
+<p>費半 SOX：<span class="up big">≈+3.5~4%</span> <span style="font-size:12px;color:#888">（MU+19%、QCOM+5.7%、AMD+4.9%驅動；5/22基準12,202）</span></p>
+<p>那斯達克：<span class="up">+1.19%</span> → 26,656（新高）</p>
+<p>台積電 ADR：<span class="dn">-0.65%</span> → $404.52（小幅回調）</p>
+<p>NVDA：<span class="dn">-0.22%</span> → ~$215（高位震盪）</p>
+<p>台指期夜盤：<span class="up">+478點（+1.09%）</span>→ 44,348點</p>
+<p>VIX：<span class="dn">16.72</span>（低位，風險偏好佳）</p>
+</div>
+<div class="card">
+<h3>🔥 美股產業強弱（5/26）</h3>
+<p class="up">超強勢：記憶體 MU +19.29%（突破$1兆市值）</p>
+<p class="up">強勢：QCOM +5.74%（ByteDance AI晶片大單）</p>
+<p class="up">強勢：AMD +4.95% | NXPI +5.71%</p>
+<p class="up">偏強：AMAT/LRCX +1~1.5% | AVGO +3.82%</p>
+<p class="dn">中性偏弱：TSM ADR -0.65% | NVDA -0.22%</p>
+<p class="warn">整體：記憶體/晶片族群大漲，NVDA/TSM小幅休息</p>
+</div>
+<div class="card">
+<h3>📰 隔夜重大消息</h3>
+<p class="up">① MU突破$1兆：UBS目標$1,625，稱其「AI原生基礎設施巨頭」，HBM/DDR5長期協議能見度高</p>
+<p class="up">② QCOM衝歷史新高：ByteDance訂購數百萬片AI晶片</p>
+<p class="up">③ 那指/S&P同創歷史新高</p>
+<p class="warn">④ 黃仁勳5/27台灣NVIDIA總部動土典禮（今日！）</p>
+<p style="color:#555">⑤ NVDA/TSM ADR小幅修正屬高位正常換手，非轉弱訊號</p>
+</div>
+</div>
+
+<!-- 候選標的對應美股表現 -->
+<h2>▌一、候選標的 × 美股對應表現</h2>
+<table>
+<tr>
+  <th>台股標的</th><th>產業</th><th>對應美股指標</th>
+  <th>美股5/26表現</th><th>相關強度</th><th>初步方向</th>
+</tr>
+<tr>
+  <td class="hl">6770 力積電</td>
+  <td>記憶體/晶圓代工</td>
+  <td>MU +19.29%</td>
+  <td class="up" style="font-weight:bold">+19.29% 🔥</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑↑ 強烈正面</td>
+</tr>
+<tr>
+  <td class="hl">2449 京元電子</td>
+  <td>封測/AI晶片測試</td>
+  <td>MU +19.29% / AMKR</td>
+  <td class="up">MU +19.29% 🔥</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑↑ 強烈正面</td>
+</tr>
+<tr>
+  <td class="hl">3402 漢科</td>
+  <td>半導體設備工程</td>
+  <td>AMAT +1.0% / LRCX +1.0%</td>
+  <td class="up">+1.0~1.5%</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑ 正面</td>
+</tr>
+<tr>
+  <td class="hl">2406 國碩</td>
+  <td>AI太陽能/綠電儲能</td>
+  <td>NVDA -0.22% / ENPH / FSLR</td>
+  <td class="warn">NVDA -0.22%（中性）</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性（COMPUTEX自身催化劑為主）</td>
+</tr>
+<tr>
+  <td class="hl">4510 高鋒</td>
+  <td>工具機/機器人</td>
+  <td>ABB/FANUC（弱相關）</td>
+  <td class="warn">大盤強但產業指標無直接映射</td>
+  <td><span class="tag hold">弱相關</span></td>
+  <td class="warn">→ 中性（COMPUTEX機器人題材自主）</td>
+</tr>
+<tr>
+  <td class="hl">4770 上品</td>
+  <td>功率半導體/電動車</td>
+  <td>ONSEMI（未直接搜到5/26數據）</td>
+  <td class="warn">估中性（同族QCOM週邊受益）</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性</td>
+</tr>
+<tr>
+  <td class="hl">6121 新普（黑馬）</td>
+  <td>電池/儲能</td>
+  <td>ENPH / STEM</td>
+  <td class="warn">未直接強催化</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性偏弱</td>
+</tr>
+<tr>
+  <td class="hl">6903 巨漢（黑馬）</td>
+  <td>機器人</td>
+  <td>ISRG / ABB</td>
+  <td class="warn">大盤強，個股催化劑COMPUTEX</td>
+  <td><span class="tag hold">弱相關</span></td>
+  <td class="warn">→ 中性（自主催化劑）</td>
+</tr>
+</table>
+
+<!-- ====== 二、Regime修正 ====== -->
+<div class="regime">
+<h2>▌二、今日台股開盤 Regime → <span class="up big">A Risk-On（維持，記憶體超催化升溫）</span></h2>
+<div class="grid3">
+<div>
+<h3>與第一輪比較</h3>
+<p>第一輪判斷：A Risk-On</p>
+<p>今日修正：<span class="up">維持A Risk-On → 甚至升溫</span></p>
+<p>修正原因：MU+19%超預期暴漲，記憶體/封測族群迎重磅催化劑；那指再創歷史新高；台指期夜盤+1.09%確認強勢；黃仁勳今日動土典禮加持</p>
+</div>
+<div>
+<h3>系統性風險檢查</h3>
+<p>費半SOX：≈+3.5~4% <span class="up">遠高於+1%觸發線 → 正常Risk-On</span></p>
+<p>台積電ADR：-0.65% <span class="warn">小幅修正（非轉弱，仍$404）</span></p>
+<p>VIX：16.72 <span class="dn">低位，無警戒</span></p>
+<p>那指：+1.19%（歷史新高）</p>
+</div>
+<div>
+<h3>今日整體操作基調</h3>
+<p><span class="up" style="font-size:16px;font-weight:bold">🚀 積極出擊，記憶體/封測優先</span></p>
+<p class="warn">最大風險：MU單日+19%後隔日台股可能出現追高後換手震盪；NVDA/TSM ADR微弱，需確認台積電今日現貨是否跟進</p>
+<p style="color:#aaa;font-size:13px">COMPUTEX超級催化劑週本週啟動（黃仁勳6/1演講）</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 三、逐檔評級修正總覽 ====== -->
+<h2>▌三、逐檔評級修正總覽</h2>
+<table>
+<tr>
+  <th>標的</th><th>第一輪</th><th>美盤依據</th>
+  <th>今日評級</th><th>今日倉位</th><th>開盤策略摘要</th>
+</tr>
+<tr>
+  <td class="hl">6770 力積電</td>
+  <td>主力 A級</td>
+  <td class="up">MU +19.29%，強相關 🔥</td>
+  <td><span class="tag up">⬆️ 升評</span></td>
+  <td class="up">13~18%（大幅加倉）</td>
+  <td class="up">今日第1優先，開盤量確認直接進</td>
+</tr>
+<tr>
+  <td class="hl">2449 京元電子</td>
+  <td>主力 B級</td>
+  <td class="up">MU +19.29%，封測強相關 🔥</td>
+  <td><span class="tag up">⬆️ 升評</span></td>
+  <td class="up">8~12%（加倉）</td>
+  <td class="up">今日第2優先，記憶體封測龍頭直接受益</td>
+</tr>
+<tr>
+  <td class="hl">3402 漢科</td>
+  <td>主力 B級</td>
+  <td class="up">AMAT/LRCX +1~1.5%，強相關</td>
+  <td><span class="tag up">⬆️ 維持升評</span></td>
+  <td class="up">6~9%（小幅加倉）</td>
+  <td>設備族群跟進，等開盤5分鐘確認量能</td>
+</tr>
+<tr>
+  <td class="hl">2406 國碩</td>
+  <td>主力 A級</td>
+  <td class="warn">NVDA -0.22%，中相關，COMPUTEX催化劑自主</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td>8~12%（不變）</td>
+  <td>等回測33.5~35.5進場，黃仁勳動土加持</td>
+</tr>
+<tr>
+  <td class="hl">4510 高鋒</td>
+  <td>主力 B級</td>
+  <td class="warn">弱相關，COMPUTEX機器人自主催化劑</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td>5~7%（不變）</td>
+  <td>等回測50~52.5，K值73.8偏高注意不追高</td>
+</tr>
+<tr>
+  <td class="hl">4770 上品</td>
+  <td>主力 B級</td>
+  <td class="warn">ONSEMI中相關，無直接利多</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td>3~5%（小幅縮倉）</td>
+  <td>RSI69偏高，等確認回測後再進</td>
+</tr>
+<tr>
+  <td class="hl">6121 新普（黑馬）</td>
+  <td>黑馬</td>
+  <td class="warn">無直接利多，儲能概念弱</td>
+  <td><span class="tag hold">➡️ 維持觀察</span></td>
+  <td>3~5%（不變）</td>
+  <td>等量突破2.0x再進，今日非優先</td>
+</tr>
+<tr>
+  <td class="hl">6903 巨漢（黑馬）</td>
+  <td>黑馬</td>
+  <td class="warn">弱相關，機器人COMPUTEX自主</td>
+  <td><span class="tag hold">➡️ 維持觀察</span></td>
+  <td>0~3%（今日觀察）</td>
+  <td>今日先觀察COMPUTEX機器人熱度</td>
+</tr>
+</table>
+
+<!-- ====== 四、逐檔開盤操作指令（核心） ====== -->
+<h2>▌四、逐檔開盤操作指令（詳細）</h2>
+
+<!-- ===升評第1：力積電=== -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評（第1優先）　6770 力積電 — 記憶體/晶圓代工 <span class="score">83</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>MU（美光）</strong> 5/26大漲 <span class="up">+19.29%</span>，突破$1兆市值（強相關）</p>
+<p>UBS目標價$1,625：稱MU為「AI原生基礎設施巨頭」，HBM/DDR5長期協議鎖定60~70%伺服器用量，EPS能見度至2029年。記憶體大牛市升溫確認，外資5/26已大買力積電5.9萬張，今日可能延續。</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：台積電開盤方向 / 台指期是否延續夜盤44,348+478的強勢 / 力積電開盤是否跳空（若跳空<4%仍可追）</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：開盤直接進（若量能延續），或跳空<4%直接追</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">68~74</span>　<span class="warn">跳空>4%（約73.6以上）不追，等回測</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">64.0</span>（外資買入成本破位，第一輪維持）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">80~85</span>（前高阻力法，MU+19%後新目標可看90~95）</p>
+<div class="rr-box">
+<p>今日 RR ≈ <span class="key-rr">2.3:1</span>　｜　建議倉位 <span class="key-pos">13~18%</span>（較第一輪10~15%加倉，MU利多確認）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：MU+19%後台股可能出現追高換手，若開盤衝過75後有量縮跡象應分批出場部分；外資今日是否延續5.9萬張買超是關鍵</p>
+</div>
+</div>
+
+<!-- ===升評第2：京元電子=== -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評（第2優先）　2449 京元電子 — 封測/AI晶片測試 <span class="score">72+</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>MU（美光）</strong> 5/26 <span class="up">+19.29%</span>，記憶體封測需求直接受益（強相關）</p>
+<p>AMKR（Amkor）為封測同業，AMD+4.95%、AVGO+3.82%確認AI晶片封測需求旺盛。京元電子第一輪評分64，但MU爆發性利多直接升評為主力候選。</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：日月光/京元電子族群是否集體跳空開高 / 量比是否延續2.13x以上</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：開盤若跳空≤3%直接進；跳空>3%等首15分鐘確認守住後追</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">330~355</span>　<span class="warn">跳空>3%（約348以上開盤）等確認</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">315.0</span>（MA10失守，第一輪設定維持）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">370~390</span>（MU利多升級後目標上調，原365~380）</p>
+<div class="rr-box">
+<p>今日 RR ≈ <span class="key-rr">2.2:1</span>　｜　建議倉位 <span class="key-pos">8~12%</span>（由第一輪5~7%升評加倉）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：京元電子第一輪評分64偏低，今日升評完全由MU+19%外部利多驅動；若台積電今日現貨轉弱需警惕整體封測族群回落</p>
+</div>
+</div>
+
+<!-- ===升評第3：漢科=== -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 維持升評（第3優先）　3402 漢科 — 半導體設備工程 <span class="score">77</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>AMAT / LRCX</strong> 5/26 <span class="up">+1.0~1.5%</span>（強相關）</p>
+<p>半導體設備族群隨大盤走強，記憶體晶圓代工擴產確認（MU+19%意味擴產需求持續），設備商間接受益。</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：半導體設備族群整體方向 / 漢科量比是否延續2.25x</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：等開盤5分鐘確認量能後進場</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">140~150</span>　<span class="warn">跳空>3%不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">133.0</span>（跌破MA5失效）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">158~165</span>（維持第一輪）</p>
+<div class="rr-box">
+<p>今日 RR ≈ <span class="key-rr">1.8:1</span>　｜　建議倉位 <span class="key-pos">6~9%</span>（較第一輪5~8%小幅加倉）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：今日記憶體/封測輪動中，設備股可能稍晚啟動；若力積電/京元電子先行，漢科可作第二波布局</p>
+</div>
+</div>
+
+<!-- ===維持：國碩=== -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持　2406 國碩 — AI太陽能/綠電儲能 <span class="score">83</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>NVDA</strong> 5/26 <span class="warn">-0.22%</span>（中相關，高位正常換手）</p>
+<p>NVDA/ENPH無明確方向，但國碩的核心催化劑是COMPUTEX（6/2~6/5）與AI能源基礎設施主題，非NVDA直接映射。黃仁勳今日動土典禮為整體AI氣氛加分。</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="key-price">33.5~35.5</span>（等回測）</p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">31.0</span>（MA10失守）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">38~40</span>（前高阻力）　｜　倉位 <span class="key-pos">8~12%</span>（不變）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">1.5~2.1:1</span></p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：今日資金可能集中在記憶體族群，國碩若不跟量可暫緩進場；等COMPUTEX前夕（5/29~6/1）是更佳布局點</p>
+</div>
+</div>
+
+<!-- ===維持：高鋒=== -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持　4510 高鋒 — 工具機/機器人 <span class="score">77</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 弱相關美股，5/26無直接催化劑</p>
+<p>高鋒主催化劑為COMPUTEX機器人主題（6/2~6/5），今日跟隨大盤正向情緒。K值73.8偏高，不宜追高。</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="key-price">50.0~52.5</span>（等回測）　<span class="warn">跳空>3%絕對不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">48.0</span></p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">56~58</span>　｜　倉位 <span class="key-pos">5~7%</span>（不變）</p>
+<div class="rr-box"><p>RR ≈ <span class="key-rr">2.0:1</span></p></div>
+<p><span class="warn">今日策略</span>：若資金往記憶體輪動，高鋒可暫緩；COMPUTEX前幾天（5/29~6/1）是更佳進場窗口</p>
+</div>
+</div>
+
+<!-- ===維持（小幅縮倉）：上品=== -->
+<div class="card yellow" style="margin-bottom:10px">
+<h2>⬇️ 小幅降評　4770 上品 — 功率半導體/電動車 <span class="score" style="color:#ffcc00">70</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>ONSEMI</strong> 5/26 未有直接利多；整體功率半導體族群偏中性</p>
+<p>今日市場聚焦記憶體/AI晶片，功率半導體缺乏直接美股催化劑。上品RSI69偏高，追高風險增加。</p>
+</div>
+<div class="action-box">
+<p><span class="warn">降評原因</span>：ONSEMI無直接利多，今日資金輪動方向偏向記憶體/封測；RSI69偏高不宜追</p>
+<p><span class="buy">今日策略</span>：縮倉至3~5%，等確認回測後再補</p>
+<p><span class="stop">🛡️ 停損維持</span>：<span class="key-stop">245.0</span></p>
+<p><span class="warn">若跌破 <span class="key-stop">245</span></span>：直接清倉</p>
+<p>倉位：<span class="key-pos">3~5%</span>（較第一輪3~5%維持，不加倉）</p>
+</div>
+</div>
+
+<!-- ===黑馬：新普=== -->
+<div class="card horse" style="margin-bottom:10px">
+<h2>⭐ 黑馬更新　6121 新普 — 電池/儲能 <span class="score" style="color:#cc88ff">69</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 ENPH/STEM 5/26 無直接利多，中相關</p>
+</div>
+<p><span class="tag horse">今日策略</span>：等開盤量比突破2.0x + 收盤站上395再決定，今日非優先；資金集中在記憶體族群</p>
+<p class="warn">提醒：黑馬倉位上限 <span class="key-pos">3~5%</span>，今日若無量能突破不動</p>
+</div>
+
+<!-- ===黑馬：巨漢=== -->
+<div class="card horse" style="margin-bottom:10px">
+<h2>⭐ 黑馬更新　6903 巨漢 — 機器人 <span class="score" style="color:#cc88ff">63</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 弱相關，機器人主題需等COMPUTEX點火</p>
+</div>
+<p><span class="tag horse">今日策略</span>：今日觀察COMPUTEX機器人題材發酵程度，若相關消息出現則升評；目前暫不進場</p>
+<p class="warn">提醒：黑馬倉位上限 <span class="key-pos">0~3%</span>（今日以觀察為主）</p>
+</div>
+
+<!-- ====== 五、今日開盤執行優先順序 ====== -->
+<h2>▌五、今日開盤執行優先順序</h2>
+<div class="card action">
+<h3>⏰ 09:00 開盤前確認清單</h3>
+<p>① 台積電現貨開盤方向（若跌破2,230需提高警戒，但目前夜盤強）</p>
+<p>② 力積電/南亞科/華邦電族群是否集體跳空開高（確認MU利多映射）</p>
+<p>③ 台指期實際開盤缺口 vs 夜盤44,348（+1.09%已暗示跳空開高）</p>
+<p>④ 今日黃仁勳NVIDIA台灣動土典禮消息確認</p>
+<div class="sep"></div>
+<h3>📋 今日執行順序</h3>
+<table>
+<tr><th>順序</th><th>標的</th><th>動作</th><th>觸發條件</th><th>倉位</th></tr>
+<tr>
+  <td class="up">第1優先</td>
+  <td class="hl">6770 力積電</td>
+  <td class="buy">開盤直接進 / 跳空≤4%追</td>
+  <td class="up">MU+19%映射，外資延續大買</td>
+  <td class="up"><strong>13~18%</strong></td>
+</tr>
+<tr>
+  <td class="up">第2優先</td>
+  <td class="hl">2449 京元電子</td>
+  <td class="buy">開盤跳空≤3%直接進</td>
+  <td class="up">記憶體封測族群集體走強</td>
+  <td class="up"><strong>8~12%</strong></td>
+</tr>
+<tr>
+  <td class="warn">第3優先</td>
+  <td class="hl">3402 漢科</td>
+  <td class="warn">開盤5分鐘量確認後進</td>
+  <td>半導體設備量能延續</td>
+  <td class="warn"><strong>6~9%</strong></td>
+</tr>
+<tr>
+  <td class="warn">第4優先</td>
+  <td class="hl">2406 國碩</td>
+  <td class="warn">等回測33.5~35.5</td>
+  <td>黃仁勳動土+COMPUTEX前哨</td>
+  <td class="warn"><strong>8~12%</strong></td>
+</tr>
+<tr>
+  <td>第5優先</td>
+  <td>4510 高鋒</td>
+  <td>等回測50~52.5</td>
+  <td>機器人族群量能確認</td>
+  <td>5~7%</td>
+</tr>
+<tr>
+  <td>觀察</td>
+  <td>4770 上品</td>
+  <td class="warn">縮倉等回測</td>
+  <td>ONSEMI回升再補倉</td>
+  <td class="warn">3~5%</td>
+</tr>
+<tr>
+  <td>今日暫緩</td>
+  <td>6903 巨漢</td>
+  <td class="stop">純觀察</td>
+  <td>COMPUTEX機器人題材需等點火</td>
+  <td class="dn">0~3%</td>
+</tr>
+<tr>
+  <td>今日暫緩</td>
+  <td>6121 新普</td>
+  <td class="stop">等量突破</td>
+  <td>量比>2.0x再考慮</td>
+  <td>3~5%</td>
+</tr>
+</table>
+</div>
+
+<!-- ====== 六、催化劑日曆更新 ====== -->
+<h2>▌六、催化劑日曆（含美盤新消息更新）</h2>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響產業/標的</th><th>較昨日變化</th><th>方向</th></tr>
+<tr>
+  <td class="up" style="font-weight:bold">5/27（今日）</td>
+  <td>🔴 黃仁勳 NVIDIA台灣總部動土典禮</td>
+  <td>AI整體、國碩、力積電</td>
+  <td class="up">確認</td>
+  <td class="up">利多加溫</td>
+</tr>
+<tr>
+  <td class="up" style="font-weight:bold">5/26（已發生）</td>
+  <td>🔥 MU突破$1兆市值 UBS目標$1,625</td>
+  <td>力積電、京元電子、南亞科、華邦電</td>
+  <td class="up">新增重磅利多</td>
+  <td class="up">直接強烈利多</td>
+</tr>
+<tr>
+  <td class="up" style="font-weight:bold">5/26（已發生）</td>
+  <td>🔥 QCOM歷史新高（ByteDance AI晶片大單）</td>
+  <td>AI晶片設計族群情緒</td>
+  <td class="up">新增確認</td>
+  <td class="up">AI需求持續旺盛信號</td>
+</tr>
+<tr>
+  <td class="warn">6/1（週一）</td>
+  <td>🔴 黃仁勳 GTC Taipei 主題演講（11:00台北流行音樂中心）</td>
+  <td>全台AI/HBM/CoWoS族群</td>
+  <td class="up">確認，超級催化劑</td>
+  <td class="up">最大利多</td>
+</tr>
+<tr>
+  <td class="warn">6/2~6/5</td>
+  <td>🔴 COMPUTEX 2026（黃仁勳+蘇姿丰+Marvell同台）</td>
+  <td>所有候選標的、機器人族群</td>
+  <td class="up">確認</td>
+  <td class="up">持續多日催化劑</td>
+</tr>
+<tr>
+  <td>5/27（今晚）</td>
+  <td>Marvell Technology（MRVL）財報（盤後）</td>
+  <td>漢科、AI晶片封測</td>
+  <td class="up">新增關注</td>
+  <td class="warn">若優於預期→設備族群再加分</td>
+</tr>
+</table>
+
+<!-- ====== 七、最終結論 ====== -->
+<h2>▌七、早盤交易員最終結論</h2>
+<div class="card blue">
+<p><strong>今日Regime</strong>：<span class="up" style="font-size:16px">A Risk-On（升溫）</span>　較第一輪維持並升溫（MU+19%超催化劑確認）</p>
+<div class="sep"></div>
+<p><strong>🥇 第1優先</strong>：<span class="up" style="font-size:15px;font-weight:bold">6770 力積電</span>。MU+19%超預期暴漲，記憶體牛市確認，外資5/26大買5.9萬張可能延續。進場 <span class="key-price">68~74</span>，跳空≤4%追，倉位 <span class="key-pos">13~18%</span>。</p>
+<p><strong>🥈 第2優先</strong>：<span class="up" style="font-size:15px;font-weight:bold">2449 京元電子</span>。封測族群直接受益MU+19%，第一輪評分低被低估，今日升評。進場 <span class="key-price">330~355</span>，倉位 <span class="key-pos">8~12%</span>。</p>
+<p><strong>🥉 第3優先</strong>：<span class="up">3402 漢科</span>。設備族群跟進，AMAT/LRCX+1%支持。進場 <span class="key-price">140~150</span>，倉位 <span class="key-pos">6~9%</span>。</p>
+<p><strong>第4優先</strong>：<span class="warn">2406 國碩</span>。黃仁勳今日動土典禮AI氣氛加溫，等回測33.5~35.5進，倉位 <span class="key-pos">8~12%</span>。</p>
+<p><strong>暫緩</strong>：<span class="warn">4510 高鋒 / 4770 上品</span>。今日資金輪動偏向記憶體；高鋒K值73.8偏高等回測；上品縮倉等ONSEMI回升。</p>
+<p><strong>⭐ 黑馬觀察</strong>：<span style="color:#cc88ff">6903 巨漢</span> 今日觀察COMPUTEX機器人熱度，暫不進場。</p>
+<div class="sep"></div>
+<p><strong>⚠️ 系統性停損</strong>：費半今日≈+3.5~4%，距-2%停損線遙遠，今日正常操作。若台積電開盤跌破2,230需提高警戒。</p>
+<p><strong>🚨 今日最大風險</strong>：MU+19%後台股記憶體族群可能出現「一日游」現象——開盤追高→午後換手。建議力積電/京元電子若開盤衝過目標的70%，先出場一半鎖利，剩半留到明日COMPUTEX前。</p>
+<p><strong>💡 今晚關注</strong>：Marvell(MRVL)財報盤後公布，若優於預期→明日漢科/設備族群再加分；COMPUTEX倒數5天，本週記憶體+AI設備是主軸。</p>
+<p><strong>產業輪動觀察</strong>：5/26美股最強為記憶體(MU+19%)，第二強為AI晶片(QCOM+5.7%、AMD+4.9%)，台股對應今日關注記憶體族群（力積電、南亞科、華邦電）及封測（京元電子）。</p>
+</div>
+
+<p style="color:#555;font-size:12px;margin-top:14px;text-align:right">
+第二輪早盤版：Claude自動搜尋美盤數據，比對產業相關性，修正第一輪評級。不構成投資建議，投資有風險。
+｜ 20260526_2_claude.html　AIreport v2.2 Round2（執行於20260527早盤）
+</p>
+</body>
+</html>
