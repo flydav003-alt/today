@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股早盤操作指令（第二輪）｜ 20260528</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Times New Roman','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px;max-width:1200px;margin:0 auto}
+h1{font-size:20px;color:#00e5ff;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:0.5px}
+h2{font-size:16px;color:#ffcc00;margin:12px 0 8px;border-left:3px solid #ffcc00;padding-left:8px}
+h3{font-size:14px;color:#aaa;margin:8px 0 5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:4px;padding:10px}
+.card.green{border-left:3px solid #ff4444}
+.card.yellow{border-left:3px solid #ffcc00}
+.card.red{border-left:3px solid #00cc66}
+.card.blue{border-left:3px solid #4488ff}
+.card.orange{border-left:3px solid #ff8800}
+.card.horse{border-left:3px solid #cc88ff;background:#1a1520}
+.card.riskoff{border:2px solid #00cc66;background:#0a1a0a}
+.card.action{border:2px solid #ffcc00;background:#1a1500}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px}
+.tag.a{background:#440000;color:#ff4444}
+.tag.up{background:#440000;color:#ff4444}
+.tag.hold{background:#333;color:#aaa}
+.tag.dn{background:#003300;color:#00cc66}
+.tag.cancel{background:#222;color:#555}
+.tag.wait{background:#2a2000;color:#ffcc00}
+.tag.horse{background:#2a1540;color:#cc88ff}
+.score{float:right;font-size:22px;font-weight:bold;color:#00e5ff}
+.regime{background:#1a0a0a;border:2px solid #ff4444;border-radius:4px;padding:12px;margin-bottom:12px}
+.regime.on{border-color:#ff4444;background:#1a0505}
+.regime.neutral{border-color:#ffcc00;background:#1a1500}
+.regime.off{border-color:#00cc66;background:#0a1a0a}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.6;font-size:14px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:14px;line-height:1.6}
+.big{font-size:20px;font-weight:bold}
+.pool-tag{display:inline-block;background:#1a1a2e;color:#4488ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #4488ff}
+.horse-tag{display:inline-block;background:#2a1540;color:#cc88ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #cc88ff}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:3px;padding:8px;margin-top:6px}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:3px;padding:10px;margin-top:8px}
+.us-box{background:#0d0d1a;border:1px solid #4488ff;border-radius:3px;padding:8px;margin:5px 0}
+.geopolitical-box{background:#1a0a0a;border:2px solid #ff4444;border-radius:4px;padding:10px;margin:10px 0}
+.key-price{font-size:20px;font-weight:bold;color:#ff4444}
+.key-stop{font-size:20px;font-weight:bold;color:#00cc66}
+.key-target{font-size:20px;font-weight:bold;color:#ffcc00}
+.key-rr{font-size:22px;font-weight:bold;color:#00e5ff}
+.key-pos{font-size:20px;font-weight:bold;color:#ff8800}
+.warn-banner{background:#2a1500;border:2px solid #ff8800;border-radius:6px;padding:10px;margin-bottom:12px;text-align:center;font-size:14px}
+.section-title{font-size:16px;color:#ffcc00;margin:16px 0 8px;border-left:4px solid #ffcc00;padding-left:8px;font-weight:bold}
+</style>
+</head>
+<body>
+
+<h1>⚡ 台股早盤操作指令（第二輪）｜ 20260528</h1>
+<p style="color:#555;font-size:12px;margin-bottom:8px">
+檔名：20260528_2_claude.html　｜　執行於：20260529 早盤
+｜　輸入：第一輪交接清單　｜　Claude自動搜尋美盤數據　｜　AIreport v2.2 Round2
+</p>
+
+<!-- 重大地緣政治警示 -->
+<div class="warn-banner">
+⚠️ <span class="warn" style="font-weight:bold">地緣政治警示｜美伊談判出現新進展：</span>
+美媒獨家披露美伊協議草案（停火60天換解除封鎖），伊朗方面尚未確認。
+油價震盪，市場情緒偏正面但不確定性仍高。<br>
+✅ <span style="color:#ff4444;font-weight:bold">台股28日已翻揚逾650點創新高</span>，台指期夜盤站上45,000點——此為早盤最重要背景。
+</div>
+
+<!-- ====== 零、美盤掃描結果 ====== -->
+<div class="section-title">▌零、美盤掃描結果（Claude自動搜尋完成）</div>
+<div class="grid3">
+<div class="card blue">
+<h3>🇺🇸 關鍵指數（5/27-28 美盤）</h3>
+<p>費半 SOX：<span class="dn big">-1.36%</span>　收12,702</p>
+<p>那斯達克：<span class="up">+0.07%</span>　收26,675（創歷史高）</p>
+<p>台積電 ADR：<span class="up">+2.52%</span>　收422.73美元（創歷史高）</p>
+<p>台指期夜盤：<span class="up">站上45,000點</span>（+約1,400點）</p>
+<p style="color:#555;font-size:12px">⚠️ SOX費半-1.36%，距停損線剩0.64%，高度警戒狀態持續</p>
+</div>
+<div class="card">
+<h3>🔥 美股產業強弱（5/28 美盤）</h3>
+<p class="up">強勢：META +3.74% | 台積電ADR +2.52%</p>
+<p class="up">強勢：MU美光 大漲（5/27盤前+7.82%，多行升目標價至1,150~1,625）</p>
+<p class="dn">弱勢：ARM -5.76% | Marvell -4.59% | KLA -2.69%</p>
+<p class="dn">弱勢：NVDA -1.05%（收212.60）| AMD -1.66% | ASML -2.09%</p>
+<p class="warn">特殊：DELL +16.16% | HPQ +14.05% 伺服器/PC強勢輪動</p>
+</div>
+<div class="card">
+<h3>📰 隔夜重大消息</h3>
+<p class="up">✅ 美伊協議草案曝光（停火60天）→ 油價急挫，通膨預期下降</p>
+<p class="up">✅ MU美光：多家大行上調目標價至1,150~1,625美元</p>
+<p class="up">✅ 台積電ADR創歷史高422.73；COMPUTEX 6/1-5進入倒數</p>
+<p class="warn">⚠️ 半導體內部分歧：設計/IP股跌（ARM/Marvell），記憶體（MU）強</p>
+<p class="warn">⚠️ NVDA -1.05%：AI情緒高漲但資金轉往其他方向布局</p>
+</div>
+</div>
+
+<!-- 候選標的對應美股表現 -->
+<div class="section-title">▌一、候選標的 × 美股對應表現</div>
+<table>
+<tr>
+  <th>台股標的</th><th>產業</th><th>對應美股指標</th>
+  <th>美股昨夜表現</th><th>相關強度</th><th>初步方向</th>
+</tr>
+<tr>
+  <td class="hl">6531 愛普*</td>
+  <td>記憶體IC設計 / AI HPC</td>
+  <td>NVDA / MU / AVGO</td>
+  <td><span class="warn">NVDA -1.05% | <span class="up">MU大漲+升目標價</span> | AVGO中性</span></td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="warn">↔ 混合：MU強力撐腰，NVDA小回，整體偏正</td>
+</tr>
+<tr>
+  <td class="hl">6143 振曜</td>
+  <td>AI通路 / COMPUTEX受益</td>
+  <td>NVDA / AVGO</td>
+  <td class="warn">NVDA -1.05% | AVGO中性</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性（COMPUTEX題材自身驅動，非美股直連）</td>
+</tr>
+<tr>
+  <td class="hl">3551 世禾</td>
+  <td>半導體設備</td>
+  <td>AMAT / LRCX</td>
+  <td class="dn">AMAT / LRCX 隨SOX回落，SOX -1.36%</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="dn">↓ 偏弱（設備股跟隨SOX，不利情境三）</td>
+</tr>
+<tr>
+  <td class="hl">2329 華泰</td>
+  <td>記憶體 / 被動</td>
+  <td>MU（美光）</td>
+  <td class="up">MU大漲（5/27盤前+7.82%，大行升目標價）</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑ 正面（MU動能極強，記憶體族群受益）</td>
+</tr>
+<tr>
+  <td class="hl">6244 茂迪</td>
+  <td>太陽能</td>
+  <td>XLK（能源科技）</td>
+  <td class="warn">XLK中性；油價急挫對能源科技影響中性</td>
+  <td><span class="tag hold">弱相關</span></td>
+  <td class="warn">→ 中性（主要看台股自身，油價跌反而中性）</td>
+</tr>
+</table>
+
+<!-- ====== 二、Regime修正 ====== -->
+<div class="section-title">▌二、今日台股開盤 Regime → <span class="up big">⬆️ B中性升級為 A Risk-On</span></div>
+<div class="regime on">
+<div class="grid3">
+<div>
+<h3>與第一輪比較</h3>
+<p>第一輪判斷：<span class="warn">B中性偏C</span>（受美伊戰事拖累）</p>
+<p>今日修正：<span class="up">⬆️ 大幅升級 → A Risk-On</span></p>
+<p>修正原因：台積電ADR +2.52%創歷史高、台指期夜盤+1,400點站上45,000、美伊協議草案曝光令地緣風險大幅降溫</p>
+</div>
+<div>
+<h3>系統性風險檢查</h3>
+<p>費半：<span class="warn">-1.36%</span>（距停損線0.64%，仍高度警戒）</p>
+<p>台積電ADR：<span class="up">+2.52%（歷史高）</span>✅ 多頭核心</p>
+<p>台指期夜盤：<span class="up">+1,400點（約+3.2%）</span>強力背書</p>
+<p>VIX：<span class="up">地緣降溫，VIX預期回落</span></p>
+</div>
+<div>
+<h3>今日整體操作基調</h3>
+<p><span class="up" style="font-size:15px;font-weight:bold">積極出擊（上行偏差大）</span></p>
+<p class="warn">⚠️ 最大風險：SOX費半僅-1.36%，若今夜續跌破-2%，下次開盤轉Risk-Off</p>
+<p class="warn">⚠️ 台股開盤會有大缺口，追高需謹慎執行跳空限制</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 三、逐檔評級修正總覽 ====== -->
+<div class="section-title">▌三、逐檔評級修正總覽</div>
+<table>
+<tr>
+  <th>標的</th><th>第一輪</th><th>美盤依據</th>
+  <th>今日評級</th><th>今日倉位</th><th>開盤策略摘要</th>
+</tr>
+<tr>
+  <td class="hl">6531 愛普*</td>
+  <td>主力候選 + C爆量確認</td>
+  <td><span class="warn">MU大漲+升目標 ✅ | NVDA -1.05% ⚠️</span></td>
+  <td><span class="tag up">⬆️ 升評（有條件）</span></td>
+  <td class="up">10~15%（升評後進情境一）</td>
+  <td>等開盤15分鐘確認情境一（量縮守1,050）→ 積極進場</td>
+</tr>
+<tr>
+  <td class="hl">6143 振曜</td>
+  <td>主力候選</td>
+  <td class="warn">COMPUTEX題材自身驅動，美股中性</td>
+  <td><span class="tag up">⬆️ 升評（Regime升級帶動）</span></td>
+  <td class="up">8~10%（較第一輪加倉）</td>
+  <td>台指期大幅跳高，振曜跳空開高概率大，等回測99~102再進</td>
+</tr>
+<tr>
+  <td class="hl">3551 世禾（黑馬）</td>
+  <td>黑馬候選 + C爆量確認</td>
+  <td class="dn">AMAT/LRCX隨SOX回落 -1.36%，設備股偏弱</td>
+  <td><span class="tag dn">⬇️ 降評（設備股逆風）</span></td>
+  <td class="warn">3%（縮至最低倉位）</td>
+  <td>情境三（量大回吐）機率升高，今日警戒觀察，不主動追</td>
+</tr>
+<tr>
+  <td class="hl">2329 華泰（黑馬）</td>
+  <td>黑馬候選</td>
+  <td class="up">MU大漲+多行升目標價，記憶體族群強勢</td>
+  <td><span class="tag up">⬆️ 升評為正式候選</span></td>
+  <td class="up">5~8%（從黑馬升為小主力）</td>
+  <td>記憶體族群今日開盤應強勢，等回測57.5~60買入</td>
+</tr>
+<tr>
+  <td class="hl">6244 茂迪（黑馬）</td>
+  <td>黑馬候選</td>
+  <td class="warn">XLK中性，太陽能自身驅動</td>
+  <td><span class="tag hold">➡️ 維持（最小倉）</span></td>
+  <td class="warn">最多3%</td>
+  <td>RR偏低1.7:1，今日大盤跳高估計帶動，但維持最小倉觀察</td>
+</tr>
+</table>
+
+<!-- ====== 四、逐檔開盤操作指令（核心） ====== -->
+<div class="section-title">▌四、逐檔開盤操作指令（詳細）</div>
+
+<!-- 愛普 升評（有條件） -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評（有條件）　6531 愛普* — 記憶體IC設計 / AI HPC矽智財 <span class="score">81→85（情境一成立後）</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>MU美光</strong> 5/27盤前 <span class="up">+7.82%（937美元）</span>，多行上調目標價至1,150~1,625（強相關記憶體鏈）</p>
+<p>🇺🇸 <strong>NVDA</strong> 5/28收 <span class="dn">-1.05%（212.60）</span>｜台積電ADR <span class="up">+2.52%（422.73，歷史高）</span></p>
+<p>綜合判斷：MU強力帶動記憶體/HPC題材，台積電ADR創高背書整體台股。NVDA小幅回落不影響愛普記憶體IC設計邏輯。</p>
+<p>📌 台指期夜盤站上45,000（+約1,400點）→ <span class="up">台股今日應大幅高開，愛普跳空概率極高</span></p>
+</div>
+
+<div class="geopolitical-box">
+<p>🚨 <strong>地緣政治更新（關鍵）</strong>：美伊協議草案曝光（停火60天換解除封鎖），台股昨日（28日）盤中已翻揚+650點消化這一消息。今日開盤是在消化後的基礎上再出發，不是第一次反應。</p>
+<p>實質影響：地緣風險<span class="up">大幅降溫</span>，有利台股整體Risk-On情緒。</p>
+</div>
+
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：</p>
+<ul>
+<li>台積電開盤方向（昨日2,350新天價，今日應續強）</li>
+<li>愛普開盤量能是否縮量（相對昨日爆量日）</li>
+<li>台指期實際開盤點數 vs 45,000預估</li>
+</ul>
+<div class="sep"></div>
+<table>
+<tr><th>情境</th><th>開盤表現</th><th>操作</th><th>進場區</th><th>倉位</th></tr>
+<tr>
+  <td class="up" style="font-weight:bold">✅ 情境一（最佳）</td>
+  <td>量縮（&lt;昨日50%）+ 收紅 + 守1,050以上</td>
+  <td class="buy">🥇 A級升評進場</td>
+  <td class="up"><strong>1,050~1,080</strong></td>
+  <td class="up"><strong>10~15%</strong></td>
+</tr>
+<tr>
+  <td class="warn" style="font-weight:bold">✅ 情境二</td>
+  <td>量延續 + 跳空開高 + 守住不回測</td>
+  <td class="warn">小倉追（跳空上限5%）</td>
+  <td class="warn">跳空&lt;5%（上限1,150）</td>
+  <td class="warn"><strong>5~8%</strong></td>
+</tr>
+<tr>
+  <td class="dn" style="font-weight:bold">❌ 情境三</td>
+  <td>大量開高走低 / 爆量長上影</td>
+  <td class="stop">直接放棄</td>
+  <td>—</td>
+  <td class="dn">0%</td>
+</tr>
+</table>
+<div class="sep"></div>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">1,020</span>（維持第一輪設定，收盤跌破則失效）</p>
+<div class="rr-box">
+<p>今日 RR ≈ <span class="key-rr">2.7:1</span>　｜　建議倉位 <span class="key-pos">10~15%</span>（情境一成立後升倉）</p>
+<p>目標：<span class="key-target">1,180~1,200</span>（前高阻力法）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：今日台股應大幅高開，愛普若已跳空超過5%（開盤在1,150以上）→ 嚴格執行不追，等回測。COMPUTEX 6/1黃仁勳演講是最重要硬時間點催化劑。</p>
+</div>
+<p class="up" style="margin-top:8px">📈 今日升評核心：台積電ADR創歷史高 + MU大漲 + 台指期夜盤+1,400點 + COMPUTEX倒數3天</p>
+<p class="dn">📉 降評/停損觸發：愛普開盤破1,020 / 大盤期指快速翻黑 / 美伊協議破裂</p>
+<p style="color:#4488ff;font-size:12px">🔗 COMPUTEX 6/1 黃仁勳演講為最大催化劑，提前布局窗口已非常窄</p>
+</div>
+
+<!-- 振曜 升評 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評　6143 振曜 — AI通路 / COMPUTEX展前行情 <span class="score">74→78</span></h2>
+<div class="us-box">
+<p>🇺🇸 COMPUTEX題材主要由台股自身驅動，美股對應指標（NVDA/AVGO）整體中性偏弱</p>
+<p>📌 <span class="up">Regime整體升級（台指期+1,400點）</span> → 全體標的水漲船高，振曜跟隨升評</p>
+<p>📌 振曜昨日（28日）在大跌日守強（量比1.92x），顯示資金主動進駐</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：台指期開盤位置；振曜是否跳空超過進場上限</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：優先等回測，不在開盤直接追</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">99~102</span>　<span class="warn">跳空開高超過106（+4.4%）不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">96</span>（維持第一輪，跌破整理區失效）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">110~112</span>（前高）</p>
+<div class="rr-box">
+<p>今日 RR ≈ <span class="key-rr">2.3:1</span>　｜　建議倉位 <span class="key-pos">8~10%</span>（較第一輪加倉2%）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：振曜屬COMPUTEX純題材股，6/1演講前保持頭寸，演講後注意題材消化風險（利多出盡）。持有天數建議到6/1前，最長6/3。</p>
+</div>
+<p class="up">📈 升評條件已成立：台指期大幅跳高 + 大盤Regime升為Risk-On</p>
+<p class="dn">📉 降評條件：開盤破96 / NVDA突破性走弱（單日跌超3%）</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：NVDA（COMPUTEX主催化劑）</p>
+</div>
+
+<!-- 華泰 升評為主力 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>⬆️ 升評（黑馬→正式候選）　2329 華泰 — 記憶體 / MU概念 <span class="score">67→75</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>MU美光</strong> 5/27盤前 <span class="up">+7.82%（937美元）</span>，多家大行調升目標價至1,150~1,625美元</p>
+<p>🇺🇸 <strong>記憶體族群</strong>：瑞銀稱美光市值突破1兆美元，AI需求推動去週期化，強相關</p>
+<p>判斷：MU強力上攻 = 台灣記憶體概念股（南亞科/華泰/威剛）今日應全線走強</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：南亞科（2408）開盤方向（記憶體族群領頭羊），確認族群是否同步走強</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：等開盤10分鐘後回測確認，不在開盤衝板追</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">57.5~60</span>　<span class="warn">跳空超過63（+5%）不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">56</span>（MU走弱或破此失效）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">64~66</span>（前高阻力）</p>
+<div class="rr-box">
+<p>今日 RR ≈ <span class="key-rr">2.6:1</span>　｜　建議倉位 <span class="key-pos">5~8%</span>（從黑馬3~5%升為正式5~8%）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：華泰市值偏小，跟隨南亞科觀察族群共振。MU後續財報（7/16）為中期催化劑。</p>
+</div>
+<p class="up">📈 升評核心：MU大漲+多行調升目標，記憶體族群基本面確認改善</p>
+<p class="dn">📉 降評條件：MU回跌（如科技股整體Risk-Off）/ 破56</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：MU Micron（強相關）</p>
+</div>
+
+<!-- 世禾 降評 -->
+<div class="card yellow" style="margin-bottom:10px">
+<h2>⬇️ 降評　3551 世禾 — 半導體設備（黑馬保留觀察）<span class="score" style="color:#ffcc00">66→62</span></h2>
+<div class="us-box">
+<p>🇺🇸 SOX費半 <span class="dn">-1.36%</span>（距停損線僅0.64%），半導體設備股 AMAT / LRCX 跟隨費半下跌</p>
+<p>設備股強相關：SOX走弱 = 設備鏈（辛耘/弘塑/世禾）承壓，今日爆量後情境三機率上升</p>
+</div>
+<div class="action-box">
+<p><span class="warn">降評原因</span>：設備股對SOX強相關，SOX-1.36%顯示設備投資情緒短暫冷卻。世禾昨日爆量2.78x，隔日需觀察是否能量縮守穩，但設備族群逆風增加風險。</p>
+<p><span class="buy">今日策略</span>：縮倉至3%（黑馬最低倉），不主動追，只有情境一（量縮守210）才進，且倉位不超過3%</p>
+<p><span class="stop">🛡️ 停損收緊至</span>：<span class="key-stop">206</span>（比第一輪203更嚴格）</p>
+<p><span class="warn">若開盤量大回吐 / 跌破210</span>：直接放棄，確認情境三出貨</p>
+<p>倉位：<span class="key-pos">3%</span>（較第一輪縮至最低）</p>
+</div>
+<table>
+<tr><th>情境</th><th>開盤表現</th><th>操作</th><th>倉位</th></tr>
+<tr>
+  <td class="up">✅ 情境一</td>
+  <td>量縮守210以上 + 收紅</td>
+  <td class="warn">黑馬小倉進場</td>
+  <td class="warn"><strong>3%</strong></td>
+</tr>
+<tr>
+  <td class="warn">⚠️ 情境二</td>
+  <td>量延續上攻</td>
+  <td class="warn">觀察，不主動追</td>
+  <td class="warn">最多3%</td>
+</tr>
+<tr>
+  <td class="dn">❌ 情境三</td>
+  <td>量大回吐 / 開高走低</td>
+  <td class="stop">直接放棄</td>
+  <td class="dn">0%</td>
+</tr>
+</table>
+<p class="up">📈 升評回正條件：SOX費半今夜止跌回升 + 世禾量縮守穩</p>
+<p class="dn">📉 確認放棄：SOX跌破-2% / 世禾開盤破210</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股：AMAT / LRCX（強相關，目前逆風）</p>
+</div>
+
+<!-- 茂迪 維持 -->
+<div class="card" style="border-left:3px solid #555;margin-bottom:10px">
+<h2>➡️ 維持（最小倉）　6244 茂迪 — 太陽能<span class="score" style="color:#555">70</span></h2>
+<div class="us-box">
+<p>🇺🇸 XLK中性，太陽能主要看台股自身題材（RR偏低1.7:1未達標準）</p>
+<p>油價急挫因美伊協議進展 → 對太陽能中長期需求影響中性</p>
+</div>
+<div class="action-box">
+<p>今日策略：維持最小倉3%，觀察大盤帶動。RR 1.7:1偏低，不主動加倉。</p>
+<p><span class="stop">🛡️ 停損</span>：<span class="key-stop">28.5</span>（維持）　｜　目標：<span class="key-target">32.5</span></p>
+<p>倉位：<span class="key-pos">最多3%</span></p>
+</div>
+</div>
+
+<!-- ====== 五、今日開盤執行優先順序 ====== -->
+<div class="section-title">▌五、今日開盤執行優先順序</div>
+<div class="card action">
+<h3>⏰ 09:00 開盤前確認清單</h3>
+<p>① <strong>台積電開盤價</strong>（昨日2,350元新天價，今日是否開更高 → 決定大盤基調）</p>
+<p>② <strong>台指期實際開盤位置</strong>（夜盤站上45,000，確認跳空幅度）</p>
+<p>③ <strong>愛普（6531）開盤量能</strong>（量縮=情境一，量延續=情境二，大量長影=情境三）</p>
+<p>④ <strong>南亞科（2408）開盤方向</strong>（確認記憶體族群共振，對華泰有指引作用）</p>
+<div class="sep"></div>
+<h3>📋 今日執行順序</h3>
+<table>
+<tr><th>順序</th><th>標的</th><th>動作</th><th>觸發條件</th><th>倉位</th></tr>
+<tr>
+  <td class="up">第1優先</td>
+  <td class="hl">6531 愛普*</td>
+  <td class="buy">情境一：積極進場</td>
+  <td>量縮守1,050，開盤15分鐘後確認</td>
+  <td class="up"><strong>10~15%</strong></td>
+</tr>
+<tr>
+  <td class="up">第2優先</td>
+  <td class="hl">6143 振曜</td>
+  <td class="buy">等回測99~102進場</td>
+  <td>不在開盤高點直接追，等回測</td>
+  <td class="up"><strong>8~10%</strong></td>
+</tr>
+<tr>
+  <td class="warn">第3優先</td>
+  <td class="hl">2329 華泰（升評）</td>
+  <td class="warn">南亞科同步走強後進</td>
+  <td>族群共振確認 + 回測57.5~60</td>
+  <td class="warn"><strong>5~8%</strong></td>
+</tr>
+<tr>
+  <td>第4（觀察）</td>
+  <td>3551 世禾</td>
+  <td class="stop">情境一才進，否則觀察</td>
+  <td>量縮守210（降評，設備股逆風）</td>
+  <td class="warn"><strong>最多3%</strong></td>
+</tr>
+<tr>
+  <td>第5（最低）</td>
+  <td>6244 茂迪</td>
+  <td class="stop">維持最小倉觀察</td>
+  <td>RR偏低，大盤強帶動才參與</td>
+  <td class="dn"><strong>最多3%</strong></td>
+</tr>
+</table>
+<div class="sep"></div>
+<p class="warn">⚠️ <strong>跳空追價紀律</strong>：今日台股應大幅高開（台指期+1,400點），各標的均可能跳空超過限制。嚴格執行「超過跳空限制不追」：愛普>5%（1,150）、振曜>5%（106）、華泰>5%（63）均不追。等回測。</p>
+</div>
+
+<!-- ====== 六、催化劑日曆更新 ====== -->
+<div class="section-title">▌六、催化劑日曆（含美盤新消息更新）</div>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響產業/標的</th><th>較昨日變化</th><th>方向</th></tr>
+<tr>
+  <td class="warn">5/29 今日</td>
+  <td>🔴 台股開盤（台指期+1,400點）</td>
+  <td>全體標的</td>
+  <td class="up">新增：台積電ADR歷史高 + 台指期大幅跳高</td>
+  <td class="up">大幅利多</td>
+</tr>
+<tr>
+  <td class="warn">6/1（週一）</td>
+  <td>🔴 NVIDIA 黃仁勳 COMPUTEX 主題演講</td>
+  <td>愛普 / 振曜 / COMPUTEX全族群</td>
+  <td class="up">確認（倒數3天）</td>
+  <td class="up">最重要硬時間點催化劑</td>
+</tr>
+<tr>
+  <td class="warn">6/2-5</td>
+  <td>🔴 COMPUTEX 2026 正式開幕</td>
+  <td>AI供應鏈全族群</td>
+  <td class="up">確認</td>
+  <td class="up">利多持續</td>
+</tr>
+<tr>
+  <td class="warn">持續進行</td>
+  <td>⚠️ 美伊協議談判（停火60天草案）</td>
+  <td>全體（地緣政治風險溢價）</td>
+  <td class="up">新增：協議草案曝光，不確定性降低</td>
+  <td class="warn">正面但仍需觀察確認</td>
+</tr>
+<tr>
+  <td>7/16</td>
+  <td>🟡 台積電法說會</td>
+  <td>愛普 / 記憶體族群</td>
+  <td>維持（確認日期）</td>
+  <td class="warn">中長期觀察</td>
+</tr>
+</table>
+
+<!-- ====== 七、最終結論 ====== -->
+<div class="section-title">▌七、早盤交易員最終結論</div>
+<div class="card blue">
+<p><strong>今日Regime</strong>：<span class="up">A Risk-On</span>　較第一輪 <span class="up">大幅升級（B中性偏C → A Risk-On）</span></p>
+<div class="sep"></div>
+<p><strong>升級核心理由三件事</strong>：</p>
+<ul>
+<li>台積電ADR +2.52%創歷史高422.73（最重要單一指標）</li>
+<li>台指期夜盤站上45,000點（+約1,400點/+3.2%），台股今日大幅高開確定</li>
+<li>美伊協議草案曝光，地緣政治溢價急劇下降，油價急挫，通膨預期降溫</li>
+</ul>
+<div class="sep"></div>
+<p><strong>🥇 第1優先</strong>：<span class="up">6531 愛普*</span>。昨日漲停+台積電ADR歷史高+MU大漲+COMPUTEX倒數3天，是今日最佳COMPUTEX前哨戰。情境一（量縮守1,050）進場 <span class="key-price">1,050~1,080</span>，停損 <span class="key-stop">1,020</span>，目標 <span class="key-target">1,180~1,200</span>。倉位 <strong>10~15%</strong>。</p>
+<p><strong>🥈 第2優先</strong>：<span class="up">6143 振曜</span>。Regime升級帶動，大跌日守強已確認籌碼。等回測 <span class="key-price">99~102</span>，不在高點追。倉位 <strong>8~10%</strong>。</p>
+<p><strong>🥉 第3優先（升評黑馬）</strong>：<span class="up">2329 華泰</span>。MU大漲將帶動記憶體族群，從黑馬升為正式候選。等族群共振確認 + 回測 <span class="key-price">57.5~60</span>。倉位 <strong>5~8%</strong>。</p>
+<p><strong>⬇️ 降評觀察</strong>：<span class="warn">3551 世禾</span>。設備股跟隨SOX逆風，降至3%最小倉，只有情境一才進。</p>
+<div class="sep"></div>
+<p><strong>⚠️ 最大風險</strong>：今日大幅高開後，若出現「開高走低」，愛普和振曜應嚴格執行停損。費半SOX距離-2%停損線僅0.64%，若今夜費半補跌，明日開盤轉Risk-Off。</p>
+<p><strong>⚡ 跳空紀律</strong>：各標的均可能超過跳空上限（愛普>1,150 / 振曜>106 / 華泰>63）→ 嚴格執行不追，等回測。</p>
+<p><strong>系統停損線狀態</strong>：費半昨夜 -1.36%，距停損線剩0.64%，高度警戒。今日台積電ADR強勢暫時覆蓋此風險，但仍需監控費半動向。若費半今夜再跌破-2%，全面切Risk-Off。</p>
+<p><strong>產業輪動觀察</strong>：美股昨夜最強為記憶體（MU）和個人電腦伺服器（DELL +16%/HPQ +14%），台股對應族群今日關注：記憶體族群（南亞科/華泰）和AI伺服器鏈（廣達/緯穎）。COMPUTEX催化劑在即，題材股操作視野控制在6/1前。</p>
+</div>
+
+<p style="color:#555;font-size:12px;margin-top:14px;text-align:right">
+第二輪早盤版：Claude自動搜尋美盤數據，比對產業相關性，修正第一輪評級。不構成投資建議，投資有風險，請自行判斷並設置停損。
+｜ 20260528_2_claude.html　AIreport v2.2 Round2（執行於20260529早盤）
+</p>
+</body>
+</html>
