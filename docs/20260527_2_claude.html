@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股早盤操作指令（第二輪）｜ 20260527</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Times New Roman','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px}
+h1{font-size:20px;color:#00e5ff;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:0.5px}
+h2{font-size:16px;color:#ffcc00;margin:12px 0 8px;border-left:3px solid #ffcc00;padding-left:8px}
+h3{font-size:14px;color:#aaa;margin:8px 0 5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:4px;padding:10px}
+.card.green{border-left:3px solid #ff4444}
+.card.yellow{border-left:3px solid #ffcc00}
+.card.red{border-left:3px solid #00cc66}
+.card.blue{border-left:3px solid #4488ff}
+.card.orange{border-left:3px solid #ff8800}
+.card.horse{border-left:3px solid #cc88ff;background:#1a1520}
+.card.riskoff{border:2px solid #00cc66;background:#0a1a0a}
+.card.action{border:2px solid #ffcc00;background:#1a1500}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px}
+.tag.a{background:#440000;color:#ff4444}
+.tag.up{background:#440000;color:#ff4444}
+.tag.hold{background:#333;color:#aaa}
+.tag.dn{background:#003300;color:#00cc66}
+.tag.cancel{background:#222;color:#555}
+.tag.wait{background:#2a2000;color:#ffcc00}
+.tag.horse{background:#2a1540;color:#cc88ff}
+.score{float:right;font-size:22px;font-weight:bold;color:#00e5ff}
+.regime{background:#1a0a0a;border:2px solid #ff4444;border-radius:4px;padding:12px;margin-bottom:12px}
+.regime.neutral{border-color:#ffcc00}
+.regime.off{border-color:#00cc66;background:#0a1a0a}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.6;font-size:15px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:15px;line-height:1.6}
+.big{font-size:22px;font-weight:bold}
+.pool-tag{display:inline-block;background:#1a1a2e;color:#4488ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #4488ff}
+.horse-tag{display:inline-block;background:#2a1540;color:#cc88ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #cc88ff}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:3px;padding:8px;margin-top:6px}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:3px;padding:10px;margin-top:8px}
+.us-box{background:#0d0d1a;border:1px solid #4488ff;border-radius:3px;padding:8px;margin:5px 0}
+.key-price{font-size:20px;font-weight:bold;color:#ff4444}
+.key-stop{font-size:20px;font-weight:bold;color:#00cc66}
+.key-target{font-size:20px;font-weight:bold;color:#ffcc00}
+.key-rr{font-size:22px;font-weight:bold;color:#00e5ff}
+.key-pos{font-size:20px;font-weight:bold;color:#ff8800}
+.highlight-box{background:#0a1a00;border:2px solid #00cc66;border-radius:4px;padding:10px;margin-bottom:10px}
+.catalyst-banner{background:#1a0500;border:2px solid #ff4444;border-radius:4px;padding:10px;margin-bottom:12px;text-align:center}
+</style>
+</head>
+<body>
+
+<h1>⚡ 台股早盤操作指令（第二輪）｜ 20260527</h1>
+<p style="color:#555;font-size:12px;margin-bottom:8px">
+檔名：20260527_2_claude.html　｜　執行於：20260528 早盤
+｜　輸入：第一輪交接清單　｜　Claude自動搜尋美盤數據　｜　AIreport v2.2 Round2
+</p>
+
+<div class="catalyst-banner">
+🔥 <span class="up" style="font-weight:bold;font-size:15px">COMPUTEX 2026 倒數5天（6/2開幕）｜黃仁勳北士科員工大會昨日舉行</span><br>
+<span class="warn" style="font-size:13px">NVIDIA宣布投資台灣約1500億美元、設台灣總部 → 半導體供應鏈全面受惠</span>
+</div>
+
+<!-- ====== 零、美盤掃描結果 ====== -->
+<h2>▌零、美盤掃描結果（Claude自動搜尋完成）</h2>
+<div class="grid3">
+<div class="card blue">
+<h3>🇺🇸 關鍵指數（5/27美股收盤）</h3>
+<p>費半 SOX：<span class="up big">+5.53%</span>（12,876.91）</p>
+<p>那斯達克：<span class="up">+0.19%</span>（26,343.97）</p>
+<p>台積電 ADR：<span class="up">+1.93%</span>（420.26）</p>
+<p>台指期夜盤：<span class="up">+431點（+0.96%）→ 45,225</span></p>
+<p style="color:#ff8800;font-size:12px;margin-top:4px">※夜盤大幅高於日盤44,256，COMPUTEX前夕超強動能</p>
+</div>
+<div class="card">
+<h3>🔥 美股產業強弱（5/27）</h3>
+<p class="up">強勢：費半 +5.53% ★★★ 近期最強單日</p>
+<p class="up">強勢：ONSEMI +近期+9.9% 突破52週新高</p>
+<p class="up">強勢：TSM ADR +1.93%</p>
+<p class="up">強勢：DELL +16%, HPQ +14%, QCOM +12%</p>
+<p class="up">NVDA：+0.22%（橫盤整理，非賣訊）</p>
+<p class="warn">中性：ANET 154~158區間震盪</p>
+</div>
+<div class="card">
+<h3>📰 隔夜重大消息</h3>
+<p class="up">✅ 黃仁勳北士科員工大會：NVIDIA宣布在台設立總部，未來每年投資台灣達1500億美元</p>
+<p class="up">✅ 美光(MU)市值首破1兆美元，瑞銀目標價上調至1,625美元</p>
+<p class="up">✅ COMPUTEX 2026 倒數5天，AI/半導體題材持續沸騰</p>
+<p class="warn">⚠️ 美伊談判持續，油價震盪（伊朗稱美方「違反停火」）</p>
+<p style="color:#555">消費者信心小幅下滑（通膨油價擔憂），但就業穩定，整體無系統性風險</p>
+</div>
+</div>
+
+<!-- 候選標的對應美股表現 -->
+<h2>▌一、候選標的 × 美股對應表現</h2>
+<table>
+<tr>
+  <th>台股標的</th><th>產業</th><th>對應美股指標</th>
+  <th>美股表現</th><th>相關強度</th><th>初步方向</th>
+</tr>
+<tr>
+  <td class="hl">6548 長科*</td>
+  <td>功率半導體</td>
+  <td>ONSEMI / IFX</td>
+  <td class="up">ONSEMI +9.9%近期、52週新高；費半+5.53%</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑↑ 強烈正面</td>
+</tr>
+<tr>
+  <td class="hl">6005 群益證</td>
+  <td>證券/金融</td>
+  <td>台指期夜盤（情緒）</td>
+  <td class="up">台指期夜盤+431點，突破45,000</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="up">↑ 正面（量能有望延續）</td>
+</tr>
+<tr>
+  <td class="hl">3711 日月光</td>
+  <td>先進封裝/半導體</td>
+  <td>NVDA / AVGO</td>
+  <td class="up">NVDA +0.22%橫盤；台積電ADR +1.93%</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="warn">→ 正面偏強（NVDA橫整非弱）</td>
+</tr>
+<tr>
+  <td class="hl">1303 南亞</td>
+  <td>PCB/電子材料</td>
+  <td>TTM Technologies（PCB）</td>
+  <td class="up">費半+5.53%帶動電子供應鏈情緒全面升溫</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="up">↑ 正面</td>
+</tr>
+<tr>
+  <td class="hl">3293 鈺象</td>
+  <td>網通</td>
+  <td>ANET / CSCO</td>
+  <td class="warn">ANET 154.65（盤中震盪，前收158.01）</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性（ANET未見明顯突破）</td>
+</tr>
+<tr>
+  <td class="hl">3689 湧德</td>
+  <td>功率元件</td>
+  <td>ONSEMI / STMicro</td>
+  <td class="up">ONSEMI 52週新高，功率半導體強勢</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑↑ 正面</td>
+</tr>
+<tr>
+  <td class="hl">1503 士電</td>
+  <td>AI資料中心用電</td>
+  <td>NVDA / AVGO</td>
+  <td class="up">NVDA +0.22%、台指期夜盤+431點，情緒偏多</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="up">↑ 偏正面（等開盤確認）</td>
+</tr>
+</table>
+
+<!-- ====== 二、Regime修正 ====== -->
+<div class="regime">
+<h2>▌二、今日台股開盤 Regime → <span class="up big">A Risk-On（維持，動能強化）</span></h2>
+<div class="grid3">
+<div>
+<h3>與第一輪比較</h3>
+<p>第一輪判斷：<span class="up">A Risk-On</span></p>
+<p>今日修正：<span class="up">✅ 維持 A，且動能強化</span></p>
+<p>修正原因：費半+5.53%大幅高於升評門檻（+1%），台積電ADR+1.93%，台指期夜盤+431點，NVIDIA宣布設台灣總部超級催化劑</p>
+</div>
+<div>
+<h3>系統性風險檢查</h3>
+<p>費半：<span class="up">+5.53% ✅ 遠高於-2%停損線</span></p>
+<p>台積電ADR：<span class="up">+1.93% ✅ 繼續走強</span></p>
+<p>VIX：17.81 <span class="up">✅ 正常偏低水位</span></p>
+<p>油價：震盪（美伊談判），無系統風險</p>
+</div>
+<div>
+<h3>今日整體操作基調</h3>
+<p><span class="up" style="font-weight:bold;font-size:15px">積極出擊 + COMPUTEX前夕加碼</span></p>
+<p class="warn">⚠️ 最大風險：大漲後跳空過高追價；COMPUTEX正式開幕當日（6/2）展前獲利了結壓力</p>
+<p style="color:#4488ff;font-size:13px">★ NVIDIA設台灣總部為一次性超級催化劑，功率半導體/AI供應鏈全面升評</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 三、逐檔評級修正總覽 ====== -->
+<h2>▌三、逐檔評級修正總覽</h2>
+<table>
+<tr>
+  <th>標的</th><th>第一輪</th><th>美盤依據</th>
+  <th>今日評級</th><th>今日倉位</th><th>開盤策略摘要</th>
+</tr>
+<tr>
+  <td class="hl">6548 長科*</td>
+  <td>主力候選</td>
+  <td class="up">ONSEMI 52週新高+費半+5.53%，強相關</td>
+  <td><span class="tag up">⬆️ 升評</span></td>
+  <td class="up">8~10%（加倉）</td>
+  <td>功率半導體龍頭升評，開盤回測59~62可積極進場</td>
+</tr>
+<tr>
+  <td class="hl">3689 湧德</td>
+  <td>黑馬候選</td>
+  <td class="up">ONSEMI+費半強勢，功率元件族群全面爆發</td>
+  <td><span class="tag up">⬆️ 升評</span>（黑馬→主力）</td>
+  <td class="up">5~7%（從3~5%升為主力倉）</td>
+  <td>功率元件黑馬升格，等量確認後進場</td>
+</tr>
+<tr>
+  <td class="hl">6005 群益證</td>
+  <td>主力候選</td>
+  <td class="up">台指期+431點，量能有望創新高，強烈利多</td>
+  <td><span class="tag up">⬆️ 升評</span></td>
+  <td class="up">7~10%（加倉）</td>
+  <td>台股量能若突破1.5兆，券商股有望補漲</td>
+</tr>
+<tr>
+  <td class="hl">3711 日月光</td>
+  <td>主力候選</td>
+  <td class="warn">NVDA橫盤+0.22%，ADR+1.93%，中性偏強</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td>3~5%（維持，因媒體曝光高）</td>
+  <td>回測625~640才進，不追高開</td>
+</tr>
+<tr>
+  <td class="hl">1303 南亞</td>
+  <td>主力候選</td>
+  <td class="up">費半+5.53%，電子供應鏈情緒升溫</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td>4~6%（維持）</td>
+  <td>關注外資是否連續買超第2天</td>
+</tr>
+<tr>
+  <td class="hl">3293 鈺象</td>
+  <td>黑馬候選</td>
+  <td class="warn">ANET盤中震盪154.65，未見明顯突破</td>
+  <td><span class="tag hold">➡️ 維持黑馬</span></td>
+  <td>3~5%（黑馬小倉）</td>
+  <td>等ANET明確走強後跟進，今日觀察為主</td>
+</tr>
+<tr>
+  <td class="hl">1503 士電</td>
+  <td>爆量等確認</td>
+  <td class="up">台指期夜盤+431點，大盤情緒偏多</td>
+  <td><span class="tag wait">⏳ 開盤確認</span>（美盤偏有利情境一/二）</td>
+  <td>視情境：5~8%（情境一/二）</td>
+  <td>大盤強勢支撐情境一機率升高，嚴格看開盤量能</td>
+</tr>
+</table>
+
+<!-- ====== 四、逐檔開盤操作指令（核心） ====== -->
+<h2>▌四、逐檔開盤操作指令（詳細）</h2>
+
+<!-- ⬆️ 升評：長科 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評　6548 長科* — 功率半導體龍頭 <span class="score">75+</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>ONSEMI</strong> 近期+9.9%突破52週新高 127元（強相關）</p>
+<p>🇺🇸 <strong>費半SOX</strong> +5.53%（12,876.91）— 今日費半期貨夜盤續揚至13,146</p>
+<p>📢 <strong>NVIDIA宣布投資台灣1500億美元+設總部</strong> → 功率半導體/AI電源管理需求想像空間大開</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：台積電方向（確認大盤基調）、功率半導體族群（強茂/富鼎）是否同步啟動</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：開盤回測 59~62 區間可積極進場；若直接跳空開高，等15分鐘確認站穩再進</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">59~63</span>　<span class="warn">跳空>4%（上限65.6）不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">56.0</span>（第一輪設定，維持）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">70元</span>（前高阻力法，動能強化後可看次高78~80）</p>
+<div class="rr-box">
+<p>今日 RR ≈ <span class="key-rr">2.1:1</span>　｜　建議倉位 <span class="key-pos">8~10%</span>（較第一輪加倉，ONSEMI升評加碼）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：功率半導體近期漲幅已大，跳空不追；停損56嚴格執行。若COMPUTEX期間NVIDIA宣布具體功率採購→可考慮加至12%</p>
+</div>
+</div>
+
+<!-- ⬆️ 升評：湧德 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評（黑馬→主力）　3689 湧德 — 功率元件 <span class="score">62+</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>ONSEMI</strong> 突破52週新高（強相關）+ 費半大漲+5.53%</p>
+<p>功率半導體族群今夜全面升溫，湧德作為上櫃功率元件標的，受益ONSEMI帶動</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場時機</span>：開盤後15分鐘看量能是否放大，若量比>1.5x且站穩128以上可進</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">128~133</span>　<span class="warn">跳空>5%不追（上限137）</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">123</span>（維持黑馬時停損設定）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">143~148元</span>（停損幅×2~2.5）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.3:1</span>　｜　倉位 <span class="key-pos">5~7%</span>（黑馬升格主力，仍需嚴格停損）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：升格主力但仍是黑馬血統，停損不可放寬；若開盤量縮反而是好買點</p>
+</div>
+</div>
+
+<!-- ⬆️ 升評：群益證 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評　6005 群益證 — 券商/金融 <span class="score">74+</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 台指期夜盤 <span class="up">+431點至45,225</span>，大幅高於日盤收盤44,256</p>
+<p>COMPUTEX前夕+NVIDIA台灣總部消息 → 台股量能可能再創新高（前日1.5兆），券商股為直接受益標的</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：大盤成交量開盤前20分鐘方向（是否趨向1.5~2兆）；融資餘額是否有異常暴增</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：開盤站穩34以上 + 成交量偏大可直接進</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">34~36</span>　<span class="warn">跳空>3%（上限37.1）不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">32.0</span>（台股成交量大幅萎縮即失效）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">39~40元</span>（前高+量能行情）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.0:1</span>　｜　倉位 <span class="key-pos">7~10%</span>（量能行情核心受益標的）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：量能受益型標的，若大盤量能不達1兆3千億，需縮減倉位至5%；COMPUTEX前成交量有望創新高</p>
+</div>
+</div>
+
+<!-- 維持：日月光 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持　3711 日月光投控 <span class="score">72</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>NVDA</strong> +0.22%（橫盤整理，非負面訊號）；<strong>台積電ADR</strong> +1.93%（強勢）</p>
+<p>第一輪設定：媒體曝光高，只在回測625~640才進，今日這個原則不變</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場原則</span>：<span class="key-price">625~640</span>回測才進，不追高開</p>
+<p><span class="warn">跳空>2%（上限 ~655）不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">610</span>（跌破MA5失效）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">680~700元</span></p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.6:1</span>　｜　倉位 <span class="key-pos">3~5%</span>（媒體曝光高，維持小倉）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：COMPUTEX期間若NVIDIA具體宣布日月光訂單細節 → 可升評加倉至8%；但若直接跳空大漲，觀望即可</p>
+</div>
+</div>
+
+<!-- 維持：南亞 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持　1303 南亞 <span class="score">66</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 費半+5.53%帶動電子供應鏈整體情緒升溫（中相關）</p>
+<p>南亞的核心催化劑為外資連續買超邏輯，今日需觀察外資第2天是否繼續買</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="key-price">93~97</span>（第一輪設定維持）</p>
+<p><span class="warn">跳空>4%（上限99.3）不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">88.0</span>（外資轉賣即失效）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">105~110元</span></p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">1.7:1</span>　｜　倉位 <span class="key-pos">4~6%</span>（不變）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：RR偏低，需外資第2天確認買超才加倉；若大盤大漲但外資無買超，降倉至3%</p>
+</div>
+</div>
+
+<!-- 維持黑馬：鈺象 -->
+<div class="card horse" style="margin-bottom:10px">
+<h2>⭐ 黑馬維持觀察　3293 鈺象 <span class="score" style="color:#cc88ff">64</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 ANET盤中收154.65（前收158.01，小幅震盪），未見明顯突破訊號</p>
+<p>整體大盤情緒偏多，但網通族群非本日主角（主角在功率半導體+AI封裝）</p>
+</div>
+<p><span class="tag horse">今日策略</span>：小倉觀察，等ANET明確走強或個股帶量突破後再決定是否升評</p>
+<p><span class="buy">📍 觀察進場</span>：<span class="key-price">745~770</span>（需量比>1.5x + 守昨低）</p>
+<p><span class="stop">🛡️ 停損</span>：<span class="key-stop">716</span></p>
+<p class="warn">⚠️ 黑馬倉位上限 <span class="key-pos">3~5%</span>，今日不主動追價</p>
+</div>
+
+<!-- 爆量確認：士電 -->
+<div class="card" style="border-left:3px solid #ffcc00;margin-bottom:10px">
+<h2>⏳ 開盤確認　1503 士電 — 今日情境判斷偏有利</h2>
+<div class="us-box">
+<p>🇺🇸 NVDA +0.22%橫盤（非負面）；台指期夜盤+431點（強力正面）</p>
+<p>美盤整體偏多 → <span class="up">情境一/二機率升高</span>，情境三機率降低</p>
+</div>
+<table>
+<tr><th>情境</th><th>開盤表現</th><th>美盤影響</th><th>操作</th><th>進場區</th><th>倉位</th></tr>
+<tr>
+  <td class="up">✅ 情境一（最可能）</td>
+  <td>量縮(&lt;昨2.84x一半)+收紅+守210</td>
+  <td class="up">大盤強，量縮是甜蜜點</td>
+  <td class="buy">A級進場</td>
+  <td class="up"><strong>215~222</strong></td>
+  <td class="up"><strong>5~8%</strong></td>
+</tr>
+<tr>
+  <td class="warn">✅ 情境二（次可能）</td>
+  <td>量延續+跳空守住</td>
+  <td class="up">大盤強支撐機構接力</td>
+  <td class="warn">小倉追（限跳空&lt;3%）</td>
+  <td class="warn">上限約227（+3%）</td>
+  <td class="warn"><strong>3~5%</strong></td>
+</tr>
+<tr>
+  <td class="dn">❌ 情境三</td>
+  <td>爆量長上影/開高走低跌破210</td>
+  <td>個股出貨，大盤強也無用</td>
+  <td class="stop">直接放棄</td>
+  <td>--</td>
+  <td class="dn">0%</td>
+</tr>
+</table>
+<p style="color:#ff8800;font-size:13px;margin-top:6px">★ 大盤台指期夜盤強勁+NVIDIA台灣消息加持，情境一出現機率提升至60%以上</p>
+</div>
+
+<!-- ====== 五、今日開盤操作優先順序 ====== -->
+<h2>▌五、今日開盤執行優先順序</h2>
+<div class="card action">
+<h3>⏰ 09:00 開盤前確認清單</h3>
+<p>① 台積電2330開盤方向（續強？跳空後站穩？）</p>
+<p>② 功率半導體族群（強茂3481、富鼎8260）是否同步啟動</p>
+<p>③ 台股開盤成交量方向（目標：前20分鐘推估日量>1.5兆）</p>
+<p>④ 期指實際開盤點位 vs 夜盤45,225（缺口大小）</p>
+<div class="sep"></div>
+<h3>📋 今日執行順序</h3>
+<table>
+<tr><th>順序</th><th>標的</th><th>動作</th><th>觸發條件</th><th>倉位</th></tr>
+<tr>
+  <td class="up">第1優先</td>
+  <td class="hl">6548 長科*</td>
+  <td class="buy">進場/升評加碼</td>
+  <td>開盤回測59~62 或 跳空<4%守穩</td>
+  <td class="up"><strong>8~10%</strong></td>
+</tr>
+<tr>
+  <td class="up">第2優先</td>
+  <td class="hl">6005 群益證</td>
+  <td class="buy">進場</td>
+  <td>大盤量能方向確認>1兆，34站穩</td>
+  <td class="up"><strong>7~10%</strong></td>
+</tr>
+<tr>
+  <td class="warn">第3優先</td>
+  <td class="hl">3689 湧德</td>
+  <td class="warn">量確認後進場</td>
+  <td>開盤量比>1.5x + 站穩128</td>
+  <td class="warn"><strong>5~7%</strong></td>
+</tr>
+<tr>
+  <td>第4優先</td>
+  <td class="hl">1503 士電</td>
+  <td>⏳ 開盤15分鐘看情境</td>
+  <td>情境一：量縮+收紅+守210</td>
+  <td>5~8%（情境一）</td>
+</tr>
+<tr>
+  <td>第5優先</td>
+  <td class="hl">1303 南亞</td>
+  <td>等外資確認</td>
+  <td>外資今日繼續買超第2天</td>
+  <td>4~6%</td>
+</tr>
+<tr>
+  <td class="warn">觀察</td>
+  <td class="hl">3711 日月光</td>
+  <td>只等回測</td>
+  <td>回測625~640才考慮進，不追</td>
+  <td>3~5%（回測才進）</td>
+</tr>
+<tr>
+  <td class="warn">觀察</td>
+  <td class="hl">3293 鈺象</td>
+  <td>黑馬觀察</td>
+  <td>等ANET走強訊號</td>
+  <td>3~5%（視情況）</td>
+</tr>
+</table>
+</div>
+
+<!-- ====== 六、催化劑日曆更新 ====== -->
+<h2>▌六、催化劑日曆（含美盤新消息更新）</h2>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響產業/標的</th><th>較昨日變化</th><th>方向</th></tr>
+<tr>
+  <td class="up">2026/5/27（今日）</td>
+  <td>🔴 黃仁勳北士科員工大會：NVIDIA宣布設台灣總部+年投資1500億美元</td>
+  <td>整體半導體供應鏈：長科、湧德、日月光</td>
+  <td class="up">🆕 新增重大催化劑</td>
+  <td class="up">超強利多</td>
+</tr>
+<tr>
+  <td class="up">2026/5/26（昨日）</td>
+  <td>🔴 美光(MU)市值首破1兆美元，瑞銀目標價上調至1,625</td>
+  <td>記憶體/AI供應鏈（間接帶動費半族群）</td>
+  <td class="up">已發生，持續發酵</td>
+  <td class="up">強利多</td>
+</tr>
+<tr>
+  <td class="warn">2026/6/1</td>
+  <td>🟡 COMPUTEX前日 + NVIDIA GTC Taipei前夕</td>
+  <td>所有AI/半導體標的</td>
+  <td class="warn">倒數5天，建議當日主動減倉30~50%</td>
+  <td class="warn">展前高點警戒</td>
+</tr>
+<tr>
+  <td class="warn">2026/6/2~6/5</td>
+  <td>🔴 COMPUTEX 2026 正式開幕</td>
+  <td>全部候選標的（長科/日月光/群益證/南亞）</td>
+  <td class="up">倒數5天，動能持續累積</td>
+  <td class="up">AI/半導體最重要催化劑</td>
+</tr>
+<tr>
+  <td class="warn">2026/6/1~6/4</td>
+  <td>🔴 NVIDIA GTC Taipei（黃仁勳主題演講）</td>
+  <td>AI供應鏈、CoWoS、先進封裝（日月光重點）</td>
+  <td class="up">NVIDIA台灣總部消息進一步強化</td>
+  <td class="up">超強催化劑</td>
+</tr>
+</table>
+
+<!-- ====== 七、最終結論 ====== -->
+<h2>▌七、早盤交易員最終結論</h2>
+<div class="card blue">
+<p><strong>今日Regime</strong>：<span class="up" style="font-size:15px;font-weight:bold">A Risk-On（維持 + 動能強化）</span>　較第一輪維持A並加強</p>
+<div class="sep"></div>
+<p><strong>🥇 第1優先</strong>：<span class="up">6548 長科*</span>。ONSEMI突破52週新高+費半+5.53%+NVIDIA台灣總部消息，功率半導體完美升評。進場 <span class="key-price">59~63</span>，停損56，倉位 <span class="key-pos">8~10%</span>。</p>
+<p><strong>🥈 第2優先</strong>：<span class="up">6005 群益證</span>。台指期+431點夜盤，COMPUTEX前夕量能有望再創高，券商直接受益。進場 <span class="key-price">34~36</span>，停損32，倉位 <span class="key-pos">7~10%</span>。</p>
+<p><strong>🥉 第3優先</strong>：<span class="up">3689 湧德</span>。黑馬升格主力，功率元件受ONSEMI帶動。等量確認進場 <span class="key-price">128~133</span>，停損123，倉位 <span class="key-pos">5~7%</span>。</p>
+<div class="sep"></div>
+<p><strong>⏳ 爆量確認</strong>：<span class="warn">1503 士電</span> 美盤偏多支撐情境一/二機率，開盤15分鐘嚴格看量縮+守210。</p>
+<p><strong>➡️ 維持觀察</strong>：<span class="warn">3711 日月光</span>（只等回測625~640）、<span class="warn">1303 南亞</span>（等外資第2天確認）、<span class="warn">3293 鈺象</span>（等ANET走強）。</p>
+<div class="sep"></div>
+<p><strong>⚠️ 最大風險</strong>：COMPUTEX前夕+NVIDIA消息可能造成大幅跳空開高→追價風險極大；嚴格執行各標的跳空上限。另外，6/2開幕前（尤其6/1）需主動減倉30~50%，勿留到展前高點。</p>
+<p><strong>🚨 系統停損線狀態</strong>：費半昨夜漲+5.53%，遠離-2%停損線，今日正常全力操作。</p>
+<p><strong>📊 產業輪動觀察</strong>：昨夜美股最強為功率半導體（ONSEMI）+ AI伺服器硬體（DELL/HPQ），台股對應族群今日關注功率半導體（長科/湧德/強茂）及電子供應鏈全面補漲。</p>
+</div>
+
+<div class="highlight-box" style="margin-top:12px">
+<p style="color:#00cc66;font-size:14px;font-weight:bold">🌙 今日最後警示：COMPUTEX前夕「不追高」原則</p>
+<p style="font-size:13px">台指期夜盤+431點，預計明日開盤缺口+1%以上。各標的<strong>嚴格遵守跳空上限</strong>，超過上限一律等回測，不搶短。COMPUTEX 6/2開幕前1~2天（即5/31、6/1）是最佳減倉時機，勿留至高點。</p>
+</div>
+
+<p style="color:#555;font-size:12px;margin-top:14px;text-align:right">
+第二輪早盤版：Claude自動搜尋美盤數據，比對產業相關性，修正第一輪評級。不構成投資建議，投資有風險。
+｜ 20260527_2_claude.html　AIreport v2.2 Round2（執行於20260528早盤）
+</p>
+
+</body>
+</html>
