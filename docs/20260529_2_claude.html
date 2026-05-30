@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股早盤操作指令（第二輪）｜ 20260529</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Times New Roman','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px;max-width:1200px;margin:0 auto}
+h1{font-size:20px;color:#00e5ff;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:0.5px}
+h2{font-size:16px;color:#ffcc00;margin:12px 0 8px;border-left:3px solid #ffcc00;padding-left:8px}
+h3{font-size:14px;color:#aaa;margin:8px 0 5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:4px;padding:10px}
+.card.green{border-left:3px solid #ff4444}
+.card.yellow{border-left:3px solid #ffcc00}
+.card.red{border-left:3px solid #00cc66}
+.card.blue{border-left:3px solid #4488ff}
+.card.orange{border-left:3px solid #ff8800}
+.card.horse{border-left:3px solid #cc88ff;background:#1a1520}
+.card.riskoff{border:2px solid #00cc66;background:#0a1a0a}
+.card.action{border:2px solid #ffcc00;background:#1a1500}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px}
+.tag.a{background:#440000;color:#ff4444}
+.tag.up{background:#440000;color:#ff4444}
+.tag.hold{background:#333;color:#aaa}
+.tag.dn{background:#003300;color:#00cc66}
+.tag.cancel{background:#222;color:#555}
+.tag.wait{background:#2a2000;color:#ffcc00}
+.tag.horse{background:#2a1540;color:#cc88ff}
+.score{float:right;font-size:22px;font-weight:bold;color:#00e5ff}
+.regime{background:#1a0a0a;border:2px solid #ff4444;border-radius:4px;padding:12px;margin-bottom:12px}
+.regime.neutral{border-color:#ffcc00}
+.regime.off{border-color:#00cc66;background:#0a1a0a}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.6;font-size:15px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:15px;line-height:1.6}
+.big{font-size:22px;font-weight:bold}
+.pool-tag{display:inline-block;background:#1a1a2e;color:#4488ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #4488ff}
+.horse-tag{display:inline-block;background:#2a1540;color:#cc88ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #cc88ff}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:3px;padding:8px;margin-top:6px}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:3px;padding:10px;margin-top:8px}
+.us-box{background:#0d0d1a;border:1px solid #4488ff;border-radius:3px;padding:8px;margin:5px 0}
+.key-price{font-size:20px;font-weight:bold;color:#ff4444}
+.key-stop{font-size:20px;font-weight:bold;color:#00cc66}
+.key-target{font-size:20px;font-weight:bold;color:#ffcc00}
+.key-rr{font-size:22px;font-weight:bold;color:#00e5ff}
+.key-pos{font-size:20px;font-weight:bold;color:#ff8800}
+.warn-banner{background:#2a0000;border:2px solid #ff4444;border-radius:6px;padding:12px;margin-bottom:12px;text-align:center;font-size:15px}
+</style>
+</head>
+<body>
+
+<h1>⚡ 台股早盤操作指令（第二輪）｜ 20260529</h1>
+<p style="color:#555;font-size:12px;margin-bottom:12px">
+檔名：20260529_2_claude.html　｜　執行於：20260530 早盤
+｜　輸入：第一輪交接清單　｜　Claude自動搜尋美盤數據　｜　AIreport v2.2 Round2
+</p>
+
+<!-- 特別警示橫幅：DELL史詩級財報 -->
+<div class="warn-banner">
+🚨 <span class="up" style="font-size:16px;font-weight:bold">DELL史詩級財報爆發！AI伺服器+757% YoY，股價單日暴漲+33%</span><br>
+<span style="color:#ffcc00">→ 台股今日AI伺服器ODM（神達、緯穎、鴻海）全面升評，COMPUTEX行情疊加DELL超預期催化劑</span>
+</div>
+
+<!-- ====== 零、美盤掃描結果 ====== -->
+<h2>▌零、美盤掃描結果（Claude自動搜尋完成）</h2>
+<div class="grid3">
+<div class="card blue">
+<h3>🇺🇸 關鍵指數（5/29收盤）</h3>
+<p>費半 SOX：<span class="up big">+約+1~1.5%</span>（SOXX ETF 5/28收+1.10%）</p>
+<p>那斯達克：<span class="up">26,972點（+0.25%，持平略漲）</span></p>
+<p>台積電 ADR：<span class="dn">419.39（-1.28%，開高收低）</span></p>
+<p>台指期夜盤：<span class="up">45,375點（+642點，+1.45% vs收盤44,732）</span></p>
+<p style="color:#555;font-size:12px">※ SOX精確5/29收盤數據尚待確認，以SOXX ETF +1.1%及台指期大漲+642點為主要依據</p>
+</div>
+<div class="card">
+<h3>🔥 美股產業強弱（5/29昨夜）</h3>
+<p class="up">🔥最強：DELL <span style="font-weight:bold">+33%</span>（史上最大單日漲幅）</p>
+<p class="up">強勢：SMCI <span>+10.69%</span>（DELL財報直接受益）</p>
+<p class="up">強勢：MU/Micron <span>~+969（+4.97% 5/28）</span>｜Susquehanna目標價大幅上調至$1,750</p>
+<p class="up">強勢：AMD <span>$518（+4.55% 5/28）</span>｜Computex前夕強勢</p>
+<p class="up">強勢：UAL <span>+6.3%（5/27-5/28連漲）</span></p>
+<p class="warn">中性：ANET <span>$155.27（±0%，持平）</span></p>
+<p class="warn">偏弱：TSM ADR <span class="dn">$419（-1.28%，高檔獲利了結）</span></p>
+<p class="warn">中性：NVDA <span>$220附近（橫盤蓄力，COMPUTEX前低波動）</span></p>
+</div>
+<div class="card">
+<h3>📰 5/29隔夜重大消息</h3>
+<p class="up">🔴 <strong>DELL財報爆炸性超預期</strong>：Q1營收$43.8B（+88% YoY），AI伺服器$16.1B（+757%），全年AI伺服器上調$60B，股價+33%</p>
+<p class="up">🟡 <strong>AMD Computex前夕強勢</strong>：蘇姿丰Keynote定於6/2，市場預期重磅發布</p>
+<p class="up">🟡 <strong>MU Susquehanna目標價</strong>大幅上調至$1,750（from $600），HBM/DRAM需求強勁</p>
+<p class="warn">⚠️ <strong>TSM ADR小幅回檔</strong>：-1.28%，高檔震盪，不影響多頭結構</p>
+<p class="warn">⚠️ <strong>黃仁勳6/1北流演講</strong>：倒計時2天，市場高度期待，需防「買預期賣事實」</p>
+<p class="warn">⚠️ <strong>WTI油價</strong>：中東局勢緩和，油價近期回落，有利航空族群</p>
+</div>
+</div>
+
+<!-- ====== 一、候選標的×美股對應表 ====== -->
+<h2>▌一、候選標的 × 美股對應表現</h2>
+<table>
+<tr>
+  <th>台股標的</th><th>類別</th><th>產業</th><th>對應美股指標</th>
+  <th>美股5/29表現</th><th>相關強度</th><th>初步方向</th>
+</tr>
+<tr>
+  <td class="hl">3706 神達</td><td><span class="pool-tag">A類主力</span></td>
+  <td>AI伺服器白牌ODM</td><td>DELL+33% / NVDA / SMCI+10.69%</td>
+  <td class="up">DELL +33%🔥 SMCI +10.69%</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑↑ 強力正面</td>
+</tr>
+<tr>
+  <td class="hl">6669 緯穎</td><td><span class="pool-tag">A類主力</span></td>
+  <td>AI伺服器ODM（AMD供應鏈）</td><td>AMD +4.55% / DELL +33%</td>
+  <td class="up">AMD +4.55%、DELL +33%</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑↑ 強力正面</td>
+</tr>
+<tr>
+  <td class="hl">2610 華航</td><td><span class="pool-tag">A類主力</span></td>
+  <td>航空（COMPUTEX旅遊潮）</td><td>UAL +6.3% / 油價走低</td>
+  <td class="up">UAL +6.3%，6日連漲+29%</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="up">↑ 正面</td>
+</tr>
+<tr>
+  <td class="hl">2383 台光電</td><td><span class="pool-tag">A類主力</span></td>
+  <td>PCB材料/ABF載板</td><td>AMAT / KLAC（設備側）</td>
+  <td class="warn">AMAT $449（+0.32%），KLAC $1,928（-1.51%）</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性</td>
+</tr>
+<tr>
+  <td class="hl">1303 南亞</td><td><span class="pool-tag">A類主力</span></td>
+  <td>石化/PCB材料</td><td>DOW / BASF（石化）</td>
+  <td class="warn">石化族群無特殊催化劑</td>
+  <td><span class="tag hold">弱相關</span></td>
+  <td class="warn">→ 中性（靠台股自身）</td>
+</tr>
+<tr>
+  <td class="hl">2330 台積電</td><td><span class="pool-tag">A類主力</span></td>
+  <td>晶圓代工龍頭</td><td>TSM ADR / NVDA</td>
+  <td class="dn">TSM ADR -1.28%，開高走低</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="warn">→ 偏中性（ADR小跌但期指大漲）</td>
+</tr>
+<tr>
+  <td class="hl">1504 東元</td><td><span class="horse-tag">B類黑馬</span></td>
+  <td>電動車/儲能</td><td>ONSEMI / ENPH</td>
+  <td class="warn">ONSEMI無特殊訊號，傳產整體中性</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 維持觀察</td>
+</tr>
+<tr>
+  <td class="hl">2059 川湖科技</td><td><span class="horse-tag">B類黑馬</span></td>
+  <td>AI伺服器機構件</td><td>NVDA / SMCI</td>
+  <td class="up">SMCI +10.69%（強催化）</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑ 升評考量</td>
+</tr>
+<tr>
+  <td class="hl">6909 創控</td><td><span class="tag wait">C類爆量確認</span></td>
+  <td>半導體設備</td><td>AMAT / KLAC / LRCX</td>
+  <td class="warn">AMAT +0.32%，KLAC -1.51%，設備側中性</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="warn">→ 美盤中性，需靠台股本身開盤表現</td>
+</tr>
+<tr>
+  <td class="hl">2317 鴻海</td><td><span class="tag wait">C類爆量確認</span></td>
+  <td>AI伺服器EMS/ODM</td><td>NVDA / SMCI +10.69%</td>
+  <td class="up">DELL +33%、SMCI +10.69%（強催化）</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑ 情境一/二機率升高</td>
+</tr>
+<tr>
+  <td class="hl">6909 創控（加碼）</td><td><span class="horse-tag">B2加碼</span></td>
+  <td>半導體設備</td><td>AMAT / KLAC / LRCX</td>
+  <td class="warn">AMAT/KLAC中性偏弱</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="warn">→ 設備側無額外催化，謹慎</td>
+</tr>
+<tr>
+  <td class="hl">6805 富世達（加碼）</td><td><span class="horse-tag">B2加碼</span></td>
+  <td>AI水冷散熱</td><td>NVDA（水冷需求）</td>
+  <td class="warn">NVDA橫盤$220（COMPUTEX前低波動）</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="warn">→ 等季線確認，不急進</td>
+</tr>
+<tr>
+  <td class="hl">2455 全新（加碼）</td><td><span class="horse-tag">B2加碼</span></td>
+  <td>化合物半導體/光通訊</td><td>ANET / MACOM</td>
+  <td class="warn">ANET $155（±0%），光通訊中性</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 維持觀察，等光通訊族群啟動</td>
+</tr>
+</table>
+
+<!-- ====== 二、Regime修正 ====== -->
+<div class="regime">
+<h2>▌二、今日台股開盤 Regime → <span class="up big">⬆️ A++ 超強 Risk-On（升級）</span></h2>
+<div class="grid3">
+<div>
+<h3>與第一輪比較</h3>
+<p>第一輪判斷：<span class="up">A（AI Risk-On，強烈）</span></p>
+<p>今日修正：<span class="up">再次升級 → A++ 超強Risk-On</span></p>
+<p>修正原因：DELL史詩級財報（+33%）疊加台指期夜盤+642點（+1.45%），COMPUTEX行情爆發前夕</p>
+<p>台指期夜盤：<span class="up" style="font-weight:bold">45,375點（+642點），大幅跳空高開確認</span></p>
+</div>
+<div>
+<h3>系統性風險檢查</h3>
+<p>費半 SOXX ETF：<span class="up">+1.10%（5/28），趨勢向上 ✅ 正常</span></p>
+<p>台積電ADR：<span class="dn">-1.28%（高檔震盪，非破壞性）</span></p>
+<p>NVDA：<span class="warn">$220附近橫盤，COMPUTEX前蓄勢 ✅ 正常</span></p>
+<p>VIX：<span class="up">~17.81，正常水平 ✅</span></p>
+<p style="color:#ffcc00;font-size:13px">⚠️ 系統停損線未觸發，全面積極操作</p>
+</div>
+<div>
+<h3>今日整體操作基調</h3>
+<p><span class="up" style="font-size:16px;font-weight:bold">🚀 積極出擊，DELL行情加速COMPUTEX</span></p>
+<p class="warn">最大風險：</p>
+<ul>
+<li class="warn">黃仁勳6/1演講低於預期 → 全面獲利了結</li>
+<li class="warn">台積電ADR連續兩日開高走低 → 注意高檔籌碼</li>
+<li class="warn">跳空過高追高風險（指數已漲近萬點）</li>
+</ul>
+</div>
+</div>
+</div>
+
+<!-- ====== 三、逐檔評級修正總覽 ====== -->
+<h2>▌三、逐檔評級修正總覽</h2>
+<table>
+<tr>
+  <th>標的</th><th>第一輪評分</th><th>美盤依據</th>
+  <th>今日評級</th><th>今日倉位</th><th>開盤策略摘要</th>
+</tr>
+<tr>
+  <td class="hl">3706 神達</td>
+  <td>主力89分</td>
+  <td class="up">DELL +33% + SMCI +10.69%（強相關）</td>
+  <td><span class="tag up">⬆️⬆️ 大幅升評</span></td>
+  <td class="up"><strong>12~15%</strong>（核心重倉加碼）</td>
+  <td>開盤若跳空在92以內直接進，等不到回測也可小追</td>
+</tr>
+<tr>
+  <td class="hl">6669 緯穎</td>
+  <td>主力76分</td>
+  <td class="up">AMD +4.55% + DELL +33%（強相關）</td>
+  <td><span class="tag up">⬆️ 升評</span></td>
+  <td class="up"><strong>8~10%</strong>（加倉）</td>
+  <td>開盤跳空在5600以內追，AMD Keynote 6/2為硬催化劑</td>
+</tr>
+<tr>
+  <td class="hl">2610 華航</td>
+  <td>主力77分</td>
+  <td class="up">UAL 6日連漲+29%（中相關）</td>
+  <td><span class="tag up">⬆️ 升評</span></td>
+  <td class="up"><strong>5~7%</strong>（加倉）</td>
+  <td>油價低+COMPUTEX旅遊潮，開盤等量確認再進</td>
+</tr>
+<tr>
+  <td class="hl">2383 台光電</td>
+  <td>主力73分</td>
+  <td class="warn">AMAT/KLAC中性（中相關）</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td class="warn"><strong>3~5%</strong>（不變）</td>
+  <td>等回測5000~5200，無額外催化劑</td>
+</tr>
+<tr>
+  <td class="hl">1303 南亞</td>
+  <td>主力77分</td>
+  <td class="warn">石化側無催化（弱相關）</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td class="warn"><strong>3~5%</strong>（不變）</td>
+  <td>等回測96~99，靠台股自身多頭氛圍帶動</td>
+</tr>
+<tr>
+  <td class="hl">2330 台積電</td>
+  <td>主力71分（低倉邊緣）</td>
+  <td class="dn">TSM ADR -1.28%（強相關，高檔震盪）</td>
+  <td><span class="tag hold">➡️ 維持偏謹慎</span></td>
+  <td class="warn"><strong>2~3%</strong>（維持低倉）</td>
+  <td>ADR小跌但期指大漲，開盤看量；跳空>2%不追</td>
+</tr>
+<tr>
+  <td class="hl">1504 東元</td>
+  <td>黑馬69分</td>
+  <td class="warn">ONSEMI中性，傳產無催化</td>
+  <td><span class="tag hold">➡️ 維持觀察</span></td>
+  <td class="warn"><strong>3~5%</strong>（維持小倉觀察）</td>
+  <td>等整體市場確認後，量縮守74元再考慮</td>
+</tr>
+<tr>
+  <td class="hl">2059 川湖科技</td>
+  <td>黑馬64分</td>
+  <td class="up">SMCI +10.69%（強相關）</td>
+  <td><span class="tag up">⬆️ 黑馬升評</span></td>
+  <td class="warn"><strong>3~5%</strong>（黑馬倉位上限）</td>
+  <td>AI伺服器機構件補漲邏輯因DELL爆發增強，等開盤確認量</td>
+</tr>
+<tr>
+  <td class="hl">6909 創控</td>
+  <td>爆量等確認</td>
+  <td class="warn">AMAT +0.32%，KLAC -1.51%（設備中性）</td>
+  <td><span class="tag wait">⏳ 開盤確認（謹慎）</span></td>
+  <td class="warn">視情境 3~7%</td>
+  <td>設備側美盤無加持，主靠台股情緒；情境一機率中等</td>
+</tr>
+<tr>
+  <td class="hl">2317 鴻海</td>
+  <td>爆量等確認（K值82.3偏高）</td>
+  <td class="up">DELL +33% + SMCI +10.69%（強相關）</td>
+  <td><span class="tag wait">⏳ 升級至情境二優先</span></td>
+  <td class="warn">視情境 3~5%</td>
+  <td>DELL爆發讓情境一/二機率大升，但K值82.3需注意超買</td>
+</tr>
+<tr>
+  <td class="hl">6805 富世達</td>
+  <td>加碼標的</td>
+  <td class="warn">NVDA橫盤（中相關）</td>
+  <td><span class="tag hold">➡️ 維持等季線</span></td>
+  <td class="warn">3~5%（季線守穩才進）</td>
+  <td>等1800元季線守穩確認，不急</td>
+</tr>
+<tr>
+  <td class="hl">2455 全新</td>
+  <td>加碼標的</td>
+  <td class="warn">ANET $155（±0%，中相關）</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td class="warn">3~5%</td>
+  <td>光通訊族群尚未啟動，等穩懋突破新高再跟</td>
+</tr>
+</table>
+
+<!-- ====== 四、逐檔開盤操作指令 ====== -->
+<h2>▌四、逐檔開盤操作指令（詳細）</h2>
+
+<!-- 神達：大幅升評 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️⬆️ 大幅升評　3706 神達 — AI伺服器白牌ODM <span class="score">89→92分</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>DELL</strong> 昨夜 <span class="up">+33%</span>（史上最大單日漲幅，強相關）</p>
+<p>🇺🇸 <strong>SMCI</strong> 昨夜 <span class="up">+10.69%</span>（DELL財報直接受益，強相關）</p>
+<p>產業：AI伺服器ODM 昨夜美股整體 <span class="up">爆炸性強勢</span>｜DELL Q1 AI伺服器$16.1B（+757%），今年全年$60B目標</p>
+<p>台指期夜盤：+642點（+1.45%），大幅跳空確認多頭</p>
+<p style="color:#ffcc00">⭐ 第一輪升評條件：「費半漲≥1% + NVDA/SMCI走強」✅ 超額達標（SMCI+10.69%）</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：台積電開盤方向、大盤期指是否守住45,000點、神達自身開盤是否爆量延續</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：開盤直接進（DELL行情加速，不等回測）</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">88~95元</span>　<span class="warn">跳空>5%（93.24元）以上分批，不一次追足</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">84元</span>（維持第一輪設定，破此失效）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">99元（第一目標）→ 108元（第二目標）</span></p>
+<p>DELL財報爆發 → 上調目標至108元（+21.6%空間）</p>
+<div class="rr-box">
+<p>進場90 | 停損84（損-6）| 目標99（獲+9）→ <span class="key-rr">RR ≈ 1.5:1</span></p>
+<p>進場90 | 停損84（損-6）| 目標108（獲+18）→ <span class="key-rr">RR ≈ 3:1</span>（持抱者）</p>
+<p>建議倉位 <span class="key-pos">12~15%</span>（由第一輪8~12%上調，核心重倉）</p>
+</div>
+<p><span class="warn">⚠️ 升評注意</span>：COMPUTEX 6/5後關注「買預期賣事實」獲利了結壓力；黃仁勳6/1若演講低於預期立即降倉至8%</p>
+<p><span class="warn">⚠️ 最大風險</span>：台股已連漲，跳空過高應分批，勿因DELL行情追高超過95元（+7%以上）</p>
+</div>
+</div>
+
+<!-- 緯穎：升評 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評　6669 緯穎 — AMD供應鏈ODM <span class="score">76→82分</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>AMD</strong> 昨夜 <span class="up">+4.55%（$518）</span>，Computex前夕強勢（強相關）</p>
+<p>🇺🇸 <strong>DELL</strong> 昨夜 <span class="up">+33%</span>，AI伺服器供應鏈全面受益（強相關）</p>
+<p>AMD蘇姿丰 6/2 Keynote：直接點名緯穎為AI伺服器合作夥伴，硬催化劑在即</p>
+<p style="color:#ffcc00">⭐ 第一輪升評條件：「AMD Keynote 6/2直接提緯穎 OR 費半漲≥1.5%」→ DELL行情提前兌現AI伺服器強勁需求</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：廣達、英業達等AI伺服器族群開盤強度，確認族群輪動</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：開盤跳空在5630元以內直接進（AMD Keynote 6/2倒計時）</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">5350~5630元</span>　<span class="warn">跳空>5630（+3.5%）不追，等回測</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">5180元</span>（跌破季線MA60失效）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">5900元（第一）→ 6300元（第二，DELL行情加速後上調）</span></p>
+<div class="rr-box">
+<p>進場5480 | 停損5180（損300）| 目標5900（獲420）→ <span class="key-rr">RR ≈ 1.4:1</span></p>
+<p>進場5480 | 停損5180（損300）| 目標6300（獲820）→ <span class="key-rr">RR ≈ 2.7:1</span>（持抱者）</p>
+<p>建議倉位 <span class="key-pos">8~10%</span>（由第一輪5~8%上調）</p>
+</div>
+<p><span class="warn">⚠️ 關鍵觀察</span>：6/2 AMD Keynote若未直接提緯穎 → 降回5~7%，停損收緊至5300</p>
+</div>
+</div>
+
+<!-- 華航：升評 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>⬆️ 升評　2610 華航 — 航空旺季+COMPUTEX <span class="score">77→80分</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>UAL（聯合航空）</strong> 6日連漲累積 <span class="up">+29%</span>（中相關）</p>
+<p>WTI油價：中東局勢緩和，油價近期走低（降低華航燃油成本）</p>
+<p>COMPUTEX 6/2-6/5：全球AI業者密集來台，旅遊潮 + 暑假旺季雙重催化</p>
+<p style="color:#ffcc00">⭐ 第一輪升評條件：「油價持續走低 OR COMPUTEX人潮報導」✅ 兩項均成立</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：航空族群整體開盤強弱，長榮航是否同步上漲，確認族群共振</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：等開盤確認量（15分鐘），量放大且守19元再進</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">18.8~19.5元</span>　<span class="warn">跳空>3%（19.67元以上）等回測</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">18.0元</span>（維持第一輪）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">21.5元（第一）→ 23元（第二）</span></p>
+<div class="rr-box">
+<p>進場19.2 | 停損18.0（損1.2）| 目標21.5（獲2.3）→ <span class="key-rr">RR ≈ 1.9:1</span></p>
+<p>建議倉位 <span class="key-pos">5~7%</span>（由第一輪3~5%上調）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：今日AI股全面跳空，資金可能集中AI族群，航空相對排名可能下降；若大盤開盤即衝漲停潮，華航可列次優先</p>
+</div>
+</div>
+
+<!-- 台光電：維持 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持　2383 台光電 — PCB材料/ABF載板 <span class="score">73分</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>AMAT</strong> <span class="warn">+0.32%</span>　<strong>KLAC</strong> <span class="dn">-1.51%</span>（中相關，設備側無加持）</p>
+<p>DELL財報對PCB/載板有間接正面影響（伺服器需求大增），但非直接受益</p>
+<p>未觸發升評條件（ABF材料漲價消息未出現）</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場時機</span>：等回測，不在跳空高開時追</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">5000~5200元</span>（等回測，不追高）</p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">4800元</span>（破MA20失效，維持第一輪）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">5600元</span>（維持）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">1.7:1</span>　｜　倉位 <span class="key-pos">3~5%</span>（不變）</p>
+</div>
+<p class="warn">⚠️ 今日AI ODM族群全面爆發，台光電可能相對弱勢；資金優先配置神達/緯穎，台光電降為次要候補</p>
+</div>
+</div>
+
+<!-- 南亞：維持 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持　1303 南亞 — 石化/PCB材料 <span class="score">77分</span></h2>
+<div class="us-box">
+<p>🇺🇸 石化族群：DOW/BASF <span class="warn">無特殊訊號</span>（弱相關，主要看台股自身）</p>
+<p>台股整體多頭氛圍仍有帶動，但無額外美股催化劑</p>
+<p>未觸發升評條件（台塑法說、PCB材料漲價均未出現）</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="key-price">96~99元</span>（等回測）</p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">93元</span>（維持）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">108元</span>（維持）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.2:1</span>　｜　倉位 <span class="key-pos">3~5%</span>（不變）</p>
+</div>
+<p class="warn">⚠️ 今日整體倉位被AI ODM股吸收，南亞建議降至最低配置3%，等確認後再加</p>
+</div>
+</div>
+
+<!-- 台積電：維持偏謹慎 -->
+<div class="card yellow" style="margin-bottom:10px">
+<h2>➡️⚠️ 維持偏謹慎　2330 台積電 — 龍頭領漲但ADR小跌 <span class="score" style="color:#ffcc00">71分</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>TSM ADR</strong> <span class="dn">-1.28%（$419.39）</span>（強相關），開高走低，高檔獲利了結</p>
+<p>台指期夜盤大漲+642點，但台積電ADR並未同步（矛盾訊號）</p>
+<p>第一輪升評條件「黃仁勳6/1點名CoWoS擴產計畫」尚未發生</p>
+</div>
+<div class="action-box">
+<p><span class="warn">降評原因</span>：ADR小跌且開高走低，指數跳空+642點主要由其他個股帶動（DELL行情）</p>
+<p><span class="buy">今日策略</span>：維持極低倉位觀察，等台積電自身開盤方向確認後再決定</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">2300~2360元</span>（等回測進，不在跳空時追）</p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">2200元</span>（破MA10失效）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2:1</span>　｜　倉位 <span class="key-pos">2~3%</span>（極低倉，維持甚至可暫不配）</p>
+</div>
+<p class="warn">⚠️ 若台積電開盤跌破2330 → 今日暫停操作，等黃仁勳6/1演講後重新評估</p>
+</div>
+</div>
+
+<!-- 川湖科技：黑馬升評 -->
+<div class="card horse" style="margin-bottom:10px">
+<h2>⬆️ 黑馬升評　2059 川湖科技 — AI伺服器機構件 <span class="score" style="color:#cc88ff">64→68分</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>SMCI</strong> 昨夜 <span class="up">+10.69%</span>（強相關，DELL財報受益者）</p>
+<p>DELL AI伺服器+757%的需求增長直接帶動機構件（機架、滑軌等）需求</p>
+</div>
+<p><span class="tag horse">今日策略</span>：由純觀察升至「開盤確認後考慮進場」，等AI伺服器族群整體開盤量確認</p>
+<div class="action-box">
+<p><span class="buy">📍 觀察進場</span>：<span class="key-price">4950~5100元</span>（等開盤15分鐘確認量）</p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">4750元</span></p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">5400~5600元</span>（停損×2~2.5）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2:1</span></p>
+</div>
+<p class="warn">提醒：黑馬倉位上限 <span class="key-pos">3~5%</span>，嚴格停損，需等AI伺服器族群整體熱絡才追</p>
+</div>
+</div>
+
+<!-- 東元：黑馬維持 -->
+<div class="card horse" style="margin-bottom:10px">
+<h2>➡️ 黑馬維持觀察　1504 東元 — 儲能/電動車 <span class="score" style="color:#cc88ff">69分</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>ONSEMI</strong> <span class="warn">無特殊訊號</span>（中相關）</p>
+<p>今日AI ODM族群全面爆發，傳產/儲能族群資金可能被排擠</p>
+</div>
+<p><span class="tag horse">今日策略</span>：今日不主動進場，等AI行情退潮後資金輪動至傳產族群</p>
+<div class="action-box">
+<p><span class="buy">📍 觀察條件</span>：外資連續買超東元 AND 儲能族群整體啟動才考慮</p>
+<p class="warn">提醒：今日整體倉位已被神達/緯穎佔滿，東元暫緩配置</p>
+</div>
+</div>
+
+<!-- 創控：爆量確認 -->
+<div class="card" style="border-left:3px solid #ffcc00;margin-bottom:10px">
+<h2>⏳ 開盤確認（謹慎）　6909 創控 — 半導體設備</h2>
+<div class="us-box">
+<p>🇺🇸 <strong>AMAT</strong> <span class="warn">+0.32%</span>（幾乎持平）　<strong>KLAC</strong> <span class="dn">-1.51%</span>（小跌）</p>
+<p>設備族群無DELL行情帶動，美盤方向<span class="warn">中性偏弱</span>，需靠台股整體多頭氛圍</p>
+<p>今日大盤跳空+642點，但創控對應美股（設備）無額外加持</p>
+<p style="color:#ffcc00">→ 情境一機率：中等（美盤無加持，但整體Regime超強）</p>
+<p style="color:#ff4444">→ 若今日開盤爆量延續+跳空 → 情境三風險升高</p>
+</div>
+<table>
+<tr><th>情境</th><th>開盤表現</th><th>操作</th><th>進場區</th><th>倉位</th></tr>
+<tr>
+  <td class="up">✅ 情境一</td>
+  <td>量縮（&lt;昨成交量50%）+收紅+守55元</td>
+  <td class="buy">A級進場</td>
+  <td class="up"><strong>55~57元</strong></td>
+  <td class="up"><strong>5~7%</strong></td>
+</tr>
+<tr>
+  <td class="warn">⚠️ 情境二</td>
+  <td>量延續+跳空+守住+半導體設備族群整體強</td>
+  <td class="warn">謹慎小倉追（設備美盤中性）</td>
+  <td class="warn">跳空&lt;3%才追</td>
+  <td class="warn"><strong>3~5%</strong></td>
+</tr>
+<tr>
+  <td class="dn">❌ 情境三</td>
+  <td>爆量長上影/開高走低/跳空>4%後無量</td>
+  <td class="stop">直接放棄</td>
+  <td>--</td>
+  <td class="dn">0%</td>
+</tr>
+</table>
+<p class="warn" style="margin-top:6px">⚠️ 特別提醒：今日AI ODM全面爆發，設備股相對弱勢；若資金全往神達/緯穎，創控建議優先序降至第3，情境一確認後才考慮</p>
+</div>
+
+<!-- 鴻海：爆量確認升評 -->
+<div class="card" style="border-left:3px solid #ff4444;margin-bottom:10px">
+<h2>⏳⬆️ 開盤確認（升級）　2317 鴻海 — AI伺服器EMS</h2>
+<div class="us-box">
+<p>🇺🇸 <strong>DELL</strong> <span class="up">+33%</span>（強相關，鴻海是DELL重要供應商）</p>
+<p>🇺🇸 <strong>SMCI</strong> <span class="up">+10.69%</span>（強相關）</p>
+<p>美盤方向對情境判斷的影響：<span class="up">有利情境一/情境二機率大升</span>，DELL超預期強勁</p>
+<p style="color:#ffcc00">原K值82.3偏高仍是風險：跳空+爆量可能加速超買，情境三也要警覺</p>
+</div>
+<table>
+<tr><th>情境</th><th>開盤表現</th><th>操作</th><th>進場區</th><th>倉位</th></tr>
+<tr>
+  <td class="up">✅ 情境一（機率提升）</td>
+  <td>量縮+守287+不破低</td>
+  <td class="buy">進場（DELL行情加持）</td>
+  <td class="up"><strong>288~292元</strong></td>
+  <td class="up"><strong>5%</strong></td>
+</tr>
+<tr>
+  <td class="warn">✅ 情境二（DELL強化）</td>
+  <td>黃仁勳6/1前夕跳空+量延續</td>
+  <td class="warn">小倉追，跳空&lt;2%才追</td>
+  <td class="warn">依跳空位置</td>
+  <td class="warn"><strong>3~5%</strong></td>
+</tr>
+<tr>
+  <td class="dn">❌ 情境三（仍要警覺）</td>
+  <td>開高走低+爆量+K值繼續衝85+</td>
+  <td class="stop">直接放棄，K值超買</td>
+  <td>--</td>
+  <td class="dn">0%</td>
+</tr>
+</table>
+<p class="warn" style="margin-top:6px">⚠️ K值82.3是最大隱憂，DELL行情讓情境一/二機率升高，但仍需先等開盤15分鐘觀察，切勿衝動追高</p>
+</div>
+
+<!-- 富世達、全新維持 -->
+<div class="card horse" style="margin-bottom:10px">
+<h2>➡️ 維持等季線　6805 富世達 — AI水冷散熱</h2>
+<div class="us-box">
+<p>🇺🇸 <strong>NVDA</strong> <span class="warn">$220橫盤（COMPUTEX前低波動）</span>（中相關）</p>
+<p>水冷散熱需求隨DELL AI伺服器爆發有間接利多，但未直接映射</p>
+</div>
+<p><span class="tag horse">今日策略</span>：繼續等季線1800元守穩確認，不因DELL行情衝動進場</p>
+<div class="action-box">
+<p><span class="buy">📍 觀察條件</span>：季線1800守穩 + AI水冷消息加溫 → 才考慮進場1800~1860元</p>
+<p><span class="stop">🛡️ 停損</span>：<span class="key-stop">1680元</span>　｜　<span class="buy">🎯 目標</span>：<span class="key-target">2000~2275元</span></p>
+<p class="warn">提醒：黑馬倉位上限 <span class="key-pos">3~5%</span>，今日不急進</p>
+</div>
+</div>
+
+<div class="card horse" style="margin-bottom:10px">
+<h2>➡️ 維持觀察　2455 全新 — 化合物半導體/光通訊</h2>
+<div class="us-box">
+<p>🇺🇸 <strong>ANET</strong> <span class="warn">$155（±0%）</span>（中相關）</p>
+<p>光通訊族群今日無特殊催化劑，COMPUTEX期間焦點集中AI伺服器ODM</p>
+</div>
+<p><span class="tag horse">今日策略</span>：維持觀察，等穩懋突破新高或ANET/MACOM走強再進</p>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="key-price">410~425元</span>（等回測）　｜　<span class="stop">🛡️ 停損</span>：<span class="key-stop">395元</span></p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">480元（第一）→ 530元（第二）</span>　RR≈ <span class="key-rr">2.7:1</span></p>
+<p><span class="key-pos">3~5%</span>小倉</p>
+</div>
+</div>
+
+<!-- ====== 五、今日開盤執行優先順序 ====== -->
+<h2>▌五、今日開盤執行優先順序</h2>
+<div class="card action">
+<h3>⏰ 09:00 開盤前確認清單</h3>
+<p>① 台積電開盤方向（ADR昨夜-1.28%，需確認是否跟大盤走還是獨弱）</p>
+<p>② 費半期貨最新狀態（確認SOX今晨延續強勢）</p>
+<p>③ 台指期實際開盤缺口 vs 夜盤預估（夜盤45,375，預計跳空約+640點）</p>
+<p>④ AI伺服器族群（廣達、緯穎、英業達）開盤量，確認DELL行情是否充分反映</p>
+<div class="sep"></div>
+<h3>📋 今日執行順序（依DELL行情加持）</h3>
+<table>
+<tr><th>順序</th><th>標的</th><th>動作</th><th>觸發條件</th><th>倉位</th></tr>
+<tr>
+  <td class="up">第1優先</td>
+  <td class="hl">3706 神達</td>
+  <td class="buy">直接進場（DELL強催化）</td>
+  <td>開盤跳空&lt;95元，直接買入</td>
+  <td class="up"><strong>12~15%</strong></td>
+</tr>
+<tr>
+  <td class="up">第2優先</td>
+  <td class="hl">6669 緯穎</td>
+  <td class="buy">跳空5630以內進場</td>
+  <td>AMD Keynote 6/2倒計時，DELL加持</td>
+  <td class="up"><strong>8~10%</strong></td>
+</tr>
+<tr>
+  <td class="warn">第3優先</td>
+  <td class="hl">2610 華航</td>
+  <td class="warn">等15分鐘量確認</td>
+  <td>量放大守19元 + 油價持續低</td>
+  <td class="warn"><strong>5~7%</strong></td>
+</tr>
+<tr>
+  <td class="warn">第4優先</td>
+  <td class="hl">2317 鴻海（爆量確認）</td>
+  <td class="warn">等情境一/二確認</td>
+  <td>DELL加持，K值82.3需等15分鐘觀察</td>
+  <td class="warn"><strong>3~5%</strong></td>
+</tr>
+<tr>
+  <td>第5優先</td>
+  <td>6909 創控（爆量確認）</td>
+  <td>等情境一確認後</td>
+  <td>設備美盤中性，量縮守55元才進</td>
+  <td>3~5%</td>
+</tr>
+<tr>
+  <td>第6優先</td>
+  <td>2059 川湖（黑馬）</td>
+  <td>等AI伺服器族群熱絡確認</td>
+  <td>SMCI帶動，量確認後再考慮</td>
+  <td>3~5%（黑馬上限）</td>
+</tr>
+<tr>
+  <td>觀察待機</td>
+  <td>2383台光電、1303南亞、2455全新、6805富世達</td>
+  <td>等回測</td>
+  <td>今日資金重心在AI ODM，次要族群等回落</td>
+  <td>3%（最低配）</td>
+</tr>
+<tr>
+  <td class="dn">今日不優先</td>
+  <td>2330 台積電</td>
+  <td class="stop">極低倉或暫緩</td>
+  <td>ADR-1.28%，等黃仁勳6/1演講前觀察</td>
+  <td class="dn">2~3%（可暫不配）</td>
+</tr>
+<tr>
+  <td class="dn">今日不操作</td>
+  <td>1504東元（黑馬）</td>
+  <td class="stop">暫緩，等AI行情退潮</td>
+  <td>傳產/儲能今日資金被排擠</td>
+  <td class="dn">0%（暫緩）</td>
+</tr>
+</table>
+</div>
+
+<!-- ====== 六、催化劑日曆（更新） ====== -->
+<h2>▌六、催化劑日曆（含美盤新消息更新）</h2>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響產業/標的</th><th>較昨日變化</th><th>方向</th></tr>
+<tr>
+  <td class="up">5/29（今日）</td>
+  <td>🔴 DELL史詩財報：AI伺服器+757% YoY，全年$60B指引</td>
+  <td>神達、緯穎、鴻海、廣達（AI伺服器ODM）</td>
+  <td class="up">🆕 新增（超預期重大事件）</td>
+  <td class="up">強烈利多</td>
+</tr>
+<tr>
+  <td class="up">5/29（今日）</td>
+  <td>🟡 MU Susquehanna目標價大升至$1,750（from $600）</td>
+  <td>記憶體族群（南亞科、華邦電）</td>
+  <td class="up">🆕 新增</td>
+  <td class="up">利多記憶體族群</td>
+</tr>
+<tr>
+  <td class="up">6/1（明天）</td>
+  <td>🔴 黃仁勳北流演講（COMPUTEX前最重要單一事件）</td>
+  <td>台股AI全族群｜神達、緯穎、台積電、川湖</td>
+  <td class="warn">確認（DELL財報讓市場期待值再升高）</td>
+  <td class="warn">利多但防「買預期賣事實」</td>
+</tr>
+<tr>
+  <td class="up">6/2</td>
+  <td>🔴 AMD蘇姿丰 Computex Keynote（點名緯穎）</td>
+  <td>緯穎（強相關）、AMD供應鏈</td>
+  <td class="up">確認（AMD +4.55%已提前反映期待）</td>
+  <td class="up">利多</td>
+</tr>
+<tr>
+  <td class="up">6/2~6/5</td>
+  <td>🟡 COMPUTEX 2026 南港展覽館</td>
+  <td>AI伺服器、PCB、航空（旅遊潮）</td>
+  <td class="up">確認</td>
+  <td class="up">利多</td>
+</tr>
+<tr>
+  <td class="warn">6/5後</td>
+  <td>⚠️ 「買預期賣事實」獲利了結壓力</td>
+  <td>COMPUTEX受益族群（神達、緯穎、台積電）</td>
+  <td class="warn">維持警示</td>
+  <td class="dn">潛在利空</td>
+</tr>
+<tr>
+  <td class="warn">6月中旬</td>
+  <td>📊 5月營收公告（驗證基本面）</td>
+  <td>AI供應鏈個股（神達、緯穎）</td>
+  <td class="warn">維持</td>
+  <td class="warn">觀察</td>
+</tr>
+</table>
+
+<!-- ====== 七、最終結論 ====== -->
+<h2>▌七、早盤交易員最終結論</h2>
+<div class="card blue">
+<p><strong>今日Regime</strong>：<span class="up" style="font-size:16px;font-weight:bold">A++ 超強Risk-On</span>　較第一輪再次升級</p>
+<p><strong>升級原因</strong>：DELL史詩財報（+33%，AI伺服器+757%）疊加台指期夜盤+642點，COMPUTEX行情全面爆發</p>
+<div class="sep"></div>
+<p><strong>🥇 第1優先</strong>：<span class="up">3706 神達</span>。DELL+SMCI雙重超強催化，白牌AI伺服器ODM直接受益。進場 <span class="key-price">88~95元</span>，停損84元，目標99→108元，倉位 <span class="key-pos">12~15%</span>。</p>
+<p><strong>🥈 第2優先</strong>：<span class="up">6669 緯穎</span>。AMD +4.55%+DELL爆發雙重加持，AMD Keynote 6/2為硬催化劑。進場 <span class="key-price">5350~5630元</span>，倉位 <span class="key-pos">8~10%</span>。</p>
+<p><strong>🥉 第3優先</strong>：<span class="up">2610 華航</span>。UAL 6日連漲+29%，油價低+COMPUTEX旅遊潮。進場 <span class="key-price">18.8~19.5元</span>，倉位 <span class="key-pos">5~7%</span>。</p>
+<p><strong>⏳ 爆量確認1</strong>：<span class="warn">2317 鴻海</span> 開盤15分鐘看情境，DELL+SMCI讓情境一/二機率升高，但K值82.3須謹慎。</p>
+<p><strong>⏳ 爆量確認2</strong>：<span class="warn">6909 創控</span> 設備美盤中性，情境一確認後才進（量縮守55元）。</p>
+<p><strong>⭐ 黑馬升評</strong>：<span style="color:#cc88ff">2059 川湖科技</span>，SMCI+10.69%帶動機構件補漲邏輯，等開盤量確認後3~5%小倉。</p>
+<div class="sep"></div>
+<p><strong>⚠️ 系統停損線狀態</strong>：SOXX ETF+1.10%（5/28），距-2%停損線甚遠，今日正常積極操作。台指期夜盤大漲+642點確認多頭延續。</p>
+<p><strong>🚨 最大風險</strong>：①黃仁勳6/1演講低於預期→全面降倉5~10%；②台股連續大漲後跳空過高追高風險（需控制總倉位&lt;65%）；③台積電ADR高檔震盪，注意若連跌兩日則重新評估。</p>
+<p><strong>❌ 今日避免FOMO</strong>：神達/緯穎若跳空超過5%以上一次性全倉追入，應分批；東元今日暫不配。</p>
+<p><strong>📊 產業輪動觀察</strong>：昨夜美股最強為AI伺服器ODM（DELL），台股對應族群神達/緯穎/鴻海今日關注；記憶體族群（南亞科、華邦電）因MU目標價大升可列入次要觀察。</p>
+<p><strong>🎯 總倉位控制</strong>：今日倉位建議上限60~65%，留空間應對6/1演講後波動。</p>
+</div>
+
+<p style="color:#555;font-size:12px;margin-top:14px;text-align:right">
+第二輪早盤版：Claude自動搜尋美盤數據，比對產業相關性，修正第一輪評級。不構成投資建議，投資有風險，請自行判斷並設置停損。
+｜ 20260529_2_claude.html　AIreport v2.2 Round2（執行於20260530早盤）
+</p>
+
+</body>
+</html>
