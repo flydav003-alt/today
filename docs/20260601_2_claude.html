@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股早盤操作指令（第二輪）｜ 20260601</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Times New Roman','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px}
+h1{font-size:20px;color:#00e5ff;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:0.5px}
+h2{font-size:16px;color:#ffcc00;margin:12px 0 8px;border-left:3px solid #ffcc00;padding-left:8px}
+h3{font-size:14px;color:#aaa;margin:8px 0 5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:4px;padding:10px}
+.card.green{border-left:3px solid #ff4444}
+.card.yellow{border-left:3px solid #ffcc00}
+.card.red{border-left:3px solid #00cc66}
+.card.blue{border-left:3px solid #4488ff}
+.card.orange{border-left:3px solid #ff8800}
+.card.horse{border-left:3px solid #cc88ff;background:#1a1520}
+.card.riskoff{border:2px solid #00cc66;background:#0a1a0a}
+.card.action{border:2px solid #ffcc00;background:#1a1500}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px}
+.tag.a{background:#440000;color:#ff4444}
+.tag.up{background:#440000;color:#ff4444}
+.tag.hold{background:#333;color:#aaa}
+.tag.dn{background:#003300;color:#00cc66}
+.tag.cancel{background:#222;color:#555}
+.tag.wait{background:#2a2000;color:#ffcc00}
+.tag.horse{background:#2a1540;color:#cc88ff}
+.score{float:right;font-size:22px;font-weight:bold;color:#00e5ff}
+.regime{background:#1a0a0a;border:2px solid #ff4444;border-radius:4px;padding:12px;margin-bottom:12px}
+.regime.neutral{border-color:#ffcc00}
+.regime.off{border-color:#00cc66;background:#0a1a0a}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.6;font-size:15px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:15px;line-height:1.6}
+.big{font-size:22px;font-weight:bold}
+.pool-tag{display:inline-block;background:#1a1a2e;color:#4488ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #4488ff}
+.horse-tag{display:inline-block;background:#2a1540;color:#cc88ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #cc88ff}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:3px;padding:8px;margin-top:6px}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:3px;padding:10px;margin-top:8px}
+.us-box{background:#0d0d1a;border:1px solid #4488ff;border-radius:3px;padding:8px;margin:5px 0}
+.key-price{font-size:20px;font-weight:bold;color:#ff4444}
+.key-stop{font-size:20px;font-weight:bold;color:#00cc66}
+.key-target{font-size:20px;font-weight:bold;color:#ffcc00}
+.key-rr{font-size:22px;font-weight:bold;color:#00e5ff}
+.key-pos{font-size:20px;font-weight:bold;color:#ff8800}
+.alert-box{background:#1a0000;border:2px solid #ff4444;border-radius:4px;padding:10px;margin-bottom:10px;text-align:center}
+</style>
+</head>
+<body>
+
+<h1>⚡ 台股早盤操作指令（第二輪）｜ 20260601</h1>
+<p style="color:#555;font-size:12px;margin-bottom:12px">
+檔名：20260601_2_claude.html　｜　執行於：20260602 早盤
+｜　輸入：第一輪交接清單　｜　Claude自動搜尋美盤數據　｜　AIreport v2.2 Round2
+</p>
+
+<!-- ====== 特別提示橫幅 ====== -->
+<div class="alert-box">
+⚡ <span class="up" style="font-weight:bold;font-size:14px">COMPUTEX 2026 開幕日 × Jensen Huang Vera Rubin 宣布量產 × MU +6.59%</span><br>
+<span class="warn" style="font-size:13px">全面強力 A Risk-On 確認 → 今日積極操作日，多檔升評</span>
+</div>
+
+<!-- ====== 零、美盤掃描結果 ====== -->
+<h2>▌零、美盤掃描結果（Claude自動搜尋完成）</h2>
+<div class="grid3">
+<div class="card blue">
+<h3>🇺🇸 關鍵指數（6/1 美盤收盤）</h3>
+<p>費半 SOX：<span class="up big">+3.5%</span>（估，約13,278）</p>
+<p>那斯達克：<span class="up">+0.5%</span>（≈27,107，指數「近乎持平」但半導體族群強勢）</p>
+<p>台積電 ADR：<span class="up">+4.1%</span>（$418.45→$435.63，52週新高）</p>
+<p>台指期夜盤（18:42 TST）：<span class="up">+209點（+0.45% from 日盤收）</span>，日盤已收+735點 (+1.62%)</p>
+<p style="color:#555;font-size:12px;margin-top:4px">※夜盤18:42為美盤開盤前初段，美盤強收後夜盤料續揚</p>
+</div>
+<div class="card">
+<h3>🔥 美股產業強弱（6/1 收盤）</h3>
+<p class="up">強勢：NVDA +5.6% ($223) ｜ MU +6.59% ($1,035) ｜ TSM +4.1%</p>
+<p class="up">強勢：DELL +8% (歷史新高$456) ｜ SMCI +1.8%</p>
+<p class="dn">弱勢：AMD 小跌（NVDA N1X搶PC市場） ｜ Intel 小跌</p>
+<p class="warn">VIX：約14~15（市場無恐慌，多頭情緒穩健）</p>
+<p style="font-size:12px;color:#555;margin-top:4px">MU本月漲幅達87.76%（1985年以來最強月），Q3 EPS June 24</p>
+</div>
+<div class="card">
+<h3>📰 隔夜重大消息</h3>
+<p class="up">🔴 Jensen Huang COMPUTEX keynote：Vera Rubin 正式宣布量產！</p>
+<p class="up">🔴 NVDA N1X ARM PC晶片正式公布（針對個人電腦市場，搶Intel/AMD）</p>
+<p class="up">🔴 NVDA確認台灣每年投入$150B，「Constellation」園區動土</p>
+<p class="up">🔴 TSM與NVDA合作擴大AI晶片製造</p>
+<p class="warn">⚠️ 中東地緣升溫，油價上漲（背景風險，未影響科技股）</p>
+<p class="warn">⚠️ CNBC警示：注意半導體倉位，「frothy chip rally」辯論升溫</p>
+</div>
+</div>
+
+<!-- 候選標的對應美股表現 -->
+<h2>▌一、候選標的 × 美股對應表現</h2>
+<table>
+<tr>
+  <th>台股標的</th><th>產業</th><th>對應美股指標</th>
+  <th>美股昨夜表現</th><th>相關強度</th><th>初步方向</th>
+</tr>
+<tr>
+  <td class="hl">3706 神達</td><td>AI伺服器/雲端DC</td>
+  <td>NVDA / DELL / SMCI</td>
+  <td class="up">NVDA +5.6% ｜ DELL +8% ｜ SMCI +1.8%</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑↑ 強力正面</td>
+</tr>
+<tr>
+  <td class="hl">8383 千附</td><td>精密零件供應鏈</td>
+  <td>SOX費半整體</td>
+  <td class="up">SOX 估+3.5%</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑ 正面</td>
+</tr>
+<tr>
+  <td class="hl">6414 樺漢</td><td>工業電腦/邊緣AI</td>
+  <td>SMCI / DELL</td>
+  <td class="up">DELL +8% ｜ SMCI +1.8%</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑ 正面（DELL升評觸發）</td>
+</tr>
+<tr>
+  <td class="hl">1326 台化</td><td>台塑集團AI DC/綠電</td>
+  <td>DXY / NEE（弱相關）</td>
+  <td class="warn">無直接對應美股訊號</td>
+  <td><span class="tag hold">弱相關</span></td>
+  <td class="warn">→ 中性（等個股公告）</td>
+</tr>
+<tr>
+  <td class="hl">6894 衛司特</td><td>半導體/高階PCB廢酸</td>
+  <td>MU（Micron）</td>
+  <td class="up">MU +6.59% ($1,035，52週新高)，HBM 2026全售罄</td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="up">↑↑ 強力正面</td>
+</tr>
+<tr>
+  <td class="hl" style="color:#cc88ff">1815 富喬 ⭐黑馬</td><td>PCB/玻纖材料</td>
+  <td>SOX費半</td>
+  <td class="up">SOX 估+3.5%</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 正面但需確認個股量能</td>
+</tr>
+</table>
+
+<!-- ====== 二、Regime修正 ====== -->
+<div class="regime">
+<h2>▌二、今日台股開盤 Regime → <span class="up big">A Risk-On（強力確認）</span></h2>
+<div class="grid3">
+<div>
+<h3>與第一輪比較</h3>
+<p>第一輪判斷：A Risk-On（強力）</p>
+<p>今日修正：<span class="up">維持 A → 進一步強化確認</span></p>
+<p>修正原因：SOX估+3.5% × TSM ADR +4.1% × NASDAQ正收 × Vera Rubin量產宣布</p>
+</div>
+<div>
+<h3>系統性風險檢查</h3>
+<p>費半SOX：估+3.5% <span class="up">✅ 遠超+1%門檻</span></p>
+<p>台積電ADR：+4.1%（$435.63，52週新高） <span class="up">✅ 健康</span></p>
+<p>VIX：約14~15 <span class="up">✅ 無恐慌</span></p>
+<p><span class="warn">⚠️ 注意：</span>「frothy rally」警示浮現，不追高原則堅守</p>
+</div>
+<div>
+<h3>今日整體操作基調</h3>
+<p><span class="up" style="font-size:16px;font-weight:bold">積極出擊</span></p>
+<p>COMPUTEX 2026開幕日 = 催化劑正式啟動</p>
+<p>AI伺服器供應鏈 + 記憶體族群雙核燃爆</p>
+<p class="warn">最大風險：跳空過高（>5%）不追，等回測確認</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 三、逐檔評級修正總覽 ====== -->
+<h2>▌三、逐檔評級修正總覽</h2>
+<table>
+<tr>
+  <th>標的</th><th>第一輪評級</th><th>美盤依據</th>
+  <th>今日評級</th><th>今日倉位</th><th>開盤策略摘要</th>
+</tr>
+<tr>
+  <td class="hl">3706 神達</td><td>主力候選 75分</td>
+  <td class="up">NVDA +5.6% + DELL +8% + Vera Rubin量產（強相關）</td>
+  <td><span class="tag up">⬆️ 升評</span></td>
+  <td class="up">10~15%（核心重倉）</td>
+  <td>開盤回測91~93進場，等大盤穩定後加碼</td>
+</tr>
+<tr>
+  <td class="hl">8383 千附</td><td>主力候選 74分</td>
+  <td class="up">SOX估+3.5%（升評條件：費半>0.5% ✅）</td>
+  <td><span class="tag up">⬆️ 升評</span></td>
+  <td class="up">5~8%（積極參與）</td>
+  <td>開盤回測62~63.5進，跳空>4%不追</td>
+</tr>
+<tr>
+  <td class="hl">6414 樺漢</td><td>主力候選 73分 B級</td>
+  <td class="up">DELL +8%歷史新高（升評條件DELL>2% ✅）</td>
+  <td><span class="tag up">⬆️ 升評</span></td>
+  <td class="up">5~8%（K值偏高保守加倉）</td>
+  <td>等開盤15分鐘確認守370，跳空>3%不追</td>
+</tr>
+<tr>
+  <td class="hl">1326 台化</td><td>主力候選 73分 A級</td>
+  <td class="warn">無直接對應美股，需等個股公告觸發</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td>5~8%（不變）</td>
+  <td>維持原進場區52~53.5，等AI DC合作公告</td>
+</tr>
+<tr>
+  <td class="hl">6894 衛司特</td><td>主力候選 72分 B級</td>
+  <td class="up">MU +6.59% ($1,035，HBM 2026售罄，強相關）</td>
+  <td><span class="tag up">⬆️ 升評</span></td>
+  <td class="up">5~8%（升評加倉）</td>
+  <td>開盤回測394~402進場，MU暴漲直接利多</td>
+</tr>
+<tr>
+  <td class="hl" style="color:#cc88ff">1815 富喬 ⭐</td><td>黑馬候選 66分</td>
+  <td class="warn">SOX+3.5%正面，但週線需等本週完整收線確認</td>
+  <td><span class="tag wait">⏳ 開盤確認</span></td>
+  <td>3~5%（黑馬小倉）</td>
+  <td>開盤量比>1.5x + 守106才進，否則等待</td>
+</tr>
+</table>
+
+<!-- ====== 四、逐檔開盤操作指令（核心） ====== -->
+<h2>▌四、逐檔開盤操作指令（詳細）</h2>
+
+<!-- 3706 神達 升評 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評　3706 神達 <span class="score">78</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>NVDA +5.6%（$223）</strong>｜ <strong>DELL +8%（歷史新高$456）</strong>｜ SMCI +1.8%（強相關）</p>
+<p>🔑 Jensen Huang COMPUTEX keynote：<span class="up">Vera Rubin NVL72 正式宣布量產</span>，AI伺服器供應鏈直接受益</p>
+<p>🔑 NVDA確認台灣$150B年度投入，Vera Rubin生態系統包含台灣ODM廠商（廣達、Foxconn等）</p>
+<p>🔑 MU +6.59%（HBM 2026全售罄）→ AI伺服器記憶體需求爆炸，進一步驗證AI伺服器超週期</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：台積電開盤方向（同向則信心加倍）、台指期是否跳空>2%（若>5%等回測）、外資是否持續買超</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：開盤回測 91~93 區間買入（最佳）；若開盤跳空但守93，可等第一根5分K拉回確認</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">91~94</span>　<span class="warn">跳空>5%（>98.2）不追，等拉回</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">87</span>（維持第一輪設定，日收盤破87或投信轉賣超）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">103~108</span>（原目標103，COMPUTEX持續期間可守至108前高）</p>
+<div class="rr-box">
+<p>升評後 RR ≈ <span class="key-rr">2.5:1</span>　｜　建議倉位 <span class="key-pos">10~15%</span>（較第一輪加倉，核心重倉）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：COMPUTEX 6/2–6/5 仍在進行，若Jensen Huang個別點名神達或AI伺服器供應鏈，有機會觸發進一步拉升。但媒體若大幅報導個股，擁擠度升高後需觀察量能。</p>
+<p><span class="warn">⚠️ 持有至COMPUTEX結束（6/5）前再評估是否持有</span></p>
+</div>
+</div>
+
+<!-- 8383 千附 升評 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評　8383 千附 <span class="score">76</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>SOX費半估+3.5%</strong>（升評條件：費半>0.5% ✅ 大幅超標）</p>
+<p>產業背景：COMPUTEX 2026開幕，精密零件供應鏈 Laggard Catch-up 題材確認</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場時機</span>：開盤後等15分鐘確認方向，回測62~63.5買入</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">62~63.5</span>　<span class="warn">跳空>4%（>66.8）不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">59</span>（維持第一輪，日收盤破59失效）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">71</span>（前高法）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.2:1</span>　｜　建議倉位 <span class="key-pos">5~8%</span></p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：1-2筆法人籌碼數據待確認（交接清單標注「待早盤版補充」）。建議開盤後先觀察量比是否持續，若量縮進場則降倉至5%。</p>
+</div>
+</div>
+
+<!-- 6894 衛司特 升評 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評　6894 衛司特 <span class="score">75</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>MU +6.59%（$971→$1,035）</strong>，盤中52週新高$1,046（強相關）</p>
+<p>🔑 關鍵：MU May月漲幅87.76%（1985年以來最強月），HBM 2026產能全售罄</p>
+<p>🔑 Raymond James 上調目標價至$1,100，AI記憶體需求爆炸 → 高階PCB廢酸量放大邏輯確認</p>
+<p>🔑 升評條件：「MU/半導體族群漲>2%」→ MU +6.59% ✅ 大幅超標</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：MU美股是否延續強勢（目前已知盤後+0.07%，穩定）、台灣PCB族群（欣興、南電）開盤方向</p>
+<p><span class="buy">📍 進場時機</span>：開盤回測394~402區間買入</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">394~402</span>（原進場區）　<span class="warn">跳空>4%不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">382</span>（維持第一輪設定）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">440</span>（技術量測）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.6:1</span>　｜　建議倉位 <span class="key-pos">5~8%</span>（較第一輪升評，可參與）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：K值82.4偏高（B級），MU確認後仍需注意高檔震盪。若開盤跳空>409，等確認守住再進。MU Q3 EPS June 24 為下一個關鍵時間點。</p>
+</div>
+</div>
+
+<!-- 6414 樺漢 升評 -->
+<div class="card green" style="margin-bottom:10px">
+<h2>⬆️ 升評　6414 樺漢 <span class="score">75</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 <strong>DELL +8%（$456，歷史新高）</strong>（升評條件：DELL大漲>2% ✅）</p>
+<p>🔑 DELL AI伺服器需求爆發（獲利創歷史新高），工業電腦/邊緣AI Sympathy Play觸發</p>
+<p>🔑 SMCI在COMPUTEX展出12款新伺服器平台（含Intel Xeon 6+），邊緣AI生態確立</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：觀察開盤是否守370，若開盤直接跳空>387（>3%）等回測；注意K值83.4偏高，需更謹慎控制進場位置</p>
+<p><span class="buy">📍 進場時機</span>：等開盤15分鐘確認守370後進場（不追高開）</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">365~375</span>（回測進場優先）　<span class="warn">跳空>3%（>386.8）不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">355</span>（維持第一輪設定）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">405</span>（前高法）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.7:1</span>　｜　建議倉位 <span class="key-pos">5~8%</span>（K值偏高保守處理，不重倉）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：K值83.4偏高為本標的最大風險，建議先小倉進（3%）確認站穩後再加碼。DELL雖創歷史新高，但樺漢是Sympathy Play，關聯性中等，控制風險優先。</p>
+</div>
+</div>
+
+<!-- 1326 台化 維持 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持　1326 台化 <span class="score" style="color:#4488ff">73</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 對應指標：DXY美元指數、NEE綠電（弱相關）→ <span class="warn">無直接美股指標觸發升評條件</span></p>
+<p>台化升評條件為「AI DC合作正式公告或台塑集團合約消息」→ <span class="warn">今夜美盤未出現相關消息</span></p>
+<p>COMPUTEX 2026雖為全面AI利多，但台化屬基礎設施/地產/綠電角色，距離AI伺服器利多鏈條較遠</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="key-price">52~53.5</span>（與第一輪相同）</p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">50.5</span>（維持，破整數50關鍵支撐）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">58~59</span>　｜　倉位 <span class="key-pos">5~8%</span>（不變）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.3:1</span></p>
+</div>
+<p><span class="warn">📌 今日策略</span>：Regime A Risk-On支撐進場，但個股催化劑未觸發，建議量能觀察進場（量縮開低不進）。若台塑集團今日有AI DC合作公告，立即升評加碼。</p>
+<p><span class="warn">⚠️ 注意</span>：今日COMPUTEX全面AI題材浮現，資金可能優先流向AI伺服器直接供應鏈（如神達），台化資金吸引力相對較弱。若大盤跳空，台化可能開高後承壓。</p>
+</div>
+</div>
+
+<!-- 1815 富喬 黑馬維持 -->
+<div class="card horse" style="margin-bottom:10px">
+<h2>⏳ 開盤確認　1815 富喬 ⭐黑馬 <span class="score" style="color:#cc88ff">66</span></h2>
+<div style="clear:both"></div>
+<div class="us-box">
+<p>🇺🇸 SOX費半估+3.5%（正面背景）｜但富喬為PCB/玻纖材料，中相關</p>
+<p>升評條件為「量比持續>1.5x + SOX週線正收」→ 今天是週一，週線收線需等週五，條件半達標</p>
+</div>
+<p><span class="tag horse">今日策略</span>：維持黑馬狀態，開盤確認以下條件後進場：</p>
+<ul>
+<li>✅ 開盤量比 >1.5x（資金持續流入信號）</li>
+<li>✅ 開盤守106以上（不破前低）</li>
+<li>✅ 大盤台指維持強勢（不跌破開盤價）</li>
+</ul>
+<p class="warn">📍 觀察進場：<span class="key-price">106~108.5</span>　停損：<span class="key-stop">102</span>　目標：<span class="key-target">120</span></p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.4:1</span>　｜　倉位 <span class="key-pos">3~5%</span>（黑馬小倉，嚴格停損）</p>
+</div>
+<p class="warn">⚠️ 提醒：黑馬不急著進，今日資金主力優先流向神達/衛司特等AI伺服器直接受益股。富喬若開盤量縮，暫不進場。</p>
+</div>
+
+<!-- ====== 五、今日開盤執行優先順序 ====== -->
+<h2>▌五、今日開盤執行優先順序</h2>
+<div class="card action">
+<h3>⏰ 09:00 開盤前確認清單</h3>
+<p>① 台積電開盤方向（TSM ADR +4.1% → 台積電應強開，確認大盤基調）</p>
+<p>② 台指期開盤缺口 vs 夜盤預估（預計高開100~300點，若>500點需謹慎不追）</p>
+<p>③ 神達（3706）開盤量是否爆量延續</p>
+<p>④ 確認MU盤後是否維持強勢（查最新盤後報價）</p>
+<div class="sep"></div>
+<h3>📋 今日執行順序</h3>
+<table>
+<tr><th>順序</th><th>標的</th><th>動作</th><th>觸發條件</th><th>倉位</th></tr>
+<tr>
+  <td class="up">第1優先</td>
+  <td class="hl">3706 神達</td>
+  <td class="buy">進場（回測買入）</td>
+  <td>開盤守91以上 + 台積電強開</td>
+  <td class="up"><strong>10~15%</strong></td>
+</tr>
+<tr>
+  <td class="up">第2優先</td>
+  <td class="hl">6894 衛司特</td>
+  <td class="buy">進場（回測買入）</td>
+  <td>開盤回測394~402，PCB族群同向</td>
+  <td class="up"><strong>5~8%</strong></td>
+</tr>
+<tr>
+  <td class="warn">第3優先</td>
+  <td class="hl">8383 千附</td>
+  <td class="warn">等15分鐘確認後進</td>
+  <td>守62以上 + 量比>1.0x</td>
+  <td class="warn"><strong>5~8%</strong></td>
+</tr>
+<tr>
+  <td class="warn">第4優先</td>
+  <td class="hl">6414 樺漢</td>
+  <td class="warn">等15分鐘確認後小倉進</td>
+  <td>守370 + 量確認，K值偏高先進3%</td>
+  <td class="warn"><strong>3~5%</strong></td>
+</tr>
+<tr>
+  <td>第5優先</td>
+  <td class="hl">1326 台化</td>
+  <td>等量能確認後進</td>
+  <td>量縮開低不進；量增且守52.5才進</td>
+  <td><strong>5~8%</strong></td>
+</tr>
+<tr>
+  <td class="warn">確認進場</td>
+  <td class="hl" style="color:#cc88ff">1815 富喬 ⭐</td>
+  <td class="warn">等開盤量確認</td>
+  <td>量比>1.5x + 守106</td>
+  <td class="warn"><strong>3~5%</strong></td>
+</tr>
+</table>
+<div class="sep"></div>
+<h3>📊 今日最大總倉位控制</h3>
+<p>若全部條件達標：神達15% + 衛司特8% + 千附8% + 樺漢5% + 台化8% + 富喬5% = <span class="up" style="font-weight:bold">~49%</span></p>
+<p class="warn">⚠️ 建議實際操作：先進前3優先共~28%，觀察30分鐘後市場確認強勢再加入後2優先。</p>
+</div>
+
+<!-- ====== 六、催化劑日曆更新 ====== -->
+<h2>▌六、催化劑日曆（含美盤新消息更新）</h2>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響產業/標的</th><th>較昨日變化</th><th>方向</th></tr>
+<tr>
+  <td class="up">6/1 ✅</td>
+  <td>🔴 Jensen Huang GTC Taipei Keynote（已發生）</td>
+  <td>AI伺服器全供應鏈 神達/廣達</td>
+  <td class="up">Vera Rubin量產宣布，N1X AI PC晶片公布</td>
+  <td class="up">強烈利多</td>
+</tr>
+<tr>
+  <td class="up">6/2 ⬅️今日</td>
+  <td>🔴 COMPUTEX 2026 正式開幕（Day 1）</td>
+  <td>AI伺服器/邊緣AI全產業鏈，神達/樺漢/廣達</td>
+  <td class="up">大單宣布日，Intel/Qualcomm CEO演講日</td>
+  <td class="up">強力利多（持續監控是否有AI大單點名台廠）</td>
+</tr>
+<tr>
+  <td class="warn">6/3</td>
+  <td>🟡 COMPUTEX 2026 Day 2</td>
+  <td>同上</td>
+  <td>持續追蹤媒體是否點名個股</td>
+  <td class="warn">觀察（擁擠度是否升高）</td>
+</tr>
+<tr>
+  <td class="warn">6/4</td>
+  <td>🟡 COMPUTEX 2026 Day 3</td>
+  <td>同上</td>
+  <td class="warn">若媒體開始大量點名個股 → 觸發擁擠度扣分</td>
+  <td class="warn">觀察</td>
+</tr>
+<tr>
+  <td>6/5</td>
+  <td>🟡 COMPUTEX 2026 最後一天</td>
+  <td>全產業鏈</td>
+  <td>COMPUTEX結束後短線資金可能獲利了結</td>
+  <td class="warn">提前警惕「題材出盡」</td>
+</tr>
+<tr>
+  <td class="warn">6/24</td>
+  <td>🔴 MU Q3 FY2026 財報</td>
+  <td>記憶體族群、衛司特（PCB廢酸）</td>
+  <td class="up">新增：Raymond James目標價上調至$1,100</td>
+  <td class="up">強力利多預期（HBM 2026售罄）</td>
+</tr>
+<tr>
+  <td class="warn">待確認</td>
+  <td>🟡 台化 AI DC合作正式公告</td>
+  <td>1326 台化</td>
+  <td>股東會已揭露框架，正式簽約待定</td>
+  <td class="warn">一旦公告立即升評</td>
+</tr>
+</table>
+
+<!-- ====== 七、最終結論 ====== -->
+<h2>▌七、早盤交易員最終結論</h2>
+<div class="card blue">
+<p><strong>今日Regime</strong>：<span class="up" style="font-size:16px;font-weight:bold">A Risk-On（強力確認，COMPUTEX Vera Rubin量產日）</span>　較第一輪：升強確認</p>
+<div class="sep"></div>
+<p><strong>🥇 第1優先</strong>：<span class="up">3706 神達</span>。NVDA +5.6% × DELL歷史新高 × Vera Rubin量產宣布，AI伺服器供應鏈甜蜜點。進場 <span class="key-price">91~94</span>，停損 <span class="key-stop">87</span>，目標 <span class="key-target">103~108</span>，倉位 <span class="key-pos">10~15%</span>。</p>
+<p><strong>🥈 第2優先</strong>：<span class="up">6894 衛司特</span>。MU +6.59%（HBM 2026全售罄），高階PCB廢酸需求邏輯強化。進場 <span class="key-price">394~402</span>，倉位 <span class="key-pos">5~8%</span>。</p>
+<p><strong>🥉 第3優先</strong>：<span class="up">8383 千附</span>。SOX +3.5%升評條件大幅超標，精密零件供應鏈Laggard補漲。進場 <span class="key-price">62~63.5</span>，倉位 <span class="key-pos">5~8%</span>。</p>
+<p><strong>🔶 第4優先</strong>：<span class="up">6414 樺漢</span>。DELL歷史新高觸發升評，邊緣AI Sympathy Play，K值偏高保守進場。等開盤15分鐘確認守370，先進 <span class="key-pos">3%</span> 再觀察。</p>
+<p><strong>➡️ 維持</strong>：<span class="warn">1326 台化</span>。弱相關，無美股觸發，量縮開低不進。等AI DC正式公告再升評。</p>
+<p><strong>⭐ 黑馬確認</strong>：<span style="color:#cc88ff">1815 富喬</span> 開盤量比>1.5x + 守106才進，否則觀望。倉位3~5%。</p>
+<div class="sep"></div>
+<p><strong>⚠️ 系統停損線狀態</strong>：SOX估+3.5%，距離-2%停損線極遠，今日正常積極操作。</p>
+<p><strong>🚨 最大風險</strong>：① 開盤跳空過高（>5%）不追，等回測確認再進；② COMPUTEX後半段（6/3起）若個股媒體曝光度暴增，擁擠度升高需降倉；③ AMD/Intel因N1X受壓，注意非AI PC/CPU族群走弱傳染。</p>
+<p><strong>🔥 COMPUTEX催化劑核心邏輯</strong>：Vera Rubin NVL72量產 = AI伺服器Capex週期正式進入Rubin Era，台灣ODM/伺服器供應鏈6月題材最強期。神達是本周最直接受益標的。</p>
+<p><strong>📊 產業輪動觀察</strong>：昨夜美股最強：記憶體（MU +6.59%）+ AI伺服器（DELL +8%）+ AI算力（NVDA +5.6%）。弱勢：x86 PC CPU（AMD/Intel，被NVDA N1X競爭）。今日台股關注記憶體/高階PCB族群是否補漲。</p>
+</div>
+
+<p style="color:#555;font-size:12px;margin-top:14px;text-align:right">
+第二輪早盤版：Claude自動搜尋美盤數據，比對產業相關性，修正第一輪評級。不構成投資建議，投資有風險。
+｜ 20260601_2_claude.html　AIreport v2.2 Round2（執行於20260602早盤）
+</p>
+</body>
+</html>
