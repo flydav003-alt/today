@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股早盤操作指令（第二輪）｜ 20260603</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Times New Roman','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px}
+h1{font-size:20px;color:#00e5ff;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:0.5px}
+h2{font-size:16px;color:#ffcc00;margin:12px 0 8px;border-left:3px solid #ffcc00;padding-left:8px}
+h3{font-size:14px;color:#aaa;margin:8px 0 5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:4px;padding:10px}
+.card.green{border-left:3px solid #ff4444}
+.card.yellow{border-left:3px solid #ffcc00}
+.card.red{border-left:3px solid #00cc66}
+.card.blue{border-left:3px solid #4488ff}
+.card.orange{border-left:3px solid #ff8800}
+.card.horse{border-left:3px solid #cc88ff;background:#1a1520}
+.card.riskoff{border:2px solid #ff8800;background:#1a0f00}
+.card.action{border:2px solid #ffcc00;background:#1a1500}
+.card.warn-avgo{border:2px solid #ff4444;background:#1a0800}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px}
+.tag.up{background:#440000;color:#ff4444}
+.tag.hold{background:#333;color:#aaa}
+.tag.dn{background:#003300;color:#00cc66}
+.tag.cancel{background:#222;color:#555}
+.tag.wait{background:#2a2000;color:#ffcc00}
+.tag.horse{background:#2a1540;color:#cc88ff}
+.score{float:right;font-size:22px;font-weight:bold;color:#00e5ff}
+.regime{background:#1a0a0a;border:2px solid #ff4444;border-radius:4px;padding:12px;margin-bottom:12px}
+.regime.neutral{border-color:#ffcc00;background:#1a1000}
+.regime.off{border-color:#00cc66;background:#0a1a0a}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.6;font-size:15px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:15px;line-height:1.6}
+.big{font-size:22px;font-weight:bold}
+.pool-tag{display:inline-block;background:#1a1a2e;color:#4488ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #4488ff}
+.horse-tag{display:inline-block;background:#2a1540;color:#cc88ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #cc88ff}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:3px;padding:8px;margin-top:6px}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:3px;padding:10px;margin-top:8px}
+.us-box{background:#0d0d1a;border:1px solid #4488ff;border-radius:3px;padding:8px;margin:5px 0}
+.avgo-alert{background:#200a00;border:2px solid #ff4444;border-radius:3px;padding:8px;margin:5px 0}
+.key-price{font-size:20px;font-weight:bold;color:#ff4444}
+.key-stop{font-size:20px;font-weight:bold;color:#00cc66}
+.key-target{font-size:20px;font-weight:bold;color:#ffcc00}
+.key-rr{font-size:22px;font-weight:bold;color:#00e5ff}
+.key-pos{font-size:20px;font-weight:bold;color:#ff8800}
+</style>
+</head>
+<body>
+<h1>⚡ 台股早盤操作指令（第二輪）｜ 20260603</h1>
+<p style="color:#555;font-size:12px;margin-bottom:12px">
+檔名：20260603_2_claude.html　｜　執行於：20260604 早盤
+｜　輸入：第一輪交接清單　｜　Claude自動搜尋美盤數據　｜　AIreport v2.2 Round2
+</p>
+
+<!-- ====== 🚨 AVGO 財報特別警報 ====== -->
+<div class="card warn-avgo" style="margin-bottom:14px">
+<h2 style="color:#ff4444;border-left-color:#ff4444">🚨 重大事件警報：Broadcom (AVGO) 財報後盤後重挫 -8~12%</h2>
+<div class="avgo-alert">
+<p class="up" style="font-size:15px;font-weight:bold">AVGO 盤後從 $479 跌至最低 $445（-7~8%），盤後持續下壓</p>
+<p style="font-size:13px;margin-top:6px">財報解析：營收 $22.19B（微超預期 $22.04B），EPS $2.44（超預期 $2.40），但 AI 晶片 Q3 指引僅 $16B（低於市場預期 $17.2B），且 CEO Hock Tan 未上調全年 $100B AI 目標 → 市場解讀為「利好出盡 + 指引保守」</p>
+<p class="warn" style="font-size:13px;margin-top:4px">⚠️ 台股影響：精成科（PCB/AI供應鏈）、凡甲（AI伺服器）直接受影響。AVGO 是 CoWoS / AI 供應鏈核心客戶，盤後跌幅將壓制今日台股 AI 族群情緒。</p>
+<p class="dn" style="font-size:13px;margin-top:4px">反向觀察：MRVL +3.73%（Jensen Huang Computex 加持維持強勢），TSM -1.72%，NVDA -3~4%。AI 族群今日分化明顯。</p>
+</div>
+</div>
+
+<!-- ====== 零、美盤掃描結果 ====== -->
+<h2>▌零、美盤掃描結果（Claude自動搜尋完成）</h2>
+<div class="grid3">
+<div class="card blue">
+<h3>🇺🇸 關鍵指數（6/3 美盤）</h3>
+<p>費半 SOX：<span class="dn big">約 -5.5%</span></p>
+<p style="font-size:12px;color:#666">（前日13,726，6/3日盤區間12,631~13,088，AVGO財報後盤後估再壓）</p>
+<p>那斯達克：<span class="dn">-0.89%</span>（27,093→26,851）</p>
+<p>台積電 ADR：<span class="dn">-1.72%</span>（$446.52→$438.99）</p>
+<p>台指期夜盤：<span class="dn">46,537（-149點，-0.32%）</span></p>
+<p style="font-size:11px;color:#666;margin-top:4px">AVGO 盤後 -8~12% 尚未計入台指期夜盤收盤值</p>
+</div>
+<div class="card">
+<h3>🔥 美股產業強弱（6/3）</h3>
+<p class="up">強勢：MRVL <span class="up">+3.73%</span>（Jensen Huang 背書）</p>
+<p class="up">強勢：INTC <span class="up">+3.52%</span>，QCOM <span class="up">+3.65%</span>（CPU AI 概念）</p>
+<p class="dn">弱勢：NVDA <span class="dn">-3~4%</span>，TSM <span class="dn">-1.72%</span></p>
+<p class="dn">弱勢：AVGO <span class="dn">盤後 -8~12%</span>（財報利好出盡）</p>
+<p class="warn">中性：ENPH 綠能、消費類 ETF 平盤</p>
+</div>
+<div class="card">
+<h3>📰 隔夜重大消息</h3>
+<p class="up">✅ MRVL：Jensen Huang 於 Computex 稱其為「下一個兆元公司」，延續強勢</p>
+<p class="dn">❌ AVGO：Q3 AI 指引 $16B 遜於預期 $17.2B，未上調全年目標，盤後暴跌</p>
+<p class="warn">⚠️ 伊朗發射彈道飛彈攻擊科威特與巴林，油價急漲，地緣政治升溫</p>
+<p class="warn">⚠️ COMPUTEX 2026 第三日（6/3~6/6）持續進行中，NVDA 供應鏈展示仍在推進</p>
+</div>
+</div>
+
+<!-- 候選標的對應美股表現 -->
+<h2>▌一、候選標的 × 美股對應表現</h2>
+<table>
+<tr>
+  <th>台股標的</th><th>產業</th><th>對應美股指標</th><th>美股6/3表現</th><th>相關強度</th><th>初步方向</th>
+</tr>
+<tr>
+  <td class="hl">6191 精成科</td>
+  <td>PCB/AI伺服器</td>
+  <td>NVDA / MRVL / AMAT</td>
+  <td><span class="dn">NVDA -3~4%｜AVGO盤後 -8~12%</span></td>
+  <td><span class="tag up">中強相關</span></td>
+  <td class="dn">↓ 偏負面（AVGO利好出盡壓制）</td>
+</tr>
+<tr>
+  <td class="hl">1722 台肥</td>
+  <td>半導體化工/資產</td>
+  <td>TSM ADR / NVDA</td>
+  <td><span class="dn">TSM -1.72%，NVDA -3~4%</span></td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性偏弱（台積電ADR跌但題材自身仍強）</td>
+</tr>
+<tr>
+  <td class="hl">2105 正新</td>
+  <td>輪胎/電動車</td>
+  <td>消費ETF / ONSEMI（間接）</td>
+  <td><span class="warn">ONSEMI 約持平，消費類中性</span></td>
+  <td><span class="tag hold">弱相關</span></td>
+  <td class="warn">→ 中性（受大盤情緒影響，自身題材不變）</td>
+</tr>
+<tr>
+  <td class="hl">2406 國碩</td>
+  <td>綠能/太陽能</td>
+  <td>ENPH / 綠能ETF</td>
+  <td><span class="warn">ENPH 約持平，綠能族群中性</span></td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性（大盤轉弱稍有壓力）</td>
+</tr>
+<tr>
+  <td class="hl">6244 茂迪</td>
+  <td>太陽能/綠電</td>
+  <td>ENPH / 太陽能ETF</td>
+  <td><span class="warn">ENPH 約持平</span></td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性（量比偏低問題未解）</td>
+</tr>
+<tr>
+  <td class="hl">3526 凡甲⭐黑馬/爆量</td>
+  <td>AI伺服器供應鏈</td>
+  <td>NVDA / AI供應鏈</td>
+  <td><span class="dn">NVDA -3~4%，AVGO 盤後 -8~12%</span></td>
+  <td><span class="tag up">強相關</span></td>
+  <td class="dn">↓ 偏負面（AVGO財報壓制，需謹慎）</td>
+</tr>
+<tr>
+  <td class="hl">5536 聖暉*⭐黑馬</td>
+  <td>AI廠房工程</td>
+  <td>NVDA（AI資本支出方向）</td>
+  <td><span class="dn">NVDA -3~4%，整體AI情緒降溫</span></td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性偏弱（廠房工程滯後性稍強，但氣氛偏弱）</td>
+</tr>
+</table>
+
+<!-- ====== 二、Regime修正 ====== -->
+<div class="regime neutral">
+<h2>▌二、今日台股開盤 Regime → <span class="warn big">B 中性偏弱（接近Risk-Off邊界）</span></h2>
+<div class="grid3">
+<div>
+<h3>與第一輪比較</h3>
+<p>第一輪判斷：<span class="up">A Risk-On</span></p>
+<p>今日修正：<span class="warn">降級 → B 中性偏弱</span></p>
+<p>修正原因：SOX 日盤 -5%+ 且 AVGO 盤後 -8~12%，TSM ADR -1.72%，整體 AI 族群承壓</p>
+<p style="font-size:12px;color:#666;margin-top:4px">※ 台指期夜盤僅 -0.32%，因 AVGO 財報是盤後公布，夜盤尚未完全反映</p>
+</div>
+<div>
+<h3>系統性風險檢查</h3>
+<p>費半 SOX：約 -5.5% <span class="dn" style="font-weight:bold">⚠️ 遠超 -2% 停損線！</span></p>
+<p>台積電 ADR：-1.72% <span class="warn">偏弱</span></p>
+<p>NVDA：約 -3~4% <span class="dn">走弱</span></p>
+<p>台指期夜盤：-0.32%（AVGO財報前收盤，實際開盤或更弱）</p>
+<p style="color:#ff4444;font-weight:bold;font-size:13px;margin-top:6px">⚠️ SOX 跌幅 > -2% 系統性停損線已觸發！</p>
+</div>
+<div>
+<h3>今日整體操作基調</h3>
+<p><span class="warn" style="font-size:16px;font-weight:bold">保守縮手，精選個股</span></p>
+<p class="warn">AVGO 盤後 -8~12% 為最大壓力源</p>
+<p>但 MRVL +3.73%（COMPUTEX/Jensen Huang效應）提供部分支撐</p>
+<p>綠能/輪胎等非 AI 族群相對隔離</p>
+<p class="warn" style="margin-top:6px">最大風險：AI 族群今日開盤跳空殺低，若台積電同步破 MA5 → 全面縮手</p>
+</div>
+</div>
+</div>
+
+<!-- 系統性停損說明 -->
+<div class="card riskoff" style="margin-bottom:12px">
+<h2 style="color:#ff8800;border-left-color:#ff8800">⚠️ 系統性停損線觸發（部分啟動）</h2>
+<p class="warn" style="font-size:15px;font-weight:bold">費半 SOX 日盤估算跌幅約 -5.5%，遠超 -2% 全面降倉停損線</p>
+<div class="sep"></div>
+<ul>
+<li>AI 強相關標的（精成科、凡甲）：倉位降至最低，若跳空低開超過 3% 建議今日觀察不進場</li>
+<li>中相關標的（台肥、聖暉）：倉位縮減至 3~4%，等開盤確認後謹慎進場</li>
+<li>弱相關標的（正新、國碩、茂迪）：自身題材未受影響，可依個股走勢判斷，但降低最大倉位</li>
+<li>AVGO 財報「利好出盡」效應：今日 AI 供應鏈族群預計開盤承壓，特別注意大盤跳空缺口</li>
+</ul>
+<p class="warn" style="margin-top:8px">例外處理：若台指期開盤實際缺口小於 -0.5%（即 AVGO 影響被消化），且 MRVL 效應帶動 AI 族群部分回升，可維持小倉位操作</p>
+</div>
+
+<!-- ====== 三、逐檔評級修正總覽 ====== -->
+<h2>▌三、逐檔評級修正總覽</h2>
+<table>
+<tr>
+  <th>標的</th><th>第一輪</th><th>美盤依據</th><th>今日評級</th><th>今日倉位</th><th>開盤策略摘要</th>
+</tr>
+<tr>
+  <td class="hl">6191 精成科</td>
+  <td>主力A</td>
+  <td class="dn">AVGO 盤後 -8%，NVDA -3%，AI 整體降溫</td>
+  <td><span class="tag dn">⬇️ 降評</span></td>
+  <td class="dn">0~3%（大幅縮倉）</td>
+  <td>開盤跳空 >3% 不追，若開平整理才考慮小倉</td>
+</tr>
+<tr>
+  <td class="hl">1722 台肥</td>
+  <td>主力A</td>
+  <td class="warn">TSM ADR -1.72%（中相關），自身題材仍在</td>
+  <td><span class="tag hold">➡️ 維持（降倉）</span></td>
+  <td class="warn">3~5%（縮倉）</td>
+  <td>等開盤 15 分鐘確認台積電方向再決定</td>
+</tr>
+<tr>
+  <td class="hl">2105 正新</td>
+  <td>主力B</td>
+  <td class="warn">ONSEMI 持平，電動車/輪胎受大盤情緒壓制</td>
+  <td><span class="tag hold">➡️ 維持</span></td>
+  <td class="warn">3~5%（不加倉）</td>
+  <td>守 33.5 支撐，若大盤穩住可低吸</td>
+</tr>
+<tr>
+  <td class="hl">2406 國碩</td>
+  <td>主力B</td>
+  <td class="warn">綠能族群中性，大盤偏弱</td>
+  <td><span class="tag hold">➡️ 維持（保守）</span></td>
+  <td class="warn">2~4%</td>
+  <td>等開盤確認，不主動追</td>
+</tr>
+<tr>
+  <td class="hl">6244 茂迪</td>
+  <td>主力（量比低降評）</td>
+  <td class="warn">ENPH 持平，量比問題未解</td>
+  <td><span class="tag cancel">❌ 今日暫停</span></td>
+  <td class="dn">0%</td>
+  <td>量比低 + 大盤偏弱，今日不操作</td>
+</tr>
+<tr>
+  <td class="hl">3526 凡甲⭐</td>
+  <td>黑馬/爆量確認</td>
+  <td class="dn">NVDA -3%，AVGO盤後 -8%，AI 供應鏈壓力大</td>
+  <td><span class="tag dn">⬇️ 降評</span></td>
+  <td class="dn">0%（取消）</td>
+  <td>AVGO 壓制 AI 供應鏈，今日爆量確認情境三機率大幅升高</td>
+</tr>
+<tr>
+  <td class="hl">5536 聖暉*⭐</td>
+  <td>黑馬</td>
+  <td class="warn">NVDA -3~4%，廠房工程題材滯後性較強</td>
+  <td><span class="tag hold">➡️ 維持（小倉觀察）</span></td>
+  <td class="warn">0~3%（最高 3%）</td>
+  <td>等量比放大至 1.5x 以上再考慮，今日優先觀察</td>
+</tr>
+</table>
+
+<!-- ====== 四、逐檔開盤操作指令（核心） ====== -->
+<h2>▌四、逐檔開盤操作指令（詳細）</h2>
+
+<!-- 台肥 維持 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持（降倉）　1722 台肥 <span class="score">72</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>TSM ADR</strong> 昨夜 <span class="dn">-1.72%</span>（中相關）｜ NVDA -3~4%（間接相關）</p>
+<p>台積電 ADR 走弱但未破 MA10（約 $410），台肥自身化工合作催化劑仍有效</p>
+<p style="color:#ff8800;font-size:13px">⚠️ 第一輪升評條件「TSM ADR 走強」未達成，維持原判斷但縮減倉位</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：台積電 2330 開盤方向、大盤期指實際缺口、外資買超是否持續</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：等開盤 15 分鐘確認大盤穩定後再進，不開盤直接衝</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">46~48元</span>　<span class="warn">跳空 >3% 不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">45元</span>（維持第一輪設定，跌破MA5失效）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">52~55元</span>（維持）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.2:1</span>　｜　建議倉位 <span class="key-pos">3~5%</span>（較第一輪縮倉，等大盤穩定再加）</p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：若台積電今日再跌 1% 以上，台肥題材雖仍在，但情緒面壓力增加，建議維持 3% 觀察倉即可</p>
+</div>
+</div>
+
+<!-- 精成科 降評 -->
+<div class="card yellow" style="margin-bottom:10px">
+<h2>⬇️ 降評　6191 精成科 <span class="score" style="color:#ffcc00">68</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>AVGO（盤後）</strong> <span class="dn">-8~12%</span>（AI供應鏈強相關）｜ NVDA <span class="dn">-3~4%</span></p>
+<p>AVGO 是 PCB / AI 伺服器供應鏈最重要的客戶端指標，盤後暴跌直接壓制精成科情緒</p>
+</div>
+<div class="action-box">
+<p><span class="warn">降評原因</span>：AVGO Q3 AI 指引低於預期，市場解讀「利好出盡」，AI 供應鏈今日開盤面臨情緒性賣壓。精成科對應指標 AVGO 盤後重挫，降低進場確定性。</p>
+<p><span class="buy">今日策略</span>：大幅縮倉至 0~3%，若開盤跳空超過 2% 今日不操作，等盤整後確認量縮守住再重新評估</p>
+<p><span class="stop">🛡️ 停損收緊至</span>：<span class="key-stop">97元</span>（較第一輪收緊，不給任何緩衝）</p>
+<p><span class="warn">若跌破 <span class="key-stop">97元</span></span>：直接清倉，不等其他條件</p>
+<p>倉位：<span class="key-pos">0~3%</span>（較第一輪大幅縮減，以觀察為主）</p>
+<p style="color:#ff8800;font-size:13px;margin-top:6px">📌 重新進場條件：費半恢復 > -1%，AVGO 盤後跌幅收斂至 -5% 以內，精成科量縮守住 97 之後才重新考慮</p>
+</div>
+</div>
+
+<!-- 正新 維持 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持　2105 正新 <span class="score">73</span></h2>
+<div class="us-box">
+<p>🇺🇸 電動車/輪胎美股相關（ONSEMI 持平，消費 ETF 中性）</p>
+<p>正新與 AI 半導體相關性弱，自身題材（6/17除息、Q1 EPS +27%）未受影響</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：大盤整體情緒（台積電 / 台指期），正新若跟跌大盤可轉為低吸機會</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：若大盤整體下跌帶動正新跌至 33~33.5 區間，可低吸布局除息邏輯</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">33~34.5元</span>　<span class="warn">跳空 >2% 不追</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">32.5元</span>（維持第一輪）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">37.5~38元</span>（前高阻力）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.3:1</span>　｜　倉位 <span class="key-pos">3~5%</span>（不變，此標的受 AVGO 財報影響最小）</p>
+</div>
+<p><span class="warn">⚠️ 今日特別注意</span>：正新 RSI 71 稍高，若大盤情緒轉弱 + 正新開高 → 需控制追高衝動，等回測才進</p>
+</div>
+</div>
+
+<!-- 國碩 維持（保守） -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持（保守）　2406 國碩 <span class="score">72</span></h2>
+<div class="us-box">
+<p>🇺🇸 ENPH / 綠能 ETF 昨夜中性，綠能族群未受 AI 財報拖累</p>
+<p>自身催化劑（禾迅綠電上市計畫）題材仍完整</p>
+</div>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="key-price">36.5~38.5元</span>（維持第一輪）</p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">35元</span>（維持）</p>
+<p><span class="buy">🎯 目標</span>：<span class="key-target">42~44元</span>　｜　倉位 <span class="key-pos">2~4%</span>（縮倉）</p>
+<div class="rr-box">
+<p>RR ≈ <span class="key-rr">2.2:1</span></p>
+</div>
+<p><span class="warn">⚠️ 注意</span>：大盤轉弱日，國碩流動性偏低，切勿追高，等回測進場</p>
+</div>
+</div>
+
+<!-- 茂迪 取消 -->
+<div class="card red" style="margin-bottom:10px">
+<h2>❌ 今日暫停　6244 茂迪</h2>
+<div class="us-box">
+<p>🇺🇸 取消原因：量比持續偏低（第一輪即已降評），大盤今日偏弱加劇不進場理由</p>
+</div>
+<p class="stop">今日倉位：<span class="key-pos" style="color:#00cc66">0%</span>　｜　等量比放大超過 1.8x 後重新評估</p>
+</div>
+
+<!-- 凡甲 降評取消 -->
+<div class="card red" style="margin-bottom:10px">
+<h2>❌ 取消　3526 凡甲（黑馬/爆量確認）</h2>
+<div class="us-box">
+<p>🇺🇸 取消原因：AVGO 盤後 -8~12%（強相關）、NVDA -3~4%，AI 供應鏈今日面臨系統性壓力</p>
+<p>爆量情境更新：今日情境三（爆量開高走低）機率大幅上升，AVGO 財報打壓整體 AI 供應鏈情緒</p>
+</div>
+<p class="stop">今日倉位：<span class="key-pos" style="color:#00cc66">0%</span>　｜　今日為觀察日，不進場</p>
+<p style="color:#ff8800;font-size:13px;margin-top:6px">📌 重新評估條件：AVGO 盤後跌幅收斂至 -3% 以內，且凡甲開盤量縮守住 380 支撐後，明日重新評估</p>
+</div>
+
+<!-- 聖暉 黑馬維持 -->
+<div class="card horse" style="margin-bottom:10px">
+<h2>⭐ 黑馬維持觀察　5536 聖暉* <span class="score" style="color:#cc88ff">65</span></h2>
+<div class="us-box">
+<p>🇺🇸 產業昨夜：NVDA <span class="dn">-3~4%</span>（間接相關，廠房工程題材滯後性較強）</p>
+<p>聖暉以 AI 廠房建設為主，受 AVGO 短線財報影響相對較小，但整體氣氛仍偏弱</p>
+</div>
+<p><span class="tag horse">今日策略</span>：今日最大倉位 3%，等量比放大超過 1.5x 且收盤守住 1040 再進，切勿今日積極追</p>
+<p class="warn">提醒：黑馬倉位上限 <span class="key-pos">3%</span>，大盤風險日更需嚴格停損</p>
+</div>
+
+<!-- ====== 五、今日開盤優先順序 ====== -->
+<h2>▌五、今日開盤執行優先順序</h2>
+<div class="card action">
+<h3>⏰ 09:00 開盤前確認清單</h3>
+<p>① 台積電 2330 開盤方向（若直接跳空殺低 2% → 全面觀望）</p>
+<p>② 台指期實際開盤缺口（AVGO 盤後衝擊是否已被定價，夜盤僅 -0.32%，開盤或有額外補跌）</p>
+<p>③ MRVL 效應是否帶動台股 AI 正面族群（COMPUTEX 概念是否有分化機會）</p>
+<div class="sep"></div>
+<h3>📋 今日執行順序</h3>
+<table>
+<tr><th>順序</th><th>標的</th><th>動作</th><th>觸發條件</th><th>倉位</th></tr>
+<tr>
+  <td class="warn">第1優先</td>
+  <td class="hl">2105 正新</td>
+  <td class="warn">低吸布局</td>
+  <td>跌至 33~33.5 區間，守住不破 32.5</td>
+  <td class="warn"><strong>3~5%</strong></td>
+</tr>
+<tr>
+  <td class="warn">第2優先</td>
+  <td class="hl">1722 台肥</td>
+  <td class="warn">等15分鐘確認</td>
+  <td>大盤穩定，台積電 2330 不跌破 MA5，台肥守住 46</td>
+  <td class="warn"><strong>3~5%</strong></td>
+</tr>
+<tr>
+  <td>第3優先</td>
+  <td>2406 國碩</td>
+  <td>等回測</td>
+  <td>回測至 36.5~37 區間，量縮守住</td>
+  <td>2~4%</td>
+</tr>
+<tr>
+  <td>觀察不進</td>
+  <td>5536 聖暉*</td>
+  <td>觀察量比</td>
+  <td>等量比 >1.5x 才考慮，最多 3%</td>
+  <td>0~3%</td>
+</tr>
+<tr>
+  <td class="dn">今日不操作</td>
+  <td>6191 精成科</td>
+  <td class="stop">縮倉觀察</td>
+  <td>AVGO 盤後大跌，今日不主動進場</td>
+  <td class="dn">0~3%（觀察倉）</td>
+</tr>
+<tr>
+  <td class="dn">今日不操作</td>
+  <td>3526 凡甲⭐</td>
+  <td class="stop">取消</td>
+  <td>AVGO 財報壓制，情境三機率升高</td>
+  <td class="dn">0%</td>
+</tr>
+<tr>
+  <td class="dn">今日不操作</td>
+  <td>6244 茂迪</td>
+  <td class="stop">跳過</td>
+  <td>量比持續低迷</td>
+  <td class="dn">0%</td>
+</tr>
+</table>
+</div>
+
+<!-- ====== 六、催化劑日曆更新 ====== -->
+<h2>▌六、催化劑日曆（含美盤新消息更新）</h2>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響產業/標的</th><th>較昨日變化</th><th>方向</th></tr>
+<tr>
+  <td class="warn">6/3~6/6</td>
+  <td>🔴 COMPUTEX 2026（持續進行）</td>
+  <td>AI供應鏈、NVDA/MRVL相關台股</td>
+  <td class="warn">分化：MRVL受益，AVGO財報壓制</td>
+  <td class="warn">中性偏正（分化觀察）</td>
+</tr>
+<tr>
+  <td class="dn">6/3盤後</td>
+  <td>❌ AVGO Broadcom Q2 財報</td>
+  <td>精成科、凡甲、AI PCB供應鏈</td>
+  <td class="dn">新增壓力：AI Q3指引 $16B < 預期 $17.2B，未調升全年目標</td>
+  <td class="dn">利空（利好出盡，壓制AI族群）</td>
+</tr>
+<tr>
+  <td class="up">6/2-6/3</td>
+  <td>✅ Jensen Huang 稱 MRVL 為「下一個兆元公司」</td>
+  <td>網通/AI供應鏈、COMPUTEX概念</td>
+  <td class="up">持續發酵，MRVL +3.73% 連兩日強</td>
+  <td class="up">利多（COMPUTEX效應持續）</td>
+</tr>
+<tr>
+  <td class="warn">6/17</td>
+  <td>💰 2105 正新除息（現金1.8元）</td>
+  <td>正新</td>
+  <td class="warn">維持確認</td>
+  <td class="up">利多（除息前布局邏輯仍在）</td>
+</tr>
+<tr>
+  <td class="warn">6~7月</td>
+  <td>🏭 台肥廢硫酸回收模組啟動</td>
+  <td>台肥 1722</td>
+  <td class="warn">維持，與台積電合作催化劑未變</td>
+  <td class="up">利多（長期）</td>
+</tr>
+<tr>
+  <td class="warn">6/3</td>
+  <td>⚠️ 伊朗飛彈攻擊科威特/巴林</td>
+  <td>大盤整體情緒</td>
+  <td class="dn">新增地緣風險，油價急漲</td>
+  <td class="dn">負面情緒（需密切追蹤）</td>
+</tr>
+</table>
+
+<!-- ====== 七、最終結論 ====== -->
+<h2>▌七、早盤交易員最終結論</h2>
+<div class="card blue">
+<p><strong>今日Regime</strong>：<span class="warn">B 中性偏弱</span>　較第一輪降級（A Risk-On → B 中性偏弱，接近 Risk-Off 邊界）</p>
+<div class="sep"></div>
+<p><strong>第1優先</strong>：<span class="up">2105 正新</span>。受 AVGO 財報影響最小（弱相關），6/17 除息邏輯仍在，若大盤跌帶跌至 33~33.5 可低吸。進場 <span class="key-price">33~33.5元</span>，倉位 <span class="key-pos">3~5%</span>。</p>
+<p><strong>第2優先</strong>：<span class="up">1722 台肥</span>。中相關，台積電合作題材完整，但需等大盤穩定確認。等 15 分鐘後進場 <span class="key-price">46~48元</span>，倉位 <span class="key-pos">3~5%</span>（縮倉）。</p>
+<p><strong>降評縮倉</strong>：<span class="dn">6191 精成科</span>。AVGO 盤後 -8~12% 為強相關壓力源，今日觀察為主，倉位 0~3%。</p>
+<p><strong>取消</strong>：<span class="dn">3526 凡甲、6244 茂迪</span>。凡甲受 AVGO 財報壓制，情境三機率大升；茂迪量比持續低迷。今日均不進場。</p>
+<p><strong>觀察</strong>：<span class="warn">2406 國碩、5536 聖暉*</span>。等回測確認後再評估，倉位均不超過 3~4%。</p>
+<div class="sep"></div>
+<p><strong>最大風險</strong>：AVGO 盤後 -8~12% 的殺傷力尚未完全計入台指期夜盤，今日開盤若台積電同步破 MA5，AI 供應鏈族群可能出現補跌殺壓。伊朗地緣政治事件（油價急漲）為次要風險。</p>
+<p><strong>系統停損線狀態</strong>：費半 6/3 日盤估算跌幅約 -5.5%，<span class="dn" style="font-weight:bold">遠超 -2% 系統停損線</span>，今日 AI 相關標的全面縮手，僅弱相關標的（正新、台肥、國碩）依個股邏輯操作。</p>
+<p><strong>AVGO 財報解讀</strong>：EPS 微超預期但 AI Q3 指引保守，屬典型「利好出盡」模式。明日市場若出現超跌回補（-8% 過度反應），AI 族群可能有反彈機會，可關注精成科/凡甲是否在明日出現情境一（量縮守住）的機會。</p>
+<p><strong>產業輪動觀察</strong>：昨夜美股最強為 MRVL（+3.73%，Jensen Huang 加持），台股對應族群今日關注有無相關網通/AI 晶片設計族群補漲機會，但 AVGO 財報利空為主導因素，整體操作保守為宜。</p>
+</div>
+
+<p style="color:#555;font-size:12px;margin-top:14px;text-align:right">
+第二輪早盤版：Claude自動搜尋美盤數據，比對產業相關性，修正第一輪評級。不構成投資建議，投資有風險。
+｜ 20260603_2_claude.html　AIreport v2.2 Round2（執行於20260604早盤）
+</p>
+</body>
+</html>
