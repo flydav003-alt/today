@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股早盤操作指令（第二輪）｜ 20260604</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Times New Roman','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px}
+h1{font-size:20px;color:#00e5ff;border-bottom:1px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:0.5px}
+h2{font-size:16px;color:#ffcc00;margin:12px 0 8px;border-left:3px solid #ffcc00;padding-left:8px}
+h3{font-size:14px;color:#aaa;margin:8px 0 5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:4px;padding:10px}
+.card.green{border-left:3px solid #ff4444}
+.card.yellow{border-left:3px solid #ffcc00}
+.card.red{border-left:3px solid #00cc66}
+.card.blue{border-left:3px solid #4488ff}
+.card.orange{border-left:3px solid #ff8800}
+.card.horse{border-left:3px solid #cc88ff;background:#1a1520}
+.card.riskoff{border:2px solid #ff8800;background:#1a0a00}
+.card.action{border:2px solid #ffcc00;background:#1a1500}
+.card.warn-box{border:2px solid #ff8800;background:#1a0800}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px}
+.tag.a{background:#440000;color:#ff4444}
+.tag.up{background:#440000;color:#ff4444}
+.tag.hold{background:#333;color:#aaa}
+.tag.dn{background:#003300;color:#00cc66}
+.tag.cancel{background:#222;color:#555}
+.tag.wait{background:#2a2000;color:#ffcc00}
+.tag.horse{background:#2a1540;color:#cc88ff}
+.tag.warn{background:#2a1000;color:#ff8800}
+.score{float:right;font-size:22px;font-weight:bold;color:#00e5ff}
+.regime{background:#1a0800;border:2px solid #ff8800;border-radius:4px;padding:12px;margin-bottom:12px}
+.regime.on{background:#1a0a0a;border-color:#ff4444}
+.regime.neutral{background:#111100;border-color:#ffcc00}
+.regime.off{border-color:#00cc66;background:#0a1a0a}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.6;font-size:15px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:15px;line-height:1.6}
+.big{font-size:22px;font-weight:bold}
+.pool-tag{display:inline-block;background:#1a1a2e;color:#4488ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #4488ff}
+.horse-tag{display:inline-block;background:#2a1540;color:#cc88ff;font-size:12px;padding:2px 6px;border-radius:2px;margin:1px;border:1px solid #cc88ff}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:3px;padding:8px;margin-top:6px}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:3px;padding:10px;margin-top:8px}
+.us-box{background:#0d0d1a;border:1px solid #4488ff;border-radius:3px;padding:8px;margin:5px 0}
+.warn-box-inner{background:#1a0800;border:1px solid #ff8800;border-radius:3px;padding:8px;margin:5px 0}
+.key-price{font-size:20px;font-weight:bold;color:#ff4444}
+.key-stop{font-size:20px;font-weight:bold;color:#00cc66}
+.key-target{font-size:20px;font-weight:bold;color:#ffcc00}
+.key-rr{font-size:22px;font-weight:bold;color:#00e5ff}
+.key-pos{font-size:20px;font-weight:bold;color:#ff8800}
+</style>
+</head>
+<body>
+
+<h1>⚡ 台股早盤操作指令（第二輪）｜ 20260604</h1>
+<p style="color:#555;font-size:12px;margin-bottom:12px">
+檔名：20260604_2_claude.html　｜　執行於：20260605 早盤
+｜　輸入：第一輪交接清單　｜　Claude自動搜尋美盤數據　｜　AIreport v2.2 Round2
+</p>
+
+<!-- ====== 重大警示橫幅 ====== -->
+<div class="card warn-box" style="margin-bottom:14px;padding:12px;text-align:center">
+<p style="font-size:16px;font-weight:bold;color:#ff8800">⚠️ 重大警示：AVGO 財報踩雷，費半跌逾6%，今日半導體族群承壓</p>
+<p style="font-size:13px;color:#ccc;margin-top:5px">
+Broadcom Q2 AI指引未上調，股價崩跌 -15%，費半指數 SOX 當日重挫逾6%。<br>
+半導體設備（AMAT / LRCX）連帶下壓。光學（AAPL）相對抗跌，是今日唯一亮點。
+</p>
+</div>
+
+<!-- ====== 零、美盤掃描結果 ====== -->
+<h2>▌零、美盤掃描結果（Claude自動搜尋完成 ｜ 6/4 美國收盤）</h2>
+<div class="grid3">
+<div class="card blue">
+<h3>🇺🇸 關鍵指數（6/4 美股收盤）</h3>
+<p>費半 SOX：<span class="dn big">-6.3%</span> ⚠️ 觸發系統性警戒</p>
+<p>那斯達克：<span class="dn">-0.09%</span>（僅小跌，受Dow拉抬）</p>
+<p>台積電 ADR：<span class="dn">-2.5%</span>（436.69 → 約426）</p>
+<p>台指期夜盤：<span class="dn">估計 -200~-400點</span>（費半重挫壓制）</p>
+<p style="font-size:12px;color:#555;margin-top:6px">※ 台指期夜盤確切點數請於開盤前最後確認</p>
+</div>
+<div class="card">
+<h3>🔥 美股產業強弱（6/4 收盤）</h3>
+<p class="dn">極弱勢：費半 / 半導體 -6.3%（AVGO -15%主導）</p>
+<p class="dn">弱勢：半導體設備 AMAT / LRCX -0.6~1%</p>
+<p class="warn">相對抗跌：AAPL -1~2%（蘋果供應鏈最強）</p>
+<p class="up">強勢：道瓊 +1.73%（金融 / 醫療輪動接棒）</p>
+<p class="up">NVDA：<span class="warn">約 -0.2%</span>（獨立表現，未跟殺）</p>
+</div>
+<div class="card">
+<h3>📰 隔夜重大消息</h3>
+<p class="dn">🔴 AVGO（博通）Q2財報後跌-15%</p>
+<p style="font-size:13px;color:#aaa">AI指引未上調，市場解讀「賣事實」，費半SOX崩跌逾6%，創近期單日最大跌幅</p>
+<p class="dn">🔴 CrowdStrike(CRWD) 財報後跌-11%（軟件領域另一地雷）</p>
+<p class="warn">⚙️ 美伊地緣緊張持續，油價高檔，利率壓力仍在</p>
+<p class="up">✅ NVDA 相對強韌（跌幅極小），AI基本面沒有動搖</p>
+<p class="up">✅ 道瓊創歷史新高（非科技輪動），系統性崩盤機率低</p>
+</div>
+</div>
+
+<!-- 候選標的對應美股表現 -->
+<h2>▌一、候選標的 × 美股對應表現</h2>
+<table>
+<tr>
+  <th>台股標的</th><th>產業</th><th>對應美股指標</th>
+  <th>美股昨夜表現</th><th>相關強度</th><th>初步方向</th>
+</tr>
+<tr>
+  <td class="hl">3406 玉晶光</td>
+  <td>光學鏡頭（蘋果供應鏈）</td>
+  <td>AAPL Apple Inc.</td>
+  <td class="warn">約 -1~2%（抗跌）</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="warn">→ 中性偏弱，但相對最強</td>
+</tr>
+<tr>
+  <td class="hl">6139 亞翔</td>
+  <td>半導體設備/廠務建設</td>
+  <td>AMAT / LRCX</td>
+  <td class="dn">AMAT -0.6%，LRCX -0.6%</td>
+  <td><span class="tag hold">中相關</span></td>
+  <td class="dn">↓ 偏弱（費半拖累產業情緒）</td>
+</tr>
+<tr>
+  <td class="hl">2404 漢唐</td>
+  <td>廠務/機電建設</td>
+  <td>AMAT / LRCX（族群連動）</td>
+  <td class="dn">族群情緒受壓</td>
+  <td><span class="tag hold">中相關（間接）</span></td>
+  <td class="dn">↓ 偏弱（亞翔若走弱，漢唐同步弱）</td>
+</tr>
+</table>
+
+<!-- ====== 二、Regime修正 ====== -->
+<div class="regime" style="border-color:#ff8800;background:#1a0e00">
+<h2 style="border:none;padding:0;margin-bottom:10px">▌二、今日台股開盤 Regime → <span class="warn big">B- 中性偏空（由A降級）</span></h2>
+<div class="grid3">
+<div>
+<h3>與第一輪比較</h3>
+<p>第一輪判斷：A（AI Risk-On）</p>
+<p>今日修正：<span class="warn">降級 → B- 中性偏空</span></p>
+<p>修正原因：費半SOX單夜跌逾6%（AVGO財報雷），觸發系統性警戒線（<-2%），半導體族群全面承壓</p>
+<p style="color:#ff8800;font-size:13px;margin-top:5px">⚠️ 費半跌幅 -6.3%，遠超 -2% 系統停損觸發線</p>
+</div>
+<div>
+<h3>系統性風險檢查</h3>
+<p>費半 SOX：<span class="dn">-6.3%</span> <span class="warn">⚠️ 系統停損線觸發（&gt;-2%）</span></p>
+<p>台積電 ADR：<span class="dn">約 -2.5%</span>（436→約426）</p>
+<p>VIX：<span class="warn">升至約16.5</span>（仍在合理區間，非恐慌）</p>
+<p>那斯達克：<span class="dn">-0.09%</span>（費半地雷，但整體可控）</p>
+<p>道瓊：<span class="up">+1.73% 歷史新高</span>（資金輪動非系統崩盤）</p>
+</div>
+<div>
+<h3>今日整體操作基調</h3>
+<p><span class="warn" style="font-size:15px;font-weight:bold">半導體族群縮手，精選個股</span></p>
+<p>系統性停損觸發 → 所有半導體相關標的降倉50%</p>
+<p class="warn">最大風險：台灣早盤台積電/半導體族群跳空低開，設備廠務族群拖累亞翔、漢唐</p>
+<p class="up" style="margin-top:8px">例外亮點：玉晶光 AAPL供應鏈相對抗跌，是今日最可能操作的標的</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 三、逐檔評級修正總覽 ====== -->
+<h2>▌三、逐檔評級修正總覽</h2>
+<table>
+<tr>
+  <th>標的</th><th>第一輪</th><th>美盤依據</th>
+  <th>今日評級</th><th>今日倉位</th><th>開盤策略摘要</th>
+</tr>
+<tr>
+  <td class="hl">3406 玉晶光</td>
+  <td>主力候選 A</td>
+  <td class="warn">AAPL 約-1~2%（中相關），費半雖重挫但AAPL相對最強</td>
+  <td><span class="tag hold">➡️ 維持（縮倉執行）</span></td>
+  <td class="warn">3~5%（系統降倉50%後）</td>
+  <td>費半重挫，降倉至3~5%。等開盤15分鐘確認守穩再入。AAPL WWDC 6/8催化劑仍在</td>
+</tr>
+<tr>
+  <td class="hl">6139 亞翔</td>
+  <td>黑馬+爆量待確認</td>
+  <td class="dn">AMAT -0.6%，費半 -6.3%（中相關，但產業情緒重壓）</td>
+  <td><span class="tag dn">⬇️ 降評</span></td>
+  <td class="dn">0~2%（極度縮手）</td>
+  <td>費半觸發停損線，爆量等確認情境三（開高走低）機率大增。今日以觀望為主</td>
+</tr>
+<tr>
+  <td class="hl">2404 漢唐</td>
+  <td>黑馬候選 B</td>
+  <td class="dn">族群連動弱，亞翔若走弱直接放棄</td>
+  <td><span class="tag cancel">❌ 取消</span></td>
+  <td class="dn">0%</td>
+  <td>升評條件「亞翔帶頭強勢」今日無法成立，直接跳過</td>
+</tr>
+</table>
+
+<!-- ====== 四、逐檔開盤操作指令（核心） ====== -->
+<h2>▌四、逐檔開盤操作指令（詳細）</h2>
+
+<!-- 玉晶光：縮倉維持 -->
+<div class="card blue" style="margin-bottom:10px">
+<h2>➡️ 維持（縮倉）　3406 玉晶光 <span class="score" style="color:#ff8800">77</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>AAPL Apple Inc.</strong> 昨夜 <span class="warn">約 -1~2%</span>（中相關）</p>
+<p>蘋果供應鏈昨夜相對同業最抗跌 ｜ WWDC 6/8 催化劑即將到來</p>
+<p style="color:#ff8800;font-size:13px">⚠️ 費半 SOX -6.3% 觸發系統性停損線 → 強制降倉50%</p>
+</div>
+<div class="action-box">
+<p><span class="buy">⏰ 開盤前15分鐘觀察</span>：台積電開盤跌幅是否可控（跌幅&lt;2%？）；大盤台指期缺口大小；玉晶光是否跟殺半導體或守住獨立走勢</p>
+<div class="sep"></div>
+<p><span class="buy">📍 進場時機</span>：不追跌，等開盤15分鐘確認量縮守穩再分批入場</p>
+<p><span class="buy">💰 進場區</span>：<span class="key-price">630~650元</span>　<span class="warn">跳空低開跌幅&gt;4%（&lt;633元）→ 先觀望不動</span></p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="key-stop">610元</span>（維持第一輪設定，費半重挫下需更嚴格守紀律）</p>
+<p><span class="buy">🎯 目標價</span>：<span class="key-target">720~750元</span>（維持，WWDC前仍有空間）</p>
+<div class="rr-box">
+<p>今日 RR ≈ <span class="key-rr">2.0~2.5:1</span>　｜　建議倉位 <span class="key-pos">3~5%</span>（較第一輪5~10% 強制降倉50%）</p>
+</div>
+<p><span class="warn">⚠️ 重要觀察</span>：玉晶光與費半相關性中等，今日若能在半導體族群大跌中逆勢守穩甚至小漲，是強烈訊號——反之若跟殺破620，立刻停損</p>
+<p><span class="warn">🗓️ WWDC 加分因子</span>：Apple 6/8全球開發者大會，光學鏡頭題材在6/5~6/8這幾天仍是可操作窗口</p>
+</div>
+</div>
+
+<!-- 亞翔：降評 -->
+<div class="card yellow" style="margin-bottom:10px">
+<h2>⬇️ 降評　6139 亞翔 <span class="score" style="color:#ffcc00">70→55（今日有效分）</span></h2>
+<div class="us-box">
+<p>🇺🇸 <strong>AMAT -0.6%、LRCX -0.6%</strong>（中相關，但費半 -6.3% 全面壓制產業情緒）</p>
+<p>半導體設備族群昨夜整體承壓，台股開盤廠務建設族群易受拖累</p>
+</div>
+<div class="action-box">
+<p><span class="warn">降評原因</span>：費半 SOX -6.3% 觸發系統性停損線；爆量後確認情境三（開高走低）機率大增；AMAT/LRCX雖未暴跌，但半導體產業情緒全面轉弱，亞翔昨日爆量後今日開盤恐有出貨壓力</p>
+<p><span class="buy">今日策略</span>：極度縮手，以觀望為主</p>
+<p><span class="stop">🛡️ 爆量後情境判斷（配合費半重挫）</span></p>
+<table style="margin-top:6px">
+<tr><th>情境</th><th>開盤表現</th><th>操作</th><th>倉位</th></tr>
+<tr>
+  <td class="warn">✅ 情境一（低機率）</td>
+  <td>量縮&lt;爆量日50% + 守住825 + 獨立走強</td>
+  <td class="warn">極小倉進場（費半重挫例外保護）</td>
+  <td class="warn"><strong>0~2%</strong>（黑馬上限）</td>
+</tr>
+<tr>
+  <td class="dn">❌ 情境三（高機率）</td>
+  <td>開高走低 / 爆量長上影 / 跟殺半導體</td>
+  <td class="stop">直接放棄，不持有過夜</td>
+  <td class="dn">0%</td>
+</tr>
+</table>
+<p style="color:#ff8800;margin-top:8px;font-size:13px">⚠️ 費半重挫後，爆量股最容易成為「借漲出貨標的」——今日亞翔升評機率極低，預設觀望</p>
+</div>
+</div>
+
+<!-- 漢唐：取消 -->
+<div class="card red" style="margin-bottom:10px">
+<h2>❌ 取消　2404 漢唐</h2>
+<div class="us-box">
+<p>🇺🇸 取消原因：升評核心條件「亞翔帶頭強勢 + 漢唐量比放大」今日無法成立。費半重挫，廠務族群整體偏弱。</p>
+</div>
+<p class="stop">今日倉位：<span class="key-pos" style="color:#00cc66">0%</span>　｜　等費半回穩 + 亞翔重新確立強勢後再重新評估（最快下週）</p>
+</div>
+
+<!-- ====== 五、系統性警戒通知 ====== -->
+<div class="card riskoff" style="margin-bottom:12px">
+<h2>🚨 系統性停損警戒（費半 -6.3%，遠超 -2% 觸發線）</h2>
+<p class="warn big">費半跌幅 -6.3% → 系統性降倉50% 指令啟動</p>
+<div class="sep"></div>
+<ul>
+<li>半導體相關所有標的：強制降倉50%，無論個股昨日表現如何</li>
+<li>新進場計畫（亞翔 / 漢唐）：原則取消，除非現場確認極強個股獨立訊號</li>
+<li>玉晶光（蘋果供應鏈）：降倉後保留3~5%，WWDC催化劑仍在，不全出</li>
+</ul>
+<div class="sep"></div>
+<p style="color:#ff8800;font-size:13px;margin-top:5px">
+⚡ 本次費半重挫性質評估：AVGO「賣事實」財報地雷為主因，NVDA基本面未惡化，Dow創新高顯示資金輪動而非系統崩盤。<br>
+→ 此次費半跌幅屬<strong>「單一財報踩雷 + 高估值修正」</strong>，非AI基本面反轉。<br>
+→ 開盤後若台積電跌幅可控（&lt;2%），玉晶光守穩，可考慮保留部位而非全清。
+</p>
+</div>
+
+<!-- ====== 五、今日開盤執行優先順序 ====== -->
+<h2>▌五、今日開盤執行優先順序</h2>
+<div class="card action">
+<h3>⏰ 09:00 開盤前三件事（最重要）</h3>
+<p>① <strong>台積電開盤跌幅是否 &lt;2%</strong>——若跌超2%，玉晶光也降為觀望，今日全面縮手</p>
+<p>② <strong>台指期實際開盤缺口</strong>——夜盤預估 -200~-400點，若實際缺口更大，升高警戒</p>
+<p>③ <strong>玉晶光開盤後15分鐘走勢</strong>——是否逆勢守穩甚至翻紅？是今日最重要判斷</p>
+<div class="sep"></div>
+<h3>📋 今日執行順序</h3>
+<table>
+<tr><th>順序</th><th>標的</th><th>動作</th><th>觸發條件</th><th>倉位</th></tr>
+<tr>
+  <td class="warn">第1優先</td>
+  <td class="hl">3406 玉晶光</td>
+  <td class="warn">等確認再小倉</td>
+  <td>開盤15分鐘後守穩630~650，量縮，AAPL族群獨立</td>
+  <td class="warn"><strong>3~5%</strong></td>
+</tr>
+<tr>
+  <td class="dn">降評觀望</td>
+  <td class="hl">6139 亞翔</td>
+  <td class="stop">以觀望為主</td>
+  <td>若情境一（量縮守825）成立且費半無繼續重挫 → 最多2%</td>
+  <td class="dn">0~2%</td>
+</tr>
+<tr>
+  <td class="dn">今日不操作</td>
+  <td>2404 漢唐</td>
+  <td class="stop">跳過</td>
+  <td>升評條件無法成立</td>
+  <td class="dn">0%</td>
+</tr>
+</table>
+</div>
+
+<!-- ====== 六、催化劑日曆更新 ====== -->
+<h2>▌六、催化劑日曆（含美盤新消息更新）</h2>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響產業/標的</th><th>較昨日變化</th><th>方向</th></tr>
+<tr>
+  <td class="dn">6/5（今日）</td>
+  <td>🔴 AVGO財報踩雷已實現 / 費半 -6.3%</td>
+  <td>半導體全族群</td>
+  <td class="dn">已觸發負面衝擊</td>
+  <td class="dn">利空已Price-in，今日觀察反應</td>
+</tr>
+<tr>
+  <td class="warn">6/5（今日）</td>
+  <td>🟡 COMPUTEX 2026 最終日</td>
+  <td>AI族群</td>
+  <td class="warn">尾聲行情，獲利了結壓力</td>
+  <td class="warn">注意高點整理</td>
+</tr>
+<tr>
+  <td class="warn">6/6（明日）</td>
+  <td>🟡 美國非農就業數據</td>
+  <td>全市場，科技股</td>
+  <td class="warn">強非農 → 升息擔憂再起</td>
+  <td class="warn">觀察</td>
+</tr>
+<tr>
+  <td class="up">6/8（週一）</td>
+  <td>🟢 Apple WWDC 2026</td>
+  <td>玉晶光 3406、光學族群</td>
+  <td class="up">確認日期，催化劑有效</td>
+  <td class="up">利多（蘋果供應鏈6/5~6/8窗口）</td>
+</tr>
+</table>
+
+<!-- ====== 七、最終結論 ====== -->
+<h2>▌七、早盤交易員最終結論</h2>
+<div class="card blue">
+<p><strong>今日Regime</strong>：<span class="warn">B- 中性偏空</span>　較第一輪由A Risk-On降級</p>
+<div class="sep"></div>
+<p><strong>唯一可操作標的</strong>：<span class="warn">3406 玉晶光</span>。AAPL供應鏈相對最抗跌，WWDC 6/8催化劑仍在窗口。費半系統停損啟動後強制降倉，進場 <span class="key-price">630~650元</span>（等確認守穩），倉位 <span class="key-pos">3~5%</span>。</p>
+<p><strong>降評觀望</strong>：<span class="warn">6139 亞翔</span>。爆量後遇費半大跌，情境三（出貨）機率大。以觀望為主，若開盤量縮守穩才考慮最多2%極小倉。</p>
+<p><strong>取消</strong>：<span class="dn">2404 漢唐</span>。升評前提條件（亞翔走強）今日無法成立。</p>
+<div class="sep"></div>
+<p><strong>最大風險</strong>：台積電ADR夜間已跌約2.5%，今日台股半導體族群開盤承壓。若台積電現貨跌幅超2%，今日建議全面觀望，玉晶光也暫不進場。</p>
+<p><strong>系統停損線狀態</strong>：費半昨夜跌-6.3%，已遠超-2%停損觸發線。今日所有半導體相關標的<strong>強制降倉50%</strong>，不以個股狀況例外。</p>
+<p><strong>本次性質研判（重要）</strong>：此次費半重挫為「AVGO賣事實+高估值修正」，NVDA(-0.2%)基本面未崩，Dow創歷史新高。AI長期趨勢未反轉，但短線需等費半消化此次衝擊（預估1~3個交易日）後方可重新進場半導體族群。</p>
+<p><strong>產業輪動觀察</strong>：昨夜美股最強為金融/醫療（Dow +1.73%）。台股今日若跟進輪動，傳產/金融/生技類股相對抗跌，供後續參考。</p>
+</div>
+
+<p style="color:#555;font-size:12px;margin-top:14px;text-align:right">
+第二輪早盤版：Claude自動搜尋美盤數據，比對產業相關性，修正第一輪評級。不構成投資建議，投資有風險。
+｜ 20260604_2_claude.html　AIreport v2.2 Round2（執行於20260605早盤）
+</p>
+</body>
+</html>
