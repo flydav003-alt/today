@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股收盤後分析（第一輪）｜ 20260606</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px;max-width:1200px;margin:0 auto}
+h1{font-size:20px;color:#00e5ff;border-bottom:2px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:1px}
+h2{font-size:15px;color:#ffcc00;margin:12px 0 8px;border-left:4px solid #ffcc00;padding-left:8px;letter-spacing:0.5px}
+h3{font-size:14px;color:#bbb;margin:8px 0 5px}
+.section-title{font-size:16px;color:#ffcc00;margin:16px 0 8px;border-left:4px solid #ffcc00;padding-left:8px;font-weight:bold}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:10px}
+.card.green{border-left:4px solid #ff4444}
+.card.yellow{border-left:4px solid #ffcc00}
+.card.red{border-left:4px solid #00cc66}
+.card.blue{border-left:4px solid #4488ff}
+.card.orange{border-left:4px solid #ff8800}
+.card.horse{border-left:4px solid #cc88ff;background:#1a1520}
+.card.handoff{border:2px solid #00e5ff;background:#0a1520;margin-top:16px}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:11px;padding:2px 6px;border-radius:3px;margin:1px}
+.tag.a{background:#440000;color:#ff4444}
+.tag.b{background:#444400;color:#ffcc00}
+.tag.c{background:#003300;color:#00cc66}
+.tag.horse{background:#2a1540;color:#cc88ff}
+.score{float:right;font-size:20px;font-weight:bold;color:#00e5ff}
+.regime{background:#0a1a0a;border:2px solid #00cc66;border-radius:6px;padding:12px;margin-bottom:12px}
+.regime.warn{border-color:#ff8800;background:#1a0f00}
+.regime.on{border-color:#ff4444;background:#1a0a0a}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold;font-size:14px}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.7;font-size:14px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:14px;line-height:1.6}
+.big{font-size:20px;color:#00e5ff;font-weight:bold}
+.pool-tag{display:inline-block;background:#1a1a2e;color:#4488ff;font-size:11px;padding:2px 6px;border-radius:3px;margin:1px;border:1px solid #4488ff}
+.horse-tag{display:inline-block;background:#2a1540;color:#cc88ff;font-size:11px;padding:2px 6px;border-radius:3px;margin:1px;border:1px solid #cc88ff}
+.wait-tag{display:inline-block;background:#2a2000;color:#ffcc00;font-size:11px;padding:2px 6px;border-radius:3px;border:1px solid #ffcc00}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:4px;padding:8px;margin-top:6px}
+.up-cond{color:#ff4444;font-size:13px;margin:3px 0;line-height:1.6}
+.dn-cond{color:#00cc66;font-size:13px;margin:3px 0;line-height:1.6}
+pre{background:#111;border:1px solid #2a4a2a;padding:12px;border-radius:4px;font-size:12px;color:#ccc;white-space:pre-wrap;margin:8px 0;line-height:1.8;font-family:'Courier New',monospace}
+.warn-banner{background:#2a1500;border:2px solid #ff8800;border-radius:6px;padding:10px;margin-bottom:12px;text-align:center;font-size:14px}
+.riskoff-banner{background:#0a2a0a;border:2px solid #00cc66;border-radius:6px;padding:12px;margin-bottom:12px;text-align:center}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:4px;padding:10px;margin-top:8px}
+.stock-card{margin-bottom:10px}
+.collapsible-header{background:#1a1a1a;border:1px solid #444;border-radius:6px;padding:10px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;user-select:none}
+.collapsible-header:hover{background:#222;border-color:#555}
+.collapsible-header .ch-title{color:#aaa;font-size:14px}
+.collapsible-header .ch-arrow{color:#555;font-size:16px;transition:transform 0.2s}
+.collapsible-header.open .ch-arrow{transform:rotate(180deg)}
+.collapsible-content{display:none;margin-bottom:10px}
+.collapsible-content.open{display:block}
+</style>
+</head>
+<body>
+
+<h1>🎯 台股收盤後分析報告（第一輪）｜ 20260606</h1>
+<p style="color:#555;font-size:12px;margin-bottom:8px">
+檔名：20260606_1_claude.html　｜　輸入：系統截圖　｜　AIreport v2.3 Round1
+</p>
+
+<!-- 重大警示 -->
+<div class="riskoff-banner">
+  <p style="color:#ff4444;font-size:18px;font-weight:bold">🚨 系統性 RISK-OFF 警報啟動 🚨</p>
+  <p style="color:#ff8800;margin-top:6px;font-size:14px">費半 SOX 昨夜（6/5）暴跌 <strong>-10.26%</strong>　那斯達克 <strong>-4.18%</strong>　AVGO 法說會引爆AI期望落差殺盤</p>
+  <p style="color:#00cc66;font-size:13px;margin-top:4px">→ 系統性停損線已觸發：全部持倉降倉50%，今日新進場計畫全面審慎評估</p>
+</div>
+
+<!-- ====== 一、市場 Regime 判斷 ====== -->
+<div class="section-title">▌一、市場 Regime 判斷</div>
+<div class="regime">
+<h2 style="border:none;padding:0;margin-bottom:10px">今日判斷 → <span class="dn" style="font-size:18px;font-weight:bold">C Risk-Off（全面降評）</span></h2>
+<div class="grid3">
+<div>
+<h3>大盤現況（6/5）</h3>
+<p>加權指數：<span class="hl">45,070.94點（-1.33%）</span></p>
+<p>成交值：1.32兆元</p>
+<p>前日最高：46,552點（歷史高）後回落</p>
+<p class="warn">明日風險預估：費半-10%衝擊，台股預估跳空低開 <span style="color:#ff4444;font-weight:bold">-2%～-4%</span>，AI供應鏈族群首當其衝</p>
+</div>
+<div>
+<h3>美股 / 費半（6/5 美盤）</h3>
+<p>費半 SOX：<span class="dn" style="font-size:17px;font-weight:bold">-10.26%</span> ⚠️ 系統停損線觸發</p>
+<p>那斯達克：<span class="dn">-4.18%</span>（2025年4月以來最大單日跌幅）</p>
+<p>AVGO：<span class="dn">-7.9%</span>（法說AI展望不如預期）</p>
+<p>MU Micron：<span class="dn">-13%</span>｜MRVL：<span class="dn">-16%</span>｜AMD：<span class="dn">-11%</span></p>
+<p><span class="warn" style="font-weight:bold">⚠️系統停損線已觸發</span>：費半跌&gt;2% → 全面降倉50%</p>
+</div>
+<div>
+<h3>法人整體方向（6/5）</h3>
+<p>三大法人：<span class="dn">賣超 1,100.98 億元</span></p>
+<p>外資：<span class="dn">賣超 826.31 億元</span></p>
+<p>投信：<span class="up">買超 9.64 億元</span>（金融股為主）</p>
+<p>自營：<span class="dn">賣超 284.31 億元</span></p>
+<p style="color:#555;font-size:12px;margin-top:4px">外資昨日例外買超：上詮(3363)、世界(5347)、聖暉*(5536)</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 二、交易員一頁總結 ====== -->
+<div class="section-title">▌二、交易員一頁總結</div>
+<div style="background:#1a0f00;border:1px solid #ff8800;border-radius:6px;padding:10px;margin-bottom:10px">
+<p class="warn" style="font-size:14px;font-weight:bold">⚠️ Risk-Off日操作原則：今日截圖中所有標的分數均需重置，費半-10%環境下AI相關族群一律降評。本輪僅標示「值得在Risk-Off後回穩時優先關注」的標的。</p>
+</div>
+<div class="grid2">
+<div class="card blue"><h3>📌 Risk-Off後首選回補標的</h3><p><span class="up" style="font-size:15px;font-weight:bold">3363 上詮</span>｜外資6/5逆勢買超居首，連接器/國防/AI題材，等費半穩定後優先關注</p></div>
+<div class="card green"><h3>🍯 最抗跌甜蜜點（非AI族群）</h3><p><span class="up" style="font-size:15px;font-weight:bold">3416 融程電</span>｜量縮整理C底背離訊號，國防電子受費半衝擊最小，惟量比僅0.5x今日需觀察</p></div>
+<div class="card yellow"><h3>🔄 爆量等確認（明日觀察）</h3><p><span class="warn" style="font-size:15px;font-weight:bold">6209 今國光 / 3023 信邦 / 3363 上詮</span>｜今日爆量漲停，明日情境判斷決定去留</p></div>
+<div class="card orange"><h3>🔥 Risk-Off後若費半回穩重壓一檔</h3><p class="big" style="color:#ff8800">2059 川湖</p><p>AI伺服器滑軌龍頭，Q2出貨強勁，4月營收年增79%，護城河最深，跌深後反彈動能最強</p></div>
+</div>
+<div class="grid2">
+<div class="card orange"><h3>🌙 今日最不建議隔夜單</h3><p style="color:#ff8800;font-size:15px;font-weight:bold">全部AI/半導體族群</p><p>費半-10%衝擊明日台股開盤無法預測跌幅，任何AI相關今晚持有風險極高</p></div>
+<div class="card red"><h3>⚡ Risk-Off立即砍倉清單</h3><p><span class="dn" style="font-size:15px;font-weight:bold">8043 蜜望實、6155 鈞寶、3357 臺慶科</span>｜RSI高檔超買+費半暴跌，先砍再說</p></div>
+</div>
+<div class="card horse" style="margin-bottom:12px">
+<h3>⭐ 黑馬候選（等Risk-Off過後觀察）</h3>
+<p><span style="color:#cc88ff;font-size:14px;font-weight:bold">3416 融程電</span>：國防電子C底背離，量縮整理，費半影響最小，惟量比0.5x需等量能回歸</p>
+</div>
+
+<!-- ====== 三、AI台股短線機會雷達表 ====== -->
+<div class="section-title">▌三、AI台股短線機會雷達表（含Risk-Off評級修正）</div>
+<table>
+<tr>
+  <th>股票</th><th>來源</th><th>原始評分</th><th>Risk-Off修正後</th><th>今日K線對明日含義</th>
+  <th>費半相關度</th><th>擁擠度</th><th>建議</th>
+</tr>
+<tr>
+  <td class="hl">3363 上詮</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="up">77</td>
+  <td class="warn">⬇️ 65（等確認）</td>
+  <td class="warn">爆量+8.1%，明日觀察隔日情境</td>
+  <td><span class="tag">弱相關（連接器/國防）</span></td>
+  <td class="warn">中</td>
+  <td class="wait-tag">⏳ 爆量等確認</td>
+</tr>
+<tr>
+  <td class="hl">6209 今國光</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="up">79（K線分+3→82）</td>
+  <td class="warn">⬇️ 60（爆量+Risk-Off）</td>
+  <td class="warn">爆量+3.78%+突破放量，明日量縮確認為關鍵</td>
+  <td><span class="tag">中相關（光學/CPO）</span></td>
+  <td class="warn">中高</td>
+  <td class="wait-tag">⏳ 爆量等確認</td>
+</tr>
+<tr>
+  <td class="hl">3023 信邦</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="up">79（突破放量）</td>
+  <td class="warn">⬇️ 62（Risk-Off降評）</td>
+  <td class="warn">爆量+5.28%，明日觀察情境</td>
+  <td><span class="tag">弱相關（連接器/機器人）</span></td>
+  <td class="warn">中</td>
+  <td class="wait-tag">⏳ 爆量等確認</td>
+</tr>
+<tr>
+  <td class="hl">2059 川湖</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="up">75（突破放量）</td>
+  <td class="dn">⬇️ 55（AI伺服器/費半強相關）</td>
+  <td class="dn">爆量+5.05%，費半-10%環境下風險極高</td>
+  <td><span style="color:#ff4444;font-size:11px">強相關（AI伺服器）</span></td>
+  <td class="up">高（媒體大量報導）</td>
+  <td class="dn">❌ 今日排除</td>
+</tr>
+<tr>
+  <td class="hl">8043 蜜望實</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="up">79（+3→82，洗盤結束A法人）</td>
+  <td class="dn">⬇️ 52（RSI68+量比1.3x+費半衝擊）</td>
+  <td class="dn">+10%漲停，明日跳空風險極大</td>
+  <td><span style="color:#ff4444;font-size:11px">強相關（AI/科技製造）</span></td>
+  <td class="up">高</td>
+  <td class="dn">❌ 今日排除</td>
+</tr>
+<tr>
+  <td class="hl">3357 臺慶科</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="up">76（主力進場A法人）</td>
+  <td class="dn">⬇️ 53（RSI74過熱+費半衝擊）</td>
+  <td class="dn">被動元件+9.43%，RSI74已過熱</td>
+  <td><span class="tag">中相關（被動元件）</span></td>
+  <td class="up">高</td>
+  <td class="dn">❌ 今日排除</td>
+</tr>
+<tr>
+  <td class="hl">3416 融程電 <span class="horse-tag">⭐黑馬</span></td>
+  <td><span class="pool-tag">上市</span></td>
+  <td>71（量縮C底背離）</td>
+  <td class="warn">維持68（國防電子最抗跌）</td>
+  <td class="warn">量比0.5x量縮整理，C底背離訊號</td>
+  <td><span class="tag">弱相關（國防/軍工）</span></td>
+  <td class="dn">低</td>
+  <td><span class="horse-tag">⭐ 黑馬觀察</span></td>
+</tr>
+<tr>
+  <td class="hl">5328 華容</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="warn">66（主力進場）</td>
+  <td class="dn">⬇️ 48（RSI80過熱+量比1.6x）</td>
+  <td class="dn">RSI80已過熱，漲幅+8.53%</td>
+  <td><span class="tag">中相關</span></td>
+  <td class="warn">中</td>
+  <td class="dn">❌ 排除</td>
+</tr>
+<tr>
+  <td class="hl">6155 鈞寶</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="warn">61（接近漲停）</td>
+  <td class="dn">⬇️ 44（RSI79過熱）</td>
+  <td class="dn">RSI79接近超買，漲幅+9.99%</td>
+  <td><span class="tag">中相關</span></td>
+  <td class="warn">中</td>
+  <td class="dn">❌ 排除</td>
+</tr>
+<tr>
+  <td class="hl">6191 精成科</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="warn">73</td>
+  <td class="dn">⬇️ 56（法人-2賣超）</td>
+  <td class="warn">+2.34%漲幅，法人賣超-2</td>
+  <td><span class="tag">中相關（機殼）</span></td>
+  <td class="dn">低</td>
+  <td class="dn">❌ Risk-Off排除</td>
+</tr>
+</table>
+
+<!-- ====== 四、深度交易機會 ====== -->
+<div class="section-title">▌四、深度交易機會（Risk-Off修正後）</div>
+
+<!-- 上詮 -->
+<div class="card green stock-card">
+<h2>🥇 3363 上詮 — 外資逆勢買超+國防連接器Emerging Rotation <span class="score">65（Risk-Off修正）</span></h2>
+<div style="clear:both"></div>
+<div class="grid2">
+<div>
+<p><span class="tag b">K線：B級</span> 今日爆量+8.1%，收908元，量比2.0x突破放量</p>
+<p><span class="tag">今日K線意義</span> <span class="warn">爆量突破，Risk-Off環境下進入「等確認區」，明日量縮收紅才能進場</span></p>
+<p><span class="tag">來源</span> <span class="pool-tag">上市</span></p>
+<p><span class="tag">型態</span> Emerging Rotation（國防/連接器供應鏈新題材）</p>
+<p><span class="tag">輪動位置</span> 國防軍工+連接器族群，Laggard Catch-up，費半相關性弱</p>
+<p><span class="tag">產業催化劑</span></p>
+<ul>
+<li>6/5 外資買超上詮居集中市場外資買超第一名（逆大盤賣超1100億環境）</li>
+<li>全球國防支出持續攀升，上詮連接器切入軍工航太供應鏈</li>
+<li>AI伺服器連接器需求持續（與半導體製造端相關性低於AI晶片族群）</li>
+</ul>
+<p><span class="tag">媒體曝光</span> <span class="dn">低-中</span>｜尚無個股頭版，外資買超新聞昨日才出現</p>
+<p><span class="tag">籌碼</span> 6/5外資買超居首（張數待確認）| RS(5日)+13.2% | 法人+5（連續買超中）</p>
+<p><span class="tag">系統訊號</span> RSI 62 | K值不明 | 量比 2.0x | 評分77→Risk-Off修正65</p>
+</div>
+<div>
+<div class="action-box">
+<p><span class="buy">⚠️ Risk-Off環境進場條件</span>：必須等費半回穩&gt;-2%且明日量縮確認</p>
+<p><span class="buy">📍 最佳進場區</span>：<span class="up" style="font-size:16px;font-weight:bold">870～900元</span>（等回測進場）</p>
+<p><span class="warn">跳空 &gt;3% 不追　若低開跌破860元觀望</span></p>
+<div class="sep"></div>
+<p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">840元</span>（破前突破點失效）</p>
+<p><span class="warn">失效條件</span>：收盤跌破840元，或費半再跌&gt;2%</p>
+<div class="sep"></div>
+<div class="rr-box">
+<p><span class="buy">🎯 目標價</span>：前高阻力法 → <span class="up" style="font-weight:bold">980～1000元</span></p>
+<p>進場885 | 停損840（損45）| 目標990（獲105）</p>
+<p><span class="up" style="font-size:15px;font-weight:bold">RR ≈ 2.3:1</span></p>
+</div>
+<p><span class="tag">持有天數</span>：3～7天　<span class="tag">隔夜</span>：⚠️（Risk-Off環境高風險）</p>
+<p><span class="tag">建議倉位</span>：<span class="warn" style="font-size:15px;font-weight:bold">3～5%（Risk-Off縮倉）</span></p>
+</div>
+<div class="sep"></div>
+<p class="up-cond">📈 明日升評條件：費半回穩（跌幅收斂至-3%以內）+量縮收紅+守昨低840</p>
+<p class="dn-cond">📉 明日降評條件：費半再跌&gt;-2%，或開盤爆量長上影，或跌破840</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：ANET/CSCO（網通連接器）、整體費半SOX</p>
+</div>
+</div>
+</div>
+
+<!-- 融程電黑馬 -->
+<div class="card blue stock-card">
+<h2>🥈 3416 融程電 — 國防電子C底背離（最抗費半衝擊） <span class="score">68（黑馬觀察）</span></h2>
+<div style="clear:both"></div>
+<div class="grid2">
+<div>
+<p><span class="tag b">K線：B級</span> 量縮整理收181元（+0.56%），量比僅0.5x</p>
+<p><span class="tag">今日K線意義</span> <span class="dn">量縮整理是C底背離訊號，但量比0.5x資金尚未真正流入，需等量能回歸</span></p>
+<p><span class="tag">來源</span> <span class="pool-tag">上市</span></p>
+<p><span class="tag">型態</span> Laggard Catch-up（國防電子族群尚未大漲）</p>
+<p><span class="tag">輪動位置</span> 全球國防支出題材，費半相關性極弱，天然對沖Risk-Off</p>
+<p><span class="tag">產業催化劑</span></p>
+<ul>
+<li>全球軍費開支持續增加，台灣國防電子受惠</li>
+<li>記憶體雜音散去：融程電主要做軍用嵌入式電腦，DRAM/AI週期影響有限</li>
+<li>系統訊號C底背離（量縮整理型態）</li>
+</ul>
+<p><span class="tag">媒體曝光</span> <span class="dn">低</span>｜個股報導極少，甜蜜點</p>
+<p><span class="tag">籌碼</span> 法人-1（賣超）| RS(5日)-2.1% | 量比0.5x | 需等法人轉買</p>
+<p><span class="tag">系統訊號</span> RSI 62 | K值不明 | 量比 0.5x | 評分71（C底背離加分）</p>
+</div>
+<div>
+<div class="action-box">
+<p><span class="buy">⚠️ 黑馬等確認進場條件</span>：量比需回到≥1.2x，法人轉正</p>
+<p><span class="buy">📍 觀察進場</span>：<span class="up" style="font-size:15px;font-weight:bold">178～183元</span></p>
+<p><span class="warn">跳空 &gt;2% 不追</span></p>
+<div class="sep"></div>
+<p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">172元</span></p>
+<div class="rr-box">
+<p><span class="buy">🎯 目標</span>：停損幅度×2.5 → <span class="up" style="font-weight:bold">203～210元</span></p>
+<p><span class="up">RR ≈ 2.5:1</span></p>
+</div>
+<p><span class="tag horse">倉位</span>：3～5%（黑馬小倉，Risk-Off環境）</p>
+<p><span class="warn">⚠️ 風險</span>：量比過低，需等量能回歸才是真訊號</p>
+</div>
+<div class="sep"></div>
+<p class="up-cond">📈 明日升評條件：量比回升&gt;1.2x+法人轉買+費半回穩</p>
+<p class="dn-cond">📉 明日降評條件：量比繼續低迷&lt;0.8x，或大盤跳空-2%以上</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：DXY美元指數、L3Harris(LHX)（國防電子）</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 五、黑馬候選區 ====== -->
+<div class="section-title">▌五、⭐ 黑馬候選區（等Risk-Off結束後觀察）</div>
+
+<div class="card horse stock-card">
+<h2>⭐ 3416 融程電 — 國防電子C底背離 <span class="score" style="color:#cc88ff">68</span></h2>
+<div style="clear:both"></div>
+<p style="color:#cc88ff;font-size:13px">費半暴跌環境下最抗跌族群之一｜量縮整理C底背離，但量比僅0.5x需等量能回歸</p>
+<div class="grid2">
+<div>
+<p><span class="tag horse">升級原因</span> RSI 62（合理區間）+ 上市股 + C底背離訊號 + 費半相關性極弱</p>
+<p><span class="tag">K線</span> B級　<span class="tag">量比</span> 0.5x（需回升）</p>
+<p><span class="tag">輪動</span> 國防/軍工，全球軍費題材，Laggard Catch-up</p>
+<p><span class="tag">潛在催化劑</span> 全球國防支出、台灣國防預算增加</p>
+<p class="up-cond">📈 明日升評條件：量比&gt;1.2x+法人轉買+費半回穩</p>
+<p class="dn-cond">📉 明日降評條件：量縮繼續或大盤跌幅擴大</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：LHX、NOC（國防）</p>
+</div>
+<div>
+<div class="action-box">
+<p><span class="buy">📍 觀察進場</span>：<span class="up" style="font-size:15px;font-weight:bold">178～183元</span>（量能回歸時）</p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">172元</span></p>
+<div class="rr-box">
+<p><span class="buy">🎯 目標</span>：停損×2.5 → <span class="up" style="font-weight:bold">203～210元</span></p>
+<p><span class="up">RR ≈ 2.5:1</span></p>
+</div>
+<p><span class="tag horse">倉位</span>：3～5%（黑馬小倉）</p>
+<p><span class="warn">⚠️ 風險</span>：量比過低，非今日進場標的</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ====== 六、未來14天催化劑日曆 ====== -->
+<div class="section-title">▌六、未來14天催化劑日曆</div>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響產業 / 標的</th><th>方向</th></tr>
+<tr>
+  <td class="dn">2026/06/06（今日）</td>
+  <td>🔴 費半-10.26%衝擊台股開盤</td>
+  <td>全部AI/半導體族群（川湖、蜜望實、臺慶科）</td>
+  <td class="dn">重大利空，全面降倉</td>
+</tr>
+<tr>
+  <td class="warn">2026/06/06-07</td>
+  <td>🟡 AVGO法說AI展望消化期</td>
+  <td>CoWoS/AI伺服器供應鏈、川湖</td>
+  <td class="warn">持續觀察是否為預期落差一次修正</td>
+</tr>
+<tr>
+  <td class="warn">2026/06/10-11</td>
+  <td>🟡 台股三大法人籌碼方向確認</td>
+  <td>全部標的（外資是否持續賣超）</td>
+  <td class="warn">觀察外資賣超是否收斂</td>
+</tr>
+<tr>
+  <td class="warn">2026/06 下旬</td>
+  <td>🟡 NVIDIA Rubin平台最新進展</td>
+  <td>AI伺服器供應鏈、川湖、臺慶科</td>
+  <td class="up">若確認無降規，利多</td>
+</tr>
+<tr>
+  <td class="warn">2026/06 月底</td>
+  <td>🟡 台灣5月營收公告（6/10起）</td>
+  <td>上詮、信邦、今國光、川湖</td>
+  <td class="up">觀察5月營收是否延續成長</td>
+</tr>
+<tr>
+  <td class="up">持續進行</td>
+  <td>🟢 全球國防預算增加</td>
+  <td>融程電（3416）、信邦（3023）</td>
+  <td class="up">中長線利多，不受費半影響</td>
+</tr>
+</table>
+
+<!-- ====== 七、交易員最終結論 ====== -->
+<div class="section-title">▌七、交易員最終結論</div>
+<div class="card blue" style="margin-bottom:16px">
+<p><strong style="font-size:15px">Regime</strong>：<span class="dn" style="font-size:15px">C Risk-Off — 費半-10.26%系統性停損觸發，今日全面降評縮倉</span></p>
+<div class="sep"></div>
+<p><strong>⚠️ 系統性停損</strong>：費半跌&gt;2%（實際-10.26%），全部持倉立即降倉50%，今日不新開多單。</p>
+<div class="sep"></div>
+<p><strong>⏳ 爆量等確認</strong>：<span class="warn">6209今國光、3023信邦、3363上詮</span> — 今日爆量漲停或大漲，等明日開盤15分鐘觀察情境（費半暴跌環境下，情境三機率大幅升高）</p>
+<p><strong>⭐ 黑馬觀察</strong>：<span style="color:#cc88ff;font-size:14px;font-weight:bold">3416 融程電</span>。唯一費半影響最小標的，量縮C底背離，等量能回歸後小倉觀察，倉位3%。</p>
+<div class="sep"></div>
+<p><strong>🚨 最大風險</strong>：AVGO法說引爆「AI期望修正」可能是中期主題，而非一日回調。若明日費半繼續下跌，整個AI族群需重新定價，今日截圖中所有AI相關標的（川湖、蜜望實、臺慶科、今國光、精成科）不宜在這個環境追進。</p>
+<p><strong>❌ 今日絕對FOMO避開</strong>：<span class="dn">8043 蜜望實</span>｜昨日漲停+10%，今日費半-10%，開盤若跳空高開絕對不追，情境三機率極高</p>
+<p><strong>💡 策略框架</strong>：今日保守現金，等待：①費半跌幅收斂至-3%以內；②外資賣超開始縮小；③個別標的量縮確認不破關鍵支撐。等以上3條件同時滿足後，3363上詮和3416融程電是最優先關注標的。</p>
+<p><strong>選股池品質</strong>：今日截圖10支標的中，7支RSI過熱（74-80）或爆量，在Risk-Off環境下幾乎全數需降評，品質偏低。融程電（C底背離+低RSI+費半相關弱）是唯一值得在此環境中繼續追蹤的標的。</p>
+</div>
+
+<!-- ====== 八、等早盤版確認區 ====== -->
+<div class="section-title">▌八、⏳ 等早盤版確認區（今日爆量股）</div>
+
+<div class="card yellow stock-card" style="margin-bottom:10px">
+<h3 style="font-size:15px">6209 今國光 — 今日量比2.1x 爆量突破，費半-10%環境下情境三機率大升</h3>
+<p style="color:#ff8800;font-size:13px;margin-bottom:6px">今日收87.9元（+3.78%），量比2.1x，突破放量訊號。但費半-10%，明日開盤前15分鐘需嚴格觀察情境。</p>
+<p style="color:#4488ff;font-size:12px;margin-bottom:6px">🔗 對應美股指標：AAPL（光學/AR應用）、整體費半方向（CPO部分）</p>
+<table>
+<tr><th>情境</th><th>開盤表現</th><th>操作</th><th>進場區</th></tr>
+<tr>
+  <td class="up" style="font-weight:bold">✅ 情境一</td>
+  <td>量縮（&lt;爆量日50%）+ 收紅 + 守昨低85</td>
+  <td class="buy">早盤版升評，確認費半不再跌才進場</td>
+  <td class="up">85～88元</td>
+</tr>
+<tr>
+  <td class="warn" style="font-weight:bold">✅ 情境二</td>
+  <td>量延續 + 跳空開高 + 守住</td>
+  <td class="warn">Risk-Off環境：跳空&lt;2%才考慮小倉</td>
+  <td class="warn">依跳空位置</td>
+</tr>
+<tr>
+  <td class="dn" style="font-weight:bold">❌ 情境三（費半-10%環境最可能）</td>
+  <td>開高走低 / 爆量長上影 / 跌破85</td>
+  <td class="stop">直接放棄，確認出貨</td>
+  <td class="dn">—</td>
+</tr>
+</table>
+</div>
+
+<div class="card yellow stock-card" style="margin-bottom:10px">
+<h3 style="font-size:15px">3363 上詮 — 今日量比2.0x 爆量+8.1%，外資逆勢買超，仍需隔日確認</h3>
+<p style="color:#ff8800;font-size:13px;margin-bottom:6px">今日收908元（+8.1%），外資今日（6/5）買超居集中市場外資買超金額第一。連接器/國防屬性相對抗跌，但爆量仍需確認。</p>
+<p style="color:#4488ff;font-size:12px;margin-bottom:6px">🔗 對應美股指標：ANET/CSCO（網通連接器）、費半SOX整體方向</p>
+<table>
+<tr><th>情境</th><th>開盤表現</th><th>操作</th><th>進場區</th></tr>
+<tr>
+  <td class="up" style="font-weight:bold">✅ 情境一（此標的最有機會）</td>
+  <td>量縮（&lt;昨量50%）+ 收紅 + 守880</td>
+  <td class="buy">升評，確認費半穩定後小倉進場</td>
+  <td class="up">870～900元</td>
+</tr>
+<tr>
+  <td class="warn" style="font-weight:bold">✅ 情境二</td>
+  <td>量延續+開高守住</td>
+  <td class="warn">跳空&lt;2%小倉追</td>
+  <td class="warn">依開盤位置</td>
+</tr>
+<tr>
+  <td class="dn" style="font-weight:bold">❌ 情境三</td>
+  <td>開高走低 / 跌破880</td>
+  <td class="stop">放棄</td>
+  <td class="dn">—</td>
+</tr>
+</table>
+</div>
+
+<div class="card yellow stock-card" style="margin-bottom:10px">
+<h3 style="font-size:15px">3023 信邦 — 今日量比2.1x 爆量+5.28%，連接器機器人/國防題材</h3>
+<p style="color:#ff8800;font-size:13px;margin-bottom:6px">今日收329元（+5.28%），量比2.1x突破放量。連接器/機器人/航太屬性，費半相關性弱。</p>
+<p style="color:#4488ff;font-size:12px;margin-bottom:6px">🔗 對應美股指標：ANET/CSCO（連接器）、整體AI伺服器需求</p>
+<table>
+<tr><th>情境</th><th>開盤表現</th><th>操作</th><th>進場區</th></tr>
+<tr>
+  <td class="up" style="font-weight:bold">✅ 情境一</td>
+  <td>量縮 + 收紅 + 守315</td>
+  <td class="buy">小倉進場（3～5%）</td>
+  <td class="up">315～325元</td>
+</tr>
+<tr>
+  <td class="warn" style="font-weight:bold">✅ 情境二</td>
+  <td>量延續+跳空&lt;2%</td>
+  <td class="warn">極小倉追</td>
+  <td class="warn">依跳空</td>
+</tr>
+<tr>
+  <td class="dn" style="font-weight:bold">❌ 情境三</td>
+  <td>跌破315元或爆量長上影</td>
+  <td class="stop">直接放棄</td>
+  <td class="dn">—</td>
+</tr>
+</table>
+</div>
+
+<!-- ====== 九、摺疊區：截圖解析 + 初篩 ====== -->
+<div style="margin-bottom:4px">
+<div class="collapsible-header" id="hdr-parse" onclick="toggleCollapse('parse')">
+<span class="ch-title">📋 截圖解析 &amp; 選股池初篩結果（點擊展開）</span>
+<span class="ch-arrow" id="arrow-parse">▼</span>
+</div>
+<div class="collapsible-content" id="col-parse">
+
+<div class="card blue" style="margin-bottom:10px">
+<h2>▌截圖解析（全部辨識標的）</h2>
+<p style="color:#555;font-size:12px">本截圖欄位：代號、名稱、現價、漲跌%、K線分、綜合分、爆量、RSI、RS(5日)、法人、今日訊號、型態</p>
+<table>
+<tr>
+  <th>代號</th><th>名稱</th><th>現價</th><th>漲跌%</th><th>K線分</th><th>綜合分</th><th>爆量</th><th>RSI</th><th>RS(5日)</th><th>法人</th><th>訊號/型態</th>
+</tr>
+<tr><td class="hl">6209</td><td>今國光</td><td>87.9</td><td class="up">+3.78%</td><td class="up">79</td><td>53</td><td class="up">2.1x</td><td class="up">72</td><td class="up">+6.8%</td><td class="warn">-1</td><td>突破放量</td></tr>
+<tr><td class="hl">3023</td><td>信邦</td><td>329.0</td><td class="up">+5.28%</td><td class="up">79</td><td>68</td><td class="up">2.1x</td><td>69</td><td class="up">+3.5%</td><td class="up">+1</td><td>突破放量</td></tr>
+<tr><td class="hl">8043</td><td>蜜望實</td><td>159.5</td><td class="up">+10.00%</td><td class="up">79</td><td>75</td><td>1.3x</td><td>68</td><td class="up">+12.4%</td><td class="up">+2</td><td>洗盤結束 / A法人啟動</td></tr>
+<tr><td class="hl">5328</td><td>華容</td><td>40.7</td><td class="up">+8.53%</td><td class="up">78</td><td>66</td><td class="up">1.6x</td><td class="warn">80</td><td class="up">+2.0%</td><td class="up">+1</td><td>主力進場</td></tr>
+<tr><td class="hl">3363</td><td>上詮</td><td>908.0</td><td class="up">+8.10%</td><td class="up">77</td><td>71</td><td class="up">2.0x</td><td>62</td><td class="up">+13.2%</td><td class="up">+5</td><td>突破放量</td></tr>
+<tr><td class="hl">3416</td><td>融程電</td><td>181.0</td><td class="up">+0.56%</td><td>76</td><td>71</td><td class="warn">0.5x</td><td>62</td><td class="dn">-2.1%</td><td class="warn">-1</td><td>量縮整理 / C底背離</td></tr>
+<tr><td class="hl">6155</td><td>鈞寶</td><td>79.3</td><td class="up">+9.99%</td><td>76</td><td>61</td><td>1.4x</td><td class="warn">79</td><td class="up">+25.5%</td><td class="up">+1</td><td>—</td></tr>
+<tr><td class="hl">3357</td><td>臺慶科</td><td>296.0</td><td class="up">+9.43%</td><td>76</td><td>77</td><td class="up">1.6x</td><td class="warn">74</td><td class="up">+2.4%</td><td class="up">+2</td><td>主力進場 / A法人啟動</td></tr>
+<tr><td class="hl">6191</td><td>精成科</td><td>100.5</td><td class="up">+2.34%</td><td>75</td><td>73</td><td>1.4x</td><td class="warn">73</td><td class="up">+2.8%</td><td class="dn">-2</td><td>—</td></tr>
+<tr><td class="hl">2059</td><td>川湖</td><td>5620.0</td><td class="up">+5.05%</td><td>75</td><td>57</td><td class="up">2.6x</td><td>66</td><td class="up">+10.2%</td><td class="warn">-1</td><td>突破放量</td></tr>
+</table>
+</div>
+
+<div>
+<h2>▌選股池初篩結果（含Risk-Off修正）</h2>
+<table>
+<tr>
+  <th>代號(名稱)</th><th>K線分/綜合分</th><th>RSI</th><th>量比</th><th>今日K線</th><th>初篩結果</th><th>理由</th>
+</tr>
+<tr>
+  <td class="hl">6209 今國光</td>
+  <td class="up">79/53（K線主導）</td><td>72</td><td class="up">2.1x</td>
+  <td class="warn">爆量突破放量</td>
+  <td><span class="wait-tag">⏳ 等早盤確認</span></td>
+  <td>爆量+費半-10%，等隔日情境</td>
+</tr>
+<tr>
+  <td class="hl">3023 信邦</td>
+  <td class="up">79/68</td><td>69</td><td class="up">2.1x</td>
+  <td class="warn">爆量突破放量</td>
+  <td><span class="wait-tag">⏳ 等早盤確認</span></td>
+  <td>爆量，費半衝擊，等情境</td>
+</tr>
+<tr>
+  <td class="hl">8043 蜜望實</td>
+  <td class="up">79/75</td><td>68</td><td>1.3x</td>
+  <td class="dn">漲停+A法人啟動</td>
+  <td class="stop">❌ 排除（Risk-Off）</td>
+  <td>費半-10%環境，漲停後不追</td>
+</tr>
+<tr>
+  <td class="hl">5328 華容</td>
+  <td>78/66</td><td class="warn">80</td><td class="up">1.6x</td>
+  <td class="warn">主力進場+大漲</td>
+  <td class="stop">❌ 排除</td>
+  <td>RSI80過熱，Risk-Off降評</td>
+</tr>
+<tr>
+  <td class="hl">3363 上詮</td>
+  <td class="up">77/71</td><td>62</td><td class="up">2.0x</td>
+  <td class="warn">爆量突破，外資逆勢買超</td>
+  <td><span class="wait-tag">⏳ 等早盤確認</span></td>
+  <td>外資逆勢買超居首，等隔日確認</td>
+</tr>
+<tr>
+  <td class="hl">3416 融程電</td>
+  <td>76/71</td><td>62</td><td class="warn">0.5x</td>
+  <td class="warn">量縮整理C底背離</td>
+  <td><span class="horse-tag">⭐ 黑馬候選</span></td>
+  <td>費半相關弱，C底背離，但量比&lt;1.0x（待量能回歸）</td>
+</tr>
+<tr>
+  <td class="hl">6155 鈞寶</td>
+  <td class="warn">76/61</td><td class="warn">79</td><td>1.4x</td>
+  <td class="dn">RSI接近超買</td>
+  <td class="stop">❌ 排除</td>
+  <td>RSI79過熱，Risk-Off降評</td>
+</tr>
+<tr>
+  <td class="hl">3357 臺慶科</td>
+  <td class="up">76/77</td><td class="warn">74</td><td class="up">1.6x</td>
+  <td class="dn">被動元件大漲+RSI74</td>
+  <td class="stop">❌ 排除</td>
+  <td>RSI74偏高+費半衝擊</td>
+</tr>
+<tr>
+  <td class="hl">6191 精成科</td>
+  <td>75/73</td><td class="warn">73</td><td>1.4x</td>
+  <td class="warn">法人-2賣超</td>
+  <td class="stop">❌ 排除</td>
+  <td>法人賣超+RSI偏高+Risk-Off</td>
+</tr>
+<tr>
+  <td class="hl">2059 川湖</td>
+  <td>75/57</td><td>66</td><td class="up">2.6x</td>
+  <td class="dn">爆量+AI伺服器費半強相關</td>
+  <td class="stop">❌ 排除（Risk-Off）</td>
+  <td>AI伺服器費半強相關，費半-10%直接衝擊</td>
+</tr>
+</table>
+</div>
+
+</div>
+</div>
+
+<!-- ====== 十、早盤交接清單 ====== -->
+<div class="card handoff">
+<h2>▌📋 早盤交接清單（複製此區塊貼入第二輪早盤版 Prompt）</h2>
+<p style="color:#00e5ff;font-size:13px;margin-bottom:10px">
+⚡ 將以下文字區塊完整複製，貼入「20260606_2_claude」第二輪Prompt。<br>
+Claude會自動搜尋美盤數據，自動比對產業相關性，不需手動輸入任何數字。
+</p>
+<pre>
+=== 第一輪交接清單 ｜ 20260606 收盤後版 ===
+
+【今日Regime】C Risk-Off | 加權45,070(-1.33%) | 外資賣超826億 | 投信買超9.6億（金融股）
+重大背景：費半SOX 6/5美盤暴跌-10.26%，那指-4.18%。AVGO法說會AI展望低於市場最激進預期引爆系統性賣壓。MU-13%/MRVL-16%/AMD-11%/NVDA-5.9%。系統性停損線已觸發（費半跌>2%）。外資台股賣超826億，但外資逆勢買超上詮(3363)居集中市場第一。
+
+【A. 主力候選】（Risk-Off修正後，均屬降評狀態，等費半回穩再評估）
+────────────────────────────────
+3363上詮 | 進場870~900 | 跳空>3%不追 | 停損840 | 目標990 | 倉位3~5%（Risk-Off縮倉）
+📈升評：費半回穩+量縮守880+明日外資繼續買超 | 📉降評：費半再跌>-2%+跌破840 | 🔗ANET/CSCO/SOX
+────────────────────────────────
+
+【B. 黑馬候選】
+────────────────────────────────
+3416融程電 | 觀察進場178~183 | 停損172 | 目標203~210 | 倉位3~5%
+📈升評：量比回升>1.2x+法人轉買+費半穩定 | 📉降評：量縮繼續或大盤跳空>-2% | 🔗LHX/NOC（國防）
+────────────────────────────────
+
+【C. 爆量等確認】
+────────────────────────────────
+6209今國光 | 情境一進場85~88 | 情境二跳空上限2% | 情境三放棄（費半-10%環境情境三機率極高）
+🔗AAPL（AR/光學）/費半SOX整體
+────────────────────────────────
+3363上詮 | 情境一進場870~900 | 情境二跳空上限2% | 情境三放棄
+🔗ANET/CSCO/SOX
+────────────────────────────────
+3023信邦 | 情境一進場315~325 | 情境二跳空上限2% | 情境三放棄
+🔗ANET（連接器）/人形機器人整體方向
+────────────────────────────────
+
+【D. 今日排除，明日不看】
+8043蜜望實 | 原因：費半-10%+AI製造族群直接受衝擊+昨日漲停後風險極高
+5328華容 | 原因：RSI80過熱+Risk-Off
+6155鈞寶 | 原因：RSI79接近超買+Risk-Off
+3357臺慶科 | 原因：RSI74偏高+被動元件費半關聯+Risk-Off
+6191精成科 | 原因：法人-2賣超+RSI73+Risk-Off
+2059川湖 | 原因：AI伺服器費半強相關，費半-10%直接衝擊，爆量不追
+
+【系統性停損線】
+費半單日 < -2% → 全部降倉50%，直接切Risk-Off
+⚠️ 今日已觸發：費半-10.26%，全部標的降倉至最大倉位50%以下，新進場暫停
+</pre>
+</div>
+
+<p style="color:#555;font-size:11px;margin-top:14px;text-align:right">
+本報告標的來自使用者系統截圖，Claude負責截圖解析、深度過濾與執行分析。不構成投資建議，投資有風險，請自行判斷並設置停損。
+｜ 20260606_1_claude.html　AIreport v2.3 Round1
+</p>
+
+<script>
+function toggleCollapse(id) {
+  var content = document.getElementById('col-' + id);
+  var header = document.getElementById('hdr-' + id);
+  var arrow = document.getElementById('arrow-' + id);
+  if (content.classList.contains('open')) {
+    content.classList.remove('open');
+    header.classList.remove('open');
+    arrow.textContent = '▼';
+  } else {
+    content.classList.add('open');
+    header.classList.add('open');
+    arrow.textContent = '▲';
+  }
+}
+</script>
+</body>
+</html>
