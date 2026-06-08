@@ -1,0 +1,618 @@
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股收盤後分析（第一輪）｜ 20260608</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px;max-width:1200px;margin:0 auto}
+h1{font-size:20px;color:#00e5ff;border-bottom:2px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:1px}
+h2{font-size:15px;color:#ffcc00;margin:12px 0 8px;border-left:4px solid #ffcc00;padding-left:8px;letter-spacing:0.5px}
+h3{font-size:14px;color:#bbb;margin:8px 0 5px}
+.section-title{font-size:16px;color:#ffcc00;margin:16px 0 8px;border-left:4px solid #ffcc00;padding-left:8px;font-weight:bold}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:10px}
+.card.green{border-left:4px solid #ff4444}
+.card.yellow{border-left:4px solid #ffcc00}
+.card.red{border-left:4px solid #00cc66}
+.card.blue{border-left:4px solid #4488ff}
+.card.orange{border-left:4px solid #ff8800}
+.card.horse{border-left:4px solid #cc88ff;background:#1a1520}
+.card.handoff{border:2px solid #00e5ff;background:#0a1520;margin-top:16px}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:11px;padding:2px 6px;border-radius:3px;margin:1px}
+.tag.a{background:#440000;color:#ff4444}
+.tag.b{background:#444400;color:#ffcc00}
+.tag.c{background:#003300;color:#00cc66}
+.tag.horse{background:#2a1540;color:#cc88ff}
+.score{float:right;font-size:20px;font-weight:bold;color:#00e5ff}
+.regime{background:#1a0a0a;border:2px solid #ff4444;border-radius:6px;padding:12px;margin-bottom:12px}
+.regime.warn{border-color:#ff8800;background:#1a0f00}
+.regime.off{border-color:#00cc66;background:#0a1a0a}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold;font-size:14px}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.7;font-size:14px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:14px;line-height:1.6}
+.big{font-size:20px;color:#00e5ff;font-weight:bold}
+.pool-tag{display:inline-block;background:#1a1a2e;color:#4488ff;font-size:11px;padding:2px 6px;border-radius:3px;margin:1px;border:1px solid #4488ff}
+.horse-tag{display:inline-block;background:#2a1540;color:#cc88ff;font-size:11px;padding:2px 6px;border-radius:3px;margin:1px;border:1px solid #cc88ff}
+.wait-tag{display:inline-block;background:#2a2000;color:#ffcc00;font-size:11px;padding:2px 6px;border-radius:3px;border:1px solid #ffcc00}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:4px;padding:8px;margin-top:6px}
+.up-cond{color:#ff4444;font-size:13px;margin:3px 0;line-height:1.6}
+.dn-cond{color:#00cc66;font-size:13px;margin:3px 0;line-height:1.6}
+pre{background:#111;border:1px solid #2a4a2a;padding:12px;border-radius:4px;font-size:12px;color:#ccc;white-space:pre-wrap;margin:8px 0;line-height:1.8;font-family:'Courier New',monospace}
+.warn-banner{background:#2a1500;border:2px solid #ff8800;border-radius:6px;padding:10px;margin-bottom:12px;text-align:center;font-size:14px}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:4px;padding:10px;margin-top:8px}
+.stock-card{margin-bottom:10px}
+.alert-banner{background:#200000;border:2px solid #ff0000;border-radius:6px;padding:12px;margin-bottom:14px;text-align:center}
+.collapsible-header{background:#1a1a1a;border:1px solid #444;border-radius:6px;padding:10px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;user-select:none}
+.collapsible-header:hover{background:#222;border-color:#555}
+.collapsible-header .ch-title{color:#aaa;font-size:14px}
+.collapsible-header .ch-arrow{color:#555;font-size:16px;transition:transform 0.2s}
+.collapsible-header.open .ch-arrow{transform:rotate(180deg)}
+.collapsible-content{display:none;margin-bottom:10px}
+.collapsible-content.open{display:block}
+</style>
+</head>
+<body>
+
+<h1>🎯 台股收盤後分析報告（第一輪）｜ 20260608</h1>
+<p style="color:#555;font-size:12px;margin-bottom:8px">
+檔名：20260608_1_claude.html　｜　輸入：使用者指定標的　｜　AIreport v2.3 Round1
+</p>
+
+<!-- 重大警示橫幅 -->
+<div class="alert-banner">
+⚠️ <span class="up" style="font-weight:bold;font-size:16px">今日台股史詩級暴跌 −1568點（−3.48%）收43,502｜費半上週五重挫10.26%</span><br>
+<span class="warn" style="font-size:13px">但：台指期夜盤已大幅反彈逾750點，美股費半今晚盤中大漲+4.51%！Regime已正在轉換中</span>
+</div>
+
+<!-- ====== 一、市場 Regime 判斷 ====== -->
+<div class="section-title">▌一、市場 Regime 判斷</div>
+<div class="regime warn">
+<h2 style="border:none;padding:0;margin-bottom:10px">今日判斷 → <span class="warn" style="font-size:18px;font-weight:bold">B → 轉 A（Regime快速修復中）</span></h2>
+<div class="grid3">
+<div>
+<h3>大盤現況（6/8收盤）</h3>
+<p>加權指數：<span class="hl">43,502（−1,568點 −3.48%）</span></p>
+<p>盤中最低：42,376（跌2,694點歷史最大）</p>
+<p>成交值：<span class="up">1.13兆</span>（爆量恐慌 + 抄底並存）</p>
+<p class="warn">⚡ 尾盤大幅收斂，月線失而復得（守住！）</p>
+<p class="warn">明日風險預估：夜盤反彈750+，明日跳空回補機率高</p>
+</div>
+<div>
+<h3>美股／費半關鍵數據</h3>
+<p>上週五費半SOX：<span class="dn">−10.26%</span>（近年最大單日跌幅）</p>
+<p>今日美股費半盤中（最新）：<span class="up">費半 +4.51% 大漲！</span></p>
+<p>那斯達克今夜：+0.04%（整體平穩）</p>
+<p>MRVL（邁威爾）：<span class="up">盤中大漲+29.6%！</span>（AI基建催化劑）</p>
+<p>HPE：<span class="up">+14.5%</span>（AI伺服器訂單創高）</p>
+<p class="warn">⚠️ 系統停損線狀態：費半今夜大幅反彈，已脫離−2%停損線</p>
+</div>
+<div>
+<h3>今日法人整體方向</h3>
+<p>外資：<span class="dn">賣超 938億</span>（受驚被動賣超）</p>
+<p>投信：<span class="up">買超 90.7億</span>（逆勢力撐！）</p>
+<p>自營商（合計）：<span class="dn">賣超 491億</span></p>
+<p class="warn">⭐ 投信已連續7週買超，今日繼續護盤</p>
+<p>核心觀察：外資今日被動賣超 + 大盤強力收斂 = 恐慌已釋放</p>
+</div>
+</div>
+</div>
+
+<!-- ====== Regime修正說明 ====== -->
+<div class="card orange" style="margin-bottom:12px">
+<h3 style="color:#ff8800">⚡ Regime快速修復分析（重要）</h3>
+<p>今日開盤是史詩級恐慌殺盤（−2,694點），但收盤收斂至−1,568點，月線守住。</p>
+<p>台指期夜盤在美股費半+4.51%帶動下，已反彈逾750點，重回43,800。</p>
+<p>核心邏輯：這不是基本面崩潰，是非農數據觸發的流動性衝擊 → 急殺急彈型態。</p>
+<p class="up">結論：Regime從C（Risk-Off）快速轉回B中性，夜盤走強則明日可升至A。</p>
+<p class="warn">明日開盤：台股預計跳空高開，這4檔在今日暴跌後若有強力支撐，將是絕佳甜蜜點。</p>
+</div>
+
+<!-- ====== 二、交易員一頁總結 ====== -->
+<div class="section-title">▌二、交易員一頁總結</div>
+<div class="grid2">
+<div class="card blue"><h3>📌 明日最值得佈局</h3><p><span class="up" style="font-size:15px;font-weight:bold">8996 高力</span>｜AI液冷散熱龍頭，今日暴跌後守月線的力道是關鍵，費半夜盤+4.5%直接利多</p></div>
+<div class="card green"><h3>🍯 最像「剛起漲」甜蜜點</h3><p><span class="up" style="font-size:15px;font-weight:bold">3029 零壹</span>｜IT基礎建設＋AI雲端代理，今日跌幅相對小，籌碼投信穩守，擁擠度低</p></div>
+<div class="card yellow"><h3>🔄 最佳 Laggard / Emerging</h3><p><span class="up" style="font-size:15px;font-weight:bold">8021 尖點</span>｜PCB高階鑽針，4月營收年增63%，MRVL今夜+30%直接帶動AI基建族群</p></div>
+<div class="card orange"><h3>🔥 如果明日只能重壓一檔</h3><p class="big">8996 高力</p><p>AI液冷散熱唯一有硬需求（GB300需液冷），今日若有守月線訊號，費半+4.5%確認入場</p></div>
+</div>
+<div class="grid2">
+<div class="card orange"><h3>🌙 如果只能做隔夜單</h3><p class="big">3029 零壹</p><p>IT服務業偏防禦性，今日跌幅最小（約−2%），隔夜風險最低，費半反彈不影響其基本面</p></div>
+<div class="card red"><h3>⚡ AI轉弱第一個先砍誰</h3><p><span class="dn" style="font-size:15px;font-weight:bold">7556 意德士</span>｜股價前5天已漲49%，今日−2.59%，相對高位，費半若再轉弱首當其衝</p></div>
+</div>
+<div class="card horse" style="margin-bottom:12px">
+<h3>⭐ 黑馬觀察（注意）</h3>
+<p><span style="color:#cc88ff;font-size:14px;font-weight:bold">7556 意德士</span>：連5漲+49%後遇系統性暴跌，今日若量縮守住，可能是甜蜜點；但高位風險極大，須嚴格小倉</p>
+</div>
+
+<!-- ====== 三、AI台股短線機會雷達表 ====== -->
+<div class="section-title">▌三、AI台股短線機會雷達表</div>
+<table>
+<tr>
+  <th>股票</th><th>來源</th><th>K線等級</th><th>今日K線對明日含義</th><th>輪動位置</th>
+  <th>產業催化劑</th><th>時間點</th><th>擁擠度</th><th>評分*</th><th>建議</th>
+</tr>
+<tr>
+  <td class="hl">8996 高力</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td><span class="tag a">A-級</span></td>
+  <td class="up">暴跌後量縮收斂 → 明日強力反彈候選</td>
+  <td class="up">Emerging Rotation（液冷龍頭）</td>
+  <td>AI液冷Blackwell需求爆發+氫能</td><td class="warn">持續進行中</td>
+  <td class="dn">低-中</td><td class="up" style="font-weight:bold">78</td>
+  <td class="buy">積極參與</td>
+</tr>
+<tr>
+  <td class="hl">3029 零壹</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td><span class="tag b">B級</span></td>
+  <td class="warn">今日小跌（-1.75%）符合甜蜜點回測</td>
+  <td class="warn">Laggard Catch-up（IT服務轉型）</td>
+  <td>AI雲端+資安代理+Google Cloud</td><td class="warn">Q2結果7月</td>
+  <td class="dn">低</td><td class="warn" style="font-weight:bold">73</td>
+  <td class="buy">積極參與</td>
+</tr>
+<tr>
+  <td class="hl">8021 尖點</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td><span class="tag a">A級</span></td>
+  <td class="up">AI高階PCB材料，MRVL+30%直接催化</td>
+  <td class="up">Sympathy Play（AI網通PCB受益）</td>
+  <td>AI伺服器PCB鑽針需求+高階化趨勢</td><td class="warn">持續</td>
+  <td class="dn">低-中</td><td class="up" style="font-weight:bold">76</td>
+  <td class="buy">積極參與</td>
+</tr>
+<tr>
+  <td class="hl">7556 意德士 <span class="horse-tag">⭐黑馬觀察</span></td>
+  <td><span class="pool-tag">上櫃</span></td>
+  <td><span class="tag b">B-級</span></td>
+  <td class="warn">連5漲後暴跌日−2.59%，量縮才是甜蜜</td>
+  <td class="warn">主升段中（但前5日+49%過熱）</td>
+  <td>半導體設備零組件供應鏈</td><td>待確認</td>
+  <td class="warn">中（前期大漲）</td><td class="warn" style="font-weight:bold">64*</td>
+  <td class="warn">小倉觀察</td>
+</tr>
+</table>
+<p style="color:#555;font-size:12px">*評分：今日因系統性暴跌，所有評分均在技術受損前提下估算，美股夜盤費半+4.51%為重要升評催化劑</p>
+
+<!-- ====== 四、深度交易機會 ====== -->
+<div class="section-title">▌四、深度交易機會（全部通過初篩標的）</div>
+
+<!-- 8996 高力 #1 -->
+<div class="card green stock-card">
+<h2>🥇 8996 高力 — AI液冷散熱龍頭 Emerging Rotation <span class="score">78</span></h2>
+<div style="clear:both"></div>
+<div class="grid2">
+<div>
+<p><span class="tag a">K線：A-級</span> 今日跟隨大盤暴跌，但屬於系統性殺盤（非個股基本面惡化）</p>
+<p><span class="tag">今日K線意義</span> <span class="up">暴跌後收斂強→明日進場邏輯變強！費半+4.5%確認方向</span></p>
+<p><span class="tag">來源</span> <span class="pool-tag">上市</span></p>
+<p><span class="tag">型態</span> Emerging Rotation — AI液冷散熱族群龍頭</p>
+<p><span class="tag">輪動位置</span> 液冷散熱領先者，AI伺服器基建剛性需求</p>
+<p><span class="tag">產業催化劑</span></p>
+<ul>
+<li>NVIDIA Blackwell GB300 NVL72 單櫃135kW → 液冷從選配變剛需</li>
+<li>2026年前2月營收年增260%，法人看2026 EPS挑戰17元</li>
+<li>泰國新廠2026年量產，擴充液冷產能</li>
+<li>燃料電池（Bloom Energy合作）訂單能見度至2027年</li>
+</ul>
+<p><span class="tag">媒體曝光</span> <span class="warn">中</span>｜近期有法人研報，但未達FOMO程度</p>
+<p><span class="tag">籌碼</span> 投信今日逆勢買超（連7週買超）｜外資今日被動賣超（系統性）｜法人中長期立場偏多</p>
+<p><span class="tag">系統訊號</span> 2026前2月營收+260% ｜ EPS法人預估17元 ｜ 連4漲後+7.66%（今日回測）</p>
+</div>
+<div>
+<div class="action-box">
+<p><span class="buy">📍 最佳進場區</span>：<span class="up" style="font-size:16px;font-weight:bold">1,050～1,100元</span></p>
+<p><span class="warn">跳空 &gt;5% 不追（避免追高）</span></p>
+<p style="color:#555;font-size:12px">*今日收盤價約1,080元（需以今日實際收盤確認）</p>
+<div class="sep"></div>
+<p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">980元以下</span>（破月線且守不住→失效）</p>
+<p><span class="warn">失效條件</span>：連續收盤破980元 or 量能不確認</p>
+<div class="sep"></div>
+<div class="rr-box">
+<p><span class="buy">🎯 目標價</span>：前高阻力法 → <span class="up" style="font-weight:bold">1,250元（第一目標）</span></p>
+<p>進場1,075 | 停損980（損95）| 目標1,250（獲175）</p>
+<p><span class="up" style="font-size:15px;font-weight:bold">RR ≈ 1.8:1</span> <span style="color:#555;font-size:12px">（暴跌後RR改善中）</span></p>
+</div>
+<p><span class="tag">持有天數</span>：5~10天　<span class="tag">隔夜</span>：✅（今日費半夜盤反彈已確認）</p>
+<p><span class="tag">建議倉位</span>：<span class="up" style="font-size:15px;font-weight:bold">7~10%</span></p>
+</div>
+<div class="sep"></div>
+<p class="up-cond">📈 明日升評條件：費半夜盤確認收+3%以上 / NVDA今夜回穩 / 高力開盤守1,000以上</p>
+<p class="dn-cond">📉 明日降評條件：費半由漲轉跌 / 高力開低後繼續走弱不反彈</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：NVDA、SMCI、HPE（AI伺服器）；參考SOXX整體走向</p>
+</div>
+</div>
+</div>
+
+<!-- 8021 尖點 #2 -->
+<div class="card green stock-card">
+<h2>🥈 8021 尖點 — PCB高階鑽針 AI供應鏈 Sympathy Play <span class="score">76</span></h2>
+<div style="clear:both"></div>
+<div class="grid2">
+<div>
+<p><span class="tag a">K線：A-級</span> 今日跟跌，但4月營收年增63%基本面強勁</p>
+<p><span class="tag">今日K線意義</span> <span class="up">系統性回測 → MRVL今夜大漲+30%，AI網通PCB直接受益，明日進場邏輯明顯增強</span></p>
+<p><span class="tag">來源</span> <span class="pool-tag">上市</span></p>
+<p><span class="tag">型態</span> Sympathy Play — AI基建強化帶動PCB高階化</p>
+<p><span class="tag">輪動位置</span> PCB材料設備族群，尚未被全面發現</p>
+<p><span class="tag">產業催化劑</span></p>
+<ul>
+<li>MRVL今夜+29.6%：AI網通與客製化晶片爆發 → PCB鑽孔需求直接受益</li>
+<li>4月營收5.25億，年增63.18%（持續加速！）</li>
+<li>高階鑽針占比目標2026年達55%（2025年為48%）</li>
+<li>鑽針月產能擴增至4500萬支（年底完成）</li>
+<li>AI伺服器與交換機PCB層數↑材料規格↑帶動單價</li>
+</ul>
+<p><span class="tag">媒體曝光</span> <span class="dn">低</span>｜4月底曾有注意股公告，但未持續炒作</p>
+<p><span class="tag">籌碼</span> 投信近期有關注，但不是主流炒作標的｜量比需確認</p>
+<p><span class="tag">系統訊號</span> 4月營收年增63% ｜ 前高在471元（5/12）｜今日回測點（458→448元附近）</p>
+</div>
+<div>
+<div class="action-box">
+<p><span class="buy">📍 最佳進場區</span>：<span class="up" style="font-size:16px;font-weight:bold">420～445元</span></p>
+<p><span class="warn">跳空 &gt;5% 不追</span></p>
+<p style="color:#555;font-size:12px">*今日收盤448元（爆料同學會數據），進場等回測</p>
+<div class="sep"></div>
+<p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">410元以下</span>（破近期整理低點失效）</p>
+<p><span class="warn">失效條件</span>：破410+放量→確認出貨</p>
+<div class="sep"></div>
+<div class="rr-box">
+<p><span class="buy">🎯 目標價</span>：前高阻力法① → <span class="up" style="font-weight:bold">471元（前高）→520元（量測）</span></p>
+<p>進場432 | 停損410（損22）| 目標471（獲39）</p>
+<p><span class="up" style="font-size:15px;font-weight:bold">RR ≈ 1.8:1（保守）→ 520目標則3.6:1</span></p>
+</div>
+<p><span class="tag">持有天數</span>：5~10天　<span class="tag">隔夜</span>：✅（MRVL夜盤暴漲確認）</p>
+<p><span class="tag">建議倉位</span>：<span class="up" style="font-size:15px;font-weight:bold">5~8%</span></p>
+</div>
+<div class="sep"></div>
+<p class="up-cond">📈 明日升評條件：MRVL確認+20%以上收盤 / AI網通族群盤面熱度升溫 / 尖點開盤守420以上</p>
+<p class="dn-cond">📉 明日降評條件：費半夜盤不持續 / MRVL拉回 / 尖點開低繼續破420</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：MRVL（最重要）、ANET、CSCO（AI網通PCB需求代理）</p>
+</div>
+</div>
+</div>
+
+<!-- 3029 零壹 #3 -->
+<div class="card blue stock-card">
+<h2>🥉 3029 零壹 — AI雲端/資安代理轉型 Laggard Catch-up <span class="score">73</span></h2>
+<div style="clear:both"></div>
+<div class="grid2">
+<div>
+<p><span class="tag b">K線：B級</span> 今日約-1.75%，屬市場中跌幅最小之一，防禦性突出</p>
+<p><span class="tag">今日K線意義</span> <span class="warn">小跌後守支撐 → 明日若大盤反彈，零壹有望率先止穩</span></p>
+<p><span class="tag">來源</span> <span class="pool-tag">上市</span></p>
+<p><span class="tag">型態</span> Laggard Catch-up — IT服務業AI轉型尚未被充分定價</p>
+<p><span class="tag">輪動位置</span> 軟體/服務業相對硬體跌幅小，具補漲潛力</p>
+<p><span class="tag">產業催化劑</span></p>
+<ul>
+<li>AI、雲端、資安三大業務同步受惠</li>
+<li>2026 Q1營收創單季歷史新高，年增26%</li>
+<li>VMware代理業務（Broadcom收購後獨占代理）</li>
+<li>Google Cloud服務整合深化</li>
+<li>2026年3月執行買回股份（護盤訊號）</li>
+</ul>
+<p><span class="tag">媒體曝光</span> <span class="dn">低</span>｜未見近期炒作，甜蜜點成立</p>
+<p><span class="tag">籌碼</span> 投信近期有回補跡象｜外資偏中性｜2026年3月公司自行買回股份（利多）</p>
+<p><span class="tag">系統訊號</span> 今日收112.5元（昨收114.5） ｜ 連3漲後首跌 ｜ 基本面EPS 6.53元（2025）</p>
+</div>
+<div>
+<div class="action-box">
+<p><span class="buy">📍 最佳進場區</span>：<span class="up" style="font-size:16px;font-weight:bold">110～115元</span></p>
+<p><span class="warn">跳空 &gt;4% 不追</span></p>
+<div class="sep"></div>
+<p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">105元以下</span>（跌破月線整理低點）</p>
+<p><span class="warn">失效條件</span>：跌破105元量縮收黑</p>
+<div class="sep"></div>
+<div class="rr-box">
+<p><span class="buy">🎯 目標價</span>：前高阻力法① → <span class="up" style="font-weight:bold">125元（近期高點） → 135元（更高目標）</span></p>
+<p>進場112 | 停損105（損7）| 目標125（獲13）</p>
+<p><span class="up" style="font-size:15px;font-weight:bold">RR ≈ 1.9:1（保守）→ 135目標則3.3:1</span></p>
+</div>
+<p><span class="tag">持有天數</span>：5~14天　<span class="tag">隔夜</span>：✅（防禦性強，隔夜最安全）</p>
+<p><span class="tag">建議倉位</span>：<span class="warn" style="font-size:15px;font-weight:bold">5~7%</span></p>
+</div>
+<div class="sep"></div>
+<p class="up-cond">📈 明日升評條件：大盤確認反彈+資安/雲端族群資金回流 / IT服務業相對強勢</p>
+<p class="dn-cond">📉 明日降評條件：大盤繼續下殺且零壹守不住110支撐</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：MSFT（雲端業務相關）；科技服務整體NASDAQ走向</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 五、黑馬候選區 ====== -->
+<div class="section-title">▌五、⭐ 黑馬候選區（7556 意德士）</div>
+
+<div class="card horse stock-card">
+<h2>⭐ 7556 意德士 — 半導體設備零組件 高風險甜蜜點觀察 <span class="score" style="color:#cc88ff">64*</span></h2>
+<div style="clear:both"></div>
+<p style="color:#ff8800;font-size:13px;margin-bottom:8px">⚠️ 重要警告：連5漲+49%（89元），今日系統性暴跌日跌-2.59%。高位遇大盤暴跌，型態評分下調。若明日量縮守住，可視為黑馬甜蜜點；若量放繼續跌則確認高位出貨。</p>
+<div class="grid2">
+<div>
+<p><span class="tag horse">升級原因</span> 連5漲前期動能強 + 上櫃 + 今日相對大盤守得住（大盤-3.48%，它-2.59%）</p>
+<p><span class="tag">K線</span> B-級（高位遇系統性殺盤，需確認）　<span class="tag">量比</span> 待確認（爆量則危險）</p>
+<p><span class="tag">輪動</span> 半導體設備零組件，EPS 7.1元（2025），連5漲後動能過熱</p>
+<p><span class="tag">潛在催化劑</span> 半導體設備零組件（AMAT、LRCX族群受益）；子公司大鐿先端科技（先進製程次系統）</p>
+<p><span class="tag">財務</span> 2026 Q1累計年增10.79%，EPS 7.1元（2025），基本面穩健</p>
+<p class="up-cond">📈 明日升評條件：費半+3%以上確認 + 意德士量縮守270元 + AMAT/KLAC走強</p>
+<p class="dn-cond">📉 明日降評條件：費半再轉弱 / 意德士開盤後繼續放量下跌 → 直接排除</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：AMAT、LRCX、KLAC（半導體設備）</p>
+</div>
+<div>
+<div class="action-box">
+<p><span class="buy">📍 觀察進場</span>：<span class="up" style="font-size:15px;font-weight:bold">265~275元</span>（量縮守住才進）</p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">250元</span>（破5日均線確認失效）</p>
+<div class="rr-box">
+<p><span class="buy">🎯 目標</span>：停損×2.5 → <span class="up" style="font-weight:bold">310元（前高區域）</span></p>
+<p>進場270 | 停損250（損20）| 目標310（獲40）</p>
+<p><span class="up">RR ≈ 2:1</span></p>
+</div>
+<p><span class="tag horse">倉位</span>：3~5%（黑馬小倉，絕不重壓）</p>
+<p><span class="warn">⚠️ 最大風險</span>：連漲後高位遇大盤暴跌，出貨風險極高。今日若非量縮則不看</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ====== 六、未來14天催化劑日曆 ====== -->
+<div class="section-title">▌六、未來14天催化劑日曆</div>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響產業 / 標的</th><th>方向</th></tr>
+<tr>
+  <td class="up">今夜 6/8</td>
+  <td>🔴 美股費半 +4.51% 盤中大漲（已知）</td>
+  <td>高力、尖點、意德士全部</td>
+  <td class="up">利多 → 明日台股開高</td>
+</tr>
+<tr>
+  <td class="up">今夜 6/8</td>
+  <td>🔴 MRVL盤中+29.6%（AI網通爆發）</td>
+  <td>8021 尖點（PCB/鑽針直接受益）</td>
+  <td class="up">強力利多</td>
+</tr>
+<tr>
+  <td class="up">今夜 6/8</td>
+  <td>🔴 HPE +14.5%（AI伺服器業績創高）</td>
+  <td>8996 高力（液冷散熱直接受益）</td>
+  <td class="up">利多</td>
+</tr>
+<tr>
+  <td class="warn">6月中</td>
+  <td>🟡 聯準會FOMC會議（利率決議）</td>
+  <td>全市場</td>
+  <td class="warn">觀察（非農強 → 升息風險仍在）</td>
+</tr>
+<tr>
+  <td class="warn">7月初</td>
+  <td>🟡 高力泰國新廠開始量產</td>
+  <td>8996 高力</td>
+  <td class="up">中長線利多（產能擴充）</td>
+</tr>
+<tr>
+  <td class="warn">7月</td>
+  <td>🟡 各公司Q2財報 / 零壹Q2業績</td>
+  <td>3029 零壹（EPS動能確認）</td>
+  <td class="up">觀察（Q1已創新高，Q2延續機率高）</td>
+</tr>
+<tr>
+  <td class="warn">持續</td>
+  <td>🟡 AI伺服器液冷滲透率提升</td>
+  <td>8996 高力（全年受益）</td>
+  <td class="up">持續利多（Blackwell出貨期）</td>
+</tr>
+</table>
+
+<!-- ====== 七、交易員最終結論 ====== -->
+<div class="section-title">▌七、交易員最終結論</div>
+<div class="card blue" style="margin-bottom:16px">
+<p><strong style="font-size:15px">Regime</strong>：<span class="warn" style="font-size:15px">B→快速轉A ── 今日史詩暴跌已大幅收斂，台指期夜盤反彈+750點，美股費半今夜+4.51%！急殺急彈型態，明日是關鍵買點視窗</span></p>
+<div class="sep"></div>
+<p><strong>🥇 最甜蜜點</strong>：<span class="up" style="font-size:15px;font-weight:bold">8996 高力</span>。AI液冷散熱龍頭，今日系統性暴跌後守月線，費半+4.5%+HPE+14.5%直接確認基本面完好。進場區1,050~1,100，停損980，目標1,250。倉位7~10%。</p>
+<p><strong>🥈 次甜蜜點</strong>：<span class="up" style="font-size:15px;font-weight:bold">8021 尖點</span>。MRVL今夜+29.6%直接催化PCB鑽針需求，4月營收+63%強勁。進場420~445，停損410，目標471~520。倉位5~8%。</p>
+<p><strong>🥉 穩健佈局</strong>：<span class="up" style="font-size:15px;font-weight:bold">3029 零壹</span>。IT服務防禦性強，今日跌幅最小，AI雲端/資安轉型受益，擁擠度最低。進場110~115，停損105，目標125~135。倉位5~7%。</p>
+<p><strong>⭐ 黑馬觀察</strong>：<span style="color:#cc88ff;font-size:14px;font-weight:bold">7556 意德士</span>。連5漲+49%後遇暴跌，高位風險高，明日量縮守270才值得小倉試水。嚴格停損250。倉位3~5%。</p>
+<div class="sep"></div>
+<p><strong>⚠️ 系統性停損</strong>：費半若今夜不確認收紅 → 明日全部暫緩。若費半確認+3%收盤 → 明日積極佈局。</p>
+<p><strong>🚨 最大風險</strong>：美國非農強勁引發的升息預期尚未消散，FOMC前市場仍不穩定。今日1.13兆成交量可能有融資斷頭未了結，明日仍需觀察開盤15分鐘。</p>
+<p><strong>❌ FOMO避開</strong>：<span class="dn">7556 意德士 高位重壓</span>｜連漲+49%後遇暴跌，不可重倉追</p>
+<p><strong>⏳ 等確認</strong>：所有標的明日開盤前先看台積電方向 + 台指期開盤缺口大小</p>
+<p><strong>選股池品質</strong>：4檔均有清楚產業邏輯，高力和尖點受益美股今夜強勁；零壹防禦性佳。今日暴跌後提供難得的低吸窗口。</p>
+</div>
+
+<!-- ====== 八、等早盤版確認區 ====== -->
+<div class="section-title">▌八、⏳ 今日特別情境：暴跌後夜盤反彈 → 明日開盤確認</div>
+<div class="card yellow stock-card">
+<h3 style="font-size:15px">今日全體 — 史詩暴跌後快速反彈，明日是關鍵確認時刻</h3>
+<p style="color:#ff8800;font-size:13px;margin-bottom:6px">今日台股最大跌2,694點後收斂至-1,568點，台指期夜盤已大漲750點。明日開盤前15分鐘觀察最關鍵。</p>
+<p style="color:#4488ff;font-size:12px;margin-bottom:6px">🔗 早盤版搜尋重點：NVDA / SMCI / MRVL / SOX收盤價 / TSM ADR / 台指期夜盤最終收盤點位</p>
+<table>
+<tr><th>情境</th><th>明日開盤表現</th><th>操作</th><th>4檔建議</th></tr>
+<tr>
+  <td class="up" style="font-weight:bold">✅ 情境一（最理想）</td>
+  <td>台積電守2,280以上 + 台指期開盤正缺口 + 成交量正常</td>
+  <td class="buy">A級進場，按計畫進場</td>
+  <td class="up"><strong>高力1,050+、尖點420+、零壹110+ 全部積極進場</strong></td>
+</tr>
+<tr>
+  <td class="warn" style="font-weight:bold">✅ 情境二（跳空高開）</td>
+  <td>跳空開高但超過+5% → 追高風險升高</td>
+  <td class="warn">等回測，不追高開</td>
+  <td class="warn">等候回測至進場區再進，高力超1,150不追</td>
+</tr>
+<tr>
+  <td class="dn" style="font-weight:bold">❌ 情境三（假反彈）</td>
+  <td>開高走低 / 台積電破2,200 / 量能再爆</td>
+  <td class="stop">全部暫緩，不操作</td>
+  <td class="dn">繼續觀望，等Regime確認</td>
+</tr>
+</table>
+</div>
+
+<!-- ====== 九、摺疊區：截圖解析 + 初篩 ====== -->
+<div style="margin-bottom:4px">
+<div class="collapsible-header" id="hdr-parse" onclick="toggleCollapse('parse')">
+<span class="ch-title">📋 截圖解析 &amp; 選股池初篩結果（點擊展開）</span>
+<span class="ch-arrow" id="arrow-parse">▼</span>
+</div>
+<div class="collapsible-content" id="col-parse">
+
+<div class="card blue" style="margin-bottom:10px">
+<h2>▌截圖解析（使用者指定標的）</h2>
+<p style="color:#555;font-size:12px">本次為使用者直接指定4檔標的，非截圖掃描模式。數據根據網路搜尋結果整合。</p>
+<table>
+<tr>
+  <th>代號</th><th>名稱</th><th>來源</th><th>今日收盤</th><th>漲跌</th>
+  <th>產業</th><th>近期動能</th><th>訊號</th>
+</tr>
+<tr>
+  <td class="hl">7556</td><td>意德士</td>
+  <td><span class="pool-tag">上櫃</span></td>
+  <td>263元</td><td class="dn">-2.59%</td>
+  <td>半導體設備零組件</td><td class="up">連5漲+49%（前5日）</td><td>高位回測觀察</td>
+</tr>
+<tr>
+  <td class="hl">8996</td><td>高力</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td>~1,080元</td><td class="dn">今日跟跌</td>
+  <td>AI液冷散熱+燃料電池</td><td class="up">連4漲+7.66%</td><td>今日系統性殺盤後守月線</td>
+</tr>
+<tr>
+  <td class="hl">3029</td><td>零壹</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td>112.5元</td><td class="dn">-1.75%</td>
+  <td>IT資訊服務/AI雲端代理</td><td class="warn">連3漲→首跌</td><td>相對強（跌幅最小）</td>
+</tr>
+<tr>
+  <td class="hl">8021</td><td>尖點</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td>448元</td><td class="dn">-2.18%</td>
+  <td>PCB材料設備（高階鑽針）</td><td class="up">4月營收+63%強勁</td><td>MRVL今夜+30%催化</td>
+</tr>
+</table>
+</div>
+
+<div>
+<h2>▌選股池初篩結果</h2>
+<table>
+<tr>
+  <th>代號(名稱)</th><th>來源</th><th>估算評分</th><th>今日K線</th><th>初篩結果</th><th>理由</th>
+</tr>
+<tr>
+  <td class="hl">8996(高力)</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="up" style="font-weight:bold">78</td>
+  <td class="up">系統性暴跌後收斂守月線，量價確認後甜蜜點成立</td>
+  <td class="buy">✅ 主力候選</td><td>AI液冷龍頭，費半+4.5%確認，RR合理</td>
+</tr>
+<tr>
+  <td class="hl">8021(尖點)</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="up" style="font-weight:bold">76</td>
+  <td class="up">MRVL+30%催化PCB鑽針，今日回測創進場機會</td>
+  <td class="buy">✅ 主力候選</td><td>AI高階PCB直接受益，4月營收+63%</td>
+</tr>
+<tr>
+  <td class="hl">3029(零壹)</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="warn" style="font-weight:bold">73</td>
+  <td class="warn">今日防禦性強（-1.75%），Laggard Catch-up成立</td>
+  <td class="buy">✅ 主力候選</td><td>AI雲端代理轉型，低擁擠度，隔夜最安全</td>
+</tr>
+<tr>
+  <td class="hl">7556(意德士)</td>
+  <td><span class="pool-tag">上櫃</span></td>
+  <td class="warn">64*</td>
+  <td class="warn">連5漲+49%後遇系統性暴跌，需量縮確認才有意義</td>
+  <td><span class="horse-tag">⭐ 黑馬觀察</span></td><td>前期動能強，但高位風險大，降評至黑馬</td>
+</tr>
+</table>
+</div>
+
+</div>
+</div>
+
+<!-- ====== 十、早盤交接清單 ====== -->
+<div class="card handoff">
+<h2>▌📋 早盤交接清單（複製此區塊貼入第二輪早盤版 Prompt）</h2>
+<p style="color:#00e5ff;font-size:13px;margin-bottom:10px">
+⚡ 將以下文字區塊完整複製，貼入「20260608_2_claude」第二輪Prompt。<br>
+Claude會自動搜尋美盤數據，自動比對產業相關性，不需手動輸入任何數字。
+</p>
+<pre>
+=== 第一輪交接清單 ｜ 20260608 收盤後版 ===
+
+【今日Regime】B（急速轉A）| 加權43,502(-1,568點 -3.48%) | 外資賣超938億（被動）| 投信買超90.7億（連7週）
+重大背景：今日史詩暴跌後大幅收斂守月線，台指期夜盤反彈+750點，美股費半今夜盤中+4.51%！
+急殺急彈型態，非基本面崩潰事件。費半上週五-10.26%引爆，今夜已快速反彈修復。
+
+【A. 主力候選】
+────────────────────────────────
+8996 高力 | 進場1,050~1,100 | 跳空>5%不追 | 停損980 | 目標1,250 | 倉位7~10%
+📈升評：費半今夜確認+3%收盤 / NVDA/HPE走強 / 高力開盤守1,000
+📉降評：費半由漲轉跌 / 高力開低繼續走弱 | 🔗NVDA、SMCI、HPE（AI液冷散熱）
+────────────────────────────────
+8021 尖點 | 進場420~445 | 跳空>5%不追 | 停損410 | 目標471-520 | 倉位5~8%
+📈升評：MRVL確認+20%收盤 / AI網通族群熱度 / 尖點守420
+📉降評：費半不持續 / MRVL拉回 / 尖點破420 | 🔗MRVL（最重要）、ANET、CSCO
+────────────────────────────────
+3029 零壹 | 進場110~115 | 跳空>4%不追 | 停損105 | 目標125-135 | 倉位5~7%
+📈升評：大盤確認反彈 / IT服務資金回流 / 零壹守110支撐
+📉降評：大盤繼續下殺 / 零壹破110 | 🔗MSFT（雲端相關）、NASDAQ整體
+────────────────────────────────
+
+【B. 黑馬候選】
+────────────────────────────────
+7556 意德士 | 觀察進場265~275（量縮才進）| 停損250 | 目標310 | 倉位3~5%
+📈升評：費半+3%確認 / 意德士量縮守270 / AMAT/KLAC走強
+📉降評：費半再轉弱 / 意德士放量跌破260 → 直接排除 | 🔗AMAT、LRCX、KLAC
+────────────────────────────────
+
+【C. 爆量等確認】
+（今日全體標的因系統性暴跌，明日開盤15分鐘為統一確認時機）
+開盤前觀察：台積電守2,280 + 台指期正缺口 + 成交量正常 → 情境一全進
+情境三觸發：開高走低+量能再爆 → 全部暫緩
+
+【D. 今日排除，明日不看】
+（無，全部4檔均進入觀察清單）
+
+【系統性停損線】
+費半單日 < -2% → 全部降倉50%，直接切Risk-Off
+今日特殊背景：費半上週五已-10.26%觸發停損，今夜已反彈+4.51%修復中
+</pre>
+</div>
+
+<p style="color:#555;font-size:11px;margin-top:14px;text-align:right">
+本報告根據使用者指定4檔標的進行分析，整合今日台股收盤數據與美股最新動態。不構成投資建議，投資有風險，請自行判斷並設置停損。
+｜ 20260608_1_claude.html　AIreport v2.3 Round1
+</p>
+
+<script>
+function toggleCollapse(id) {
+  var content = document.getElementById('col-' + id);
+  var header = document.getElementById('hdr-' + id);
+  var arrow = document.getElementById('arrow-' + id);
+  if (content.classList.contains('open')) {
+    content.classList.remove('open');
+    header.classList.remove('open');
+    arrow.textContent = '▼';
+  } else {
+    content.classList.add('open');
+    header.classList.add('open');
+    arrow.textContent = '▲';
+  }
+}
+</script>
+</body>
+</html>
