@@ -1,0 +1,375 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.wrap{padding:0.5rem 0 2rem}
+.mkt-bar{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:12px 18px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:1.5rem}
+.mkt-item{display:flex;align-items:center;gap:6px;font-size:13px}
+.mkt-label{color:var(--color-text-secondary)}
+.mkt-up{color:#c0392b;font-weight:500}
+.sec-title{font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.sec-title .badge{font-size:11px;background:var(--color-background-info);color:var(--color-text-info);border-radius:var(--border-radius-md);padding:2px 8px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:1.5rem}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:1.5rem}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 14px}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.stock-code{font-size:12px;color:var(--color-text-secondary)}
+.stock-name{font-size:15px;font-weight:500;color:var(--color-text-primary);line-height:1.3}
+.price-badge{font-size:12px;background:var(--color-background-danger);color:var(--color-text-danger);border-radius:var(--border-radius-md);padding:3px 7px;white-space:nowrap}
+.row-stat{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.row-stat:last-child{border-bottom:none}
+.stat-label{font-size:11px;color:var(--color-text-secondary)}
+.stat-val{font-size:12px;font-weight:500;color:var(--color-text-primary);text-align:right}
+.up-yoy{color:#c0392b;font-size:11px}
+.down-yoy{color:#27ae60;font-size:11px}
+.tag-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.tag{font-size:10px;padding:2px 7px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary)}
+.tag-blue{background:var(--color-background-info);color:var(--color-text-info);border:0.5px solid var(--color-border-info)}
+.tag-amber{background:#FAEEDA;color:#854F0B;border:0.5px solid #FAC775}
+.tag-teal{background:#E1F5EE;color:#0F6E56;border:0.5px solid #5DCAA5}
+.chain-section{margin-bottom:8px}
+.chain-label{font-size:10px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em}
+.chain-content{font-size:11px;color:var(--color-text-primary);line-height:1.5}
+.rec-section{margin-bottom:1.5rem}
+.rec-first{background:var(--color-background-primary);border:2px solid #185FA5;border-radius:var(--border-radius-lg);padding:16px}
+.rec-badge{display:inline-block;background:var(--color-background-info);color:var(--color-text-info);font-size:11px;padding:3px 10px;border-radius:var(--border-radius-md);margin-bottom:10px}
+.rec-stock{font-size:18px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.rec-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:12px}
+.stars-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.star-item{display:flex;flex-direction:column;align-items:center;gap:3px}
+.star-label{font-size:10px;color:var(--color-text-secondary)}
+.star-dots{display:flex;gap:2px}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot-fill{background:#185FA5}
+.dot-empty{background:var(--color-border-tertiary)}
+.reasons{font-size:12px;color:var(--color-text-secondary);line-height:1.6}
+.reason-row{display:flex;gap:6px;margin-bottom:4px}
+.reason-icon{color:#185FA5;font-size:14px;flex-shrink:0;margin-top:1px}
+.rec-other{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.rec-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px}
+.rc-rank{font-size:10px;color:var(--color-text-secondary);margin-bottom:4px}
+.rc-name{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px}
+.rc-reason{font-size:11px;color:var(--color-text-secondary);line-height:1.5}
+.cat-row{display:flex;flex-direction:column;gap:4px}
+.cat-item{display:flex;justify-content:space-between;align-items:center}
+.cat-key{font-size:11px;color:var(--color-text-secondary)}
+.cat-bar-wrap{flex:1;margin:0 8px;height:4px;background:var(--color-border-tertiary);border-radius:2px}
+.cat-bar{height:4px;border-radius:2px;background:#185FA5}
+.cat-val{font-size:11px;color:var(--color-text-primary);font-weight:500;min-width:20px;text-align:right}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:1.5rem 0}
+.expand-plan{font-size:11px;color:var(--color-text-secondary);line-height:1.5;margin-top:6px;padding:6px 8px;background:var(--color-background-secondary);border-radius:var(--border-radius-md)}
+.catalyst-good{font-size:11px;padding:4px 8px;background:#EAF3DE;color:#3B6D11;border-radius:var(--border-radius-md);margin-bottom:4px}
+.catalyst-mid{font-size:11px;padding:4px 8px;background:#FAEEDA;color:#854F0B;border-radius:var(--border-radius-md);margin-bottom:4px}
+.catalyst-risk{font-size:11px;padding:4px 8px;background:#FCEBEB;color:#A32D2D;border-radius:var(--border-radius-md);margin-bottom:4px}
+.tab-nav{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap}
+.tab-btn{font-size:12px;padding:5px 12px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);background:transparent;color:var(--color-text-secondary);cursor:pointer}
+.tab-btn.active{background:var(--color-background-info);color:var(--color-text-info);border-color:var(--color-border-info)}
+</style>
+
+<div class="wrap">
+<h2 class="sr-only">台股四檔個股深度分析報告：金像電、健鼎、雙鴻、貿聯KY</h2>
+
+<div class="mkt-bar">
+  <div class="mkt-item"><span class="mkt-label"><i class="ti ti-chart-line" style="font-size:14px" aria-hidden="true"></i> 美股背景</span></div>
+  <div class="mkt-item"><span class="mkt-label">費半指數</span><span class="mkt-up">▲ +2.6%</span></div>
+  <div class="mkt-item"><span class="mkt-label">TSM ADR</span><span class="mkt-up">▲ +2.2%</span></div>
+  <div class="mkt-item"><span class="mkt-label">整體氛圍</span><span style="font-size:13px;color:var(--color-text-primary);font-weight:500">小漲偏多 · AI族群輪動</span></div>
+  <div class="mkt-item" style="margin-left:auto"><span class="mkt-label" style="font-size:11px">2026/06/09 分析</span></div>
+</div>
+
+<div class="sec-title"><i class="ti ti-chart-bar" aria-hidden="true"></i> 一、業績數據 <span class="badge">最新財報</span></div>
+<div class="grid4">
+
+<div class="card">
+  <div class="card-head">
+    <div><div class="stock-code">2368</div><div class="stock-name">金像電</div></div>
+    <div class="price-badge">≈ 1,350 元</div>
+  </div>
+  <div class="row-stat"><span class="stat-label">Q1'26 EPS</span><span class="stat-val">6.87 元 <span class="up-yoy">↑91%</span></span></div>
+  <div class="row-stat"><span class="stat-label">FY25 EPS</span><span class="stat-val">19.47 元</span></div>
+  <div class="row-stat"><span class="stat-label">FY25 全年營收</span><span class="stat-val">597 億</span></div>
+  <div class="row-stat"><span class="stat-label">Q1'26 單季營收</span><span class="stat-val">~168億 <span class="up-yoy">↑50%+</span></span></div>
+  <div class="row-stat"><span class="stat-label">近月營收 (12月)</span><span class="stat-val">52.5億 <span class="up-yoy">↑46%</span></span></div>
+  <div class="row-stat"><span class="stat-label">近四季累計EPS</span><span class="stat-val">~22 元</span></div>
+  <div class="expand-plan"><i class="ti ti-building-factory" style="font-size:12px" aria-hidden="true"></i> 擴產：台灣自地委建廠房、泰國廠導入AI PCB、私募增資強化產能；目標美系CSP市占50%+</div>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div><div class="stock-code">3044</div><div class="stock-name">健鼎</div></div>
+    <div class="price-badge">≈ 502 元</div>
+  </div>
+  <div class="row-stat"><span class="stat-label">Q1'26 EPS</span><span class="stat-val">5.61 元 <span class="up-yoy">↑25%</span></span></div>
+  <div class="row-stat"><span class="stat-label">FY25 EPS</span><span class="stat-val">19.45 元</span></div>
+  <div class="row-stat"><span class="stat-label">FY25 全年營收</span><span class="stat-val">734 億</span></div>
+  <div class="row-stat"><span class="stat-label">Q1'26 單季營收</span><span class="stat-val">209.6億 <span class="up-yoy">↑22%</span></span></div>
+  <div class="row-stat"><span class="stat-label">4月月營收</span><span class="stat-val">82.0億 <span class="up-yoy">↑28.9%</span></span></div>
+  <div class="row-stat"><span class="stat-label">FY26 全年資本支出</span><span class="stat-val">100億+</span></div>
+  <div class="expand-plan"><i class="ti ti-map-pin" style="font-size:12px" aria-hidden="true"></i> 擴產：越南廠巴地頭頓增資、中國越南各50%資本支出、月產值目標90億元(現80億)</div>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div><div class="stock-code">3324</div><div class="stock-name">雙鴻</div></div>
+    <div class="price-badge">≈ 1,160 元</div>
+  </div>
+  <div class="row-stat"><span class="stat-label">Q1'26 EPS</span><span class="stat-val">12.61 元 <span class="up-yoy">↑123%</span></span></div>
+  <div class="row-stat"><span class="stat-label">FY25 EPS</span><span class="stat-val">28.26 元</span></div>
+  <div class="row-stat"><span class="stat-label">FY25 全年營收</span><span class="stat-val">232.8 億</span></div>
+  <div class="row-stat"><span class="stat-label">Q1'26 累計營收</span><span class="stat-val">113.9億 <span class="up-yoy">↑77%</span></span></div>
+  <div class="row-stat"><span class="stat-label">4月月營收</span><span class="stat-val">28.4億 <span class="up-yoy">↑40.9%</span> <span class="down-yoy">MoM↓14.6%</span></span></div>
+  <div class="row-stat"><span class="stat-label">FY26 預估EPS</span><span class="stat-val">~42–52 元</span></div>
+  <div class="expand-plan"><i class="ti ti-droplet" style="font-size:12px" aria-hidden="true"></i> 擴產：GB300液冷模組Q2出貨、快接頭/機櫃認證完成、訂單能見度延至2027年；2026營收目標上修至+70%</div>
+</div>
+
+<div class="card">
+  <div class="card-head">
+    <div><div class="stock-code">3665</div><div class="stock-name">貿聯KY</div></div>
+    <div class="price-badge">≈ 2,200 元</div>
+  </div>
+  <div class="row-stat"><span class="stat-label">Q1'26 EPS</span><span class="stat-val">11.66 元 <span class="up-yoy">↑37%</span></span></div>
+  <div class="row-stat"><span class="stat-label">FY25 EPS</span><span class="stat-val">46.57 元</span></div>
+  <div class="row-stat"><span class="stat-label">FY25 全年營收</span><span class="stat-val">712 億</span></div>
+  <div class="row-stat"><span class="stat-label">Q1'26 累計營收</span><span class="stat-val">208.6億 <span class="up-yoy">↑28%</span></span></div>
+  <div class="row-stat"><span class="stat-label">4月月營收</span><span class="stat-val">73.8億 <span class="up-yoy">↑18.5%</span></span></div>
+  <div class="row-stat"><span class="stat-label">外資目標價</span><span class="stat-val">2,245 元</span></div>
+  <div class="expand-plan"><i class="ti ti-plug" style="font-size:12px" aria-hidden="true"></i> 擴產：越南廠增資、AI高速互連線纜產能擴充；EV充電線、資料中心電源管理雙驅動</div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<div class="sec-title"><i class="ti ti-network" aria-hidden="true"></i> 二、產業鏈定位與美股連動</div>
+<div class="grid4">
+
+<div class="card">
+  <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:10px;padding-bottom:6px;border-bottom:0.5px solid var(--color-border-tertiary)">2368 金像電 · AI PCB</div>
+  <div class="chain-section">
+    <div class="chain-label">上游原料</div>
+    <div class="chain-content">台光電、聯茂、台燿（銅箔基板CCL）<br>銅箔、玻纖布、低損耗材料</div>
+  </div>
+  <div class="chain-section" style="margin-top:8px">
+    <div class="chain-label">主要客戶</div>
+    <div class="chain-content">美系超大CSP（Meta、Google、Microsoft）<br>廣達、鴻海等AI伺服器ODM廠</div>
+  </div>
+  <div class="chain-section" style="margin-top:8px">
+    <div class="chain-label">美股連動</div>
+    <div class="tag-row">
+      <span class="tag-blue">NVDA</span><span class="tag-blue">META</span><span class="tag-blue">GOOG</span><span class="tag-blue">SMCI</span>
+    </div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-top:5px;line-height:1.4">連動邏輯：AI伺服器PCB為GPU運算基板，NVDA/CSP資本支出直驅訂單。費半+2.6% = PCB訂單展望直接上修</div>
+  </div>
+</div>
+
+<div class="card">
+  <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:10px;padding-bottom:6px;border-bottom:0.5px solid var(--color-border-tertiary)">3044 健鼎 · 多元PCB</div>
+  <div class="chain-section">
+    <div class="chain-label">上游原料</div>
+    <div class="chain-content">銅箔基板CCL廠（台光電、聯茂）<br>銅材、低損耗積層材料</div>
+  </div>
+  <div class="chain-section" style="margin-top:8px">
+    <div class="chain-label">主要客戶</div>
+    <div class="chain-content">Apple、Samsung（記憶體模組）<br>Dell（通用伺服器）、Bosch（車用電子）</div>
+  </div>
+  <div class="chain-section" style="margin-top:8px">
+    <div class="chain-label">美股連動</div>
+    <div class="tag-row">
+      <span class="tag-blue">DELL</span><span class="tag-blue">AAPL</span><span class="tag-amber">MU</span><span class="tag-amber">WDC</span>
+    </div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-top:5px;line-height:1.4">連動邏輯：通用伺服器、記憶體模組板需求與DELL/記憶體股高度連動；汽車電子則與EV/MCU族群掛鉤</div>
+  </div>
+</div>
+
+<div class="card">
+  <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:10px;padding-bottom:6px;border-bottom:0.5px solid var(--color-border-tertiary)">3324 雙鴻 · AI液冷散熱</div>
+  <div class="chain-section">
+    <div class="chain-label">上游原料</div>
+    <div class="chain-content">銅鋁材料廠、快接頭零件<br>冷卻液、均熱板原材</div>
+  </div>
+  <div class="chain-section" style="margin-top:8px">
+    <div class="chain-label">主要客戶</div>
+    <div class="chain-content">NVIDIA供應鏈（GB300液冷）<br>ASIC伺服器廠、廣達等ODM廠</div>
+  </div>
+  <div class="chain-section" style="margin-top:8px">
+    <div class="chain-label">美股連動</div>
+    <div class="tag-row">
+      <span class="tag-blue">NVDA</span><span class="tag-teal">AVGO</span><span class="tag-teal">MRVL</span>
+    </div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-top:5px;line-height:1.4">連動邏輯：直接NVDA GB300供應商，液冷模組是GB300標配；費半漲 = NVDA出貨強勁 = 雙鴻訂單直接受益</div>
+  </div>
+</div>
+
+<div class="card">
+  <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:10px;padding-bottom:6px;border-bottom:0.5px solid var(--color-border-tertiary)">3665 貿聯KY · AI線纜</div>
+  <div class="chain-section">
+    <div class="chain-label">上游原料</div>
+    <div class="chain-content">銅導線廠、絕緣/護套塑膠原料<br>連接器零件廠</div>
+  </div>
+  <div class="chain-section" style="margin-top:8px">
+    <div class="chain-label">主要客戶</div>
+    <div class="chain-content">Meta、Google、Microsoft（資料中心）<br>Tesla、EV車廠（充電線）、工業自動化</div>
+  </div>
+  <div class="chain-section" style="margin-top:8px">
+    <div class="chain-label">美股連動</div>
+    <div class="tag-row">
+      <span class="tag-blue">NVDA</span><span class="tag-blue">META</span><span class="tag-teal">TSLA</span><span class="tag-teal">CDNS</span>
+    </div>
+    <div style="font-size:11px;color:var(--color-text-secondary);margin-top:5px;line-height:1.4">連動邏輯：AI資料中心高速互連線纜跟隨NVDA/CSP建置；EV充電線受惠Tesla/EV擴張；多元客戶降低單一風險</div>
+  </div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<div class="sec-title"><i class="ti ti-bolt" aria-hidden="true"></i> 三、催化劑整理</div>
+<div class="grid4">
+
+<div class="card">
+  <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px">2368 金像電</div>
+  <div style="font-size:10px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:500">短期 (&lt;1個月)</div>
+  <div class="catalyst-good">6/23 除息 (現金10元) 填息行情</div>
+  <div class="catalyst-good">費半走強 → PCB訂單展望上調</div>
+  <div style="font-size:10px;color:var(--color-text-secondary);margin:6px 0 4px;font-weight:500">中期 (3~6個月)</div>
+  <div class="catalyst-mid">美系CSP市占率衝破50%</div>
+  <div class="catalyst-mid">泰國廠AI PCB產能釋放</div>
+  <div class="catalyst-mid">Q2'26 EPS可望持續季增</div>
+  <div style="font-size:10px;color:var(--color-text-secondary);margin:6px 0 4px;font-weight:500">潛在風險</div>
+  <div class="catalyst-risk">股價在歷史高位 估值偏貴(本益比~32x)</div>
+  <div class="catalyst-risk">銅箔基板漲價轉嫁壓力</div>
+</div>
+
+<div class="card">
+  <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px">3044 健鼎</div>
+  <div style="font-size:10px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:500">短期 (&lt;1個月)</div>
+  <div class="catalyst-good">4月月營收82億 年增28.9% 創40個月新高</div>
+  <div class="catalyst-good">外資上調目標價邏輯持續</div>
+  <div style="font-size:10px;color:var(--color-text-secondary);margin:6px 0 4px;font-weight:500">中期 (3~6個月)</div>
+  <div class="catalyst-mid">越南廠新產能陸續開出</div>
+  <div class="catalyst-mid">Q2伺服器營收佔比上升至38%</div>
+  <div class="catalyst-mid">7/9 除息12.7元 (現金殖利率高)</div>
+  <div style="font-size:10px;color:var(--color-text-secondary);margin:6px 0 4px;font-weight:500">潛在風險</div>
+  <div class="catalyst-risk">汽車板下滑 結構調整期</div>
+  <div class="catalyst-risk">中美關稅影響越南廠客戶需求</div>
+</div>
+
+<div class="card">
+  <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px">3324 雙鴻</div>
+  <div style="font-size:10px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:500">短期 (&lt;1個月)</div>
+  <div class="catalyst-good">6/17 除息 (現金12元) 即將登場</div>
+  <div class="catalyst-good">費半漲 → NVDA供應鏈直接催化</div>
+  <div style="font-size:10px;color:var(--color-text-secondary);margin:6px 0 4px;font-weight:500">中期 (3~6個月)</div>
+  <div class="catalyst-mid">GB300液冷訂單持續放量</div>
+  <div class="catalyst-mid">ASIC伺服器散熱新訂單</div>
+  <div class="catalyst-mid">2026年營收成長目標上修至+70%</div>
+  <div style="font-size:10px;color:var(--color-text-secondary);margin:6px 0 4px;font-weight:500">潛在風險</div>
+  <div class="catalyst-risk">4月月營收月減14.6% (須觀察)</div>
+  <div class="catalyst-risk">水冷滲透速度若慢於預期</div>
+</div>
+
+<div class="card">
+  <div style="font-size:12px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px">3665 貿聯KY</div>
+  <div style="font-size:10px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:500">短期 (&lt;1個月)</div>
+  <div class="catalyst-good">4月月營收月增5.26% 年增18.5%穩健</div>
+  <div class="catalyst-good">費半走強帶動AI線纜出貨預期</div>
+  <div style="font-size:10px;color:var(--color-text-secondary);margin:6px 0 4px;font-weight:500">中期 (3~6個月)</div>
+  <div class="catalyst-mid">AI資料中心電源線纜持續放量</div>
+  <div class="catalyst-mid">EV充電市場歐美規格認證進度</div>
+  <div class="catalyst-mid">7/15 除息現金15元</div>
+  <div style="font-size:10px;color:var(--color-text-secondary);margin:6px 0 4px;font-weight:500">潛在風險</div>
+  <div class="catalyst-risk">Q1 EPS 季減17% 季度波動大</div>
+  <div class="catalyst-risk">EV市場成長慢於預期</div>
+</div>
+</div>
+
+<div class="divider"></div>
+
+<div class="sec-title"><i class="ti ti-target" aria-hidden="true"></i> 四、短中線操作建議 <span class="badge">美股小漲 · 費半+2.6%</span></div>
+
+<div class="rec-section">
+  <div class="rec-first">
+    <div class="rec-badge">★ 首選推薦 · 3~14天</div>
+    <div class="rec-stock">3324 雙鴻科技</div>
+    <div class="rec-sub">AI液冷散熱龍頭 · 費半Beta最高 · NVDA GB300直接供應鏈</div>
+    <div class="stars-row">
+      <div class="star-item">
+        <span class="star-label">基本面強度</span>
+        <div class="star-dots">
+          <div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div>
+        </div>
+      </div>
+      <div class="star-item">
+        <span class="star-label">美股連動性</span>
+        <div class="star-dots">
+          <div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div>
+        </div>
+      </div>
+      <div class="star-item">
+        <span class="star-label">短線催化</span>
+        <div class="star-dots">
+          <div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-empty"></div>
+        </div>
+      </div>
+      <div class="star-item">
+        <span class="star-label">K線安全</span>
+        <div class="star-dots">
+          <div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-empty"></div><div class="dot dot-empty"></div>
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px;margin-bottom:10px">
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:500">K線分析（短中線觀點）</div>
+      <div style="font-size:12px;color:var(--color-text-primary);line-height:1.6">近期股價從高位回落後在~1,100~1,200元形成盤整區間，費半+2.6%背景下有機會沿季線反彈；6/17除息12元前後形成短期催化窗口。若守穩1,100元均線支撐，可嘗試3~5天內波段進場，目標看1,250~1,300元；停損設1,050元以下。</div>
+    </div>
+    <div class="reasons">
+      <div class="reason-row"><span class="reason-icon"><i class="ti ti-check" aria-hidden="true"></i></span><span>Q1'26 EPS 12.61元，年增幅123%，四檔中成長速度最快，且近四季累計EPS已達34.65元</span></div>
+      <div class="reason-row"><span class="reason-icon"><i class="ti ti-check" aria-hidden="true"></i></span><span>直接供應NVDA GB300液冷模組（水冷板+分歧管+快接頭全認證），費半上漲訊號直接傳遞</span></div>
+      <div class="reason-row"><span class="reason-icon"><i class="ti ti-check" aria-hidden="true"></i></span><span>2026年營收目標上修至+70%，訂單能見度延至2027年，中線支撐明確</span></div>
+      <div class="reason-row"><span class="reason-icon"><i class="ti ti-alert-triangle" style="color:#854F0B" aria-hidden="true"></i></span><span>注意風險：4月月營收月減14.6%須追蹤；水冷普及速度若低於預期為主要下行風險</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="rec-other">
+  <div class="rec-card">
+    <div class="rc-rank" style="color:var(--color-text-info)">▲ 次選</div>
+    <div class="rc-name">2368 金像電</div>
+    <div style="margin-bottom:8px">
+      <div class="star-dots" style="gap:2px">
+        <div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-empty"></div>
+      </div>
+    </div>
+    <div class="rc-reason">Q1 EPS年增91%，AI PCB伺服器板龍頭。費半上漲直接拉動PCB訂單預期，6/23除息10元為短線催化。惟股價約1,350元已接近歷史高位1,470元，本益比32x偏高，估值有壓力。適合基本面較重者持有，短線進出空間不如雙鴻靈活。</div>
+    <div class="tag-row" style="margin-top:8px"><span class="tag-blue">AI PCB龍頭</span><span class="tag-amber">估值偏高</span></div>
+  </div>
+
+  <div class="rec-card">
+    <div class="rc-rank" style="color:var(--color-text-secondary)">▲ 第三選</div>
+    <div class="rc-name">3665 貿聯KY</div>
+    <div style="margin-bottom:8px">
+      <div class="star-dots" style="gap:2px">
+        <div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-empty"></div>
+      </div>
+    </div>
+    <div class="rc-reason">月營收最穩健（連續成長、4月年增18.5%），EPS年增37%，外資目標價2,245元有上行空間。缺點是Q1季減17%顯示季度波動，且股價約2,200元流動性相對低，短線振幅空間有限。適合中線投資人布局，短期3~7天操作難度稍高。</div>
+    <div class="tag-row" style="margin-top:8px"><span class="tag-teal">穩健成長</span><span class="tag-amber">流動性偏低</span></div>
+  </div>
+
+  <div class="rec-card">
+    <div class="rc-rank" style="color:var(--color-text-secondary)">— 短線暫緩</div>
+    <div class="rc-name">3044 健鼎</div>
+    <div style="margin-bottom:8px">
+      <div class="star-dots" style="gap:2px">
+        <div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-fill"></div><div class="dot dot-empty"></div><div class="dot dot-empty"></div>
+      </div>
+    </div>
+    <div class="rc-reason">基本面最穩健（月營收創40月新高、多元業務護城河），但短線Beta較低、除息7/9最晚。費半上漲對健鼎連動效果最間接。車用板下滑抵消部分伺服器成長。建議作為中長線持有標的，而非3~14天短中線首選。</div>
+    <div class="tag-row" style="margin-top:8px"><span class="tag-teal">長線穩健</span><span class="tag-amber">短線催化少</span></div>
+  </div>
+</div>
+
+<div style="background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:12px 16px;margin-top:12px;border-left:3px solid var(--color-border-info)">
+  <div style="font-size:12px;font-weight:500;color:var(--color-text-info);margin-bottom:4px"><i class="ti ti-info-circle" aria-hidden="true"></i> 操作摘要</div>
+  <div style="font-size:12px;color:var(--color-text-secondary);line-height:1.6">費半+2.6%背景下，AI散熱 > AI PCB > AI線纜 > 多元PCB 的短線連動邏輯成立。四檔均屬正向基本面，建議以<strong style="color:var(--color-text-primary)">雙鴻</strong>為短中線主力、<strong style="color:var(--color-text-primary)">金像電</strong>為副倉，健鼎貿聯KY適合中長線持有。本分析純供參考，操作請自行評估風險。</div>
+</div>
+
+</div>
