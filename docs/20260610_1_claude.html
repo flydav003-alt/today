@@ -1,0 +1,414 @@
+
+<style>
+h2.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans);font-size:14px;color:var(--color-text-primary)}
+.report-wrap{padding:1rem 0}
+.section-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;padding-bottom:6px;border-bottom:.5px solid var(--color-border-tertiary)}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:1.5rem}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:1.5rem}
+.card{background:var(--color-background-primary);border:.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px}
+.card-featured{background:var(--color-background-primary);border:2px solid var(--color-border-info);border-radius:var(--border-radius-lg);padding:14px;position:relative}
+.card-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.ticker-badge{font-size:11px;font-weight:500;background:var(--color-background-secondary);color:var(--color-text-secondary);padding:2px 7px;border-radius:var(--border-radius-md);border:.5px solid var(--color-border-secondary)}
+.stock-name{font-size:14px;font-weight:500}
+.stock-price{font-size:20px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+.price-tag{font-size:11px;color:var(--color-text-secondary)}
+.metric-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:.5px solid var(--color-border-tertiary)}
+.metric-row:last-child{border-bottom:none}
+.metric-label{font-size:12px;color:var(--color-text-secondary)}
+.metric-val{font-size:12px;font-weight:500}
+.up{color:#1D9E75}
+.down{color:#D85A30}
+.neutral{color:var(--color-text-secondary)}
+.chain-block{margin-bottom:6px}
+.chain-label{font-size:11px;color:var(--color-text-tertiary);margin-bottom:3px}
+.chain-val{font-size:12px;line-height:1.5}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:var(--border-radius-md);margin:2px 2px 2px 0}
+.tag-blue{background:var(--color-background-info);color:var(--color-text-info)}
+.tag-green{background:var(--color-background-success);color:var(--color-text-success)}
+.tag-amber{background:var(--color-background-warning);color:var(--color-text-warning)}
+.tag-red{background:var(--color-background-danger);color:var(--color-text-danger)}
+.cat-title{font-size:12px;font-weight:500;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.star-row{display:flex;align-items:center;justify-content:space-between;padding:4px 0}
+.stars{display:flex;gap:2px}
+.star-filled{color:#BA7517;font-size:13px}
+.star-empty{color:var(--color-border-secondary);font-size:13px}
+.rec-badge{position:absolute;top:-1px;right:12px;font-size:11px;font-weight:500;background:var(--color-background-info);color:var(--color-text-info);padding:3px 10px;border-radius:0 0 var(--border-radius-md) var(--border-radius-md)}
+.kline-bar{display:flex;gap:4px;align-items:flex-end;height:36px;margin:6px 0}
+.kb{width:6px;border-radius:1px}
+.kb-up{background:#1D9E75}
+.kb-dn{background:#D85A30}
+.kb-flat{background:var(--color-border-secondary)}
+.catalyst-item{font-size:12px;padding:4px 0;border-bottom:.5px solid var(--color-border-tertiary);line-height:1.5}
+.catalyst-item:last-child{border-bottom:none}
+.risk-item{font-size:12px;padding:4px 0;color:var(--color-text-secondary);line-height:1.5}
+.divider{height:.5px;background:var(--color-border-tertiary);margin:1.5rem 0}
+.rank-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 14px;margin-bottom:8px}
+.rank-num{font-size:22px;font-weight:500;color:var(--color-text-secondary);margin-right:10px}
+.rec-reason{font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-top:4px}
+.overall-title{font-size:18px;font-weight:500;margin-bottom:.5rem;padding-top:.5rem}
+.mkt-bg{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 14px;margin-bottom:1.5rem;font-size:13px;color:var(--color-text-secondary);display:flex;align-items:center;gap:8px}
+.section-mb{margin-bottom:1.5rem}
+.chart-wrap{position:relative;width:100%;height:200px;margin:8px 0}
+</style>
+
+<div class="report-wrap">
+<h2 class="sr-only">台股四檔個股深度研究報告：7828 創新服務、3088 艾訊、8028 昇陽半導體、3006 晶豪科</h2>
+
+<div class="mkt-bg">
+  <i class="ti ti-info-circle" style="font-size:16px" aria-hidden="true"></i>
+  <span>美股背景：CPI 4.2% 如預期，前兩日暴跌暴漲已充分反映，目前<strong>美股平盤整理</strong>。台股跟隨震盪，短線風險溢酬下降，利於精選個股操作。</span>
+</div>
+
+<div class="section-title">一、業績數據</div>
+<div class="grid4">
+  <div class="card">
+    <div class="card-head">
+      <span class="ticker-badge">7828</span>
+      <span class="stock-name">創新服務</span>
+    </div>
+    <div class="stock-price">約 1,550 元</div>
+    <div class="price-tag">上櫃新掛 2026/04/22，參考近期行情</div>
+    <div style="margin-top:8px">
+      <div class="metric-row"><span class="metric-label">全年 EPS (2025)</span><span class="metric-val up">6.33 元</span></div>
+      <div class="metric-row"><span class="metric-label">全年 EPS 年增率</span><span class="metric-val up">+大幅</span></div>
+      <div class="metric-row"><span class="metric-label">全年營收 (2025)</span><span class="metric-val">7.16 億</span></div>
+      <div class="metric-row"><span class="metric-label">Q1 2026 EPS</span><span class="metric-val up">1.02 元</span></div>
+      <div class="metric-row"><span class="metric-label">Q1 2026 EPS 年增</span><span class="metric-val up">+108%</span></div>
+      <div class="metric-row"><span class="metric-label">最新月營收 (4月)</span><span class="metric-val up">1.3 億</span></div>
+      <div class="metric-row"><span class="metric-label">月營收年增率</span><span class="metric-val up">+32,000%+</span></div>
+      <div class="metric-row"><span class="metric-label">毛利率 (Q4 2025)</span><span class="metric-val up">79.4%</span></div>
+      <div class="metric-row"><span class="metric-label">擴產計畫</span><span class="metric-val">台中新廠投產</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="ticker-badge">3088</span>
+      <span class="stock-name">艾訊</span>
+    </div>
+    <div class="stock-price">約 134 元</div>
+    <div class="price-tag">OTC 上櫃</div>
+    <div style="margin-top:8px">
+      <div class="metric-row"><span class="metric-label">全年 EPS (2025)</span><span class="metric-val down">4.68 元</span></div>
+      <div class="metric-row"><span class="metric-label">全年 EPS 年增率</span><span class="metric-val down">-38%</span></div>
+      <div class="metric-row"><span class="metric-label">全年營收 (2025)</span><span class="metric-val">70.2 億</span></div>
+      <div class="metric-row"><span class="metric-label">Q1 2026 EPS</span><span class="metric-val up">2.25 元</span></div>
+      <div class="metric-row"><span class="metric-label">Q1 2026 EPS 年增</span><span class="metric-val up">+86%</span></div>
+      <div class="metric-row"><span class="metric-label">最新月營收 (3月)</span><span class="metric-val up">8.32 億</span></div>
+      <div class="metric-row"><span class="metric-label">月營收年增率</span><span class="metric-val up">+30.5%</span></div>
+      <div class="metric-row"><span class="metric-label">毛利率 (Q1 2026)</span><span class="metric-val">34.0%</span></div>
+      <div class="metric-row"><span class="metric-label">擴產計畫</span><span class="metric-val">邊緣 AI 專案擴充</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="ticker-badge">8028</span>
+      <span class="stock-name">昇陽半導體</span>
+    </div>
+    <div class="stock-price">約 315 元</div>
+    <div class="price-tag">TSE 上市</div>
+    <div style="margin-top:8px">
+      <div class="metric-row"><span class="metric-label">全年 EPS (2025)</span><span class="metric-val up">4.37 元</span></div>
+      <div class="metric-row"><span class="metric-label">全年 EPS 年增率</span><span class="metric-val up">+53%</span></div>
+      <div class="metric-row"><span class="metric-label">全年營收 (2025)</span><span class="metric-val up">45.1 億</span></div>
+      <div class="metric-row"><span class="metric-label">Q1 2026 EPS</span><span class="metric-val up">1.61 元</span></div>
+      <div class="metric-row"><span class="metric-label">Q1 2026 EPS 年增</span><span class="metric-val up">+20%</span></div>
+      <div class="metric-row"><span class="metric-label">最新月營收 (4月)</span><span class="metric-val up">4.65 億</span></div>
+      <div class="metric-row"><span class="metric-label">月營收年增率</span><span class="metric-val up">+31.2%</span></div>
+      <div class="metric-row"><span class="metric-label">毛利率 (2025)</span><span class="metric-val up">34%</span></div>
+      <div class="metric-row"><span class="metric-label">擴產計畫</span><span class="metric-val">月產能→120萬片</span></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head">
+      <span class="ticker-badge">3006</span>
+      <span class="stock-name">晶豪科</span>
+    </div>
+    <div class="stock-price">202 元</div>
+    <div class="price-tag">TSE 上市，今收 -5.8%</div>
+    <div style="margin-top:8px">
+      <div class="metric-row"><span class="metric-label">全年 EPS (2025)</span><span class="metric-val neutral">0.87 元</span></div>
+      <div class="metric-row"><span class="metric-label">全年 EPS 年增率</span><span class="metric-val up">大幅轉盈</span></div>
+      <div class="metric-row"><span class="metric-label">全年營收 (2025)</span><span class="metric-val">145.7 億</span></div>
+      <div class="metric-row"><span class="metric-label">Q1 2026 EPS</span><span class="metric-val up">7.22 元</span></div>
+      <div class="metric-row"><span class="metric-label">Q1 2026 EPS 年增</span><span class="metric-val up">+2,774%</span></div>
+      <div class="metric-row"><span class="metric-label">最新月營收 (5月)</span><span class="metric-val up">44.7 億</span></div>
+      <div class="metric-row"><span class="metric-label">月營收年增率</span><span class="metric-val up">+297%</span></div>
+      <div class="metric-row"><span class="metric-label">毛利率</span><span class="metric-val neutral">回升中</span></div>
+      <div class="metric-row"><span class="metric-label">擴產計畫</span><span class="metric-val">DRAM/SRAM 擴量</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">二、產業鏈定位</div>
+<div class="grid4">
+  <div class="card">
+    <div class="cat-title"><i class="ti ti-sitemap" style="font-size:15px" aria-hidden="true"></i>7828 創新服務</div>
+    <div class="chain-block">
+      <div class="chain-label">上游原料 / 技術</div>
+      <div class="chain-val">精密 MEMS 材料、鎢針、陶瓷基板；Technoprobe (TP 集團，義大利) 技術授權合作</div>
+    </div>
+    <div class="chain-block">
+      <div class="chain-label">主要下游客戶</div>
+      <div class="chain-val">TP 集團全球生產線、台灣 IC 封測廠（測試探針卡維修/設備）、AI 晶片測試廠商</div>
+    </div>
+    <div class="chain-block">
+      <div class="chain-label">美股連動邏輯</div>
+      <span class="tag tag-blue">NVDA</span><span class="tag tag-blue">AMAT</span><span class="tag tag-blue">ONTO</span>
+      <div class="chain-val" style="margin-top:4px">AI 算力晶片（NVDA/AVGO）擴產 → 探針卡需求爆增 → 自動化植針設備需求直接拉動；AMAT/ONTO 為同類測試設備概念，具比價效應</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="cat-title"><i class="ti ti-sitemap" style="font-size:15px" aria-hidden="true"></i>3088 艾訊</div>
+    <div class="chain-block">
+      <div class="chain-label">上游原料 / 零組件</div>
+      <div class="chain-val">Intel / AMD 處理器、記憶體（Samsung、SK Hynix、南亞科）、工業級 PCB、電源模組</div>
+    </div>
+    <div class="chain-block">
+      <div class="chain-label">主要下游客戶</div>
+      <div class="chain-val">北美/歐洲工廠自動化、智慧城市、醫療、零售 POS 系統商；美國市場佔比逾 50%</div>
+    </div>
+    <div class="chain-block">
+      <div class="chain-label">美股連動邏輯</div>
+      <span class="tag tag-blue">INTC</span><span class="tag tag-blue">AMD</span><span class="tag tag-blue">ROCKW</span>
+      <div class="chain-val" style="margin-top:4px">Intel/AMD 工業級 CPU 景氣 → 直接影響 IPC 成本與備料；美國製造業回流（Industrial IoT）→ 邊緣 AI 設備需求提升</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="cat-title"><i class="ti ti-sitemap" style="font-size:15px" aria-hidden="true"></i>8028 昇陽半導體</div>
+    <div class="chain-block">
+      <div class="chain-label">上游原料</div>
+      <div class="chain-val">矽晶圓原材（Shin-Etsu、Sumco）；化學品、清洗耗材</div>
+    </div>
+    <div class="chain-block">
+      <div class="chain-label">主要下游客戶</div>
+      <div class="chain-val">台積電（推估佔比約 70%，先進製程測試晶圓）、記憶體廠（HBM/DDR5）、先進封裝客戶</div>
+    </div>
+    <div class="chain-block">
+      <div class="chain-label">美股連動邏輯</div>
+      <span class="tag tag-blue">TSM</span><span class="tag tag-blue">NVDA</span><span class="tag tag-blue">MU</span>
+      <div class="chain-val" style="margin-top:4px">台積電 2nm 擴產節奏 = 昇陽再生晶圓直接訂單；NVDA/MU AI 晶片需求 → HBM/DDR5 製程推進 → 晶圓用量結構性提升（每10片3nm需23片再生晶圓）</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="cat-title"><i class="ti ti-sitemap" style="font-size:15px" aria-hidden="true"></i>3006 晶豪科</div>
+    <div class="chain-block">
+      <div class="chain-label">上游晶圓代工</div>
+      <div class="chain-val">台積電、力積電（DRAM 製程）；設計委外代工（Fabless 模式）</div>
+    </div>
+    <div class="chain-block">
+      <div class="chain-label">主要下游客戶</div>
+      <div class="chain-val">網通設備商、工控/汽車電子、消費電子；SRAM/DRAM 模組客戶遍及亞洲 ODM 廠</div>
+    </div>
+    <div class="chain-block">
+      <div class="chain-label">美股連動邏輯</div>
+      <span class="tag tag-blue">MU</span><span class="tag tag-blue">MRVL</span><span class="tag tag-blue">WDC</span>
+      <div class="chain-val" style="margin-top:4px">美光/三星 DRAM 報價回升 → 晶豪科利基型記憶體報價同步上漲、ASP 改善；MRVL 網通晶片景氣 → 帶動 SRAM 需求</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-title">三、催化劑與風險</div>
+<div class="grid4">
+  <div class="card">
+    <div class="cat-title">7828 創新服務</div>
+    <div class="chain-label" style="margin-bottom:4px">短期催化（1月內）</div>
+    <div class="catalyst-item">✦ 台中新廠 Q1-Q2 投產，組裝產能 ×1.5</div>
+    <div class="catalyst-item">✦ 上櫃後法人/ETF 納入效應持續</div>
+    <div class="catalyst-item">✦ TP 集團全球訂單放量材料包業績</div>
+    <div class="chain-label" style="margin-top:8px;margin-bottom:4px">中期驅動（3~6月）</div>
+    <div class="catalyst-item">✦ Copper Pillar / TGV 先進封裝新品貢獻</div>
+    <div class="catalyst-item">✦ AI 算力晶片持續擴產帶動探針卡自動化剛需</div>
+    <div class="chain-label" style="margin-top:8px;margin-bottom:4px">風險</div>
+    <div class="risk-item">⚠ 新上市流通籌碼少、股價波動劇烈</div>
+    <div class="risk-item">⚠ 市值小、流動性風險高</div>
+    <div class="risk-item">⚠ 客戶集中 TP 集團，單一依賴風險</div>
+  </div>
+  <div class="card">
+    <div class="cat-title">3088 艾訊</div>
+    <div class="chain-label" style="margin-bottom:4px">短期催化（1月內）</div>
+    <div class="catalyst-item">✦ 自動化/零售 AI 大型專案持續出貨</div>
+    <div class="catalyst-item">✦ 2026 H1 業績掌握度高，法人維持買進</div>
+    <div class="chain-label" style="margin-top:8px;margin-bottom:4px">中期驅動（3~6月）</div>
+    <div class="catalyst-item">✦ 邊緣 AI 設備普及帶動 IPC 換機潮</div>
+    <div class="catalyst-item">✦ 亞洲（日、韓、台）市場訂單填補美國集中風險</div>
+    <div class="chain-label" style="margin-top:8px;margin-bottom:4px">風險</div>
+    <div class="risk-item">⚠ 美國市場佔比超五成，關稅/政策風險</div>
+    <div class="risk-item">⚠ 記憶體漲價壓成本，毛利率承壓</div>
+    <div class="risk-item">⚠ 匯損（強台幣）侵蝕獲利</div>
+  </div>
+  <div class="card">
+    <div class="cat-title">8028 昇陽半導體</div>
+    <div class="chain-label" style="margin-bottom:4px">短期催化（1月內）</div>
+    <div class="catalyst-item">✦ Q1 財報 EPS 1.61 元年增 20%，季增 25%</div>
+    <div class="catalyst-item">✦ 6/12 除息 2.701 元，除息前資金效應</div>
+    <div class="catalyst-item">✦ 台積電擴產訊息持續提振再生晶圓需求</div>
+    <div class="chain-label" style="margin-top:8px;margin-bottom:4px">中期驅動（3~6月）</div>
+    <div class="catalyst-item">✦ 月產能由 95 萬→120 萬片爬坡，H2 顯著貢獻</div>
+    <div class="catalyst-item">✦ HBM/DDR5 製程節點升級放量再生晶圓用量</div>
+    <div class="chain-label" style="margin-top:8px;margin-bottom:4px">風險</div>
+    <div class="risk-item">⚠ 客戶集中台積電（約 70%），合約調整風險</div>
+    <div class="risk-item">⚠ 估值已高（靜態 PE 約 48x），擴產遞延即修正</div>
+    <div class="risk-item">⚠ 中國同業競爭晶圓薄化市場</div>
+  </div>
+  <div class="card">
+    <div class="cat-title">3006 晶豪科</div>
+    <div class="chain-label" style="margin-bottom:4px">短期催化（1月內）</div>
+    <div class="catalyst-item">✦ 5月營收 44.7 億年增 +297%，8連月成長</div>
+    <div class="catalyst-item">✦ 7/2 除息 1 元，除息前買盤</div>
+    <div class="catalyst-item">✦ 美光市值衝兆美元，記憶體族群全面補漲</div>
+    <div class="chain-label" style="margin-top:8px;margin-bottom:4px">中期驅動（3~6月）</div>
+    <div class="catalyst-item">✦ Q2 EPS 有望延續 Q1 高成長，全年估值重訂</div>
+    <div class="catalyst-item">✦ DRAM 報價持續回升，ASP 改善擴大毛利空間</div>
+    <div class="chain-label" style="margin-top:8px;margin-bottom:4px">風險</div>
+    <div class="risk-item">⚠ 今日 -5.8% 大跌，短線技術面受損</div>
+    <div class="risk-item">⚠ 融資水位偏高，解套賣壓風險</div>
+    <div class="risk-item">⚠ 記憶體景氣反轉敏感度高，波動大</div>
+  </div>
+</div>
+
+<div class="section-title">四、K 線技術分析</div>
+<div class="grid4" style="margin-bottom:1rem">
+  <div class="card">
+    <div class="cat-title">7828 K線判斷</div>
+    <div class="kline-bar">
+      <div class="kb kb-up" style="height:14px"></div>
+      <div class="kb kb-up" style="height:18px"></div>
+      <div class="kb kb-up" style="height:22px"></div>
+      <div class="kb kb-up" style="height:28px"></div>
+      <div class="kb kb-up" style="height:36px"></div>
+      <div class="kb kb-dn" style="height:20px"></div>
+      <div class="kb kb-dn" style="height:16px"></div>
+      <div class="kb kb-flat" style="height:18px"></div>
+    </div>
+    <div class="metric-row"><span class="metric-label">趨勢</span><span class="metric-val up">強勢整理</span></div>
+    <div class="metric-row"><span class="metric-label">上市首日</span><span class="metric-val up">飆1635元 +160%</span></div>
+    <div class="metric-row"><span class="metric-label">現況</span><span class="metric-val neutral">高位震盪回整</span></div>
+    <div class="metric-row"><span class="metric-label">支撐參考</span><span class="metric-val">1200~1300 元</span></div>
+    <div class="metric-row"><span class="metric-label">操作難度</span><span class="metric-val down">極高（新股效應）</span></div>
+    <div style="font-size:11px;color:var(--color-text-tertiary);margin-top:6px;line-height:1.5">新上市股流動性薄、波動極劇烈，技術分析參考性低，需待 2-4 週籌碼穩定後再介入</div>
+  </div>
+  <div class="card">
+    <div class="cat-title">3088 K線判斷</div>
+    <div class="kline-bar">
+      <div class="kb kb-dn" style="height:20px"></div>
+      <div class="kb kb-dn" style="height:16px"></div>
+      <div class="kb kb-flat" style="height:14px"></div>
+      <div class="kb kb-up" style="height:18px"></div>
+      <div class="kb kb-up" style="height:24px"></div>
+      <div class="kb kb-up" style="height:28px"></div>
+      <div class="kb kb-up" style="height:32px"></div>
+      <div class="kb kb-up" style="height:28px"></div>
+    </div>
+    <div class="metric-row"><span class="metric-label">趨勢</span><span class="metric-val up">均線多頭排列</span></div>
+    <div class="metric-row"><span class="metric-label">現價</span><span class="metric-val">約 134 元</span></div>
+    <div class="metric-row"><span class="metric-label">均線關係</span><span class="metric-val up">站上日/週/月/季線</span></div>
+    <div class="metric-row"><span class="metric-label">RSI/KD</span><span class="metric-val up">偏強，未過熱</span></div>
+    <div class="metric-row"><span class="metric-label">支撐</span><span class="metric-val">125 元（月線）</span></div>
+    <div style="font-size:11px;color:var(--color-text-tertiary);margin-top:6px;line-height:1.5">MACD 零軸上方、外資法人連續買超，結構偏多。短線回測 130 元附近是低接機會</div>
+  </div>
+  <div class="card">
+    <div class="cat-title">8028 K線判斷</div>
+    <div class="kline-bar">
+      <div class="kb kb-up" style="height:14px"></div>
+      <div class="kb kb-up" style="height:18px"></div>
+      <div class="kb kb-up" style="height:22px"></div>
+      <div class="kb kb-up" style="height:36px"></div>
+      <div class="kb kb-up" style="height:34px"></div>
+      <div class="kb kb-up" style="height:30px"></div>
+      <div class="kb kb-dn" style="height:20px"></div>
+      <div class="kb kb-up" style="height:26px"></div>
+    </div>
+    <div class="metric-row"><span class="metric-label">趨勢</span><span class="metric-val up">跳空突破，強勢</span></div>
+    <div class="metric-row"><span class="metric-label">現價</span><span class="metric-val">約 315 元</span></div>
+    <div class="metric-row"><span class="metric-label">關鍵支撐</span><span class="metric-val">202.5 元（跳空缺口）</span></div>
+    <div class="metric-row"><span class="metric-label">型態</span><span class="metric-val up">高點持續創新高</span></div>
+    <div class="metric-row"><span class="metric-label">短線估值</span><span class="metric-val down">PE 48x，偏高</span></div>
+    <div style="font-size:11px;color:var(--color-text-tertiary);margin-top:6px;line-height:1.5">跳空強勢結構完整，但高本益比壓力大，追高需設嚴格停損。6/12除息後注意填息力道</div>
+  </div>
+  <div class="card">
+    <div class="cat-title">3006 K線判斷</div>
+    <div class="kline-bar">
+      <div class="kb kb-up" style="height:16px"></div>
+      <div class="kb kb-up" style="height:22px"></div>
+      <div class="kb kb-up" style="height:30px"></div>
+      <div class="kb kb-up" style="height:36px"></div>
+      <div class="kb kb-dn" style="height:28px"></div>
+      <div class="kb kb-dn" style="height:22px"></div>
+      <div class="kb kb-dn" style="height:18px"></div>
+      <div class="kb kb-dn" style="height:14px"></div>
+    </div>
+    <div class="metric-row"><span class="metric-label">趨勢</span><span class="metric-val down">近期高位拉回</span></div>
+    <div class="metric-row"><span class="metric-label">今日</span><span class="metric-val down">202 元，-5.8%</span></div>
+    <div class="metric-row"><span class="metric-label">最高</span><span class="metric-val">曾達 217.5 元</span></div>
+    <div class="metric-row"><span class="metric-label">支撐</span><span class="metric-val">190~195 元（月線）</span></div>
+    <div class="metric-row"><span class="metric-label">籌碼警示</span><span class="metric-val down">融資高、解套賣壓</span></div>
+    <div style="font-size:11px;color:var(--color-text-tertiary);margin-top:6px;line-height:1.5">短線已達注意交易標準，技術上正在尋找支撐，基本面極強但籌碼雜亂需等量縮穩定</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+<div class="section-title">五、短中線操作推薦（3~14 天）</div>
+<div style="margin-bottom:1rem;font-size:13px;color:var(--color-text-secondary)">美股平盤整理背景下，精選基本面加速 + 技術結構健康 + 催化劑明確的個股。</div>
+
+<div class="grid2">
+  <div class="card-featured">
+    <div class="rec-badge">首選推薦</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <span class="ticker-badge">8028</span>
+      <span class="stock-name" style="font-size:16px">昇陽半導體</span>
+    </div>
+    <div class="star-row"><span style="font-size:12px;color:var(--color-text-secondary)">基本面強度</span><div class="stars"><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span></div></div>
+    <div class="star-row"><span style="font-size:12px;color:var(--color-text-secondary)">美股連動性</span><div class="stars"><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-empty">★</span></div></div>
+    <div class="star-row"><span style="font-size:12px;color:var(--color-text-secondary)">短線安全性</span><div class="stars"><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-empty">★</span></div></div>
+    <div class="star-row"><span style="font-size:12px;color:var(--color-text-secondary)">流動性</span><div class="stars"><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-empty">★</span></div></div>
+    <div style="margin-top:10px;padding-top:10px;border-top:.5px solid var(--color-border-tertiary)">
+      <div style="font-size:12px;font-weight:500;margin-bottom:6px">推薦理由</div>
+      <div class="rec-reason">① 再生晶圓需求結構性成長，台積電 2nm 擴產直接驅動<br>② EPS 2025→2026 連年加速成長（法人估 7.4 元），業績能見度高<br>③ 6/12 除息 2.701 元，資金效應明確<br>④ 技術面維持跳空強勢結構，回測支撐區（約 290~300）可低接<br>⑤ 台股→TSM→NVDA AI 擴產題材，與美股高度連動</div>
+      <div style="margin-top:8px;padding:6px 10px;background:var(--color-background-success);border-radius:var(--border-radius-md);font-size:12px;color:var(--color-text-success)">進場參考：290~310 元；停損：280 元以下；目標：340~360 元</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+      <span class="ticker-badge">3088</span>
+      <span class="stock-name" style="font-size:16px">艾訊 ← 次選</span>
+    </div>
+    <div class="star-row"><span style="font-size:12px;color:var(--color-text-secondary)">基本面強度</span><div class="stars"><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-empty">★</span></div></div>
+    <div class="star-row"><span style="font-size:12px;color:var(--color-text-secondary)">美股連動性</span><div class="stars"><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-empty">★</span><span class="star-empty">★</span></div></div>
+    <div class="star-row"><span style="font-size:12px;color:var(--color-text-secondary)">短線安全性</span><div class="stars"><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-empty">★</span></div></div>
+    <div class="star-row"><span style="font-size:12px;color:var(--color-text-secondary)">流動性</span><div class="stars"><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-empty">★</span><span class="star-empty">★</span></div></div>
+    <div style="margin-top:10px;padding-top:10px;border-top:.5px solid var(--color-border-tertiary)">
+      <div style="font-size:12px;font-weight:500;margin-bottom:6px">次選理由</div>
+      <div class="rec-reason">① Q1 2026 EPS +86%，月營收創歷史新高，基本面加速改善<br>② 本益比僅 13-15x，相對低估，下跌空間有限<br>③ 技術面均線多頭排列，走勢健康<br>④ 缺點：OTC 流動性較低（日成交量小）、毛利率仍受壓、匯率風險未消；美股連動性較弱（IPC 商業模式較封閉）</div>
+      <div style="margin-top:8px;padding:6px 10px;background:var(--color-background-warning);border-radius:var(--border-radius-md);font-size:12px;color:var(--color-text-warning)">進場參考：回測 125~130 元量縮止穩；停損：120 元；目標：145~155 元</div>
+    </div>
+  </div>
+</div>
+
+<div class="grid2" style="margin-top:10px">
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <span class="ticker-badge">3006</span>
+      <span class="stock-name">晶豪科 ← 第三選（暫緩）</span>
+    </div>
+    <div class="star-row"><span style="font-size:12px;color:var(--color-text-secondary)">基本面強度</span><div class="stars"><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span></div></div>
+    <div class="star-row"><span style="font-size:12px;color:var(--color-text-secondary)">短線安全性</span><div class="stars"><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-empty">★</span><span class="star-empty">★</span><span class="star-empty">★</span></div></div>
+    <div class="rec-reason" style="margin-top:8px">基本面是四檔中最亮眼（Q1 EPS +2,774%），但今日 -5.8% 大跌、籌碼達注意標準、融資解套賣壓明顯。<strong>基本面強 ≠ 短線安全</strong>。建議待量縮穩定、技術面確認支撐（190~195）後再介入，不宜在高位劇烈震盪時追高。</div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+      <span class="ticker-badge">7828</span>
+      <span class="stock-name">創新服務 ← 不推短線</span>
+    </div>
+    <div class="star-row"><span style="font-size:12px;color:var(--color-text-secondary)">基本面強度</span><div class="stars"><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span><span class="star-filled">★</span></div></div>
+    <div class="star-row"><span style="font-size:12px;color:var(--color-text-secondary)">短線安全性</span><div class="stars"><span class="star-filled">★</span><span class="star-empty">★</span><span class="star-empty">★</span><span class="star-empty">★</span><span class="star-empty">★</span></div></div>
+    <div class="rec-reason" style="margin-top:8px">業務前景與毛利率（79%）是四檔最強，但剛上櫃（2026/04/22）、股價已從首日 1,635 元大幅波動。流動性極差，市值小，極易因籌碼異動造成 ±15% 以上單日波動。短中線操作風險不可控，<strong>適合長線持有，不適合 3~14 天短中線佈局</strong>。</div>
+  </div>
+</div>
+
+<div style="margin-top:1.5rem;padding:12px 14px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);font-size:12px;color:var(--color-text-tertiary);line-height:1.7">
+⚠ 本報告為研究分析用途，資料來源截至 2026/06/10，不構成投資建議。股市投資有風險，請依個人財務狀況審慎決策。
+</div>
+</div>
