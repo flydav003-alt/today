@@ -1,0 +1,385 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background-color:#FCF8F0}
+.report-wrap{padding:1.5rem 0;font-family:var(--font-sans);background:#FCF8F0}
+.report-title{font-size:20px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.report-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem}
+.section-header{font-size:15px;font-weight:500;color:var(--color-text-primary);margin:1.5rem 0 0.75rem;padding-left:10px;border-left:3px solid #378ADD}
+.grid5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:1.5rem}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:1.5rem}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:1.5rem}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem}
+.card-top{padding:0.75rem 1rem 0.5rem;border-radius:var(--border-radius-lg);margin-bottom:0.75rem}
+.stock-code{font-size:11px;font-weight:500;letter-spacing:0.5px}
+.stock-name{font-size:16px;font-weight:500;margin:2px 0}
+.stock-price{font-size:22px;font-weight:500}
+.price-tag{font-size:11px;color:var(--color-text-secondary);margin-bottom:2px}
+.metric-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:0.5px solid var(--color-border-tertiary);font-size:12px}
+.metric-row:last-child{border-bottom:none}
+.metric-label{color:var(--color-text-secondary)}
+.metric-value{font-weight:500;color:var(--color-text-primary)}
+.up{color:#c0392b}.down{color:#27ae60}
+.chain-section{margin-bottom:0.5rem}
+.chain-title{font-size:11px;font-weight:500;color:var(--color-text-secondary);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px}
+.chain-item{font-size:12px;color:var(--color-text-primary);padding:3px 0;display:flex;align-items:flex-start;gap:6px}
+.chain-item i{font-size:14px;margin-top:1px;flex-shrink:0}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:var(--border-radius-md);font-weight:500}
+.badge-blue{background:#E6F1FB;color:#0C447C}
+.badge-green{background:#EAF3DE;color:#3B6D11}
+.badge-amber{background:#FAEEDA;color:#633806}
+.badge-red{background:#FCEBEB;color:#791F1F}
+.badge-purple{background:#EEEDFE;color:#3C3489}
+.star-row{display:flex;align-items:center;gap:8px;margin:4px 0;font-size:12px}
+.stars{color:#BA7517;letter-spacing:1px}
+.star-label{color:var(--color-text-secondary);min-width:60px;font-size:11px}
+.recommend-card{border:2px solid #185FA5;border-radius:var(--border-radius-lg);background:var(--color-background-primary);padding:1rem}
+.recommend-badge{display:inline-block;background:#185FA5;color:#fff;font-size:11px;padding:3px 10px;border-radius:var(--border-radius-md);margin-bottom:8px}
+.catalyst-item{font-size:12px;color:var(--color-text-primary);padding:4px 0;display:flex;align-items:flex-start;gap:6px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.catalyst-item:last-child{border-bottom:none}
+.catalyst-tag{font-size:10px;padding:1px 6px;border-radius:var(--border-radius-md);font-weight:500;white-space:nowrap;flex-shrink:0}
+.tag-short{background:#E6F1FB;color:#0C447C}
+.tag-mid{background:#EAF3DE;color:#3B6D11}
+.tag-risk{background:#FCEBEB;color:#791F1F}
+.kline-box{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:8px 10px;margin-top:8px}
+.kline-title{font-size:11px;color:var(--color-text-secondary);margin-bottom:4px;font-weight:500}
+.kline-text{font-size:12px;color:var(--color-text-primary);line-height:1.6}
+.us-context{background:#FAEEDA;border-radius:var(--border-radius-md);padding:0.75rem 1rem;margin-bottom:1.5rem;font-size:13px;color:#412402}
+.us-context-title{font-weight:500;margin-bottom:6px;font-size:14px}
+.us-tickers{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:1.5rem 0}
+.disclaimer{font-size:11px;color:var(--color-text-tertiary);margin-top:1.5rem;line-height:1.6;padding:0.75rem 1rem;background:var(--color-background-secondary);border-radius:var(--border-radius-md)}
+</style>
+<h2 class="sr-only">台股五檔個股深度研究報告 — 3042晶技、4958臻鼎、2379瑞昱、3236千如、8299群聯</h2>
+<div class="report-wrap">
+<div class="report-title">台股五檔個股深度研究報告</div>
+<div class="report-sub">2026年6月11日 ｜ 製作日：今日 ｜ 費半+4%｜ TSM+2%｜ NVDA+1%｜ INTC+7%｜ MU+2%</div>
+
+<div class="us-context">
+  <div class="us-context-title"><i class="ti ti-trending-up" style="font-size:16px;vertical-align:-2px;margin-right:6px" aria-hidden="true"></i>美股背景：費半全面上漲，台股連動正向</div>
+  費半(SOX)+4%、TSM+2%、NVDA+1%、INTC+7%（低基期補漲）、MU+2%。整體半導體類股強勁，AI基礎設施＋記憶體雙主軸助攻，對台股AI/PCB/IC供應鏈短線有正向催化。
+  <div class="us-tickers">
+    <span class="badge badge-green">SOX +4%</span>
+    <span class="badge badge-green">TSM +2%</span>
+    <span class="badge badge-green">NVDA +1%</span>
+    <span class="badge badge-blue">INTC +7% 補漲</span>
+    <span class="badge badge-green">MU +2%</span>
+  </div>
+</div>
+
+<div class="section-header">一、業績數據總覽</div>
+<div class="grid5">
+
+  <div class="card">
+    <div class="card-top" style="background:#E6F1FB">
+      <div class="stock-code" style="color:#0C447C">3042</div>
+      <div class="stock-name" style="color:#042C53">晶技 TXC</div>
+    </div>
+    <div class="price-tag">最新收盤價</div>
+    <div class="stock-price" style="color:#c0392b">≈212元</div>
+    <div style="height:8px"></div>
+    <div class="metric-row"><span class="metric-label">2025全年EPS</span><span class="metric-value">5.28元</span></div>
+    <div class="metric-row"><span class="metric-label">EPS年增率</span><span class="metric-value down">-7%</span></div>
+    <div class="metric-row"><span class="metric-label">2025全年營收</span><span class="metric-value">133.5億</span></div>
+    <div class="metric-row"><span class="metric-label">Q1-2026 EPS</span><span class="metric-value">1.32元</span></div>
+    <div class="metric-row"><span class="metric-label">Q1 EPS年增率</span><span class="metric-value down">-4%</span></div>
+    <div class="metric-row"><span class="metric-label">5月營收</span><span class="metric-value">12.17億</span></div>
+    <div class="metric-row"><span class="metric-label">5月營收年增率</span><span class="metric-value up">+10.5%</span></div>
+    <div class="metric-row"><span class="metric-label">現金股利</span><span class="metric-value">4.8元(6/16除息)</span></div>
+    <div class="kline-box">
+      <div class="kline-title"><i class="ti ti-chart-candle" style="font-size:13px;vertical-align:-1px" aria-hidden="true"></i> K線判斷</div>
+      <div class="kline-text">近期爆量觸漲停後拉回整理，月線附近獲支撐。5月底創新高後技術面偏高，需等量縮回測。6/16除息前存在填息預期。短線注意高檔震盪風險。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top" style="background:#EEEDFE">
+      <div class="stock-code" style="color:#3C3489">4958</div>
+      <div class="stock-name" style="color:#26215C">臻鼎-KY</div>
+    </div>
+    <div class="price-tag">最新收盤價</div>
+    <div class="stock-price" style="color:#c0392b">≈522元</div>
+    <div style="height:8px"></div>
+    <div class="metric-row"><span class="metric-label">2025全年EPS</span><span class="metric-value">6.91元</span></div>
+    <div class="metric-row"><span class="metric-label">EPS年增率</span><span class="metric-value up">+82%</span></div>
+    <div class="metric-row"><span class="metric-label">2025全年營收</span><span class="metric-value">1,825億</span></div>
+    <div class="metric-row"><span class="metric-label">Q1-2026 EPS</span><span class="metric-value">1.33元</span></div>
+    <div class="metric-row"><span class="metric-label">Q1 EPS年增率</span><span class="metric-value up">+102%</span></div>
+    <div class="metric-row"><span class="metric-label">5月營收</span><span class="metric-value">162億</span></div>
+    <div class="metric-row"><span class="metric-label">5月營收年增率</span><span class="metric-value up">+37.4%</span></div>
+    <div class="metric-row"><span class="metric-label">2026資本支出</span><span class="metric-value">逾500億</span></div>
+    <div class="kline-box">
+      <div class="kline-title"><i class="ti ti-chart-candle" style="font-size:13px;vertical-align:-1px" aria-hidden="true"></i> K線判斷</div>
+      <div class="kline-text">從157元低點飆至今超過220%，5月再度創高至500+。量能持續放大，月線上方強勢排列。短線乖離大，需關注季線(≈350元區域)為回檔支撐關鍵。主力趨勢仍向上。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top" style="background:#E1F5EE">
+      <div class="stock-code" style="color:#085041">2379</div>
+      <div class="stock-name" style="color:#04342C">瑞昱 Realtek</div>
+    </div>
+    <div class="price-tag">最新收盤價</div>
+    <div class="stock-price" style="color:#c0392b">≈643元</div>
+    <div style="height:8px"></div>
+    <div class="metric-row"><span class="metric-label">2025全年EPS</span><span class="metric-value">28.77元</span></div>
+    <div class="metric-row"><span class="metric-label">EPS年增率</span><span class="metric-value down">-3.5%</span></div>
+    <div class="metric-row"><span class="metric-label">2025全年營收</span><span class="metric-value">1,227億</span></div>
+    <div class="metric-row"><span class="metric-label">Q1-2026 EPS</span><span class="metric-value">8.44元</span></div>
+    <div class="metric-row"><span class="metric-label">Q1 EPS年增率</span><span class="metric-value down">-9%</span></div>
+    <div class="metric-row"><span class="metric-label">Q1-2026累計營收</span><span class="metric-value">364億</span></div>
+    <div class="metric-row"><span class="metric-label">累計年增率</span><span class="metric-value up">+4%</span></div>
+    <div class="metric-row"><span class="metric-label">現金股利</span><span class="metric-value">25.5元</span></div>
+    <div class="kline-box">
+      <div class="kline-title"><i class="ti ti-chart-candle" style="font-size:13px;vertical-align:-1px" aria-hidden="true"></i> K線判斷</div>
+      <div class="kline-text">股價近期連漲回升至600+，月線走平轉揚，形態類似上升三角形整理後突破。中線站穩月線為多方訊號，短線追高需注意500~530區間壓力。Q2業績若回升可驅動下一波。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top" style="background:#FAEEDA">
+      <div class="stock-code" style="color:#633806">3236</div>
+      <div class="stock-name" style="color:#412402">千如 Qianru</div>
+    </div>
+    <div class="price-tag">最新收盤價</div>
+    <div class="stock-price" style="color:#888">≈54元</div>
+    <div style="height:8px"></div>
+    <div class="metric-row"><span class="metric-label">2025全年EPS</span><span class="metric-value">0.32元</span></div>
+    <div class="metric-row"><span class="metric-label">EPS年增率</span><span class="metric-value down">偏低</span></div>
+    <div class="metric-row"><span class="metric-label">2025全年營收</span><span class="metric-value">20.7億</span></div>
+    <div class="metric-row"><span class="metric-label">Q1-2026 EPS</span><span class="metric-value">0.10元</span></div>
+    <div class="metric-row"><span class="metric-label">Q1 EPS季增率</span><span class="metric-value down">-50%</span></div>
+    <div class="metric-row"><span class="metric-label">12月營收</span><span class="metric-value">1.89億</span></div>
+    <div class="metric-row"><span class="metric-label">12月年增率</span><span class="metric-value up">+44.8%</span></div>
+    <div class="metric-row"><span class="metric-label">現金股利</span><span class="metric-value">0.35元</span></div>
+    <div class="kline-box">
+      <div class="kline-title"><i class="ti ti-chart-candle" style="font-size:13px;vertical-align:-1px" aria-hidden="true"></i> K線判斷</div>
+      <div class="kline-text">近期連跌，技術面偏弱。量能萎縮，月線下彎。財報評分僅49分，獲利能力偏低。短線無明確支撐訊號，需等落底型態確認。不建議追進。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-top" style="background:#FCEBEB">
+      <div class="stock-code" style="color:#791F1F">8299</div>
+      <div class="stock-name" style="color:#501313">群聯 Phison</div>
+    </div>
+    <div class="price-tag">最新收盤價</div>
+    <div class="stock-price" style="color:#c0392b">≈2,160元</div>
+    <div style="height:8px"></div>
+    <div class="metric-row"><span class="metric-label">2025全年EPS</span><span class="metric-value">41.98元</span></div>
+    <div class="metric-row"><span class="metric-label">EPS年增率</span><span class="metric-value up">+高成長</span></div>
+    <div class="metric-row"><span class="metric-label">2025全年營收</span><span class="metric-value">726.6億</span></div>
+    <div class="metric-row"><span class="metric-label">Q1-2026 EPS</span><span class="metric-value">68.8元</span></div>
+    <div class="metric-row"><span class="metric-label">Q1 EPS年增率</span><span class="metric-value up">+1144%</span></div>
+    <div class="metric-row"><span class="metric-label">Q1單季營收</span><span class="metric-value">409.7億</span></div>
+    <div class="metric-row"><span class="metric-label">5月營收</span><span class="metric-value">228.3億</span></div>
+    <div class="metric-row"><span class="metric-label">5月年增率</span><span class="metric-value up">+301%</span></div>
+    <div class="kline-box">
+      <div class="kline-title"><i class="ti ti-chart-candle" style="font-size:13px;vertical-align:-1px" aria-hidden="true"></i> K線判斷</div>
+      <div class="kline-text">Q1財報爆發，單季EPS 68.8元創歷史新高。股價2,000+，近期整理後維持強勢。週線持續站在均線上方，籌碼偏正面。短線需注意高檔震盪，月線支撐約1,800元。</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-header">二、產業鏈定位</div>
+<div class="grid5">
+
+  <div class="card">
+    <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px">晶技 3042</div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-arrow-up" style="font-size:12px" aria-hidden="true"></i> 上游供應</div>
+      <div class="chain-item"><i class="ti ti-circle-dot" style="color:#378ADD" aria-hidden="true"></i><span>石英晶體原料廠（日本/中國大陸）</span></div>
+      <div class="chain-item"><i class="ti ti-circle-dot" style="color:#378ADD" aria-hidden="true"></i><span>基板與封裝材料供應商</span></div>
+    </div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-arrow-down" style="font-size:12px" aria-hidden="true"></i> 主要客戶</div>
+      <div class="chain-item"><i class="ti ti-building" style="color:#1D9E75" aria-hidden="true"></i><span>Apple（iPhone/AirPods頻率元件）</span></div>
+      <div class="chain-item"><i class="ti ti-building" style="color:#1D9E75" aria-hidden="true"></i><span>SpaceX Starlink（LEO衛星）</span></div>
+      <div class="chain-item"><i class="ti ti-building" style="color:#1D9E75" aria-hidden="true"></i><span>AI光通訊模組廠（光模組振盪器）</span></div>
+    </div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-brand-amazon" style="font-size:12px" aria-hidden="true"></i> 美股連動</div>
+      <span class="badge badge-blue">AAPL</span> <span class="badge badge-amber">SPCE/SpaceX</span>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">iPhone出貨＋LEO衛星擴張直接帶動訂單</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px">臻鼎 4958</div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-arrow-up" style="font-size:12px" aria-hidden="true"></i> 上游供應</div>
+      <div class="chain-item"><i class="ti ti-circle-dot" style="color:#534AB7" aria-hidden="true"></i><span>ABF載板材料（Ajinomoto）</span></div>
+      <div class="chain-item"><i class="ti ti-circle-dot" style="color:#534AB7" aria-hidden="true"></i><span>銅箔/環氧樹脂廠</span></div>
+    </div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-arrow-down" style="font-size:12px" aria-hidden="true"></i> 主要客戶</div>
+      <div class="chain-item"><i class="ti ti-building" style="color:#1D9E75" aria-hidden="true"></i><span>NVIDIA（GB200 iHDI板）</span></div>
+      <div class="chain-item"><i class="ti ti-building" style="color:#1D9E75" aria-hidden="true"></i><span>Apple（FPC/HDI）</span></div>
+      <div class="chain-item"><i class="ti ti-building" style="color:#1D9E75" aria-hidden="true"></i><span>光通訊800G/1.6T客戶</span></div>
+    </div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-brand-amazon" style="font-size:12px" aria-hidden="true"></i> 美股連動</div>
+      <span class="badge badge-purple">NVDA</span> <span class="badge badge-blue">AAPL</span>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">NVDA GB200/Blackwell算力板直接受益；NVDA漲→臻鼎訂單能見度↑</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px">瑞昱 2379</div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-arrow-up" style="font-size:12px" aria-hidden="true"></i> 上游供應</div>
+      <div class="chain-item"><i class="ti ti-circle-dot" style="color:#0F6E56" aria-hidden="true"></i><span>晶圓代工：TSMC、聯電</span></div>
+      <div class="chain-item"><i class="ti ti-circle-dot" style="color:#0F6E56" aria-hidden="true"></i><span>封測：日月光ASE</span></div>
+    </div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-arrow-down" style="font-size:12px" aria-hidden="true"></i> 主要客戶</div>
+      <div class="chain-item"><i class="ti ti-building" style="color:#1D9E75" aria-hidden="true"></i><span>Intel（網路/音訊晶片）</span></div>
+      <div class="chain-item"><i class="ti ti-building" style="color:#1D9E75" aria-hidden="true"></i><span>Lenovo/HP/Dell（PC）</span></div>
+      <div class="chain-item"><i class="ti ti-building" style="color:#1D9E75" aria-hidden="true"></i><span>路由器/交換器廠（Cisco生態）</span></div>
+    </div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-brand-amazon" style="font-size:12px" aria-hidden="true"></i> 美股連動</div>
+      <span class="badge badge-blue">INTC</span> <span class="badge badge-green">CSCO</span>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">INTC補漲+7%，瑞昱作為Intel平台網路晶片主供應商直接受益；2.5G乙太網普及驅動</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px">千如 3236</div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-arrow-up" style="font-size:12px" aria-hidden="true"></i> 上游供應</div>
+      <div class="chain-item"><i class="ti ti-circle-dot" style="color:#BA7517" aria-hidden="true"></i><span>鐵氧體/磁芯材料廠</span></div>
+      <div class="chain-item"><i class="ti ti-circle-dot" style="color:#BA7517" aria-hidden="true"></i><span>漆包線/銅線供應商</span></div>
+    </div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-arrow-down" style="font-size:12px" aria-hidden="true"></i> 主要客戶</div>
+      <div class="chain-item"><i class="ti ti-building" style="color:#1D9E75" aria-hidden="true"></i><span>電源供應器廠（電感/變壓器）</span></div>
+      <div class="chain-item"><i class="ti ti-building" style="color:#1D9E75" aria-hidden="true"></i><span>工控/汽車電子應用</span></div>
+    </div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-brand-amazon" style="font-size:12px" aria-hidden="true"></i> 美股連動</div>
+      <span class="badge badge-amber">間接受益</span>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">美股連動性偏低；主要跟AI伺服器電源方案有間接關聯，但規模小且非主流受益</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px">群聯 8299</div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-arrow-up" style="font-size:12px" aria-hidden="true"></i> 上游供應</div>
+      <div class="chain-item"><i class="ti ti-circle-dot" style="color:#A32D2D" aria-hidden="true"></i><span>NAND Flash：三星/Kioxia/Micron</span></div>
+      <div class="chain-item"><i class="ti ti-circle-dot" style="color:#A32D2D" aria-hidden="true"></i><span>TSMC（控制晶片代工）</span></div>
+    </div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-arrow-down" style="font-size:12px" aria-hidden="true"></i> 主要客戶</div>
+      <div class="chain-item"><i class="ti ti-building" style="color:#1D9E75" aria-hidden="true"></i><span>超大型雲端CSP（企業SSD）</span></div>
+      <div class="chain-item"><i class="ti ti-building" style="color:#1D9E75" aria-hidden="true"></i><span>AI訓練/推論資料中心</span></div>
+      <div class="chain-item"><i class="ti ti-building" style="color:#1D9E75" aria-hidden="true"></i><span>Pascari生態系統廠商</span></div>
+    </div>
+    <div class="chain-section">
+      <div class="chain-title"><i class="ti ti-brand-amazon" style="font-size:12px" aria-hidden="true"></i> 美股連動</div>
+      <span class="badge badge-red">MU</span> <span class="badge badge-purple">NVDA</span>
+      <div style="font-size:11px;color:var(--color-text-secondary);margin-top:4px">MU漲→NAND供需緊張→群聯控制晶片訂單爆增；NVDA算力需求直接拉動AI SSD用量</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-header">三、催化劑整理</div>
+<div class="grid5">
+
+  <div class="card" style="font-size:12px">
+    <div style="font-weight:500;margin-bottom:8px;color:var(--color-text-primary)">晶技 3042</div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-short">短期</span><span>6/16除息4.8元，填息預期強；費半上漲帶動頻率元件</span></div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-mid">中期</span><span>SpaceX Starlink第二代衛星升級，LEO頻率元件訂單持續增加；AI光通訊模組振盪器需求</span></div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-risk">風險</span><span>iPhone出貨成長放緩；晶振競爭格局（日廠競爭）；前期急漲後修正壓力</span></div>
+  </div>
+
+  <div class="card" style="font-size:12px">
+    <div style="font-weight:500;margin-bottom:8px;color:var(--color-text-primary)">臻鼎 4958</div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-short">短期</span><span>NVIDIA MGX平台點名供應商，市場信心強；外資/投信籌碼持續流入；5月營收+37%年增</span></div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-mid">中期</span><span>500億資本支出泰國+高雄新廠2026下半年投產；CPO光通訊板營收預估成長數倍；ABF載板超級缺貨</span></div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-risk">風險</span><span>股價翻3倍後估值偏高（本益比34X）；匯率風險；擴產若延遲恐股價修正</span></div>
+  </div>
+
+  <div class="card" style="font-size:12px">
+    <div style="font-weight:500;margin-bottom:8px;color:var(--color-text-primary)">瑞昱 2379</div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-short">短期</span><span>INTC +7%補漲直接連動；PC庫存回補週期進行中；2.5G乙太網路滲透率快速提升</span></div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-mid">中期</span><span>WiFi 7普及換機潮；AI PC帶動網路晶片升級；與聯發科的反壟斷訴訟若勝訴可提升市占</span></div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-risk">風險</span><span>聯發科競爭壓力；Q1 EPS年減9%獲利能力仍在回升路上；PC市況波動</span></div>
+  </div>
+
+  <div class="card" style="font-size:12px">
+    <div style="font-weight:500;margin-bottom:8px;color:var(--color-text-primary)">千如 3236</div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-short">短期</span><span>被動元件族群短線炒作題材；12月營收+44%創高</span></div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-mid">中期</span><span>AI伺服器電源模組用電感需求；電動車汽車電子滲透</span></div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-risk">風險</span><span>2025全年EPS僅0.32元，獲利基本面極弱；Q1-2026 EPS 0.1元季減50%；股價缺乏基本面支撐</span></div>
+  </div>
+
+  <div class="card" style="font-size:12px">
+    <div style="font-weight:500;margin-bottom:8px;color:var(--color-text-primary)">群聯 8299</div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-short">短期</span><span>MU+2%帶動NAND供需預期；Q1 EPS 68.8元歷史新高發酵；5月營收年增301%</span></div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-mid">中期</span><span>AI儲存基礎架構「Phison 3.0」轉型；企業SSD佔比衝30%；法人全年EPS上看120~150元</span></div>
+    <div class="catalyst-item"><span class="catalyst-tag tag-risk">風險</span><span>NAND Flash價格波動；庫存評價風險；下半年毛利率是否收斂；高股價流動性風險</span></div>
+  </div>
+</div>
+
+<hr class="divider">
+<div class="section-header">四、短中線操作建議（3~14天）</div>
+
+<div class="recommend-card" style="margin-bottom:1rem">
+  <div class="recommend-badge"><i class="ti ti-award" style="font-size:13px;vertical-align:-1px;margin-right:4px" aria-hidden="true"></i>首選 — 群聯 8299</div>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-start">
+    <div style="flex:1;min-width:200px">
+      <div style="font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px">推薦邏輯</div>
+      <div style="font-size:12px;color:var(--color-text-primary);line-height:1.8">
+        ① <strong>基本面爆發：</strong>Q1 EPS 68.8元（年增1144%），5月營收301%年增，創歷史同期新高，業績是最硬的催化劑<br>
+        ② <strong>MU連動最強：</strong>MU+2%直接反映NAND供需緊繃，群聯作為AI儲存控制晶片龍頭受益最直接<br>
+        ③ <strong>轉型題材：</strong>Phison 3.0 AI儲存平台概念，法人全年EPS上看120~150元，機構持續調升目標價<br>
+        ④ <strong>K線強勢：</strong>周線站穩均線上方，籌碼面近日整理後量縮，等待回升放量訊號
+      </div>
+    </div>
+    <div style="min-width:160px">
+      <div style="font-size:12px;font-weight:500;color:var(--color-text-secondary);margin-bottom:8px">評分</div>
+      <div class="star-row"><span class="star-label">基本面強度</span><span class="stars">★★★★★</span></div>
+      <div class="star-row"><span class="star-label">美股連動性</span><span class="stars">★★★★★</span></div>
+      <div class="star-row"><span class="star-label">短線催化</span><span class="stars">★★★★☆</span></div>
+      <div class="star-row"><span class="star-label">流動性</span><span class="stars">★★★★☆</span></div>
+      <div style="margin-top:10px"><span class="badge badge-red">留意：股價高，震盪大</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px"><span class="badge badge-blue" style="margin-right:6px">次選</span>臻鼎 4958</div>
+    <div style="font-size:12px;color:var(--color-text-primary);line-height:1.8;margin-bottom:8px">
+      NVDA+1%直接連動AI PCB龍頭；5月營收+37%、Q1獲利年增102%；500億資本支出擴廠佈局清晰。但股價已從低點翻3倍+，短線乖離大，追高需謹慎，建議等拉回月線再介入。
+    </div>
+    <div class="star-row"><span class="star-label">基本面強度</span><span class="stars">★★★★☆</span></div>
+    <div class="star-row"><span class="star-label">美股連動性</span><span class="stars">★★★★★</span></div>
+    <div class="star-row"><span class="star-label">短線安全</span><span class="stars">★★★☆☆</span></div>
+    <div style="margin-top:8px"><span class="badge badge-purple">策略：拉回420~450再介入</span></div>
+  </div>
+
+  <div class="card">
+    <div style="font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px"><span class="badge badge-green" style="margin-right:6px">第三選</span>瑞昱 2379</div>
+    <div style="font-size:12px;color:var(--color-text-primary);line-height:1.8;margin-bottom:8px">
+      INTC+7%為最強短線催化劑，瑞昱是Intel平台最重要的網路晶片供應商；Q1 EPS 8.44元QoQ+63%回升明顯；WiFi 7/2.5G乙太網中線題材持續。股價估值合理（黃色區間），相對安全但動能較群聯/臻鼎弱。
+    </div>
+    <div class="star-row"><span class="star-label">基本面強度</span><span class="stars">★★★☆☆</span></div>
+    <div class="star-row"><span class="star-label">美股連動性</span><span class="stars">★★★★☆</span></div>
+    <div class="star-row"><span class="star-label">短線安全</span><span class="stars">★★★★☆</span></div>
+    <div style="margin-top:8px"><span class="badge badge-green">估值合理，適合中線佈局</span></div>
+  </div>
+</div>
+
+<div class="card" style="margin-bottom:1rem">
+  <div style="font-size:13px;font-weight:500;margin-bottom:8px;color:var(--color-text-primary)"><i class="ti ti-x" style="font-size:14px;color:#A32D2D;margin-right:6px" aria-hidden="true"></i>不推薦：晶技3042 / 千如3236</div>
+  <div style="font-size:12px;color:var(--color-text-primary);line-height:1.8">
+    <strong>晶技3042：</strong>基本面穩健但EPS年減4%，5月營收雖創同期次高但成長動能不及同期其他標的；股價近期急漲後已達前高壓力，6/16除息前填息邏輯雖存在，但除息後若無業績驅動易成賣點。<br><br>
+    <strong>千如3236：</strong>2025全年EPS僅0.32元、Q1-2026 EPS 0.1元（季減50%），獲利能力嚴重不足。美股連動性極低，K線技術面偏弱，近期連跌。在費半全面上漲背景下，此類低基本面標的難以持續受惠。強烈不推薦短中線操作。
+  </div>
+</div>
+
+<div class="disclaimer"><i class="ti ti-alert-triangle" style="font-size:13px;vertical-align:-1px;margin-right:6px" aria-hidden="true"></i>本報告僅供研究參考，不構成投資建議。股票投資有風險，請依個人財務狀況自行判斷。所有數據來源為公開財報及市場資訊，可能存在延遲。</div>
+</div>
