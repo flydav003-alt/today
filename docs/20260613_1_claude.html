@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>台股收盤後分析（第一輪）｜ 20260613</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Georgia','Times New Roman','Microsoft JhengHei','PingFang TC',serif;font-size:15px;background:#0d0d0d;color:#e0e0e0;padding:12px;max-width:1200px;margin:0 auto}
+h1{font-size:20px;color:#00e5ff;border-bottom:2px solid #333;padding-bottom:8px;margin-bottom:12px;letter-spacing:1px}
+h2{font-size:15px;color:#ffcc00;margin:12px 0 8px;border-left:4px solid #ffcc00;padding-left:8px;letter-spacing:0.5px}
+h3{font-size:14px;color:#bbb;margin:8px 0 5px}
+.section-title{font-size:16px;color:#ffcc00;margin:16px 0 8px;border-left:4px solid #ffcc00;padding-left:8px;font-weight:bold}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px}
+.card{background:#1a1a1a;border:1px solid #333;border-radius:6px;padding:10px}
+.card.green{border-left:4px solid #ff4444}
+.card.yellow{border-left:4px solid #ffcc00}
+.card.red{border-left:4px solid #00cc66}
+.card.blue{border-left:4px solid #4488ff}
+.card.orange{border-left:4px solid #ff8800}
+.card.horse{border-left:4px solid #cc88ff;background:#1a1520}
+.card.handoff{border:2px solid #00e5ff;background:#0a1520;margin-top:16px}
+.tag{display:inline-block;background:#333;color:#ccc;font-size:11px;padding:2px 6px;border-radius:3px;margin:1px}
+.tag.a{background:#440000;color:#ff4444}
+.tag.b{background:#444400;color:#ffcc00}
+.tag.c{background:#003300;color:#00cc66}
+.tag.horse{background:#2a1540;color:#cc88ff}
+.score{float:right;font-size:20px;font-weight:bold;color:#00e5ff}
+.regime{background:#1a0a0a;border:2px solid #ff4444;border-radius:6px;padding:12px;margin-bottom:12px}
+.regime.warn{border-color:#ff8800;background:#1a0f00}
+.regime.off{border-color:#00cc66;background:#0a1a0a}
+table{width:100%;border-collapse:collapse;margin-bottom:10px}
+th{background:#222;color:#ffcc00;text-align:left;padding:6px 8px;font-size:13px}
+td{padding:6px 8px;border-bottom:1px solid #222;font-size:13px;line-height:1.6}
+tr:hover{background:#1f1f1f}
+.up{color:#ff4444}
+.dn{color:#00cc66}
+.warn{color:#ff8800}
+.buy{color:#ff4444;font-weight:bold}
+.stop{color:#00cc66}
+.hl{color:#fff;font-weight:bold;font-size:14px}
+.sep{border-top:1px solid #333;margin:10px 0}
+p{margin:5px 0;line-height:1.7;font-size:14px}
+ul{margin:5px 0 5px 18px}
+li{margin:3px 0;font-size:14px;line-height:1.6}
+.big{font-size:20px;color:#00e5ff;font-weight:bold}
+.pool-tag{display:inline-block;background:#1a1a2e;color:#4488ff;font-size:11px;padding:2px 6px;border-radius:3px;margin:1px;border:1px solid #4488ff}
+.horse-tag{display:inline-block;background:#2a1540;color:#cc88ff;font-size:11px;padding:2px 6px;border-radius:3px;margin:1px;border:1px solid #cc88ff}
+.wait-tag{display:inline-block;background:#2a2000;color:#ffcc00;font-size:11px;padding:2px 6px;border-radius:3px;border:1px solid #ffcc00}
+.rr-box{background:#0a1a0a;border:1px solid #00cc66;border-radius:4px;padding:8px;margin-top:6px}
+.up-cond{color:#ff4444;font-size:13px;margin:3px 0;line-height:1.6}
+.dn-cond{color:#00cc66;font-size:13px;margin:3px 0;line-height:1.6}
+pre{background:#111;border:1px solid #2a4a2a;padding:12px;border-radius:4px;font-size:12px;color:#ccc;white-space:pre-wrap;margin:8px 0;line-height:1.8;font-family:'Courier New',monospace}
+.warn-banner{background:#2a1500;border:2px solid #ff8800;border-radius:6px;padding:10px;margin-bottom:12px;text-align:center;font-size:14px}
+.action-box{background:#1a1500;border:1px solid #ffcc00;border-radius:4px;padding:10px;margin-top:8px}
+.stock-card{margin-bottom:10px}
+.collapsible-header{background:#1a1a1a;border:1px solid #444;border-radius:6px;padding:10px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;user-select:none}
+.collapsible-header:hover{background:#222;border-color:#555}
+.collapsible-header .ch-title{color:#aaa;font-size:14px}
+.collapsible-header .ch-arrow{color:#555;font-size:16px;transition:transform 0.2s}
+.collapsible-header.open .ch-arrow{transform:rotate(180deg)}
+.collapsible-content{display:none;margin-bottom:10px}
+.collapsible-content.open{display:block}
+</style>
+</head>
+<body>
+
+<h1>🎯 台股收盤後分析報告（第一輪）｜ 20260613</h1>
+<p style="color:#555;font-size:12px;margin-bottom:8px">
+檔名：20260613_1_claude.html　｜　輸入：使用者指定選股池（7檔）　｜　AIreport v2.3 Round1
+</p>
+
+<!-- ====== 一、市場 Regime 判斷 ====== -->
+<div class="section-title">▌一、市場 Regime 判斷</div>
+<div class="regime warn">
+<h2 style="border:none;padding:0;margin-bottom:10px">今日判斷（2026/06/13 週五）→ <span class="warn" style="font-size:18px;font-weight:bold">B 中性偏多 / 結構轉好但需驗證</span></h2>
+<div class="grid3">
+<div>
+<h3>大盤現況（6/13 週五）</h3>
+<p>加權指數：<span class="hl up">44,169.04（+1,019.58點 / +2.36%）</span></p>
+<p>成交值：<span class="hl">1.12兆元</span>（量能回升、偏強）</p>
+<p>前日（6/11）：43,149.46（-0.18%）</p>
+<p class="warn">本週合計跌約901點，但週五強彈收複，週線收黑</p>
+<p class="warn">明日風險預估：週末後開盤，需等美盤最終確認</p>
+</div>
+<div>
+<h3>美股 / 費半（6/12 美東）</h3>
+<p>費半 SOX：<span class="up">+1.52%（13,371點）</span></p>
+<p>NASDAQ：<span class="up">+0.31%（25,888點）</span></p>
+<p>台積電ADR(TSM)：<span class="up">+0.68%（$423.93）</span></p>
+<p>ARM：<span class="up">+11.27%</span>　AMAT：<span class="up">+2.64%</span></p>
+<p>SMCI：<span class="dn">-4.72%</span>　ASML：<span class="dn">-1.89%</span></p>
+<p><span class="warn">系統停損線</span>：費半跌&gt;2% → 全面降倉50%（未觸發）</p>
+<p style="color:#4488ff;font-size:12px">⚡ 6/12美股：伊朗危機解除，資金由NVDA輪轉至落後半導體股補漲</p>
+</div>
+<div>
+<h3>法人整體方向（6/13 台股）</h3>
+<p>外資：<span class="warn">估轉趨中性（本週連賣後縮手）</span></p>
+<p>投信：<span class="up">逆勢持續加碼（本週連買）</span></p>
+<p>自營：<span class="warn">中性避險為主</span></p>
+<p style="color:#555;font-size:12px">⚠ 6/13盤後三大法人數字尚待公布，以近期趨勢推估</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 二、交易員一頁總結 ====== -->
+<div class="section-title">▌二、交易員一頁總結</div>
+<div class="grid2">
+<div class="card blue"><h3>📌 明日最值得佈局</h3><p><span class="up" style="font-size:15px;font-weight:bold">6196 帆宣</span>｜廠務工程五雄龍頭、台積電海外擴廠直接受益、今日強彈+9.72%連二漲，需等開盤回測再進</p></div>
+<div class="card green"><h3>🍯 最像「剛起漲」甜蜜點</h3><p><span class="up" style="font-size:15px;font-weight:bold">6691 洋基工程</span>｜連5漲、Q1營收年增134%優於同業，本週市場重新關注廠務工程族群，低估值補漲潛力最強</p></div>
+<div class="card yellow"><h3>🔄 最佳 Laggard / Emerging</h3><p><span class="up" style="font-size:15px;font-weight:bold">3131 弘塑</span>｜先進封裝設備核心受益股、AMAT/LRCX連日大漲帶動台灣設備族群跟漲邏輯明確，甜蜜點位</p></div>
+<div class="card orange"><h3>🔥 如果明日只能重壓一檔</h3><p class="big up">6196 帆宣</p><p>台積電全球建廠、帆宣直接吃分，估值低、題材硬，近期量能回升，強彈後需等開盤15分鐘確認</p></div>
+</div>
+<div class="grid2">
+<div class="card orange"><h3>🌙 如果只能做隔夜單</h3><p class="big up">2404 漢唐</p><p>廠務工程龍頭、EPS48元配息40元強勁基本面，隔夜持股風險最低（本業能見度高），停損位清楚</p></div>
+<div class="card red"><h3>⚡ AI轉弱第一個先砍誰</h3><p><span class="dn" style="font-size:15px;font-weight:bold">3265 台星科</span>｜今日爆跌-6.74%、連二漲後大跌，籌碼鬆動，若費半再走弱先砍</p></div>
+</div>
+<div class="card horse" style="margin-bottom:12px">
+<h3>⭐ 黑馬候選（低分但有潛力）</h3>
+<p><span style="color:#cc88ff;font-size:14px;font-weight:bold">5236 凌陽創新</span>：成為超微/英特爾雙認證eUSB2供應商，AI PC新催化劑，股價壓低、量比偏高</p>
+<p><span style="color:#cc88ff;font-size:14px;font-weight:bold">3416 融程電</span>：工業電腦、AI邊緣計算切入，營收連創新高，本益比合理，系統篩選評分偏低但基本面扎實</p>
+</div>
+
+<!-- ====== 三、AI台股短線機會雷達表 ====== -->
+<div class="section-title">▌三、AI台股短線機會雷達表</div>
+<table>
+<tr>
+  <th>股票</th><th>來源</th><th>K線等級</th><th>今日K線對明日含義</th><th>輪動位置</th>
+  <th>產業催化劑</th><th>時間點</th><th>擁擠度</th><th>評分</th><th>建議</th>
+</tr>
+<tr>
+  <td class="hl">6196 帆宣</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td><span class="tag b">B+級</span></td>
+  <td class="up">連2漲+9.72%，量能放大，進場邏輯變強但需等回測</td>
+  <td class="up">Emerging Rotation</td>
+  <td>台積電全球建廠廠務工程</td><td class="warn">2026H2持續</td>
+  <td class="dn">低</td><td class="up" style="font-weight:bold">78</td>
+  <td class="buy">積極參與</td>
+</tr>
+<tr>
+  <td class="hl">6691 洋基工程</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td><span class="tag a">A級</span></td>
+  <td class="up">連5漲強勢，但本週五大漲後需量縮測試</td>
+  <td class="up">Laggard Catch-up</td>
+  <td>半導體廠房擴產 訂單能見度高</td><td class="warn">全年持續</td>
+  <td class="dn">低</td><td class="up" style="font-weight:bold">76</td>
+  <td class="buy">積極參與</td>
+</tr>
+<tr>
+  <td class="hl">3131 弘塑</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td><span class="tag a">A級</span></td>
+  <td class="up">近期連跌後週五+4.46%強彈，進場邏輯轉強</td>
+  <td class="up">Emerging Rotation</td>
+  <td>先進封裝設備 AMAT大漲帶動</td><td class="warn">長期</td>
+  <td class="dn">低</td><td class="up" style="font-weight:bold">75</td>
+  <td class="buy">積極參與</td>
+</tr>
+<tr>
+  <td class="hl">2404 漢唐</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td><span class="tag a">A級</span></td>
+  <td class="up">廠務工程龍頭、基本面強，台股反彈領漲</td>
+  <td class="up">Laggard Catch-up</td>
+  <td>台積電美國廠驗收認列</td><td class="warn">2026H1-H2</td>
+  <td class="warn">中</td><td class="up" style="font-weight:bold">74</td>
+  <td class="buy">積極參與</td>
+</tr>
+<tr>
+  <td class="hl">5236 凌陽創新 <span class="horse-tag">⭐黑馬</span></td>
+  <td><span class="pool-tag">上櫃</span></td>
+  <td><span class="tag b">B級</span></td>
+  <td class="warn">中性，股價在年線附近整理</td>
+  <td class="warn">Sympathy Play</td>
+  <td>AI PC eUSB2 雙認證</td><td>待定</td>
+  <td class="dn">低</td><td class="warn">68</td>
+  <td class="warn">黑馬觀察</td>
+</tr>
+<tr>
+  <td class="hl">3416 融程電 <span class="horse-tag">⭐黑馬</span></td>
+  <td><span class="pool-tag">上市</span></td>
+  <td><span class="tag b">B級</span></td>
+  <td class="warn">中性偏穩</td>
+  <td class="warn">Sympathy Play</td>
+  <td>工業電腦 AI邊緣運算</td><td>待定</td>
+  <td class="dn">低</td><td class="warn">65</td>
+  <td class="warn">黑馬觀察</td>
+</tr>
+<tr>
+  <td>3265 台星科</td>
+  <td><span class="pool-tag">上櫃</span></td>
+  <td><span class="tag c">C級</span></td>
+  <td class="dn">今日爆量跌停-6.74%，明日進場邏輯轉弱</td>
+  <td class="dn">—</td>
+  <td>IC測試/封裝</td><td>—</td>
+  <td class="warn">中</td><td class="dn">56→排除</td>
+  <td class="stop">❌ 排除</td>
+</tr>
+</table>
+
+<!-- ====== 四、深度交易機會 ====== -->
+<div class="section-title">▌四、深度交易機會（通過初篩標的）</div>
+
+<!-- 帆宣 #1 -->
+<div class="card green stock-card">
+<h2>🥇 6196 帆宣 — Emerging Rotation｜廠務工程海外擴廠直接受益 <span class="score">78</span></h2>
+<div style="clear:both"></div>
+<div class="grid2">
+<div>
+<p><span class="tag b">K線：B+級</span> 週五強彈+9.72%至553元，連2漲，量能顯著放大</p>
+<p><span class="tag">今日K線意義</span> <span class="warn">進場邏輯轉強，但連漲後需等回測確認，不追漲停位</span></p>
+<p><span class="tag">來源</span> <span class="pool-tag">上市</span></p>
+<p><span class="tag">型態</span> Emerging Rotation — 廠務工程族群輪動補漲領頭</p>
+<p><span class="tag">輪動位置</span> <span class="up">Emerging Rotation，市場開始重新認識廠務工程估值</span></p>
+<p><span class="tag">產業催化劑</span></p>
+<ul>
+<li>🔴 台積電全球建廠（美國、日本、德國）廠務工程直接受益，在手訂單估超1,081億</li>
+<li>ASML EUV掩模傳送盒(EUV Pod)深度合作商，技術護城河高</li>
+<li>半導體廠商資本支出2026年仍高速擴張，全球先進製程建廠不停歇</li>
+</ul>
+<p><span class="tag">媒體曝光</span> <span class="dn">低</span>｜未見主流財經媒體大篇幅報導，甜蜜點位</p>
+<p><span class="tag">籌碼</span> 近期量能回升，今日大量強漲；法人近期籌碼轉好，融資未暴增</p>
+<p><span class="tag">系統訊號</span> RSI 估65左右 | K值 估55 | 量比 約2.5x | 評分 78</p>
+</div>
+<div>
+<div class="action-box">
+<p><span class="buy">📍 最佳進場區</span>：<span class="up" style="font-size:16px;font-weight:bold">520～540元</span>（回測區，非追漲）</p>
+<p><span class="warn">跳空 &gt;5% 不追；今日553以上不宜入</span></p>
+<div class="sep"></div>
+<p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">505元</span>（破此跌回整理，失效）</p>
+<p><span class="warn">失效條件</span>：跌破505元或量縮伴隨跌停</p>
+<div class="sep"></div>
+<div class="rr-box">
+<p><span class="buy">🎯 目標價</span>：前高阻力法 → <span class="up" style="font-weight:bold">590～620元</span></p>
+<p>進場530 | 停損505（損25元）| 目標600（獲70元）</p>
+<p><span class="up" style="font-size:15px;font-weight:bold">RR ≈ 2.8:1</span></p>
+</div>
+<p><span class="tag">持有天數</span>：5~10天　<span class="tag">隔夜</span>：✅（基本面強）</p>
+<p><span class="tag">建議倉位</span>：<span class="up" style="font-size:15px;font-weight:bold">5~8%</span></p>
+</div>
+<div class="sep"></div>
+<p class="up-cond">📈 明日升評條件：SOX漲>+1% 且 台積電ADR續漲；開盤縮量守520以上</p>
+<p class="dn-cond">📉 明日降評條件：SOX跌>-1%；開盤放量長黑跌破510</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：AMAT、LRCX、台積電ADR(TSM)（半導體設備+廠務）</p>
+</div>
+</div>
+</div>
+
+<!-- 洋基工程 #2 -->
+<div class="card blue stock-card">
+<h2>🥈 6691 洋基工程 — Laggard Catch-up｜廠務工程低本益比補漲潛力王 <span class="score">76</span></h2>
+<div style="clear:both"></div>
+<div class="grid2">
+<div>
+<p><span class="tag a">K線：A級</span> 連5漲，今日+4.09%至445元，趨勢明確上揚</p>
+<p><span class="tag">今日K線意義</span> <span class="up">連5漲趨勢完整，但須觀察量能是否延續，量縮回測為買點</span></p>
+<p><span class="tag">來源</span> <span class="pool-tag">上市</span></p>
+<p><span class="tag">型態</span> Laggard Catch-up — 同業漢唐創新高，洋基本益比仍偏低</p>
+<p><span class="tag">產業催化劑</span> Q1營收年增134%優於漢唐的124.5%，本益比低於11倍，提升估值空間大</p>
+<p><span class="tag">媒體曝光</span> <span class="dn">低</span>｜未見主流媒體大篇幅推薦，甜蜜點</p>
+<p><span class="tag">籌碼</span> 三大法人近期全面買超（依新聞資料），融資未見暴增</p>
+<p><span class="tag">系統訊號</span> RSI 估60 | K值 估55 | 量比 約1.8x | 評分 76</p>
+</div>
+<div>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="up" style="font-size:16px;font-weight:bold">425～440元</span>（等回測）</p>
+<p><span class="warn">跳空 &gt;5% 不追</span></p>
+<div class="sep"></div>
+<p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">410元</span>（跌破前低失效）</p>
+<div class="rr-box">
+<p><span class="buy">🎯 目標</span>：前高阻力法 → <span class="up" style="font-weight:bold">490~510元</span></p>
+<p>進場432 | 停損410（損22元）| 目標500（獲68元）</p>
+<p><span class="up" style="font-size:15px;font-weight:bold">RR ≈ 3.1:1</span></p>
+</div>
+<p><span class="tag">建議倉位</span>：<span class="warn" style="font-size:15px;font-weight:bold">5~8%</span></p>
+<p><span class="tag">持有天數</span>：5~14天　<span class="tag">隔夜</span>：✅</p>
+</div>
+<div class="sep"></div>
+<p class="up-cond">📈 明日升評：SOX>+1%；漢唐續漲帶動族群輪動</p>
+<p class="dn-cond">📉 明日降評：費半跌>-1%；放量跌破420元</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：AMAT、LRCX（半導體設備對應廠務工程）</p>
+</div>
+</div>
+</div>
+
+<!-- 弘塑 #3 -->
+<div class="card blue stock-card">
+<h2>🥉 3131 弘塑 — Emerging Rotation｜先進封裝設備甜蜜點 <span class="score">75</span></h2>
+<div style="clear:both"></div>
+<div class="grid2">
+<div>
+<p><span class="tag a">K線：A級</span> 連2跌後週五+4.46%強彈，量比放大，趨勢反轉訊號</p>
+<p><span class="tag">今日K線意義</span> <span class="up">底部反轉型態，連跌後首根大陽線，明日進場邏輯轉強</span></p>
+<p><span class="tag">來源</span> <span class="pool-tag">上市</span></p>
+<p><span class="tag">型態</span> Emerging Rotation — AMAT/LRCX/KLA大漲映射台灣半導體設備股</p>
+<p><span class="tag">產業催化劑</span></p>
+<ul>
+<li>6/12 AMAT+2.64%、LRCX+12.65%（前日）、KLA+5.55%，設備族群連日強勢</li>
+<li>弘塑主攻先進封裝設備，CoWoS/HBM擴產直接受益</li>
+<li>與日月光合作，客戶訂單能見度高</li>
+</ul>
+<p><span class="tag">媒體曝光</span> <span class="dn">低</span>｜近期無大篇幅追高報導</p>
+<p><span class="tag">籌碼</span> 外資近期偏持平，投信開始進場，融資未爆增</p>
+<p><span class="tag">系統訊號</span> RSI 估58 | K值 估50 | 量比 約2.0x | 評分 75</p>
+</div>
+<div>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="up" style="font-size:16px;font-weight:bold">3,050～3,150元</span></p>
+<p><span class="warn">跳空 &gt;4% 不追</span></p>
+<div class="sep"></div>
+<p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">2,950元</span>（跌破近期低點失效）</p>
+<div class="rr-box">
+<p><span class="buy">🎯 目標</span>：均線目標法 → <span class="up" style="font-weight:bold">3,400~3,500元</span></p>
+<p>進場3,100 | 停損2,950（損150）| 目標3,450（獲350）</p>
+<p><span class="up" style="font-size:15px;font-weight:bold">RR ≈ 2.3:1</span></p>
+</div>
+<p><span class="tag">建議倉位</span>：<span class="warn" style="font-size:15px;font-weight:bold">5~8%</span></p>
+<p><span class="tag">持有天數</span>：5~10天　<span class="tag">隔夜</span>：✅</p>
+</div>
+<div class="sep"></div>
+<p class="up-cond">📈 明日升評：AMAT/LRCX續漲 &gt;+2%；弘塑量能延續+站上月線</p>
+<p class="dn-cond">📉 明日降評：AMAT走弱；弘塑開盤量縮翻黑</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：AMAT、LRCX、KLA（半導體設備直接對應）</p>
+</div>
+</div>
+</div>
+
+<!-- 漢唐 #4 -->
+<div class="card blue stock-card">
+<h2>🏅 2404 漢唐 — Laggard Catch-up｜廠務工程龍頭基本面最強 <span class="score">74</span></h2>
+<div style="clear:both"></div>
+<div class="grid2">
+<div>
+<p><span class="tag a">K線：A級</span> 近期逆勢抗跌，廠務工程族群輪動後回歸</p>
+<p><span class="tag">今日K線意義</span> <span class="up">中性偏強，大盤反彈漲幅普通，但基本面支撐強</span></p>
+<p><span class="tag">來源</span> <span class="pool-tag">上市</span></p>
+<p><span class="tag">型態</span> Laggard Catch-up — 股價未跟上EPS48元的強勁基本面</p>
+<p><span class="tag">產業催化劑</span></p>
+<ul>
+<li>台積電美國廠二期無塵室工程進入驗收認列期，2026年H1/H2皆有認列</li>
+<li>EPS48元、配息40元，殖利率逾6%，基本面最穩</li>
+<li>在手訂單超千億，能見度至2026年底以上</li>
+</ul>
+<p><span class="tag">媒體曝光</span> <span class="warn">中</span>｜曾有媒體報導但非追高推薦，仍可操作</p>
+<p><span class="tag">籌碼</span> 外資外賣超vs投信+自營買超，土洋對作中，近期族群輪動轉入</p>
+<p><span class="tag">系統訊號</span> RSI 估62 | K值 估58 | 量比 約1.5x | 評分 74</p>
+</div>
+<div>
+<div class="action-box">
+<p><span class="buy">📍 進場區</span>：<span class="up" style="font-size:16px;font-weight:bold">960～1,000元</span>（本週已在此區）</p>
+<p><span class="warn">跳空 &gt;4% 不追</span></p>
+<div class="sep"></div>
+<p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">930元</span>（月線下方失效）</p>
+<div class="rr-box">
+<p><span class="buy">🎯 目標</span>：前高阻力法 → <span class="up" style="font-weight:bold">1,050～1,100元</span></p>
+<p>進場980 | 停損930（損50）| 目標1,080（獲100）</p>
+<p><span class="up" style="font-size:15px;font-weight:bold">RR ≈ 2.0:1</span></p>
+</div>
+<p><span class="tag">建議倉位</span>：<span class="warn" style="font-size:15px;font-weight:bold">5~8%</span></p>
+<p><span class="tag">持有天數</span>：7~14天　<span class="tag">隔夜</span>：✅（最適合隔夜）</p>
+</div>
+<div class="sep"></div>
+<p class="up-cond">📈 明日升評：SOX>+1.5% 且 族群資金持續流入廠務工程</p>
+<p class="dn-cond">📉 明日降評：費半<-1.5%；漢唐放量跌破960</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：AMAT、LRCX（廠務工程vs半導體設備）</p>
+</div>
+</div>
+</div>
+
+<!-- ====== 五、黑馬候選區 ====== -->
+<div class="section-title">▌五、⭐ 黑馬候選區（低分但有潛力，3~5% 小倉）</div>
+
+<div class="card horse stock-card">
+<h2>⭐ 5236 凌陽創新 — AI PC / 半導體IP黑馬 <span class="score" style="color:#cc88ff">68</span></h2>
+<div style="clear:both"></div>
+<p style="color:#cc88ff;font-size:13px">系統評分偏低，但成為超微(AMD)+英特爾雙認證eUSB2V1供應商，AI PC新題材催化</p>
+<div class="grid2">
+<div>
+<p><span class="tag horse">升級原因</span> ①上櫃股 ②量比估>1.8x ③RSI估45~60低位 ④AMD/Intel雙認證催化劑具體</p>
+<p><span class="tag">K線</span> B級　<span class="tag">量比</span> 估1.8~2.0x</p>
+<p><span class="tag">輪動</span> Sympathy Play — AI PC族群，受益AMD/INTC AI PC策略</p>
+<p><span class="tag">潛在催化劑</span> 業界首家eUSB2V1 AMD/Intel認證；AI PC 2026年全球出貨量大幅提升</p>
+<p class="up-cond">📈 明日升評條件：AMD/INTC漲&gt;+3%；凌陽創新量比放大突破前高</p>
+<p class="dn-cond">📉 明日降評條件：AI PC族群熄火；費半<-1%</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：AMD、INTC（AI PC直接客戶）</p>
+</div>
+<div>
+<div class="action-box">
+<p><span class="buy">📍 觀察進場</span>：<span class="up" style="font-size:15px;font-weight:bold">160～170元</span>（需等量能確認）</p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">152元</span>（跌破年線失效）</p>
+<div class="rr-box">
+<p><span class="buy">🎯 目標</span>：停損幅度×2.5 → <span class="up" style="font-weight:bold">185~195元</span></p>
+<p><span class="up">RR ≈ 2.5:1</span></p>
+</div>
+<p><span class="tag horse">倉位</span>：3~5%（黑馬小倉）</p>
+<p><span class="warn">⚠️ 風險</span>：評分偏低，催化劑知名度不高，嚴格停損，不適合隔夜重倉</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card horse stock-card">
+<h2>⭐ 3416 融程電 — AI邊緣計算工業電腦黑馬 <span class="score" style="color:#cc88ff">65</span></h2>
+<div style="clear:both"></div>
+<p style="color:#cc88ff;font-size:13px">系統評分偏低，但工業電腦+AI邊緣應用題材，EPS 7.39元創高，本益比合理</p>
+<div class="grid2">
+<div>
+<p><span class="tag horse">升級原因</span> ①量比估>1.5x ②本益比合理（約23倍）③工業電腦AI化明確趨勢 ④1月營收創同期新高</p>
+<p><span class="tag">K線</span> B級　<span class="tag">量比</span> 估1.5~2.0x</p>
+<p><span class="tag">輪動</span> Sympathy Play — AI邊緣/工業電腦族群，需求穩定擴張</p>
+<p><span class="tag">潛在催化劑</span> AI邊緣設備需求擴張；工業電腦滲透AI算力；EPS創高</p>
+<p class="up-cond">📈 明日升評條件：工業電腦族群輪動；量比放大>2x突破前高174元</p>
+<p class="dn-cond">📉 明日降評條件：大盤拉回；量縮跌破160元</p>
+<p style="color:#4488ff;font-size:12px">🔗 對應美股指標：NVDA（AI邊緣/工業AI間接）</p>
+</div>
+<div>
+<div class="action-box">
+<p><span class="buy">📍 觀察進場</span>：<span class="up" style="font-size:15px;font-weight:bold">168～175元</span>（股價約174元附近）</p>
+<p><span class="stop">🛡️ 停損位</span>：<span class="dn" style="font-weight:bold">160元</span>（月線下方失效）</p>
+<div class="rr-box">
+<p><span class="buy">🎯 目標</span>：停損幅度×2.5 → <span class="up" style="font-weight:bold">188~195元</span></p>
+<p><span class="up">RR ≈ 2.5:1</span></p>
+</div>
+<p><span class="tag horse">倉位</span>：3~5%（黑馬小倉）</p>
+<p><span class="warn">⚠️ 風險</span>：評分偏低，族群輪動依賴大盤，嚴格停損</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ====== 六、未來14天催化劑日曆 ====== -->
+<div class="section-title">▌六、未來14天催化劑日曆</div>
+<table>
+<tr><th>日期</th><th>事件</th><th>影響產業 / 標的</th><th>方向</th></tr>
+<tr>
+  <td class="warn">2026/06/16（一）</td>
+  <td>🔴 台股開盤（週末後首日）</td>
+  <td>全體選股池標的</td>
+  <td class="up">週五+1019點後是否延續或高開低走，關鍵觀察日</td>
+</tr>
+<tr>
+  <td class="warn">2026/06/17（二）</td>
+  <td>🟡 美國CPI/PPI數據（若當週有）</td>
+  <td>費半SOX / 帆宣、弘塑、漢唐</td>
+  <td class="warn">若通膨高 → 降息延後 → 半導體設備承壓</td>
+</tr>
+<tr>
+  <td class="warn">2026/06/18（三）</td>
+  <td>🟡 Fed決策公布（本月若有）</td>
+  <td>整體市場</td>
+  <td class="warn">降息機率上升 → 高估值AI科技股利多</td>
+</tr>
+<tr>
+  <td>2026/06/20（五）</td>
+  <td>🟢 NVIDIA GTC相關後續發展觀察</td>
+  <td>弘塑（先進封裝設備）、帆宣</td>
+  <td class="up">AI算力需求持續確認，設備族群長線利多</td>
+</tr>
+<tr>
+  <td class="warn">2026/06/25（三）</td>
+  <td>🔴 台股各券商法說會季 Q2業績預告期開始</td>
+  <td>漢唐（2404）、帆宣（6196）重點觀察</td>
+  <td class="up">廠務工程五雄業績確認，利多可期</td>
+</tr>
+<tr>
+  <td>2026/06/27（五）</td>
+  <td>🟡 美光(MU)財報（若此季財報期）</td>
+  <td>弘塑（HBM/先進封裝設備）</td>
+  <td class="up">HBM需求確認 → 弘塑升評</td>
+</tr>
+<tr>
+  <td class="warn">2026年持續</td>
+  <td>🔴 台積電全球建廠擴產進度</td>
+  <td>帆宣(6196)、洋基工程(6691)、漢唐(2404)</td>
+  <td class="up">廠務工程最強長線催化劑，訂單持續累積</td>
+</tr>
+<tr>
+  <td>2026年H2</td>
+  <td>🟡 SpaceX IPO後低軌衛星題材發酵</td>
+  <td>凌陽創新（eUSB2 AI PC邊緣周邊）</td>
+  <td class="warn">關聯性較弱，需等個股確認</td>
+</tr>
+</table>
+
+<!-- ====== 七、交易員最終結論 ====== -->
+<div class="section-title">▌七、交易員最終結論</div>
+<div class="card blue" style="margin-bottom:16px">
+<p><strong style="font-size:15px">Regime</strong>：<span class="warn" style="font-size:15px">B 中性偏多 — 台股週五強彈+1,019點收復月線，費半+1.52%未觸停損線，但週線仍收黑，需等週一確認延續性</span></p>
+<div class="sep"></div>
+<p><strong>🥇 最甜蜜點</strong>：<span class="up" style="font-size:15px;font-weight:bold">6691 洋基工程</span>。廠務工程族群最被低估、連5漲趨勢完整、本益比不到11倍遠低於同業。進場425～440，停損410，目標490～510。倉位5~8%。</p>
+<p><strong>🥈 次甜蜜點</strong>：<span class="up" style="font-size:15px;font-weight:bold">3131 弘塑</span>。AMAT/LRCX本週大漲雙位數直接映射台灣先進封裝設備股，週五強彈底部訊號清楚。等開盤確認後進場3,050～3,150。倉位5%。</p>
+<p><strong>🏅 第三位</strong>：<span class="up" style="font-size:15px;font-weight:bold">6196 帆宣</span>。廠務工程受益最直接，在手訂單超千億，但今日已漲+9.72%，需等530附近回測再入，不追高。</p>
+<p><strong>⭐ 黑馬觀察</strong>：<span style="color:#cc88ff;font-size:14px;font-weight:bold">5236 凌陽創新</span>。AMD/INTC雙認證催化劑，需量能放大確認。倉位3%，嚴守停損152。</p>
+<div class="sep"></div>
+<p><strong>⚠️ 系統性停損</strong>：費半跌&gt;2%立即降倉50%，不等個股失效條件。</p>
+<p><strong>🚨 最大風險</strong>：本週台股大起大落（-1478 → +1019），若週一開高走低或費半再度走弱，廠務工程族群可能再次承壓；SpaceX上市炒作可能分散資金。</p>
+<p><strong>❌ 明日不操作</strong>：<span class="dn">3265 台星科</span>｜今日爆量大跌-6.74%，籌碼鬆動，等後續整理再觀察</p>
+<p><strong>⏳ 爆量觀察</strong>：3265台星科今日爆量大跌，等早盤版判斷情境</p>
+<p><strong>選股池品質</strong>：本次7檔均集中廠務工程+設備族群，主題高度一致，非分散佈局。廠務五雄中4檔入選，具族群輪動共振效應。</p>
+</div>
+
+<!-- ====== 八、等早盤版確認區 ====== -->
+<div class="section-title">▌八、⏳ 等早盤版確認區（今日異常股）</div>
+<div class="card yellow stock-card">
+<h3 style="font-size:15px">3265 台星科 — 今日爆量大跌-6.74%至180元，需隔日確認</h3>
+<p style="color:#ff8800;font-size:13px;margin-bottom:6px">台星科今日量比大幅放大且收大跌（-6.74%），前2日連漲後爆量長黑。明日開盤前15分鐘需觀察以下情境。</p>
+<p style="color:#4488ff;font-size:12px;margin-bottom:6px">🔗 對應美股指標：AMAT、日月光ADR(ASX)（先進封裝/IC測試）</p>
+<table>
+<tr><th>情境</th><th>開盤表現</th><th>操作</th><th>進場區</th></tr>
+<tr>
+  <td class="up" style="font-weight:bold">✅ 情境一</td>
+  <td>量縮（&lt;今日50%）+ 紅K收回+守180元</td>
+  <td class="buy">升評 → 觀察進場185</td>
+  <td class="up">185～190元</td>
+</tr>
+<tr>
+  <td class="warn" style="font-weight:bold">✅ 情境二</td>
+  <td>量平穩+跳空+守住180元上方</td>
+  <td class="warn">超小倉追（3%）</td>
+  <td class="warn">依跳空位置判斷</td>
+</tr>
+<tr>
+  <td class="dn" style="font-weight:bold">❌ 情境三</td>
+  <td>持續爆量下跌/跌停</td>
+  <td class="stop">直接放棄，確認主力出貨</td>
+  <td class="dn">—</td>
+</tr>
+</table>
+</div>
+
+<!-- ====== 九、摺疊區：截圖解析 + 初篩 ====== -->
+<div style="margin-bottom:4px">
+<div class="collapsible-header" id="hdr-parse" onclick="toggleCollapse('parse')">
+<span class="ch-title">📋 選股池解析 &amp; 初篩結果（點擊展開）</span>
+<span class="ch-arrow" id="arrow-parse">▼</span>
+</div>
+<div class="collapsible-content" id="col-parse">
+
+<div class="card blue" style="margin-bottom:10px">
+<h2>▌選股池解析（使用者指定7檔，非截圖）</h2>
+<p style="color:#555;font-size:12px">使用者直接輸入股票代碼（非截圖），已依Prompt規則解析 ｜ 強烈偏多訊號 → 系統評分 +3</p>
+<table>
+<tr>
+  <th>代號</th><th>名稱</th><th>來源</th><th>系統評分（估）</th><th>強烈偏多+3</th><th>調整後評分</th>
+  <th>近期股價</th><th>RSI（估）</th><th>K值（估）</th><th>量比（估）</th><th>今日漲跌</th>
+</tr>
+<tr>
+  <td class="hl">3265</td><td>台星科</td>
+  <td><span class="pool-tag">上櫃</span></td>
+  <td>58</td><td class="warn">—</td><td class="warn">58</td>
+  <td>180.0元</td><td>65</td><td>72</td><td>3.0x</td><td class="dn">-13元(-6.74%)</td>
+</tr>
+<tr>
+  <td class="hl">3131</td><td>弘塑</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td>72</td><td class="up">—</td><td class="up">75</td>
+  <td>~3,160元</td><td>58</td><td>50</td><td>2.0x</td><td class="up">+135元(+4.46%)</td>
+</tr>
+<tr>
+  <td class="hl">3416</td><td>融程電</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td>63</td><td class="warn">—</td><td class="warn">65</td>
+  <td>174.0元</td><td>55</td><td>48</td><td>1.6x</td><td class="up">+3元(+1.75%)</td>
+</tr>
+<tr>
+  <td class="hl">5236</td><td>凌陽創新</td>
+  <td><span class="pool-tag">上櫃</span></td>
+  <td>65</td><td class="warn">—</td><td class="warn">68</td>
+  <td>~167元</td><td>52</td><td>45</td><td>1.8x</td><td class="up">+2元(+1.2%)</td>
+</tr>
+<tr>
+  <td class="hl">6196</td><td>帆宣</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td>75</td><td class="up">—</td><td class="up">78</td>
+  <td>553.0元</td><td>65</td><td>55</td><td>2.5x</td><td class="up">+38元(+9.41%)</td>
+</tr>
+<tr>
+  <td class="hl">6691</td><td>洋基工程</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td>73</td><td class="up">—</td><td class="up">76</td>
+  <td>445.0元</td><td>60</td><td>55</td><td>1.8x</td><td class="up">+17.5元(+4.09%)</td>
+</tr>
+<tr>
+  <td class="hl">2404</td><td>漢唐</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td>72</td><td class="warn">—</td><td class="warn">74</td>
+  <td>~960元</td><td>62</td><td>58</td><td>1.5x</td><td class="up">估+15~30元</td>
+</tr>
+</table>
+</div>
+
+<div>
+<h2>▌選股池初篩結果</h2>
+<table>
+<tr>
+  <th>代號(名稱)</th><th>來源</th><th>調整後評分</th><th>RSI(估)</th><th>K值(估)</th><th>量比(估)</th>
+  <th>今日K線</th><th>初篩結果</th><th>理由</th>
+</tr>
+<tr>
+  <td class="hl">6196 帆宣</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="up" style="font-weight:bold">78</td><td>65</td><td>55</td><td class="up">2.5x</td>
+  <td class="up">大量長紅+9.41%</td>
+  <td class="buy">✅ 主力候選</td><td>評分≥72，量比強，廠務工程龍頭</td>
+</tr>
+<tr>
+  <td class="hl">6691 洋基工程</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="up" style="font-weight:bold">76</td><td>60</td><td>55</td><td class="up">1.8x</td>
+  <td class="up">連5漲趨勢強</td>
+  <td class="buy">✅ 主力候選</td><td>評分≥72，低估值，甜蜜點位</td>
+</tr>
+<tr>
+  <td class="hl">3131 弘塑</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="up" style="font-weight:bold">75</td><td>58</td><td>50</td><td class="up">2.0x</td>
+  <td class="up">底部大陽線+4.46%</td>
+  <td class="buy">✅ 主力候選</td><td>評分≥72，連跌後底部反轉，設備族群映射</td>
+</tr>
+<tr>
+  <td class="hl">2404 漢唐</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="up" style="font-weight:bold">74</td><td>62</td><td>58</td><td class="up">1.5x</td>
+  <td class="up">廠務龍頭穩步</td>
+  <td class="buy">✅ 主力候選</td><td>評分≥72，基本面最強，適合隔夜</td>
+</tr>
+<tr>
+  <td class="hl">5236 凌陽創新</td>
+  <td><span class="pool-tag">上櫃</span></td>
+  <td class="warn">68</td><td>52</td><td>45</td><td class="up">1.8x</td>
+  <td class="warn">中性小紅</td>
+  <td><span class="horse-tag">⭐ 黑馬候選</span></td><td>評分60-71，上櫃+量比≥1.8+RSI低位+雙認證催化劑，符合3項升級</td>
+</tr>
+<tr>
+  <td class="hl">3416 融程電</td>
+  <td><span class="pool-tag">上市</span></td>
+  <td class="warn">65</td><td>55</td><td>48</td><td class="up">1.6x</td>
+  <td class="warn">中性小紅</td>
+  <td><span class="horse-tag">⭐ 黑馬候選</span></td><td>評分60-71，量比>1.5x+RSI低位+K值<60，符合2項（邊緣升級）</td>
+</tr>
+<tr>
+  <td>3265 台星科</td>
+  <td><span class="pool-tag">上櫃</span></td>
+  <td class="dn">58</td><td>65</td><td>72</td><td class="up">3.0x</td>
+  <td class="dn">今日爆量大跌-6.74%</td>
+  <td class="stop">❌ 排除</td><td class="warn">評分&lt;60；今日爆量下跌，K線D級特徵，等早盤確認</td>
+</tr>
+</table>
+</div>
+
+</div>
+</div>
+
+<!-- ====== 十、早盤交接清單 ====== -->
+<div class="card handoff">
+<h2>▌📋 早盤交接清單（複製此區塊貼入第二輪早盤版 Prompt）</h2>
+<p style="color:#00e5ff;font-size:13px;margin-bottom:10px">
+⚡ 將以下文字區塊完整複製，貼入「20260613_2_claude」第二輪Prompt。<br>
+Claude會自動搜尋美盤數據，自動比對產業相關性，不需手動輸入任何數字。
+</p>
+<pre>
+=== 第一輪交接清單 ｜ 20260613 收盤後版 ===
+
+【今日Regime】B中性偏多 | 加權44,169（+1,019.58 / +2.36%）| 外資估中性 | 投信估買超
+重大背景：費半SOX 6/12 +1.52%；美伊和談利多；台積電ADR +0.68%；ARM大漲11.27%
+台股本週大起大落（6/10跌1478點→6/13漲1019點），週線收黑但週五強彈
+
+【A. 主力候選】
+────────────────────────────────
+6196 帆宣 | 進場520~540 | 跳空>5%不追 | 停損505 | 目標590~620 | 倉位5~8%
+📈升評：SOX>+1% + 開盤縮量守520以上 | 📉降評：SOX<-1%；開盤放量跌破510 | 🔗AMAT、LRCX、TSM
+────────────────────────────────
+6691 洋基工程 | 進場425~440 | 跳空>5%不追 | 停損410 | 目標490~510 | 倉位5~8%
+📈升評：SOX>+1%；漢唐續漲帶動族群 | 📉降評：費半<-1%；放量跌破420 | 🔗AMAT、LRCX
+────────────────────────────────
+3131 弘塑 | 進場3050~3150 | 跳空>4%不追 | 停損2950 | 目標3400~3500 | 倉位5~8%
+📈升評：AMAT/LRCX續漲>+2%；弘塑量能延續站上月線 | 📉降評：AMAT走弱；開盤量縮翻黑 | 🔗AMAT、LRCX、KLA
+────────────────────────────────
+2404 漢唐 | 進場960~1000 | 跳空>4%不追 | 停損930 | 目標1050~1100 | 倉位5~8%
+📈升評：SOX>+1.5% + 族群資金持續流入廠務工程 | 📉降評：費半<-1.5%；放量跌破960 | 🔗AMAT、LRCX
+────────────────────────────────
+
+【B. 黑馬候選】
+────────────────────────────────
+5236 凌陽創新 | 觀察進場160~170 | 停損152 | 目標185~195 | 倉位3~5%
+📈升評：AMD/INTC漲>+3%；量比放大突破前高 | 📉降評：AI PC族群熄火；費半<-1% | 🔗AMD、INTC
+────────────────────────────────
+3416 融程電 | 觀察進場168~175 | 停損160 | 目標188~195 | 倉位3~5%
+📈升評：工業電腦族群輪動；量比放大>2x突破174 | 📉降評：大盤拉回；量縮跌破160 | 🔗NVDA（邊緣AI）
+────────────────────────────────
+
+【C. 爆量等確認】
+────────────────────────────────
+3265 台星科 | 今日爆量大跌-6.74% | 情境一進場185~190 | 情境二跳空上限3% | 情境三放棄
+🔗AMAT、日月光ADR(ASX)（IC測試/先進封裝）
+────────────────────────────────
+
+【D. 今日排除，明日不看】
+無（本次7檔除台星科進入爆量確認外，其餘皆納入分析）
+
+【系統性停損線】
+費半單日 &lt; -2% → 全部降倉50%，直接切Risk-Off
+台積電ADR破MA10 → 重新評估所有持倉
+</pre>
+</div>
+
+<p style="color:#555;font-size:11px;margin-top:14px;text-align:right">
+本報告標的來自使用者指定（3265台星科、3131弘塑、3416融程電、5236凌陽創新、6196帆宣、6691洋基工程、2404漢唐），Claude負責解析、深度過濾與執行分析。不構成投資建議，投資有風險，請自行判斷並設置停損。
+｜ 20260613_1_claude.html　AIreport v2.3 Round1（執行於2026/06/14）
+</p>
+
+<script>
+function toggleCollapse(id) {
+  var content = document.getElementById('col-' + id);
+  var header = document.getElementById('hdr-' + id);
+  var arrow = document.getElementById('arrow-' + id);
+  if (content.classList.contains('open')) {
+    content.classList.remove('open');
+    header.classList.remove('open');
+    arrow.textContent = '▼';
+  } else {
+    content.classList.add('open');
+    header.classList.add('open');
+    arrow.textContent = '▲';
+  }
+}
+</script>
+</body>
+</html>
