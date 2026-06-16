@@ -1,0 +1,370 @@
+
+<h2 class="sr-only">台股研究報告：京鼎3413、健鼎3044、瑞昱2379 完整分析與短中線操作建議</h2>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background-color:#FCF8F0}
+.report-wrap{padding:1.5rem 0;background-color:#FCF8F0;min-height:100vh}
+.report-title{font-size:20px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.report-sub{font-size:13px;color:var(--color-text-secondary);margin-bottom:1.5rem}
+.section-label{font-size:11px;font-weight:500;letter-spacing:.08em;color:var(--color-text-tertiary);text-transform:uppercase;margin:1.5rem 0 .75rem}
+.three-col{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:12px}
+.stock-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.1rem}
+.stock-card.featured{border:2px solid #185FA5}
+.stock-head{display:flex;align-items:center;gap:8px;margin-bottom:.85rem}
+.stock-badge{font-size:11px;font-weight:500;padding:2px 8px;border-radius:4px}
+.badge-semi{background:#EEEDFE;color:#3C3489}
+.badge-pcb{background:#EAF3DE;color:#3B6D11}
+.badge-ic{background:#E6F1FB;color:#0C447C}
+.stock-name{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.stock-code{font-size:12px;color:var(--color-text-secondary)}
+.price-big{font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:.15rem}
+.price-note{font-size:11px;color:var(--color-text-tertiary);margin-bottom:.8rem}
+.metric-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+.metric-row:last-child{border-bottom:none}
+.metric-label{font-size:12px;color:var(--color-text-secondary)}
+.metric-val{font-size:12px;font-weight:500;color:var(--color-text-primary)}
+.up{color:#D85A30}.dn{color:#3B6D11}
+.chain-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.9rem 1.1rem}
+.chain-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:.5rem;display:flex;align-items:center;gap:6px}
+.chain-item{font-size:12px;color:var(--color-text-secondary);padding:3px 0;line-height:1.5}
+.chain-item b{color:var(--color-text-primary);font-weight:500}
+.cat-icon{font-size:14px}
+.recommend-wrap{background:var(--color-background-primary);border:2px solid #185FA5;border-radius:var(--border-radius-lg);padding:1.1rem 1.25rem;margin-bottom:12px}
+.rec-header{display:flex;align-items:center;gap:10px;margin-bottom:.75rem}
+.rec-crown{font-size:18px}
+.rec-label{font-size:11px;font-weight:500;background:#E6F1FB;color:#0C447C;padding:3px 10px;border-radius:4px}
+.rec-name{font-size:17px;font-weight:500;color:var(--color-text-primary)}
+.stars-row{display:flex;gap:16px;margin:.6rem 0}
+.star-item{display:flex;flex-direction:column;align-items:center;gap:3px}
+.star-label{font-size:10px;color:var(--color-text-tertiary)}
+.stars{color:#EF9F27;font-size:13px;letter-spacing:1px}
+.rec-reason{font-size:12px;color:var(--color-text-secondary);line-height:1.7}
+.rec-reason b{color:var(--color-text-primary);font-weight:500}
+.two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.alt-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.9rem 1.1rem}
+.alt-rank{font-size:11px;font-weight:500;padding:2px 8px;border-radius:4px;margin-bottom:.5rem;display:inline-block}
+.alt-rank.second{background:#EAF3DE;color:#3B6D11}
+.alt-rank.third{background:#FAEEDA;color:#633806}
+.alt-name{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:.4rem}
+.alt-text{font-size:12px;color:var(--color-text-secondary);line-height:1.6}
+.kline-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.9rem 1.1rem}
+.kline-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:.5rem}
+.kline-badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;margin-bottom:.4rem}
+.kb-up{background:#FCEBEB;color:#791F1F}
+.kb-cons{background:#FAEEDA;color:#633806}
+.kb-neutral{background:#F1EFE8;color:#444441}
+.kline-text{font-size:12px;color:var(--color-text-secondary);line-height:1.6}
+.catalyst-row{font-size:12px;color:var(--color-text-secondary);padding:3px 0;display:flex;gap:6px;line-height:1.5}
+.catalyst-dot{width:6px;height:6px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.cat-short{background:#D85A30}
+.cat-mid{background:#185FA5}
+.cat-risk{background:#E24B4A}
+.risk-text{color:#A32D2D}
+.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:1rem 0}
+.note-bar{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.6rem 1rem;font-size:11px;color:var(--color-text-tertiary);margin-top:1rem;line-height:1.6}
+.tab-bar{display:flex;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
+.tab-btn{font-size:12px;padding:5px 14px;border:0.5px solid var(--color-border-secondary);border-radius:20px;background:var(--color-background-primary);color:var(--color-text-secondary);cursor:pointer}
+.tab-btn.active{background:#185FA5;color:#fff;border-color:#185FA5}
+.section{display:none}
+.section.active{display:block}
+</style>
+
+<div class="report-wrap">
+  <div class="report-title"><i class="ti ti-chart-candle" aria-hidden="true" style="font-size:18px;vertical-align:-2px;margin-right:6px"></i>台股深度研究報告</div>
+  <div class="report-sub">京鼎 3413 · 健鼎 3044 · 瑞昱 2379 &nbsp;|&nbsp; 2026年6月16日 &nbsp;|&nbsp; 短中線操作分析</div>
+
+  <div class="tab-bar" role="tablist">
+    <button class="tab-btn active" onclick="showTab('perf')" role="tab">業績數據</button>
+    <button class="tab-btn" onclick="showTab('chain')" role="tab">產業鏈定位</button>
+    <button class="tab-btn" onclick="showTab('catalyst')" role="tab">催化劑整理</button>
+    <button class="tab-btn" onclick="showTab('kline')" role="tab">K線技術分析</button>
+    <button class="tab-btn" onclick="showTab('rec')" role="tab">操作建議 ★</button>
+  </div>
+
+  <div id="perf" class="section active">
+    <div class="section-label">一、業績數據（最新資料）</div>
+    <div class="three-col">
+      <div class="stock-card">
+        <div class="stock-head">
+          <div>
+            <div class="stock-name">京鼎精密</div>
+            <div class="stock-code">3413 &nbsp;<span class="stock-badge badge-semi">半導體設備</span></div>
+          </div>
+        </div>
+        <div class="price-big">292.5 元</div>
+        <div class="price-note">52週區間：205 ~ 403 元 ｜ 市值約 299 億</div>
+        <div class="metric-row"><span class="metric-label">2025全年 EPS</span><span class="metric-val">21.44 元 <span class="up">▲+5%</span></span></div>
+        <div class="metric-row"><span class="metric-label">2024全年 EPS</span><span class="metric-val">25.22 元 <span class="up">▲+23%</span></span></div>
+        <div class="metric-row"><span class="metric-label">2026 Q1 EPS</span><span class="metric-val">4.28 元 <span class="dn">▼-36% YoY</span></span></div>
+        <div class="metric-row"><span class="metric-label">2024全年營收</span><span class="metric-val">164.5 億元</span></div>
+        <div class="metric-row"><span class="metric-label">2025年累計(1-8月)</span><span class="metric-val">135.5 億 <span class="up">▲+35%</span></span></div>
+        <div class="metric-row"><span class="metric-label">最新月營收(8月)</span><span class="metric-val">18.2 億 <span class="up">▲+12.8% YoY</span></span></div>
+        <div class="metric-row"><span class="metric-label">現金股利(2026配)</span><span class="metric-val">10.98 元</span></div>
+        <div class="metric-row"><span class="metric-label">法人預估2026 EPS</span><span class="metric-val">約 21~23 元</span></div>
+        <hr class="divider">
+        <div class="metric-label" style="font-size:11px;margin-top:4px">擴產計畫：越南 UNIEQ 廠建置中；FPD設備與半導體次系統擴產</div>
+      </div>
+
+      <div class="stock-card">
+        <div class="stock-head">
+          <div>
+            <div class="stock-name">健鼎科技</div>
+            <div class="stock-code">3044 &nbsp;<span class="stock-badge badge-pcb">PCB製造</span></div>
+          </div>
+        </div>
+        <div class="price-big">544 元</div>
+        <div class="price-note">歷史天價 497.5 元(4月) ｜ 目前回測中</div>
+        <div class="metric-row"><span class="metric-label">2025全年 EPS</span><span class="metric-val">19.45 元 <span class="up">▲+11.5%</span></span></div>
+        <div class="metric-row"><span class="metric-label">2026 Q1 EPS</span><span class="metric-val">5.61 元 <span class="up">▲+25% YoY</span></span></div>
+        <div class="metric-row"><span class="metric-label">2025全年營收</span><span class="metric-val">734 億元 <span class="up">▲+11.5%</span></span></div>
+        <div class="metric-row"><span class="metric-label">最新月營收(2026/4)</span><span class="metric-val">82 億 <span class="up">▲+28.9% YoY</span></span></div>
+        <div class="metric-row"><span class="metric-label">累計(2026前4月)</span><span class="metric-val">291.7億 <span class="up">▲+24.2%</span></span></div>
+        <div class="metric-row"><span class="metric-label">現金股利(2026配)</span><span class="metric-val">12.7 元</span></div>
+        <div class="metric-row"><span class="metric-label">本益比</span><span class="metric-val">約 24-25 倍</span></div>
+        <div class="metric-row"><span class="metric-label">2026資本支出規劃</span><span class="metric-val">50~60 億元</span></div>
+        <hr class="divider">
+        <div class="metric-label" style="font-size:11px;margin-top:4px">擴產：越南周德廠建設中；無錫/仙桃廠高階PCB產能擴充；2026 Q1試產</div>
+      </div>
+
+      <div class="stock-card">
+        <div class="stock-head">
+          <div>
+            <div class="stock-name">瑞昱半導體</div>
+            <div class="stock-code">2379 &nbsp;<span class="stock-badge badge-ic">IC設計</span></div>
+          </div>
+        </div>
+        <div class="price-big">678 元</div>
+        <div class="price-note">52週區間：438 ~ 689 元 ｜ 市值 3,495 億</div>
+        <div class="metric-row"><span class="metric-label">2025全年 EPS</span><span class="metric-val">28.77 元 <span class="dn">▼-3.5%</span></span></div>
+        <div class="metric-row"><span class="metric-label">2026 Q1 EPS</span><span class="metric-val">8.44 元 <span class="up">▲+63% QoQ</span></span></div>
+        <div class="metric-row"><span class="metric-label">2025全年營收</span><span class="metric-val">1,227 億元</span></div>
+        <div class="metric-row"><span class="metric-label">最新月營收(2026/4)</span><span class="metric-val">127.2億 <span class="up">▲+11.3% YoY</span></span></div>
+        <div class="metric-row"><span class="metric-label">累計(2026前4月)</span><span class="metric-val">491.4億 <span class="up">▲+5.8%</span></span></div>
+        <div class="metric-row"><span class="metric-label">現金股利</span><span class="metric-val">25.5 元（殖利率4.7%）</span></div>
+        <div class="metric-row"><span class="metric-label">分析師2026 EPS預估</span><span class="metric-val">32.2 元（中位數）</span></div>
+        <div class="metric-row"><span class="metric-label">法人目標價</span><span class="metric-val">600 元（18位分析師）</span></div>
+        <hr class="divider">
+        <div class="metric-label" style="font-size:11px;margin-top:4px">產品：800G/1.6T交換器晶片、WiFi 7、音頻IC、車用乙太網路晶片</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="chain" class="section">
+    <div class="section-label">二、產業鏈定位與美股連動</div>
+    <div class="three-col">
+      <div class="chain-card">
+        <div class="chain-title"><i class="ti ti-circuit-switchboard" aria-hidden="true" class="cat-icon"></i>京鼎 3413</div>
+        <div class="metric-label" style="margin-bottom:4px;font-size:11px">上游供應商</div>
+        <div class="chain-item">· <b>富士康/鴻海</b>（最大股東兼母集團，訂單來源）</div>
+        <div class="chain-item">· 半導體材料商（高純度石英、特殊氣體廠）</div>
+        <div class="chain-item">· 精密零件供應商（軸承、馬達廠）</div>
+        <div style="margin:8px 0 4px;font-size:11px" class="metric-label">主要下游客戶</div>
+        <div class="chain-item">· <b>TSMC 台積電</b>（最核心設備客戶）</div>
+        <div class="chain-item">· 三星電子、SK Hynix（韓系晶圓廠）</div>
+        <div class="chain-item">· 海力士、英特爾（邏輯/記憶體廠）</div>
+        <div style="margin:8px 0 4px;font-size:11px" class="metric-label">美股連動邏輯</div>
+        <div class="chain-item">· <b>AMAT / LRCX / KLAC</b>：半導體設備族群同漲跌</div>
+        <div class="chain-item">· <b>NVDA</b>：AI晶片需求 → 台積電擴產 → 設備訂單</div>
+        <div class="chain-item">· 費城半導體指數(SOX) 為最關鍵領先指標</div>
+      </div>
+      <div class="chain-card">
+        <div class="chain-title"><i class="ti ti-layers" aria-hidden="true" class="cat-icon"></i>健鼎 3044</div>
+        <div class="metric-label" style="margin-bottom:4px;font-size:11px">上游供應商</div>
+        <div class="chain-item">· <b>CCL銅箔基板廠</b>（台燿、聯茂、南亞科）</div>
+        <div class="chain-item">· <b>HVLP銅箔</b>（超電磁波損耗材料廠）</div>
+        <div class="chain-item">· 高階玻纖布（宏和、台玻）；化學品（長春、永光）</div>
+        <div style="margin:8px 0 4px;font-size:11px" class="metric-label">主要下游客戶</div>
+        <div class="chain-item">· <b>Samsung</b>（記憶體模組板最大客戶）</div>
+        <div class="chain-item">· <b>Dell / HPE / Supermicro</b>（AI伺服器主板）</div>
+        <div class="chain-item">· 車用 Tier-1（博世、Aptiv、大陸集團）</div>
+        <div style="margin:8px 0 4px;font-size:11px" class="metric-label">美股連動邏輯</div>
+        <div class="chain-item">· <b>SMCI Supermicro</b>：AI伺服器出貨同步景氣</div>
+        <div class="chain-item">· <b>MU Micron</b>：DRAM拉貨力道 → 記憶體板需求</div>
+        <div class="chain-item">· <b>NVDA GB200</b> 出貨週期 → 交換板/背板訂單</div>
+      </div>
+      <div class="chain-card">
+        <div class="chain-title"><i class="ti ti-cpu" aria-hidden="true" class="cat-icon"></i>瑞昱 2379</div>
+        <div class="metric-label" style="margin-bottom:4px;font-size:11px">上游供應商</div>
+        <div class="chain-item">· <b>台積電</b>（晶圓代工，28nm/16nm製程）</div>
+        <div class="chain-item">· 日月光（封裝測試）</div>
+        <div class="chain-item">· IP授權商（ARM架構授權）</div>
+        <div style="margin:8px 0 4px;font-size:11px" class="metric-label">主要下游客戶</div>
+        <div class="chain-item">· <b>Cisco / Arista</b>（網通設備用高速交換器IC）</div>
+        <div class="chain-item">· 華碩、技嘉（PC/NB音頻IC、網卡）</div>
+        <div class="chain-item">· 資料中心CSP（800G乙太網路晶片）</div>
+        <div style="margin:8px 0 4px;font-size:11px" class="metric-label">美股連動邏輯</div>
+        <div class="chain-item">· <b>CSCO Cisco</b>：網通設備採購 → 乙太晶片需求</div>
+        <div class="chain-item">· <b>ANET Arista</b>：資料中心交換器 → 高速IC受惠</div>
+        <div class="chain-item">· <b>MRVL Marvell</b>：競品走勢，格局重分配</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="catalyst" class="section">
+    <div class="section-label">三、催化劑整理</div>
+    <div class="three-col">
+      <div class="chain-card">
+        <div class="chain-title">京鼎 3413 催化劑</div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:6px">短期（1個月內）</div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-short"></span><span>2026/05/27 除息（10.98元），填息行情窗口</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-short"></span><span>台積電 CoWoS/2nm 擴產訂單釋出，設備交期確認</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-short"></span><span>鴻海 AI 伺服器出貨放量，子公司UNIEQ訂單</span></div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin:8px 0 6px">中期（3~6個月）</div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-mid"></span><span>越南 UNIEQ 廠正式投產，產能翻倍</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-mid"></span><span>半導體設備本土化需求（中國大型晶圓廠擴產）</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-mid"></span><span>法人預估2026 EPS 22~23元，估值修復空間</span></div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin:8px 0 6px">潛在風險點</div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-risk"></span><span class="risk-text">Q1 EPS年減36%，獲利衰退明顯</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-risk"></span><span class="risk-text">半導體設備資本支出景氣週期下行風險</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-risk"></span><span class="risk-text">股價已距52週高403元跌近28%，反彈力道待觀察</span></div>
+      </div>
+      <div class="chain-card">
+        <div class="chain-title">健鼎 3044 催化劑</div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:6px">短期（1個月內）</div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-short"></span><span>5月營收公告（預估延續>80億元高檔）</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-short"></span><span>Q1 EPS 5.61元年增25%，法人持續看多</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-short"></span><span>2026/07/09 除息（12.7元），護盤動機</span></div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin:8px 0 6px">中期（3~6個月）</div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-mid"></span><span>越南廠 Q2-Q3 量產，高階PCB產能大幅提升</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-mid"></span><span>Agentic AI 帶動通用伺服器板+記憶體板需求雙升</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-mid"></span><span>DDR5/HBM 供需趨緊，記憶體模組板佔比升至26%</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-mid"></span><span>訂單能見度已延伸至 2026 下半年</span></div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin:8px 0 6px">潛在風險點</div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-risk"></span><span class="risk-text">車用板庫存去化，短期拉貨放緩</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-risk"></span><span class="risk-text">GB200 出貨受安費諾 Cable 供應影響</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-risk"></span><span class="risk-text">本益比25倍估值偏高，股價已衝天高</span></div>
+      </div>
+      <div class="chain-card">
+        <div class="chain-title">瑞昱 2379 催化劑</div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin-bottom:6px">短期（1個月內）</div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-short"></span><span>4月營收127.2億年增11.3%，動能延續確認</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-short"></span><span>5月法說會利多，外資目標價600元</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-short"></span><span>Q1 EPS 8.44元，季增63%，創近期新高</span></div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin:8px 0 6px">中期（3~6個月）</div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-mid"></span><span>AI資料中心800G→1.6T乙太網路規格升級浪潮</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-mid"></span><span>WiFi 7 滲透率提升，終端換機潮帶動</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-mid"></span><span>車用乙太網路晶片新應用開拓</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-mid"></span><span>聯發科訴訟若有進展，市場情緒正面</span></div>
+        <div style="font-size:11px;color:var(--color-text-tertiary);margin:8px 0 6px">潛在風險點</div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-risk"></span><span class="risk-text">下半年全球PC需求疲軟，音頻/NIC晶片承壓</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-risk"></span><span class="risk-text">DRAM報價上漲壓縮毛利率（成本傳導）</span></div>
+        <div class="catalyst-row"><span class="catalyst-dot cat-risk"></span><span class="risk-text">外資高檔調節，籌碼面偏空</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="kline" class="section">
+    <div class="section-label">四、K線技術分析（日線觀察）</div>
+    <div class="three-col">
+      <div class="kline-card">
+        <div class="kline-title">京鼎 3413｜292.5 元</div>
+        <span class="kline-badge kb-cons">整理偏弱</span>
+        <div class="kline-text">
+          <b>趨勢形態：</b>今年高點403元後，已跌幅逾28%，目前位於52週低點205元與高點403元間約1/3低位區。連2跌形成短線破底壓力。<br><br>
+          <b>支撐與壓力：</b>支撐250元（52週相對低點整理區），壓力300元整數關（前期整理平台），再上330元。需站上月均線（約310元附近）才轉強。<br><br>
+          <b>量能觀察：</b>近期量能萎縮（日成交1,660張），代表買盤觀望氣氛濃厚，無法吸引積極多頭。<br><br>
+          <b>短線判斷：</b>除息後填息動能未啟動，連2跌格局應等待打底再確認，不宜追高。觀察250元支撐是否守住，守住後可考慮小量佈局。
+        </div>
+      </div>
+      <div class="kline-card">
+        <div class="kline-title">健鼎 3044｜544 元</div>
+        <span class="kline-badge kb-up">強勢整理</span>
+        <div class="kline-text">
+          <b>趨勢形態：</b>今年4月衝至天價497.5元後突破至544元，股價創歷史新高後仍維持在高位。2026首季以來月線呈多頭排列，週線站穩季線（約400元）以上，趨勢結構完整。<br><br>
+          <b>支撐與壓力：</b>支撐480元（前高支撐轉强），再下440元季線區。上方壓力：560元整數關，突破後可看580元。<br><br>
+          <b>量能觀察：</b>外資持續買超（目標價上調），成交量有效放量後伴隨股價創高，量價配合良好。<br><br>
+          <b>短線判斷：</b>高位整理格局，趨勢仍強。站穩520元以上，搭配外資持續偏多，是布局方向。風險在高位震盪加大。
+        </div>
+      </div>
+      <div class="kline-card">
+        <div class="kline-title">瑞昱 2379｜678 元</div>
+        <span class="kline-badge kb-up">近強勢突破</span>
+        <div class="kline-text">
+          <b>趨勢形態：</b>今日大漲6.94%（+44元），股價接近52週高點689元。1月底低點483.5元起一路震盪走高，累計漲幅逾40%，技術面強勢。<br><br>
+          <b>支撐與壓力：</b>關鍵支撐620元（前高整理），再下580元月線支撐。壓力：689元 52週高點，突破可望一波啟動，目標看720-750元。<br><br>
+          <b>量能觀察：</b>今日成交4,272張，週轉率0.79%，為近期放量代表，多頭氣勢較強，但本益比24倍不算低。<br><br>
+          <b>短線判斷：</b>正在嘗試突破52週高位689元，若收盤突破確認，短線強勢格局清楚。搭配Q1 EPS超預期，技術面與基本面共振。
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label" style="margin-top:1rem">美股背景研判</div>
+    <div style="background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.9rem 1.1rem;font-size:12px;color:var(--color-text-secondary);line-height:1.8">
+      目前美股半導體（SOX指數）維持在高位整理、AI相關股持續強勢。Nvidia、Arista等AI基礎設施核心股近期呈上漲背景，對台灣半導體設備（京鼎）、PCB（健鼎）與網通IC（瑞昱）均形成正向連動。資料中心資本支出超預期成長，支撐三檔中線多頭邏輯。
+    </div>
+  </div>
+
+  <div id="rec" class="section">
+    <div class="section-label">五、短中線操作建議（3~14天）</div>
+
+    <div class="recommend-wrap">
+      <div class="rec-header">
+        <span class="rec-crown"><i class="ti ti-trophy" aria-hidden="true" style="color:#EF9F27;font-size:20px"></i></span>
+        <span class="rec-label">首選推薦</span>
+        <span class="rec-name">健鼎 3044 — PCB龍頭強勢創高</span>
+      </div>
+      <div class="stars-row">
+        <div class="star-item">
+          <div class="stars">★★★★★</div>
+          <div class="star-label">基本面強度</div>
+        </div>
+        <div class="star-item">
+          <div class="stars">★★★★☆</div>
+          <div class="star-label">美股連動性</div>
+        </div>
+        <div class="star-item">
+          <div class="stars">★★★★★</div>
+          <div class="star-label">短線動能</div>
+        </div>
+        <div class="star-item">
+          <div class="stars">★★★☆☆</div>
+          <div class="star-label">估值安全性</div>
+        </div>
+      </div>
+      <div class="rec-reason">
+        <b>推薦理由：</b><br>
+        ① <b>基本面最強</b>：2026 Q1 EPS年增25%，4月營收82億年增28.9%，連15個月成長且創40個月新高，具有最強的營收加速度。<br>
+        ② <b>趨勢結構完整</b>：週線多頭排列，5月外資上調目標價、滾量創天價，是三檔中唯一技術面仍在上升軌道的個股。<br>
+        ③ <b>催化劑明確</b>：越南廠即將投產，Agentic AI推動記憶體板+伺服器板雙線需求，訂單能見度延伸到下半年。<br>
+        ④ <b>美股連動</b>：SMCI、MU、NVDA GB200均呈強勢，直接帶動健鼎核心產品線景氣。<br>
+        ⑤ <b>短線操作</b>：目前544元在天高區整理，建議站穩520元確認壓回不破後買進，停損設定480元，短線目標560-580元。
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="alt-card">
+        <span class="alt-rank second">次選</span>
+        <div class="alt-name">瑞昱 2379 — 突破52週高位</div>
+        <div class="alt-text">
+          今日大漲6.94%，正測試689元52週高點。Q1 EPS季增63%超預期，4月營收年增11.3%仍穩健，法人目標價600元（現價678元已超法人目標），本益比24倍略貴。<br><br>
+          <b>操作建議：</b>若今日能收盤站穩689元以上並帶量，則進場追，短線可看720-750元。若收盤回落，則等待回測640-650元支撐後再布局，下半年PC疲軟是最大隱憂。<br><br>
+          <b>次選原因：</b>技術面動能強，但股價已接近法人目標區上方，操作空間相對健鼎略小，且PC需求隱憂使中期能見度低於健鼎。
+        </div>
+      </div>
+      <div class="alt-card">
+        <span class="alt-rank third">暫不推薦</span>
+        <div class="alt-name">京鼎 3413 — 等待打底確認</div>
+        <div class="alt-text">
+          2026 Q1 EPS年減36%，為三檔中唯一獲利衰退個股。技術面連2跌，距52週高點403元已跌28%，雖5月除息後理論上具填息動能，但量能萎縮（1,660張/日），買盤不積極。<br><br>
+          <b>不推薦原因：</b>基本面轉弱（獲利衰退）、技術面偏弱（連跌）、量能不足，三重不利。除非半導體設備景氣急速轉好，否則短線反彈有限。<br><br>
+          <b>觀察條件：</b>等待250元支撐確認、量能回升至3,000張以上，且月線翻揚後才重新評估進場。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-bar">
+    <i class="ti ti-info-circle" aria-hidden="true" style="vertical-align:-1px;margin-right:4px"></i>
+    本報告資料截至 2026年6月16日，僅供參考，不構成投資建議。股市有風險，投資人須自行評估。股價資料來源：鉅亨網、Yahoo股市、財報狗；EPS/營收資料來源：Win投資、財報狗、Goodinfo。
+  </div>
+</div>
+
+<script>
+function showTab(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
