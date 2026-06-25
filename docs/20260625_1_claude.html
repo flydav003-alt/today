@@ -1,0 +1,560 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background-color:#FCF8F0;font-family:var(--font-sans);}
+.wrap{padding:20px 16px;background:#FCF8F0;max-width:900px}
+h1{font-size:20px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.subtitle{font-size:13px;color:var(--color-text-secondary);margin-bottom:20px}
+.section-title{font-size:15px;font-weight:500;color:var(--color-text-primary);margin:24px 0 10px;display:flex;align-items:center;gap:8px}
+.section-title .badge{font-size:11px;font-weight:500;padding:2px 8px;border-radius:4px;background:#E6F1FB;color:#185FA5}
+.cards-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:4px}
+.cards-row3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px}
+.cards-row2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:4px}
+.stock-card{background:#fff;border-radius:10px;border:0.5px solid #D3D1C7;padding:14px 12px;position:relative}
+.stock-card.featured{border:2px solid #185FA5;background:#fff}
+.stock-card .ticker{font-size:11px;font-weight:500;color:#185FA5;letter-spacing:.5px}
+.stock-card .sname{font-size:14px;font-weight:500;color:var(--color-text-primary);margin:2px 0 8px}
+.stock-card .price{font-size:22px;font-weight:500;color:var(--color-text-primary)}
+.stock-card .price-unit{font-size:12px;color:var(--color-text-secondary)}
+.metric-row{display:flex;justify-content:space-between;border-top:0.5px solid #E8E6DF;padding-top:8px;margin-top:8px;gap:6px;flex-wrap:wrap}
+.metric{display:flex;flex-direction:column;align-items:flex-start}
+.metric .lbl{font-size:10px;color:var(--color-text-secondary)}
+.metric .val{font-size:12px;font-weight:500;color:var(--color-text-primary)}
+.metric .val.up{color:#0F6E56}
+.metric .val.dn{color:#A32D2D}
+.metric .val.neu{color:#5F5E5A}
+.divider{height:0.5px;background:#E8E6DF;margin:10px 0}
+.chain-card{background:#fff;border-radius:10px;border:0.5px solid #D3D1C7;padding:14px 12px}
+.chain-card .head{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.chain-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-top:4px}
+.chain-cell{background:#F7F5EF;border-radius:6px;padding:8px 10px}
+.chain-cell .chead{font-size:10px;color:#888780;font-weight:500;margin-bottom:4px}
+.chain-cell .cval{font-size:11px;color:var(--color-text-primary);line-height:1.5}
+.rec-card{background:#fff;border-radius:10px;padding:16px 14px;position:relative}
+.rec-card.top{border:2px solid #185FA5}
+.rec-card.second{border:0.5px solid #D3D1C7}
+.rec-card.third{border:0.5px solid #D3D1C7}
+.rec-badge{position:absolute;top:-10px;left:14px;font-size:11px;font-weight:500;padding:2px 10px;border-radius:12px}
+.rec-badge.top{background:#185FA5;color:#fff}
+.rec-badge.second{background:#444441;color:#fff}
+.rec-badge.third{background:#888780;color:#fff}
+.rec-card h3{font-size:15px;font-weight:500;color:var(--color-text-primary);margin:6px 0 4px}
+.rec-card .reason{font-size:12px;color:var(--color-text-secondary);line-height:1.6;margin-bottom:10px}
+.stars-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.star-item{display:flex;flex-direction:column;align-items:center;gap:3px}
+.star-item .slbl{font-size:10px;color:#888780}
+.star-dots{display:flex;gap:2px}
+.dot{width:8px;height:8px;border-radius:50%;background:#D3D1C7}
+.dot.on-blue{background:#185FA5}
+.dot.on-green{background:#0F6E56}
+.dot.on-amber{background:#BA7517}
+.catalyst-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
+.cat-card{background:#fff;border-radius:8px;border:0.5px solid #D3D1C7;padding:10px 12px}
+.cat-card .ctype{font-size:10px;font-weight:500;padding:2px 7px;border-radius:4px;margin-bottom:6px;display:inline-block}
+.cat-card .ctype.short{background:#E1F5EE;color:#0F6E56}
+.cat-card .ctype.mid{background:#E6F1FB;color:#185FA5}
+.cat-card .ctype.risk{background:#FCEBEB;color:#A32D2D}
+.cat-card p{font-size:11px;color:var(--color-text-secondary);line-height:1.6}
+.kline-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kline-card{background:#fff;border-radius:8px;border:0.5px solid #D3D1C7;padding:10px 12px}
+.kline-card .kticker{font-size:11px;font-weight:500;color:#185FA5}
+.kline-card .kname{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px}
+.kline-card p{font-size:11px;color:var(--color-text-secondary);line-height:1.6}
+.kline-tag{font-size:10px;padding:2px 8px;border-radius:10px;margin-right:4px;margin-bottom:4px;display:inline-block}
+.kline-tag.bull{background:#E1F5EE;color:#0F6E56}
+.kline-tag.bear{background:#FCEBEB;color:#A32D2D}
+.kline-tag.neutral{background:#F1EFE8;color:#5F5E5A}
+.report-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px}
+.date-tag{font-size:11px;color:#888780;margin-top:4px}
+.summary-box{background:#EAF3DE;border-radius:8px;padding:10px 14px;margin-bottom:20px}
+.summary-box p{font-size:12px;color:#3B6D11;line-height:1.7}
+.tab-nav{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.tab-btn{font-size:12px;padding:5px 12px;border-radius:16px;border:0.5px solid #D3D1C7;background:#fff;cursor:pointer;color:var(--color-text-secondary)}
+.tab-btn.active{background:#185FA5;color:#fff;border-color:#185FA5}
+.section{display:none}
+.section.active{display:block}
+.rating-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.rating-item{font-size:11px;color:var(--color-text-secondary);display:flex;align-items:center;gap:4px}
+.rec-compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.rec-small{background:#fff;border-radius:8px;border:0.5px solid #D3D1C7;padding:10px 12px}
+.rec-small h4{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:4px}
+.rec-small p{font-size:11px;color:var(--color-text-secondary);line-height:1.6}
+</style>
+
+<div class="wrap">
+<h2 class="sr-only">台股五檔個股深度研究報告：6781 AES-KY、6121 新普、3023 信邦、2492 華新科、4973 廣穎電通</h2>
+
+<div class="report-header">
+  <div>
+    <h1>台股五檔個股深度研究報告</h1>
+    <div class="date-tag">分析日期：2026年6月25日 ｜ 資料來源：公開資訊觀測站、Yahoo股市、各財經平台</div>
+  </div>
+</div>
+
+<div class="summary-box">
+  <p>⚡ 本期聚焦：<strong>被動元件超級循環</strong>（2492 華新科）、<strong>AI儲能電池</strong>（6781 AES-KY）、<strong>工業/醫療連接器</strong>（3023 信邦）、<strong>記憶體復甦</strong>（4973 廣穎）與<strong>電池模組承壓</strong>（6121 新普）。短線首選華新科，MLCC B/B ratio達1.3–1.4，供需緊俏可能延伸至2027年以後，AI server帶動獲利加速。</p>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('perf')">📊 業績數據</button>
+  <button class="tab-btn" onclick="switchTab('chain')">🔗 產業鏈定位</button>
+  <button class="tab-btn" onclick="switchTab('catalyst')">⚡ 催化劑</button>
+  <button class="tab-btn" onclick="switchTab('kline')">📈 K線分析</button>
+  <button class="tab-btn" onclick="switchTab('rec')">🎯 操作建議</button>
+</div>
+
+<div id="tab-perf" class="section active">
+  <div class="section-title">一、業績數據總覽 <span class="badge">2026 Q1 最新</span></div>
+  <div class="cards-row">
+    <div class="stock-card">
+      <div class="ticker">6781</div>
+      <div class="sname">AES-KY</div>
+      <div class="price">1,135<span class="price-unit"> 元</span></div>
+      <div class="divider"></div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">Q1 EPS</div><div class="val up">10.64元</div></div>
+        <div class="metric"><div class="lbl">Q1年增率</div><div class="val up">+9.7%</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">2025全年EPS</div><div class="val up">~38.2元</div></div>
+        <div class="metric"><div class="lbl">vs 2024 +126%</div><div class="val up">↑↑↑</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">4月月營收</div><div class="val">15.2億</div></div>
+        <div class="metric"><div class="lbl">月營收年增</div><div class="val up">+16.6%</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">1-4月累計</div><div class="val">60.5億</div></div>
+        <div class="metric"><div class="lbl">累計年增</div><div class="val up">+27.6%</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">擴產計畫</div><div class="val neu" style="font-size:10px">AI server功耗升至1MW，電池模組同步擴規</div></div>
+      </div>
+    </div>
+
+    <div class="stock-card">
+      <div class="ticker">6121</div>
+      <div class="sname">新普科技</div>
+      <div class="price">424<span class="price-unit"> 元</span></div>
+      <div class="divider"></div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">Q1 EPS</div><div class="val dn">6.83元</div></div>
+        <div class="metric"><div class="lbl">Q1年增率</div><div class="val dn">−12%</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">2025全年EPS</div><div class="val">30.6元</div></div>
+        <div class="metric"><div class="lbl">本益比</div><div class="val neu">~14x</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">5月月營收</div><div class="val">69.6億</div></div>
+        <div class="metric"><div class="lbl">月營收年增</div><div class="val up">+4.1%</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">1-5月累計</div><div class="val">323.3億</div></div>
+        <div class="metric"><div class="lbl">累計年增</div><div class="val up">+2.1%</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">擴產計畫</div><div class="val neu" style="font-size:10px">越南廠(SIMPLO Vietnam)增資擴建</div></div>
+      </div>
+    </div>
+
+    <div class="stock-card">
+      <div class="ticker">3023</div>
+      <div class="sname">信邦電子</div>
+      <div class="price">315<span class="price-unit"> 元</span></div>
+      <div class="divider"></div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">Q1 EPS</div><div class="val">3.6元</div></div>
+        <div class="metric"><div class="lbl">Q1年增率</div><div class="val dn">−6.5%</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">2025全年EPS</div><div class="val">13.02元</div></div>
+        <div class="metric"><div class="lbl">Q1季增率</div><div class="val up">+21.6%</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">4月月營收</div><div class="val">29.6億</div></div>
+        <div class="metric"><div class="lbl">月營收年增</div><div class="val up">+15.0%</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">1-5月累計</div><div class="val">142.9億</div></div>
+        <div class="metric"><div class="lbl">累計年增</div><div class="val up">+7.0%</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">擴產計畫</div><div class="val neu" style="font-size:10px">子公司佈局AI浸沒式液冷散熱</div></div>
+      </div>
+    </div>
+
+    <div class="stock-card featured">
+      <div style="position:absolute;top:-10px;right:10px;background:#185FA5;color:#fff;font-size:10px;padding:2px 8px;border-radius:8px">首選</div>
+      <div class="ticker">2492</div>
+      <div class="sname">華新科技</div>
+      <div class="price">617<span class="price-unit"> 元</span></div>
+      <div class="divider"></div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">Q1 EPS</div><div class="val up">1.69元</div></div>
+        <div class="metric"><div class="lbl">Q1年增率</div><div class="val up">+40%</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">2025全年EPS</div><div class="val">4.74元</div></div>
+        <div class="metric"><div class="lbl">法人估2026</div><div class="val up">7.20元↑52%</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">4月月營收</div><div class="val">37.1億</div></div>
+        <div class="metric"><div class="lbl">月營收年增</div><div class="val up">+16.0%</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">5月單月EPS</div><div class="val up">0.88元</div></div>
+        <div class="metric"><div class="lbl">5月淨利年增</div><div class="val up">~200%↑</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">擴產計畫</div><div class="val neu" style="font-size:10px">2026年+10–15%，資本支出提升3倍，B/B=1.3–1.4</div></div>
+      </div>
+    </div>
+
+    <div class="stock-card">
+      <div class="ticker">4973</div>
+      <div class="sname">廣穎電通</div>
+      <div class="price">191<span class="price-unit"> 元</span></div>
+      <div class="divider"></div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">Q1 EPS</div><div class="val up">7.46元</div></div>
+        <div class="metric"><div class="lbl">Q1季增率</div><div class="val up">+227%</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">2025全年EPS</div><div class="val dn">2.11元</div></div>
+        <div class="metric"><div class="lbl">低基期反彈</div><div class="val up">飛躍式增長</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">5月月營收</div><div class="val">8.35億</div></div>
+        <div class="metric"><div class="lbl">月營收年增</div><div class="val up">+187%</div></div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">1-5月累計</div><div class="val">36.6億</div></div>
+        <div class="metric"><div class="lbl">累計年增</div><div class="val up">+98.7%</div></div>
+      </div>
+      <div class="divider"></div>
+      <div class="metric-row">
+        <div class="metric"><div class="lbl">擴產計畫</div><div class="val neu" style="font-size:10px">發行無擔保可轉換公司債以擴大資本</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:18px">
+    <div class="section-title">EPS比較圖 <span class="badge">Q1 2026</span></div>
+    <div style="position:relative;width:100%;height:200px">
+      <canvas id="epsChart" role="img" aria-label="五檔個股2026 Q1每股盈餘比較：AES-KY 10.64元、新普 6.83元、信邦 3.60元、華新科 1.69元、廣穎 7.46元">AES-KY 10.64 | 新普 6.83 | 信邦 3.60 | 華新科 1.69 | 廣穎 7.46</canvas>
+    </div>
+  </div>
+</div>
+
+<div id="tab-chain" class="section">
+  <div class="section-title">二、產業鏈定位</div>
+
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div class="chain-card">
+      <div class="head">🔋 6781 AES-KY — AI儲能電池模組</div>
+      <div class="chain-row">
+        <div class="chain-cell"><div class="chead">上游原料供應商</div><div class="cval">LG Energy / CATL（鋰電芯）<br>日礦金屬（銅箔）<br>巴斯夫（電解液）</div></div>
+        <div class="chain-cell"><div class="chead">主要下游客戶</div><div class="cval">Dell / HPE（AI伺服器備電）<br>APC / Eaton（UPS系統）<br>ODM：廣達、仁寶、緯創</div></div>
+        <div class="chain-cell"><div class="chead">美股連動邏輯</div><div class="cval"><b>NVDA / DELL / HPE</b><br>AI server機架功耗突破1MW，UPS & 電池模組需求剛性成長；NVDA Blackwell出貨量即訂單能見度</div></div>
+      </div>
+    </div>
+
+    <div class="chain-card">
+      <div class="head">🔌 6121 新普科技 — 筆電/行動裝置電池組</div>
+      <div class="chain-row">
+        <div class="chain-cell"><div class="chead">上游原料供應商</div><div class="cval">Panasonic / LG / 三星SDI（電芯）<br>正極材料廠（廈門廈鎢）<br>鋁箔、鎳帶等</div></div>
+        <div class="chain-cell"><div class="chead">主要下游客戶</div><div class="cval">Apple（MacBook/iPad最大客戶）<br>Dell / HP / Lenovo<br>Sony / Microsoft（主機電池）</div></div>
+        <div class="chain-cell"><div class="chead">美股連動邏輯</div><div class="cval"><b>AAPL 主要驅動</b><br>Mac出貨量連動最直接；AAPL iPhone換機週期與AI PC滲透率決定新普中期成長；DELL/HPQ次要</div></div>
+      </div>
+    </div>
+
+    <div class="chain-card">
+      <div class="head">🔗 3023 信邦電子 — 連接器與電纜組件</div>
+      <div class="chain-row">
+        <div class="chain-cell"><div class="chead">上游原料供應商</div><div class="cval">台灣伸銅（銅材）<br>台橡（橡膠/塑膠原料）<br>各端子衝壓廠</div></div>
+        <div class="chain-cell"><div class="chead">主要下游客戶</div><div class="cval">GE Healthcare / Siemens（醫療設備）<br>ABB / Rockwell（工業自動化）<br>Tesla / BYD（EV充電模組）<br>風電廠商（再生能源)</div></div>
+        <div class="chain-cell"><div class="chead">美股連動邏輯</div><div class="cval"><b>GEV / ROK / ABB</b><br>醫療設備CapEx決定信邦醫療線訂單；AI散熱液冷（浸沒式）為新催化；EV充電連接器需求受TSLA走勢影響</div></div>
+      </div>
+    </div>
+
+    <div class="chain-card" style="border:1.5px solid #B5D4F4">
+      <div class="head">⚡ 2492 華新科技 — MLCC/被動元件【首選】</div>
+      <div class="chain-row">
+        <div class="chain-cell"><div class="chead">上游原料供應商</div><div class="chead" style="color:#0F6E56">垂直整合優勢</div><div class="cval">自有介電陶瓷粉末子公司<br>日本松尾電機（持股39%，鉭質電容）<br>鈀金屬、Ni粉採購</div></div>
+        <div class="chain-cell"><div class="chead">主要下游客戶</div><div class="cval">NVIDIA GB200機架（MLCC×45萬顆/台）<br>Apple / 鴻海（消費+伺服器）<br>Bosch / 比亞迪（車用電子）<br>AI PC ODM廠</div></div>
+        <div class="chain-cell"><div class="chead">美股連動邏輯</div><div class="cval"><b>NVDA 最高度連動</b><br>AI server放量直接拉動高規MLCC需求；AVGO ASIC需求同步；村田/太陽誘電漲價確認產業缺貨週期正式啟動，台廠最直接受益</div></div>
+      </div>
+    </div>
+
+    <div class="chain-card">
+      <div class="head">💾 4973 廣穎電通 — NAND Flash記憶體模組</div>
+      <div class="chain-row">
+        <div class="chain-cell"><div class="chead">上游原料供應商</div><div class="cval">Kioxia（東芝/NAND原廠）<br>Samsung / SK Hynix（原廠NAND）<br>Western Digital（WD NAND晶粒）</div></div>
+        <div class="chain-cell"><div class="chead">主要下游客戶</div><div class="cval">消費電子（USB/SSD/SD卡）<br>NAS市場（Synology、QNAP）<br>PC/Notebook OEM廠<br>工業嵌入式（工規SSD）</div></div>
+        <div class="chain-cell"><div class="chead">美股連動邏輯</div><div class="cval"><b>MU / WDC 最直接</b><br>美光財報與NAND報價方向決定廣穎採購成本與毛利；WDC NAND事業分割後報價透明度提升；Kioxia地震（4/21）事件短暫推升供需緊張</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-catalyst" class="section">
+  <div class="section-title">三、催化劑整理</div>
+
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div class="chain-card">
+      <div class="head">6781 AES-KY</div>
+      <div class="catalyst-row">
+        <div class="cat-card"><div class="ctype short">短期 ≤1個月</div><p>• 7月10日除息（12.5元），填息行情<br>• 6月月營收公告，預期維持15%+年增<br>• AI server廠商Q2法說會確認出貨量</p></div>
+        <div class="cat-card"><div class="ctype mid">中期 3–6個月</div><p>• AI server機架功耗升溫推升電池模組ASP<br>• GB300 / Blackwell Ultra新機型拉動UPS配套需求<br>• 2026全年EPS法人估達43–50元，估值重評</p></div>
+        <div class="cat-card"><div class="ctype risk">潛在風險</div><p>• 原料鋰電芯價格波動壓縮毛利<br>• 美中貿易關稅干擾AI server出貨節奏<br>• 股價已大幅上漲，本益比偏高（~27–30x）</p></div>
+      </div>
+    </div>
+
+    <div class="chain-card">
+      <div class="head">6121 新普科技</div>
+      <div class="catalyst-row">
+        <div class="cat-card"><div class="ctype short">短期 ≤1個月</div><p>• 蘋果WWDC後供應鏈下單節奏明朗<br>• 越南廠增資完成後產能確認<br>• 6月月營收能否維持年增4%趨勢</p></div>
+        <div class="cat-card"><div class="ctype mid">中期 3–6個月</div><p>• AI PC搭載大容量電池帶動新普電池組升規<br>• iPhone 18備貨啟動，供應鏈訂單能見度<br>• 越南廠產能爬坡支撐出貨彈性</p></div>
+        <div class="cat-card"><div class="ctype risk">潛在風險</div><p>• Q1 EPS年減12%，動能轉弱<br>• Apple供應鏈競爭加劇（比亞迪電池入供應鏈）<br>• EPS季減27%，下半年能否轉正不確定</p></div>
+      </div>
+    </div>
+
+    <div class="chain-card">
+      <div class="head">3023 信邦電子</div>
+      <div class="catalyst-row">
+        <div class="cat-card"><div class="ctype short">短期 ≤1個月</div><p>• 4月月營收年增15%動能延續至5月<br>• 浸沒式液冷連接器新品發表（Computex效應延伸）<br>• 法人持續持股，UBS邀請出席亞洲投資年會</p></div>
+        <div class="cat-card"><div class="ctype mid">中期 3–6個月</div><p>• 醫療設備更新週期帶動客製線纜訂單<br>• 北京同安新能源（EV充電/儲能）業務增溫<br>• AI數據中心液冷佈線需求進入量產階段</p></div>
+        <div class="cat-card"><div class="ctype risk">潛在風險</div><p>• Q1 EPS年減6.5%，基本面修復尚在初期<br>• 中國子公司比重，匯率與政治風險<br>• 醫療設備支出若受美國聯邦預算影響</p></div>
+      </div>
+    </div>
+
+    <div class="chain-card" style="border:1.5px solid #B5D4F4">
+      <div class="head">2492 華新科技 ★ 首選</div>
+      <div class="catalyst-row">
+        <div class="cat-card"><div class="ctype short">短期 ≤1個月</div><p>• 5月月營收公告（年增預期維持15%+）<br>• 村田/太陽誘電漲價效應擴散，現貨報價繼續走高<br>• 股東會B/B比1.3–1.4後市場情緒偏多</p></div>
+        <div class="cat-card"><div class="ctype mid">中期 3–6個月</div><p>• 年底產能較去年增10–15%，資本支出提升3倍<br>• GB300/VR200機櫃MLCC需求年增210%<br>• MLCC缺貨延伸2027+，超越2018年超級循環<br>• 6月起對電阻、部分電容調漲客戶報價</p></div>
+        <div class="cat-card"><div class="ctype risk">潛在風險</div><p>• 短期漲幅過大已進入處置股（已解禁）<br>• 本益比118倍（以Q1年化），需EPS持續兌現<br>• 若NVDA出貨受阻或貿易政策轉向，需求預期修正</p></div>
+      </div>
+    </div>
+
+    <div class="chain-card">
+      <div class="head">4973 廣穎電通</div>
+      <div class="catalyst-row">
+        <div class="cat-card"><div class="ctype short">短期 ≤1個月</div><p>• 5月月營收年增187%持續驗證反彈力道<br>• 可轉換公司債發行後資金活水<br>• 新任總經理上任帶動市場關注</p></div>
+        <div class="cat-card"><div class="ctype mid">中期 3–6個月</div><p>• NAND flash報價回升周期確立（三星/SK）<br>• 工規SSD / 車規記憶體模組訂單增溫<br>• AI PC帶動高容量SSD需求；累計1-5月年增99%</p></div>
+        <div class="cat-card"><div class="ctype risk">潛在風險</div><p>• 原廠NAND報價高度波動，毛利易受壓縮<br>• 競爭白牌廠削價，品牌溢價有限<br>• 低流動性（日均量小），震盪風險高</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="tab-kline" class="section">
+  <div class="section-title">四、K線技術分析 <span class="badge">短中線視角 3–14天</span></div>
+  <div class="kline-grid">
+    <div class="kline-card">
+      <div class="kticker">6781 AES-KY</div>
+      <div class="kname">高檔震盪整理，多頭結構未破</div>
+      <div style="margin-bottom:6px">
+        <span class="kline-tag bull">多頭排列</span><span class="kline-tag neutral">高位盤整</span><span class="kline-tag neutral">RSI降溫中</span>
+      </div>
+      <p>股價自年初1,050元起大幅上漲，高點約1,280元後在1,100–1,200元區間震盪收斂。MA20（約1,080元）持續上揚，形成有效支撐。成交量在高點縮量整理，屬正常換手。<br><br>短線觀察：若回測MA20附近量縮守穩，可視為低吸機會；7月10日除息（12.5元）前布局需注意填息預期。RSI由高點降至50–60中性區，多頭結構仍在。<br><br>操作建議：等待1,080–1,100元區間拉回布局，止損設MA20下方2%。</p>
+    </div>
+
+    <div class="kline-card">
+      <div class="kticker">6121 新普科技</div>
+      <div class="kname">弱勢反彈，EPS年減壓制動能</div>
+      <div style="margin-bottom:6px">
+        <span class="kline-tag neutral">橫向盤整</span><span class="kline-tag bear">EPS動能弱</span><span class="kline-tag neutral">RSI中性</span>
+      </div>
+      <p>新普過去12個月股價從500元高點回落至410–430元，形成中期下降通道後近期轉橫向整理。MA60仍高於MA20，均線糾結。成交量清淡，市場興趣有限。<br><br>Q1 EPS年減12%是主要壓力，市場需看到下半年EPS年增率轉正才有重估動力。AI PC新機帶動的電池組升規是唯一看漲觸媒，但確認訊號尚未明確。<br><br>操作建議：暫不進場，等Q2 EPS轉正信號確認後再評估，觀察420–430元能否突破。</p>
+    </div>
+
+    <div class="kline-card">
+      <div class="kticker">3023 信邦電子</div>
+      <div class="kname">盤底反彈，4月月營收突破確認</div>
+      <div style="margin-bottom:6px">
+        <span class="kline-tag bull">月營收加速</span><span class="kline-tag neutral">低檔整理</span><span class="kline-tag bull">季增22%</span>
+      </div>
+      <p>股價從年初高點390元回落至280–320元後止跌整理，近期反彈至310–320元附近。4月月營收年增15%是重要技術突破信號，成交量溫和放大，顯示資金緩步進場。<br><br>K線形態：近週出現低量縮整後的小紅K堆疊，是典型的底部成型徵兆。若能突破MA20（約325元）並放量，可期待向350元測試。<br><br>操作建議：可在305–315元小量建倉，突破325元加碼，止損設290元。</p>
+    </div>
+
+    <div class="kline-card" style="border:1.5px solid #B5D4F4">
+      <div class="kticker">2492 華新科技 ★ 首選</div>
+      <div class="kname">強勢噴出後整理，等待拉回買點</div>
+      <div style="margin-bottom:6px">
+        <span class="kline-tag bull">強勢主升段</span><span class="kline-tag bull">法人買超</span><span class="kline-tag neutral">短線過熱</span>
+      </div>
+      <p>華新科年初約250元，6月22日最高617元，漲幅超過150%。股東會後一度觸漲停，確立MLCC超級循環敘事。多次漲停後曾進入處置股（已解禁），籌碼面已清洗換手。<br><br>目前形態：短期位於MA5上方，成交量較高峰縮小，顯示多空整理中。支撐位約MA10（550元），強支撐在MA20（480元）。<br><br>操作建議：理想低吸區在550–580元（MA10附近量縮整理）；若直接強勢突破617元創新高，可追強，目標680–720元；止損設MA20下方3%（約465元）。</p>
+    </div>
+
+    <div class="kline-card">
+      <div class="kticker">4973 廣穎電通</div>
+      <div class="kname">記憶體行情退潮後整理，等方向</div>
+      <div style="margin-bottom:6px">
+        <span class="kline-tag neutral">高點回落</span><span class="kline-tag bull">月營收+187%</span><span class="kline-tag bear">流動性低</span>
+      </div>
+      <p>廣穎受記憶體概念爆發，從低點大幅拉升後在180–200元附近高位震盪整理。Q1 EPS 7.46元屬爆發性數字但高度依賴記憶體報價周期。<br><br>技術面：上影線明顯，壓力在200元整數關，支撐在170元（MA20）。成交量日益萎縮，方向性不明確，適合短線操作但不宜過重持倉。<br><br>操作建議：機動布局，進場點控制在MA20附近，嚴格設定止損（-5%）；不適合重倉，投機部位為主。</p>
+    </div>
+  </div>
+</div>
+
+<div id="tab-rec" class="section">
+  <div class="section-title">五、短中線操作建議 <span class="badge">美股目前走勢：震盪偏多</span></div>
+
+  <div style="display:flex;flex-direction:column;gap:14px">
+    <div class="rec-card top">
+      <div class="rec-badge top">🥇 首選</div>
+      <h3>2492 華新科技</h3>
+      <p style="font-size:13px;color:#185FA5;font-weight:500;margin:0 0 6px">股價 617元 ｜ B/B ratio 1.3–1.4 ｜ 供需緊俏延至2027年以後</p>
+      <div class="reason">
+        基本面：MLCC超級缺貨循環是本波最強題材，Q1 EPS年增40%且5月單月獲利年增~2倍，EPS加速中。法人預估2026全年EPS 7.20元，年增52%。<br><br>
+        美股連動：NVDA Blackwell機架MLCC用量是手機300倍，每台GB200用量45萬顆；AI建置支出不減代表訂單能見度強。村田/太陽誘電正式啟動漲價，等同為行業供需吃緊背書。<br><br>
+        短線催化：5月月營收即將公告（預計仍年增15%+），加上6月起對電阻/電容調漲報價，Q2 EPS具超預期潛力。<br><br>
+        流動性：進入處置股解禁後籌碼健康，近五日三大法人買超近2萬張，機構進場意願強烈。
+      </div>
+      <div class="stars-row">
+        <div class="star-item">
+          <div class="slbl">基本面強度</div>
+          <div class="star-dots"><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div></div>
+        </div>
+        <div class="star-item">
+          <div class="slbl">美股連動性</div>
+          <div class="star-dots"><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div></div>
+        </div>
+        <div class="star-item">
+          <div class="slbl">短線安全性</div>
+          <div class="star-dots"><div class="dot on-amber"></div><div class="dot on-amber"></div><div class="dot on-amber"></div><div class="dot" style="background:#D3D1C7"></div><div class="dot" style="background:#D3D1C7"></div></div>
+        </div>
+        <div class="star-item">
+          <div class="slbl">催化劑明確度</div>
+          <div class="star-dots"><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot" style="background:#D3D1C7"></div></div>
+        </div>
+      </div>
+      <div style="margin-top:10px;background:#E6F1FB;border-radius:6px;padding:8px 12px;font-size:12px;color:#185FA5">
+        📍 建議進場區：550–580元（MA10回測）｜ 目標一：650元 ｜ 目標二：720元 ｜ 止損：520元（MA20下方3%）
+      </div>
+    </div>
+
+    <div class="rec-card second">
+      <div class="rec-badge second">🥈 次選</div>
+      <h3>6781 AES-KY</h3>
+      <p style="font-size:13px;color:var(--color-text-secondary);margin:0 0 6px">股價 1,135元 ｜ 2026年EPS估43–50元 ｜ AI server電池模組</p>
+      <div class="reason">
+        理由：基本面極強，2025全年EPS約38元（年增126%），2026 Q1 EPS 10.64元持續加速。AI server功耗升至1MW代表UPS/電池配套需求剛性成長；7月10日除息（12.5元）前有填息行情預期。美股連動NVDA/DELL。<br><br>
+        不及首選原因：股價已大幅漲升，本益比偏高（27–30x），短線追高風險較大；且流動性不如華新科，日均量較低；需等MA20回測才是理想進場點。
+      </div>
+      <div class="stars-row">
+        <div class="star-item"><div class="slbl">基本面強度</div><div class="star-dots"><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div></div></div>
+        <div class="star-item"><div class="slbl">美股連動性</div><div class="star-dots"><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot on-blue"></div><div class="dot" style="background:#D3D1C7"></div></div></div>
+        <div class="star-item"><div class="slbl">短線安全性</div><div class="star-dots"><div class="dot on-amber"></div><div class="dot on-amber"></div><div class="dot on-amber"></div><div class="dot" style="background:#D3D1C7"></div><div class="dot" style="background:#D3D1C7"></div></div></div>
+      </div>
+      <div style="margin-top:10px;background:#F7F5EF;border-radius:6px;padding:8px 12px;font-size:12px;color:#5F5E5A">
+        📍 建議等待：1,080–1,100元（MA20回測後）再布局 ｜ 止損：1,060元 ｜ 7月除息前宜在持倉
+      </div>
+    </div>
+
+    <div class="rec-compare">
+      <div class="rec-small">
+        <div style="background:#E1F5EE;color:#0F6E56;font-size:11px;padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:6px">🥉 第三選：3023 信邦</div>
+        <h4>穩健型次選，月營收動能確認中</h4>
+        <p>4月月營收年增15%，Q1 EPS季增22%，正在底部築底反彈。AI液冷散熱新品線是中期催化。但EPS年減6.5%尚未轉正，適合風險承受力較低、偏好穩健布局者。月營收連續確認年增 → 加碼訊號。</p>
+        <div style="margin-top:8px;font-size:11px;color:#0F6E56;background:#E1F5EE;padding:6px 10px;border-radius:6px">進場：305–315元 ｜ 止損：290元</div>
+      </div>
+      <div class="rec-small">
+        <div style="background:#FAEEDA;color:#BA7517;font-size:11px;padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:6px">⚠️ 機動倉：4973 廣穎</div>
+        <h4>高風險高報酬，嚴控部位</h4>
+        <p>月營收年增187%、Q1 EPS爆發式增長，記憶體概念爆發期可短線參與。但業績高度依賴NAND報價，本益比過高，流動性差，不適合重倉；以5–10%以內部位短線機動操作為原則。</p>
+        <div style="margin-top:8px;font-size:11px;color:#BA7517;background:#FAEEDA;padding:6px 10px;border-radius:6px">嚴格止損 -5%｜MA20（170元）破則出</div>
+      </div>
+    </div>
+
+    <div class="rec-small" style="border:0.5px solid #F7C1C1">
+      <div style="background:#FCEBEB;color:#A32D2D;font-size:11px;padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:6px">❌ 暫不建議：6121 新普</div>
+      <h4>EPS動能轉弱，觀望等待轉機訊號</h4>
+      <p>Q1 EPS年減12%、季減27%，是本組中唯一EPS年增率為負的個股。Apple供應鏈競爭加劇，AI PC電池規格升級效益尚未體現於財報。越南廠投產需時間才能貢獻獲利。建議等待Q2 EPS年增轉正或月營收年增加速（超過8%）才重新評估進場。</p>
+    </div>
+  </div>
+
+  <div style="margin-top:16px">
+    <div class="section-title">EPS年增率雷達 <span class="badge">2026 Q1</span></div>
+    <div style="position:relative;width:100%;height:240px">
+      <canvas id="radarChart" role="img" aria-label="五檔個股多維度評分雷達圖">評分維度：基本面強度、美股連動、短線安全、月營收動能、催化劑明確度</canvas>
+    </div>
+  </div>
+</div>
+
+<div style="margin-top:16px;padding:10px;background:#F7F5EF;border-radius:8px;font-size:11px;color:#888780;line-height:1.7">
+  ⚠️ 本報告僅供研究參考，不構成投資建議。投資有風險，請自行評估風險承受能力。股價數據截至2026/06/22，EPS與月營收數據以最新公告為準。
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+function switchTab(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+const barCtx = document.getElementById('epsChart');
+if(barCtx){
+  new Chart(barCtx,{
+    type:'bar',
+    data:{
+      labels:['AES-KY 6781','新普 6121','信邦 3023','華新科 2492','廣穎 4973'],
+      datasets:[{
+        label:'2026 Q1 EPS（元）',
+        data:[10.64,6.83,3.60,1.69,7.46],
+        backgroundColor:['#378ADD','#7F77DD','#1D9E75','#185FA5','#9FE1CB'],
+        borderRadius:5,
+        borderSkipped:false
+      }]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{callbacks:{label:ctx=>'EPS：'+ctx.parsed.y+'元'}}
+      },
+      scales:{
+        x:{grid:{display:false},ticks:{font:{size:11}}},
+        y:{grid:{color:'rgba(0,0,0,0.06)'},ticks:{callback:v=>v+'元',font:{size:11}}}
+      }
+    }
+  });
+}
+
+const radCtx = document.getElementById('radarChart');
+if(radCtx){
+  new Chart(radCtx,{
+    type:'radar',
+    data:{
+      labels:['基本面強度','美股連動','月營收動能','催化劑明確','短線安全'],
+      datasets:[
+        {label:'華新科 2492',data:[5,5,4,4,3],borderColor:'#185FA5',backgroundColor:'rgba(24,95,165,0.08)',pointBackgroundColor:'#185FA5',borderWidth:2},
+        {label:'AES-KY 6781',data:[5,4,4,3,3],borderColor:'#1D9E75',backgroundColor:'rgba(29,158,117,0.06)',pointBackgroundColor:'#1D9E75',borderDash:[4,3],borderWidth:2},
+        {label:'信邦 3023',data:[3,3,3,3,4],borderColor:'#7F77DD',backgroundColor:'rgba(127,119,221,0.06)',pointBackgroundColor:'#7F77DD',borderDash:[2,4],borderWidth:1.5},
+        {label:'廣穎 4973',data:[3,4,5,3,2],borderColor:'#EF9F27',backgroundColor:'rgba(239,159,39,0.05)',pointBackgroundColor:'#EF9F27',borderDash:[4,3],borderWidth:1.5},
+        {label:'新普 6121',data:[2,3,2,2,3],borderColor:'#888780',backgroundColor:'rgba(136,135,128,0.04)',pointBackgroundColor:'#888780',borderDash:[3,5],borderWidth:1.5}
+      ]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{
+        legend:{position:'bottom',labels:{font:{size:11},boxWidth:12,padding:10}}
+      },
+      scales:{
+        r:{min:0,max:5,ticks:{stepSize:1,font:{size:9}},pointLabels:{font:{size:11}}}
+      }
+    }
+  });
+}
+</script>
