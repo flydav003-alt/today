@@ -1,0 +1,412 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background-color:#FCF8F0;font-family:var(--font-sans,'Helvetica Neue',Arial,sans-serif);font-size:14px;color:var(--text-primary)}
+.wrap{padding:1.5rem 1rem;max-width:900px;margin:0 auto}
+h1.rpt-title{font-size:22px;font-weight:500;color:var(--text-primary);margin-bottom:4px}
+.rpt-sub{font-size:13px;color:var(--text-secondary);margin-bottom:1.5rem}
+.section-hd{font-size:16px;font-weight:500;color:var(--text-primary);border-left:4px solid #378ADD;padding-left:10px;margin:1.8rem 0 1rem}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:#fff;border:0.5px solid var(--border,rgba(11,11,11,.1));border-radius:12px;padding:14px 16px}
+.card.featured{border:2px solid #378ADD;background:#f0f7ff}
+.stock-badge{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;margin-bottom:8px}
+.b-blue{background:#e6f1fb;color:#0c447c}
+.b-teal{background:#e1f5ee;color:#085041}
+.b-amber{background:#faeeda;color:#633806}
+.b-coral{background:#faece7;color:#4a1b0c}
+.stock-name{font-size:15px;font-weight:500;margin-bottom:2px}
+.stock-price{font-size:22px;font-weight:500;color:#185fa5}
+.metric-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:0.5px solid var(--border,rgba(11,11,11,.08))}
+.metric-row:last-child{border-bottom:none}
+.mkey{font-size:12px;color:var(--text-secondary);flex-shrink:0;margin-right:6px}
+.mval{font-size:13px;font-weight:500;text-align:right}
+.up{color:#1D9E75}.down{color:#E24B4A}.neu{color:var(--text-secondary)}
+.chain-block{margin-top:6px}
+.chain-label{font-size:11px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.chain-val{font-size:12px;color:var(--text-primary);line-height:1.6}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;margin:2px 2px 2px 0}
+.tag-blue{background:#e6f1fb;color:#185fa5}
+.tag-green{background:#eaf3de;color:#3b6d11}
+.tag-amber{background:#faeeda;color:#854f0b}
+.tag-red{background:#fcebeb;color:#a32d2d}
+.cat-block{margin-bottom:10px}
+.cat-title{font-size:12px;font-weight:500;color:var(--text-secondary);margin-bottom:4px}
+.cat-body{font-size:12px;color:var(--text-primary);line-height:1.6}
+.stars{font-size:16px;letter-spacing:2px}
+.star-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px;color:var(--text-secondary)}
+.rank-card{border-radius:12px;padding:14px 16px;margin-bottom:10px}
+.rank1{background:#e6f1fb;border:2px solid #378ADD}
+.rank2{background:#f0f0f0;border:0.5px solid #ccc}
+.rank3{background:#fff5f5;border:0.5px solid #f5c1c1}
+.rank-num{font-size:11px;font-weight:500;color:#185fa5;margin-bottom:4px}
+.rank-name{font-size:15px;font-weight:500;margin-bottom:6px}
+.rank-body{font-size:12px;color:var(--text-secondary);line-height:1.7}
+.k-box{background:#f7f9fc;border-radius:8px;padding:10px 12px;margin-top:6px}
+.k-title{font-size:11px;font-weight:500;color:#185fa5;margin-bottom:4px}
+.k-body{font-size:12px;color:var(--text-primary);line-height:1.65}
+.divider{height:0.5px;background:var(--border,rgba(11,11,11,.1));margin:1.5rem 0}
+.footer{font-size:11px;color:var(--text-muted);text-align:center;margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid var(--border)}
+.warn-box{background:#faeeda;border:0.5px solid #ba7517;border-radius:8px;padding:8px 12px;font-size:11px;color:#633806;margin-top:8px}
+.note-box{background:#e1f5ee;border:0.5px solid #0f6e56;border-radius:8px;padding:8px 12px;font-size:12px;color:#04342c;margin-top:8px}
+</style>
+
+<div class="wrap">
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">台股深度研究報告：祥碩 5269、辛耘 3583、立隆電 2472、南亞科 2408</h2>
+
+<h1 class="rpt-title">台股深度研究報告</h1>
+<div class="rpt-sub">5269 祥碩・3583 辛耘・2472 立隆電・2408 南亞科 ｜ 2026/06/29 更新</div>
+
+<!-- ── SECTION 1 業績數據 ── -->
+<div class="section-hd">一、業績數據總覽</div>
+<div class="grid4">
+
+  <!-- 祥碩 -->
+  <div class="card">
+    <span class="stock-badge b-blue">5269</span>
+    <div class="stock-name">祥碩科技</div>
+    <div class="stock-price" style="margin:6px 0 10px">≈ 1,495 元</div>
+    <div class="metric-row"><span class="mkey">2025全年EPS</span><span class="mval">72.7 元 <span class="up">↑41%</span></span></div>
+    <div class="metric-row"><span class="mkey">2026 Q1 EPS</span><span class="mval">24.85 元 <span class="up">↑52%</span></span></div>
+    <div class="metric-row"><span class="mkey">Q1 毛利率</span><span class="mval up">50.8%</span></div>
+    <div class="metric-row"><span class="mkey">2025全年營收</span><span class="mval">134.15 億</span></div>
+    <div class="metric-row"><span class="mkey">2026年5月月收</span><span class="mval">8.97 億 <span class="down">↓19.4%</span></span></div>
+    <div class="metric-row"><span class="mkey">累計1-5月</span><span class="mval">53.53 億 <span class="up">↑11.9%</span></span></div>
+    <div class="note-box">擴產：竹北新研發中心3月啟用；PCIe Gen5/USB4 V2 H2 tape-out；目標5年達10億美元營收</div>
+  </div>
+
+  <!-- 辛耘 -->
+  <div class="card">
+    <span class="stock-badge b-teal">3583</span>
+    <div class="stock-name">辛耘企業</div>
+    <div class="stock-price" style="margin:6px 0 10px">≈ 351 元</div>
+    <div class="metric-row"><span class="mkey">2025全年EPS</span><span class="mval">13.82 元 <span class="up">↑19.8%</span></span></div>
+    <div class="metric-row"><span class="mkey">2026 Q1 EPS</span><span class="mval">4.14 元 <span class="up">↑29%</span></span></div>
+    <div class="metric-row"><span class="mkey">Q4毛利率</span><span class="mval">37.1%</span></div>
+    <div class="metric-row"><span class="mkey">2025全年營收</span><span class="mval">113.7 億 <span class="up">↑17.4%</span></span></div>
+    <div class="metric-row"><span class="mkey">2026年5月月收</span><span class="mval">9.57 億 <span class="up">↑25.2%</span></span></div>
+    <div class="metric-row"><span class="mkey">累計1-5月</span><span class="mval">46.63 億 <span class="up">↑23.8%</span></span></div>
+    <div class="note-box">擴產：自製設備年產能拉升至200台；12吋再生晶圓月產能擴至25萬片，首度超越設備代理業務</div>
+  </div>
+
+  <!-- 立隆電 -->
+  <div class="card">
+    <span class="stock-badge b-amber">2472</span>
+    <div class="stock-name">立隆電子</div>
+    <div class="stock-price" style="margin:6px 0 10px">≈ 412.5 元</div>
+    <div class="metric-row"><span class="mkey">2025全年EPS</span><span class="mval">8.73 元 <span class="up">↑44%</span></span></div>
+    <div class="metric-row"><span class="mkey">2026 Q1 EPS</span><span class="mval">1.60 元 <span class="down">↓4%YoY</span></span></div>
+    <div class="metric-row"><span class="mkey">毛利率(近季)</span><span class="mval">30~33%</span></div>
+    <div class="metric-row"><span class="mkey">2025全年營收</span><span class="mval">112.9 億 <span class="up">↑8%</span></span></div>
+    <div class="metric-row"><span class="mkey">2026年5月月收</span><span class="mval">≈11.4 億 <span class="up">↑14%</span></span></div>
+    <div class="metric-row"><span class="mkey">累計1-5月</span><span class="mval">53.49 億 <span class="up">↑14.6%</span></span></div>
+    <div class="note-box">擴產：泰國新廠2026 Q4量產；已進入Nvidia Vera Rubin板端供電供應鏈；SP-CAP高分子固態電容佈局</div>
+  </div>
+
+  <!-- 南亞科 -->
+  <div class="card">
+    <span class="stock-badge b-coral">2408</span>
+    <div class="stock-name">南亞科技</div>
+    <div class="stock-price" style="margin:6px 0 10px">≈ 449 元</div>
+    <div class="metric-row"><span class="mkey">2025全年EPS</span><span class="mval">2.13 元 <span class="neu">基期低</span></span></div>
+    <div class="metric-row"><span class="mkey">2026 Q1 EPS</span><span class="mval up">8.41 元 <span class="up">↑1435%</span></span></div>
+    <div class="metric-row"><span class="mkey">Q1 毛利率</span><span class="mval up">67.9%（超預期）</span></div>
+    <div class="metric-row"><span class="mkey">Q1 營收</span><span class="mval up">創歷史單季新高</span></div>
+    <div class="metric-row"><span class="mkey">3月月收</span><span class="mval">181.7億 <span class="up">↑560%</span></span></div>
+    <div class="metric-row"><span class="mkey">法人2026E EPS</span><span class="mval up">33~45 元</span></div>
+    <div class="note-box">擴產：DDR5雲端伺服器年底量產；1B製程良率持續提升；私募引進四大國際機構資金</div>
+  </div>
+</div>
+
+<!-- ── SECTION 2 產業鏈定位 ── -->
+<div class="section-hd">二、產業鏈定位</div>
+<div class="grid4">
+
+  <!-- 祥碩鏈 -->
+  <div class="card">
+    <span class="stock-badge b-blue">5269 祥碩</span>
+    <div class="chain-block">
+      <div class="chain-label">上游原料</div>
+      <div class="chain-val">台積電（12nm FinFET製程代工）<br>封裝材料商、PCB板廠</div>
+    </div>
+    <div class="chain-block" style="margin-top:8px">
+      <div class="chain-label">主要下游客戶</div>
+      <div class="chain-val">AMD（AM5平台）、ASUS、MSI、技嘉（主板/NB）、工業電腦廠（IPC）、AI PC品牌商</div>
+    </div>
+    <div class="chain-block" style="margin-top:8px">
+      <div class="chain-label">美股高度連動</div>
+      <span class="tag tag-blue">AMD</span>
+      <span class="tag tag-blue">NVDA</span>
+      <span class="tag tag-blue">INTC</span>
+      <div class="chain-val" style="margin-top:4px;font-size:11px">AMD新平台出貨 → 祥碩USB/PCIe需求；NVDA AI PC生態 → eUSB伺服器需求；ASIC訂單與CSP大廠連動</div>
+    </div>
+  </div>
+
+  <!-- 辛耘鏈 -->
+  <div class="card">
+    <span class="stock-badge b-teal">3583 辛耘</span>
+    <div class="chain-block">
+      <div class="chain-label">上游原料</div>
+      <div class="chain-val">設備零組件（東京威力科創TUK系列）、矽片/晶圓原材料、化學品供應商</div>
+    </div>
+    <div class="chain-block" style="margin-top:8px">
+      <div class="chain-label">主要下游客戶</div>
+      <div class="chain-val">台積電、三星、力積電（PSMC）、欣銓、頎邦（先進封裝測試設備採購）；晶圓代工廠再生晶圓需求</div>
+    </div>
+    <div class="chain-block" style="margin-top:8px">
+      <div class="chain-label">美股高度連動</div>
+      <span class="tag tag-blue">TSM ADR</span>
+      <span class="tag tag-blue">LRCX</span>
+      <span class="tag tag-blue">AMAT</span>
+      <div class="chain-val" style="margin-top:4px;font-size:11px">台積電CoWoS/SoIC擴產 → 先進封裝設備需求；Lam Research/AMAT設備週期 → 辛耘代理設備需求同步波動</div>
+    </div>
+  </div>
+
+  <!-- 立隆電鏈 -->
+  <div class="card">
+    <span class="stock-badge b-amber">2472 立隆電</span>
+    <div class="chain-block">
+      <div class="chain-label">上游原料</div>
+      <div class="chain-val">立敦科技(6175)集團腐蝕箔/化成箔（母系供應，成本綁定）、電解液、鋁合金材料</div>
+    </div>
+    <div class="chain-block" style="margin-top:8px">
+      <div class="chain-label">主要下游客戶</div>
+      <div class="chain-val">AI伺服器板端供電（Nvidia Vera Rubin NVL144/576）；汽車電子（EV/ADAS OBC）；工業UPS；太陽能逆變器</div>
+    </div>
+    <div class="chain-block" style="margin-top:8px">
+      <div class="chain-label">美股高度連動</div>
+      <span class="tag tag-blue">NVDA</span>
+      <span class="tag tag-blue">TSLA</span>
+      <span class="tag tag-blue">KEM</span>
+      <div class="chain-val" style="margin-top:4px;font-size:11px">NVDA Vera Rubin平台出貨 → SP-CAP需求爆發；松下/Kemet SP-CAP漲價65% → 立隆電受惠；EV滲透率提升 → 汽車電容結構成長</div>
+    </div>
+  </div>
+
+  <!-- 南亞科鏈 -->
+  <div class="card">
+    <span class="stock-badge b-coral">2408 南亞科</span>
+    <div class="chain-block">
+      <div class="chain-label">上游原料</div>
+      <div class="chain-val">台塑集團化學品（南亞塑膠）、矽晶圓（台勝科）、光阻劑（信越化學）、製程設備（AMAT/LRCX）</div>
+    </div>
+    <div class="chain-block" style="margin-top:8px">
+      <div class="chain-label">主要下游客戶</div>
+      <div class="chain-val">PC OEM（HPQ/Dell）、伺服器ODM（廣達/英業達）、CSP雲端廠；DDR4成熟型市場；年底起DDR5雲端伺服器</div>
+    </div>
+    <div class="chain-block" style="margin-top:8px">
+      <div class="chain-label">美股高度連動</div>
+      <span class="tag tag-blue">MU</span>
+      <span class="tag tag-blue">NVDA</span>
+      <span class="tag tag-blue">AMD</span>
+      <div class="chain-val" style="margin-top:4px;font-size:11px">美光財報/報價 → 南亞科最高直接連動（同業）；NVDA AI伺服器出貨 → HBM排擠DDR4供給；DDR4合約價 → EPS線性連動</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION 3 催化劑 ── -->
+<div class="section-hd">三、催化劑整理</div>
+<div class="grid4">
+  <div class="card">
+    <span class="stock-badge b-blue">5269 祥碩</span>
+    <div class="cat-block">
+      <div class="cat-title">🔥 短期（1個月內）</div>
+      <div class="cat-body">股東會釋出新五年轉型計畫（10億美元營收目標）；eUSB合作開發曝光；第二ASIC客戶H2放量前哨；ASIC/PCIe Switch題材持續發酵</div>
+    </div>
+    <div class="cat-block">
+      <div class="cat-title">📈 中期（3~6個月）</div>
+      <div class="cat-body">第二ASIC客戶2026 H2正式貢獻營收；AMD下一代平台（合作定案）訂單；PCIe Gen5/USB4 V2 tape-out完成；機器人/車用SerDes test chip推出</div>
+    </div>
+    <div class="cat-block">
+      <div class="cat-title">⚠️ 潛在風險</div>
+      <div class="cat-body">5月月收年減19.4%（終端拉貨保守）；記憶體/CPU供貨緊缺拖累PC出貨；股價已在高位本益比（≈20x 2026E），題材兌現前波動大</div>
+    </div>
+  </div>
+  <div class="card">
+    <span class="stock-badge b-teal">3583 辛耘</span>
+    <div class="cat-block">
+      <div class="cat-title">🔥 短期（1個月內）</div>
+      <div class="cat-body">5月月收25.2%年增印證訂單動能；台積電CoWoS持續擴產帶動先進封裝設備採購；再生晶圓需求受HBM生產廢料增加而成長</div>
+    </div>
+    <div class="cat-block">
+      <div class="cat-title">📈 中期（3~6個月）</div>
+      <div class="cat-body">再生晶圓月產能25萬片目標落地後利潤率提升；自製設備佔比首度超越代理，毛利率結構提升；法人預估2026 EPS 17~21元（年增25%+）</div>
+    </div>
+    <div class="cat-block">
+      <div class="cat-title">⚠️ 潛在風險</div>
+      <div class="cat-body">股價位於本益比紅色偏高區間（~25x）；客戶集中度高（台積電大戶）；設備代理代替風險；CoWoS擴產若放緩，訂單能見度下降</div>
+    </div>
+  </div>
+  <div class="card">
+    <span class="stock-badge b-amber">2472 立隆電</span>
+    <div class="cat-block">
+      <div class="cat-title">🔥 短期（1個月內）</div>
+      <div class="cat-body">松下SP-CAP漲價65%消息持續擴散；Nvidia Vera Rubin量產節奏確認；被動元件族群5月多檔漲停，市場情緒熱</div>
+    </div>
+    <div class="cat-block">
+      <div class="cat-title">📈 中期（3~6個月）</div>
+      <div class="cat-body">泰國新廠Q4量產 → 承接歐美China-free訂單；Vera Rubin設計案數從1~2件擴大至5~10件；汽車電子ADAS/OBC訂單放量；私募增資完成後資本充實</div>
+    </div>
+    <div class="cat-block">
+      <div class="cat-title">⚠️ 潛在風險</div>
+      <div class="cat-body">Q1 EPS 1.6元季減54.8%（高基期影響）；本益比已達49x偏高；AI電容入滲率仍低（&lt;5%）；NVL576延誤可能推遲需求兌現</div>
+    </div>
+  </div>
+  <div class="card">
+    <span class="stock-badge b-coral">2408 南亞科</span>
+    <div class="cat-block">
+      <div class="cat-title">🔥 短期（1個月內）</div>
+      <div class="cat-body">美光Q3財報「炸裂」 → 南亞科當日大漲8%+；DRAM下半年合約價預估再漲40~45%；投信5日累計買超5.2萬張強力承接</div>
+    </div>
+    <div class="cat-block">
+      <div class="cat-title">📈 中期（3~6個月）</div>
+      <div class="cat-body">Q2毛利率預估推升至76.7%；DDR5雲端伺服器年底量產貢獻新營收來源；HBM擠壓傳統DRAM供給，DDR4報價結構性支撐；法人2026年EPS共識33~45元</div>
+    </div>
+    <div class="cat-block">
+      <div class="cat-title">⚠️ 潛在風險</div>
+      <div class="cat-body">外資5日累計賣超4.5萬張（外資 vs 投信拉鋸）；景氣循環股本益比不確定性高；AI需求放緩即引發大幅修正；高通+字節合作分食ASIC市場或衝擊HBM需求</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── SECTION 4 K線 + 操作建議 ── -->
+<div class="section-hd">四、K線分析 × 短中線操作建議（3~14天）</div>
+<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">美股背景：美股近期呈現上漲走勢（科技股強勢，Nasdaq創高後震盪），SOX半導體指數偏多整理</div>
+
+<!-- 首選 南亞科 -->
+<div class="rank-card rank1">
+  <div class="rank-num">🥇 首選｜評分最高</div>
+  <div class="rank-name">2408 南亞科技</div>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:8px">
+    <div><div class="star-row"><span>基本面強度</span><span class="stars">★★★★★</span></div></div>
+    <div><div class="star-row"><span>美股連動性</span><span class="stars">★★★★★</span></div></div>
+    <div><div class="star-row"><span>短線催化</span><span class="stars">★★★★☆</span></div></div>
+    <div><div class="star-row"><span>短線安全性</span><span class="stars">★★★☆☆</span></div></div>
+  </div>
+  <div class="k-box">
+    <div class="k-title">K線技術分析</div>
+    <div class="k-body">6/25受美光財報帶動爆量大漲8%+，重新站回月線，形成「大量長陽打底」訊號。前波回檔曾一度觸及跌停（6/23），但隨後快速收復，顯示下方支撐強（投信護盤）。目前均線由空頭排列翻多測試中，MA20壓力位約420~430元，有效突破後可看440~470元。KD自超賣區回升，MACD翻正趨勢確立中。<br><span style="color:#185fa5">操作：可逢回至420~430元支撐區間分批佈局，停損設於415元破月線以下；目標1: 470元，目標2: 500元（下半年旺季行情）</span></div>
+  </div>
+  <div class="rank-body" style="margin-top:10px">
+  推薦理由：①Q1 EPS 8.41元年增1435%，獲利爆發力最強；②與MU美光高度連動，美光財報超預期直接帶動股價；③DRAM報價下半年再漲40~45%，基本面催化持續；④投信5日買超5.2萬張籌碼強力護航；⑤本益比評估（股價449/E-EPS 33）僅約13.6x，相對歷史便宜。唯一限制：景氣循環股波動大，需嚴守停損紀律。
+  </div>
+</div>
+
+<!-- 次選 祥碩 -->
+<div class="rank-card rank2">
+  <div class="rank-num">🥈 次選</div>
+  <div class="rank-name">5269 祥碩科技</div>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:8px">
+    <div><div class="star-row"><span>基本面強度</span><span class="stars">★★★★★</span></div></div>
+    <div><div class="star-row"><span>美股連動性</span><span class="stars">★★★★☆</span></div></div>
+    <div><div class="star-row"><span>短線催化</span><span class="stars">★★★★★</span></div></div>
+    <div><div class="star-row"><span>短線安全性</span><span class="stars">★★★☆☆</span></div></div>
+  </div>
+  <div class="k-box">
+    <div class="k-title">K線技術分析</div>
+    <div class="k-body">6/29日攻上1,500元漲停（ASIC/eUSB題材發酵）。均線完全多頭排列（MA5&gt;MA20&gt;MA60），短線強勢但量價需觀察持續性。前高約1,500~1,520元為關卡，若站穩此價位，籌碼乾淨後可見1,600~1,700元。股東會後短線或有獲利了結賣壓，1,350~1,400元為MA20支撐，可待回測再進場。<br><span style="color:#185fa5">操作：漲停追進風險較高；建議等待壓回MA20（約1,350~1,400元）再佈局；目標1,600元，停損1,300元</span></div>
+  </div>
+  <div class="rank-body" style="margin-top:10px">
+  次選理由：①Q1 EPS 24.85元創歷史新高，每年EPS持續成長；②ASIC第二客戶H2放量 + 五年轉型計畫，中期題材豐富；③今日漲停，短線動能強，但高位追入風險大；④5月月收年減19.4%顯示短期終端需求偏弱，需留意Q2月收趨勢。若等到拉回再佈局，性價比提升。
+  </div>
+</div>
+
+<!-- 第三選 辛耘 -->
+<div class="rank-card" style="background:#f0fff8;border:0.5px solid #9FE1CB;border-radius:12px;padding:14px 16px;margin-bottom:10px">
+  <div class="rank-num" style="color:#085041">🥉 第三選</div>
+  <div class="rank-name">3583 辛耘企業</div>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:8px">
+    <div><div class="star-row"><span>基本面強度</span><span class="stars">★★★★☆</span></div></div>
+    <div><div class="star-row"><span>美股連動性</span><span class="stars">★★★☆☆</span></div></div>
+    <div><div class="star-row"><span>短線催化</span><span class="stars">★★★☆☆</span></div></div>
+    <div><div class="star-row"><span>短線安全性</span><span class="stars">★★★★☆</span></div></div>
+  </div>
+  <div class="k-box">
+    <div class="k-title">K線技術分析</div>
+    <div class="k-body">從2月低點303元反彈後收復所有均線，前高497元漲停（3/25）後回落整理。目前351元附近量縮測試MA20支撐（約340~350元），形成健康回踩。KD自高檔回落至中性區，若守住350元以上並出現量增，為再上攻訊號；關注前高497元能否創新高。<br><span style="color:#085041">操作：現價350元附近為相對安全進場點；目標420~460元；停損330元（MA60失守）</span></div>
+  </div>
+  <div class="rank-body" style="margin-top:10px">
+  第三選理由：①連續多季EPS穩定成長，2026 Q1再增29%；②5月月收年增25.2%優於預期；③設備自製轉型帶來毛利率改善中期邏輯清晰；④但美股連動性相對最弱（非直接DRAM/IC設計鏈）；⑤本益比在紅色偏高區間，短線安全性優於其他三檔（股價相對合理）。適合穩健型佈局。
+  </div>
+</div>
+
+<!-- 不推薦 立隆電短線 -->
+<div class="rank-card rank3">
+  <div class="rank-num">⛔ 暫不推薦短中線</div>
+  <div class="rank-name">2472 立隆電子</div>
+  <div style="display:flex;gap:24px;flex-wrap:wrap;margin-bottom:8px">
+    <div><div class="star-row"><span>基本面強度</span><span class="stars">★★★★☆</span></div></div>
+    <div><div class="star-row"><span>美股連動性</span><span class="stars">★★★☆☆</span></div></div>
+    <div><div class="star-row"><span>短線催化</span><span class="stars">★★☆☆☆</span></div></div>
+    <div><div class="star-row"><span>短線安全性</span><span class="stars">★★☆☆☆</span></div></div>
+  </div>
+  <div class="k-box">
+    <div class="k-title">K線技術分析</div>
+    <div class="k-body">股價412.5元，本益比已達約47~50x（遠高於被動元件同業）。5月7日一度出現漲停（AI電容題材），但後續動能衰退。Q1 EPS 1.6元季減54.8%，短線財報面偏弱。支撐位約375~390元（MA20）；若跌破恐快速回落至330~350元。泰國新廠Q4量產才是真正兌現點。<br><span style="color:#a32d2d">建議：估值偏高 + 短期財報弱，不適合3~14天短中線操作；等待Q3財報發布或泰國廠量產確認後（Q4附近）再重新評估</span></div>
+  </div>
+  <div class="rank-body" style="margin-top:10px" style="color:#791f1f">
+  不推薦短線理由：①Q1 EPS 1.60元年減4%，為四檔中唯一出現EPS年減的個股；②本益比≈50x，市場已預期了中長期AI電容題材，短期風險報酬比不佳；③Vera Rubin AI電容訂單仍在早期（AI營收&lt;5%），題材兌現需時間；④SP-CAP漲價概念短線已反映在股價中，「預期過熱」風險高。長線（6~12個月）邏輯完整，但短中線暫時保守。
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── 總結表 ── -->
+<div class="section-hd">五、綜合評分總表（短中線3~14天）</div>
+<div style="overflow-x:auto">
+<table style="width:100%;border-collapse:collapse;font-size:13px">
+<thead>
+<tr style="background:#e6f1fb">
+  <th style="text-align:left;padding:10px 12px;border:0.5px solid #b5d4f4;font-weight:500">個股</th>
+  <th style="text-align:center;padding:10px 12px;border:0.5px solid #b5d4f4;font-weight:500">基本面</th>
+  <th style="text-align:center;padding:10px 12px;border:0.5px solid #b5d4f4;font-weight:500">美股連動</th>
+  <th style="text-align:center;padding:10px 12px;border:0.5px solid #b5d4f4;font-weight:500">短線催化</th>
+  <th style="text-align:center;padding:10px 12px;border:0.5px solid #b5d4f4;font-weight:500">安全性</th>
+  <th style="text-align:center;padding:10px 12px;border:0.5px solid #b5d4f4;font-weight:500">短中線建議</th>
+</tr>
+</thead>
+<tbody>
+<tr style="background:#f0f7ff">
+  <td style="padding:10px 12px;border:0.5px solid #d4e8f8;font-weight:500">🥇 2408 南亞科</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #d4e8f8" class="up">★★★★★</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #d4e8f8" class="up">★★★★★</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #d4e8f8" class="up">★★★★☆</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #d4e8f8">★★★☆☆</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #d4e8f8"><span style="background:#1D9E75;color:#fff;padding:3px 10px;border-radius:10px;font-size:12px">強力推薦</span></td>
+</tr>
+<tr>
+  <td style="padding:10px 12px;border:0.5px solid #e8e8e8;font-weight:500">🥈 5269 祥碩</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #e8e8e8" class="up">★★★★★</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #e8e8e8" class="up">★★★★☆</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #e8e8e8" class="up">★★★★★</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #e8e8e8">★★★☆☆</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #e8e8e8"><span style="background:#378ADD;color:#fff;padding:3px 10px;border-radius:10px;font-size:12px">回測再佈局</span></td>
+</tr>
+<tr style="background:#f7fff7">
+  <td style="padding:10px 12px;border:0.5px solid #e0f0e0;font-weight:500">🥉 3583 辛耘</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #e0f0e0" class="up">★★★★☆</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #e0f0e0">★★★☆☆</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #e0f0e0">★★★☆☆</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #e0f0e0" class="up">★★★★☆</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #e0f0e0"><span style="background:#1baf7a;color:#fff;padding:3px 10px;border-radius:10px;font-size:12px">穩健可佈局</span></td>
+</tr>
+<tr style="background:#fff5f5">
+  <td style="padding:10px 12px;border:0.5px solid #f5c1c1;font-weight:500">⛔ 2472 立隆電</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #f5c1c1" class="up">★★★★☆</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #f5c1c1">★★★☆☆</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #f5c1c1" class="down">★★☆☆☆</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #f5c1c1" class="down">★★☆☆☆</td>
+  <td style="text-align:center;padding:10px 12px;border:0.5px solid #f5c1c1"><span style="background:#E24B4A;color:#fff;padding:3px 10px;border-radius:10px;font-size:12px">暫緩，等Q3</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="warn-box" style="margin-top:16px">
+⚠️ 以上分析僅供研究參考，不構成任何投資建議。股市有風險，買賣請自行判斷並嚴守停損紀律。
+</div>
+
+<div class="footer">資料來源：鉅亨網、財報狗、Yahoo股市、各公司法說會公告 ｜ 分析截止日期 2026/06/29 ｜ 本報告由 Claude AI 輔助生成</div>
+
+</div>
